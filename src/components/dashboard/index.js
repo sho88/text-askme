@@ -10,7 +10,7 @@ dotenv.config()
 Pusher.logToConsole = true;
 
 export default function DashboardComponent() {
-  const pusher = new Pusher("831d4569d791bd4c2623", { cluster: 'mt1' })
+  const pusher = new Pusher(process.env.PUSHER_KEY, { cluster: 'mt1' })
   const [messages, setMessages] = useState([])
   const [inputValue, setInputValue] = useState('');
   
@@ -28,11 +28,11 @@ export default function DashboardComponent() {
 
 
   // events go here...
-  function handleInputChange(event) {
+  const handleInputChange = (event) => {
     setInputValue(event.target.value)
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault()
 
     const message = {
