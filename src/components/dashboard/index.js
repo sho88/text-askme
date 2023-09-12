@@ -28,11 +28,11 @@ export default function DashboardComponent() {
 
 
   // events go here...
-  function handleInputChange(event) {
+  const handleInputChange = (event) => {
     setInputValue(event.target.value)
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault()
 
     const message = {

@@ -1,0 +1,255 @@
+/* GENERAL RULES */
+
+body {
+    background-color: #23203c;
+    margin: 0;
+    font-family: sans-serif;
+    color: rgb(88, 88, 88);
+}
+
+p {
+    margin: 0;
+    display: inline;
+}
+
+
+
+
+
+
+
+/* BANK */
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+    opacity: 0%;
+}
+
+img {
+    border-radius: 50px;
+    width: 50px;
+}
+
+
+
+
+
+
+/* HEAD */
+
+.head {
+    position: fixed;
+    width: 100%;
+    margin-top: 0px;
+    background-color: #23203c;display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.head-container {
+    width: 90%;
+    height: 98px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.head-primary-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.head-button {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50px;
+    margin-left: -8px;
+}
+
+.head-profile-picture {
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+    background-color: white;
+    border-radius: 50px;
+    margin-right: -8px;
+}
+
+.head-primary-info h1{
+    color: white;
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 14pt;
+    margin: 4px 0 4px 0;
+}
+
+.head-primary-info h3{
+    color: white;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 9pt;
+}
+
+.head-primary-info h3{
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+/* MESSAGE */
+/* Concerning that attach and submit buttons are not evenly circle */
+
+
+.message {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 50px;
+    bottom: 40px;
+    left: 50%;
+    padding: 8px;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 100px;
+    z-index: 1;
+}
+
+
+.message-attatch {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(231, 231, 231);
+    border-radius: 50px;
+    border: 0;
+    outline: 0;
+}
+
+
+.message-input {
+    height: 100%;
+    width: 70%;
+    border: 0;
+    outline: none;
+}
+
+input {
+    width: 100%;
+    height: 95%;
+    padding: 0;
+    font-size: 1rem;
+    border: 0;
+    outline: none;
+}
+
+
+.message-submit-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: #f3defb;
+    outline: none;
+    border: 0;
+}
+
+
+
+
+
+.sent-time {
+    color: rgb(165, 165, 165);
+    font-weight: 700;
+    font-size: smaller;
+    display: inline;
+    align-self: flex-end;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* BODY */
+
+.body-container {
+    padding: 100px 20px 150px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.body-sent-messages {
+    display: flex;
+    align-self: flex-end;
+    align-items: flex-end;
+    max-width: 70%;
+    background-color: #edfec1;
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.body-sent-messages p {
+    margin-left: -12px;
+}
+
+.body-received-messages {
+    display: flex;
+    align-items: flex-end;
+    max-width: 70%;
+    background-color: #f3defb;
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+.triangle {
+    position: relative;
+    translate: -6px 24px;
+    rotate: 110deg;
+    height: 0px;
+    width: 0px;
+    border-bottom: 20px solid #edfec1;
+    border-right: 17px solid transparent;
+    transform: translateY(20%);
+}
+
+
+.triangle2 {
+    position: relative;
+    translate: 16px 24px;
+    rotate: 150deg;
+    height: 0px;
+    width: 0px;
+    border-bottom: 20px solid  #f3defb;
+    border-right: 17px solid transparent;
+    transform: translateY(20%);
+}
