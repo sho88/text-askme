@@ -68,57 +68,25 @@ export const DashboardBottomNav = () => {
   );
 };
 
-export const DashboardBody = () => {
+export const DashboardBody = (props) => {
+  console.log(props);
+  const [events, setEvents] = useState(Array.from({ length: 8 }));
+
   return (
     <div className="body-container">
       <h2>All messages</h2>
-      <article className="all-messages-article-1">
-        <div className="all-messages-article">
-          <DashBoardArticlePicture />
-          <DashboardArticleInfo />
-          <DashboardArticleTimeAgo />
-        </div>
-      </article>
-
-      <article className="all-messages-article-1">
-        <div className="all-messages-article">
-          <DashBoardArticlePicture />
-          <DashboardArticleInfo />
-          <DashboardArticleTimeAgo />
-        </div>
-      </article>
-
-      <article className="all-messages-article-1">
-        <div className="all-messages-article">
-          <DashBoardArticlePicture />
-          <DashboardArticleInfo />
-          <DashboardArticleTimeAgo />
-        </div>
-      </article>
-
-      <article className="all-messages-article-1">
-        <div className="all-messages-article">
-          <DashBoardArticlePicture />
-          <DashboardArticleInfo />
-          <DashboardArticleTimeAgo />
-        </div>
-      </article>
-
-      <article className="all-messages-article-1">
-        <div className="all-messages-article">
-          <DashBoardArticlePicture />
-          <DashboardArticleInfo />
-          <DashboardArticleTimeAgo />
-        </div>
-      </article>
-
-      <article className="all-messages-article-1">
-        <div className="all-messages-article">
-          <DashBoardArticlePicture />
-          <DashboardArticleInfo />
-          <DashboardArticleTimeAgo />
-        </div>
-      </article>
+      {events.map((event) => (
+        <article
+          onClick={() => props.onHandleToggle(true)}
+          className="all-messages-article-1"
+        >
+          <div className="all-messages-article">
+            <DashBoardArticlePicture />
+            <DashboardArticleInfo />
+            <DashboardArticleTimeAgo />
+          </div>
+        </article>
+      ))}
     </div>
   );
 };
@@ -164,7 +132,7 @@ const WriteNewMessage = () => {
 const DashboardArticleTimeAgo = () => {
   return (
     <div className="dashboard-article-container-time-ago">
-      <p>8 mins ago</p>
+      <time>8 mins ago</time>
     </div>
   );
 };

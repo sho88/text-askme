@@ -3,11 +3,14 @@ import "./style.css";
 import { RandomButton } from "./RandomButton";
 import { RandomDiv } from "./random-div";
 
-export const Head = () => {
+export const Head = (props) => {
   return (
     <header className="head">
       <div className="head-container">
-        <div className="head-button">
+        <div
+          className="head-button"
+          onClick={() => props.onHandleToggle(false)}
+        >
           <img src="/images/left-arrow.png"></img>
         </div>
         <div className="head-primary-info">
@@ -71,27 +74,6 @@ export const Input = () => {
     </div>
   );
 };
-
-/*export const TextArea = () => {
-    const textAreaRef = useRef(null);
-    const[val, setVal] = useState("");
-    const handleChange = (e) => {
-        setVal(e.target.value);
-    }
-
-    useEffect(() => {
-        textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
-    }, [val])
-
-    return (
-        <div className="textarea-container">
-            <div className="message-input">
-                <textarea className="message-textarea" placeholder="Type message" type="text" value={val} onChange={handleChange} rows="1" ref={textAreaRef}></textarea>
-            </div>
-        </div>
-        
-    )
-}*/
 
 const Filler = () => {
   return <div className="filler"></div>;
@@ -204,137 +186,6 @@ export const Body = () => {
           </div>
         ))}
       </>
-
-      {/* DELETE LOT SOON? */}
-      {/* <div className="body-sent-messages-1">
-        <div className="body-sent-messages">
-          <p>
-            lorem ipwve jlll ll.l iiii dmscv dsdscm dsvcdsmch vdscd bsfdsamfb saafcjads bcjabds chvdsmsj
-            wdjdiid dsdsb k 🔥
-          </p>
-          <MessageShape />
-        </div>
-        <MessageTime2 />
-      </div>
-
-      <div className="body-received-messages-1">
-        <div className="body-received-messages">
-          <MessageShape2 />
-          <p>
-            This message is receieved. efjvdscdashc vdscjv j vlorem ipsum feb e
-            mesfe fmevwfemf vwfew fmnbewvf jhvej. and ❤️
-          </p>
-        </div>
-        <MessageTime3 />
-      </div>
-
-      <div className="body-sent-messages-1">
-        <div className="body-sent-messages">
-          <p>
-            lorem ipwve jlll ll.l iiii dmscv dsdscm dsvcdsmch vdscdsm chvdsmsj
-            wdjdiid dsdsb k 😂😂😂😂😂😂😂😂😂
-          </p>
-          <MessageShape />
-        </div>
-        <MessageTime2 />
-      </div>
-
-      <div className="body-received-messages-1">
-        <div className="body-received-messages">
-          <MessageShape2 />
-          <p>
-            This message is receieved. efjvdscdashc vdscjv j vlorem ipsum feb e
-            mesfe 🔥🔥
-          </p>
-        </div>
-        <MessageTime3 />
-      </div>
-
-      <div className="body-sent-messages-1">
-        <div className="body-sent-messages">
-          <p>🔋🔋🔋🔋🔋</p>
-          <MessageShape />
-        </div>
-        <MessageTime2 />
-      </div>
-
-      <div className="body-received-messages-1">
-        <div className="body-received-messages">
-          <MessageShape2 />
-          <p>
-            This message is receieved. efjvdscdashc vdscjv j vlorem ipsum feb e
-            mesfe fmevwfemf vwfew fmnbewvf jhvej. and ❤️
-          </p>
-        </div>
-        <MessageTime3 />
-      </div>
-
-      <div className="body-sent-messages-1">
-        <div className="body-sent-messages">
-          <p>
-            lorem ipwve jlll ll.l iiii dmscv dsdscm dsvcdsmch vdscdsm chvdsmsj
-            wdjdiid dsdsb k
-          </p>
-          <MessageShape />
-        </div>
-        <MessageTime2 />
-      </div>
-
-      <div className="body-received-messages-1">
-        <div className="sent-received-images">
-          <MessageSentReceivedImage />
-          <p>This message is receieved. ef❤️</p>
-        </div>
-        <MessageTime3 />
-      </div>
-
-      <div className="body-sent-messages-1">
-        <div className="body-sent-messages">
-          <p>
-            lorem ipwve jlll ll.l iiii dmscv dsdscm dsvcdsmch vdscdsm chvdsmsj
-            wdjdiid dsdsb k
-          </p>
-          <MessageShape />
-        </div>
-        <MessageTime2 />
-      </div>
-
-      <div className="body-received-messages-1">
-        <div className="body-received-messages">
-          <MessageShape2 />
-          <p>
-            This message is receieved. efjvdscdashc vdscjv j vlorem ipsum feb e
-            mesfe fmevwfemf vwfew fmnbewvf jhvej. and ❤️
-          </p>
-        </div>
-        <MessageTime3 />
-      </div>
-
-      <div className="body-sent-messages-1">
-        <div className="body-sent-messages">
-          <p>
-            lorem ipwve jlll ll.l iiii dmscv dsdscm dsvcdsmch vdscdsm chvdsmsj
-            wdjdiid dsdsb k
-          </p>
-          <MessageShape />
-        </div>
-        <MessageTime2 />
-      </div>
-
-      <div className="body-received-messages-1">
-        <div className="body-received-messages">
-          <MessageShape2 />
-
-          <p>
-            This message is receieved. efjvdscdashc vdscjv j vlorem ipsum feb e
-            mesfe fmevwfemf vwfew fmnbewvf jhvej. and ❤️
-          </p>
-        </div>
-        <MessageTime3 />
-      </div> */}
-
-      {/*<RandomButton />*/}
-      {/*<RandomDiv />*/}
     </div>
   );
 };

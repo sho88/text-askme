@@ -795,7 +795,7 @@ position: relative;
 /*      SEPERATE   //   FOR ENIRE PAGES     */
 
 .chatPage {
-    display: none;
+    /* display: none; */
 }
 
 .entire-dashboard-page {

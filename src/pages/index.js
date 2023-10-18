@@ -21,24 +21,39 @@ import { useUsers } from "@/hooks/users";
 import App from "next/app";
 import { staticGenerationAsyncStorage } from "next/dist/client/components/static-generation-async-storage";
 import { getImgProps } from "next/dist/shared/lib/get-img-props";
+import { useState } from "react";
 
 export default function Index() {
+  const [toggle, setToggle] = useState(false);
+
+  const handleToggle = (state) => {
+    console.log(state);
+    setToggle(state);
+  };
+
   return (
     <div>
-      <div className="chatPage">
-        <Head />
-        <Input />
-        <ProFilePicture />
-        <Body />
-      </div>
+      {toggle ? (
+        <div className="chatPage">
+          <Head onHandleToggle={handleToggle} />
+          <Input />
+          <ProFilePicture />
+          <Body />
+        </div>
+      ) : null}
 
-      <div className="entire-dashboard-page">
-        <DashboardComponent />
-        <DashboardSearch />
-        <DashboardBottomNav />
-        <DashboardImportantMessagesSection />
-        <DashboardBody />
-      </div>
+      {!toggle ? (
+        <div className="entire-dashboard-page">
+          <DashboardComponent />
+          <DashboardSearch />
+          <DashboardBottomNav />
+          {/* <DashboardImportantMessagesSection /> */}
+          <DashboardBody
+            title="something-random"
+            onHandleToggle={handleToggle}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
