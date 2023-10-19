@@ -14,7 +14,7 @@ export const Head = (props) => {
           <img src="/images/left-arrow.png"></img>
         </div>
         <div className="head-primary-info">
-          <h1>Clive Stephenson</h1>
+          <h2>Clive Stephenson</h2>
           <h3>last seen 4 mins ago</h3>
         </div>
         <ProfilePictureImage />
@@ -97,7 +97,7 @@ export const TextAreaInput = () => {
       <div className="whatnot1">
         <textarea
           className="textarea1"
-          placeholder="Type message"
+          placeholder="Type here..."
           value={val}
           onChange={handleChange2}
           rows="1"
@@ -171,7 +171,18 @@ export const Body = () => {
   }, [messages]);
 
   return (
+    /*DELETE SOON / THIS IS JUST FOR SHOW*/
     <div className="body-container">
+      <div className="body-received-messages-1">
+        <div className="body-received-messages">
+          <MessageShape2 />
+          <p>
+            dhsadv sadhvsa bfm dds mbds dsds mds for show and tnkd sd kjnsw dc
+          </p>
+        </div>
+        <MessageTime3 />
+      </div>
+
       <>
         {/* THIS IS THE REASON WHY THE MESSAGES WERE PRINTING PLAINLY IN THE WEBSITE */}
         {/* <pre>{JSON.stringify(messages, null, 2)}</pre> */}

@@ -1,7 +1,7 @@
 /* GENERAL RULES */
 
 body {
-    background-color: #23203c;
+    background-color: #294946;
     margin: 0;
     font-family: sans-serif;
     color: rgb(88, 88, 88);
@@ -53,7 +53,7 @@ p {
     position: fixed;
     width: 100%;
     margin-top: 0px;
-    background-color: #23203c;display: flex;
+    background-color: #294946; display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -130,14 +130,15 @@ p {
 }
 /* DASHBOARD - WRITE NEW MESSAGE */
 .write-new-message {
-    width: 50px;
-    height: 50px;
+    width: auto;
+    height: auto;
     margin: 0px;
     border-radius: 50px;
     margin-right: 20px;
     outline: none;
     border: none;
     background-color: transparent;
+    padding: 0;
 }
 .write-new-message img {
     width: 25px;
@@ -167,6 +168,13 @@ p {
 
 
 .head-primary-info h1{
+    color: white;
+    margin: 0;
+    font-family: Oswald, sans-serif;
+    font-size: 1.8rem;
+    margin: 4px 0 4px 0;
+}
+.head-primary-info h2{
     color: white;
     margin: 0;
     font-family: Oswald, sans-serif;
@@ -275,7 +283,7 @@ p {
 }
 /* DASHBOARD BOTTOM NAV */
 .dashboard-nav-container {
-    width: 300px;
+    width: 275px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -300,6 +308,24 @@ p {
     outline: 0;
     margin-left: 6px;
     background-color: transparent;
+}
+/* DAAHBOARD SEARCH BUTTON */
+.dashboard-message-attatch-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 0;
+    outline: 0;
+    margin-left: 6px;
+    background-color: transparent;
+}
+
+.dashboard-message-attatch-button img {
+    margin-left: -2px;
+    margin-top: 3px;
+    object-fit: contain;
+    width: 25px;
+    /* rotate: -48deg; */
 }
 
 
@@ -372,7 +398,7 @@ p {
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    background-color: #f3defb;
+    background-color: #d0ecf5;
     outline: none;
     border: 0;
     margin-right: 6px;
@@ -408,50 +434,6 @@ p {
 
 
 
-
-
-/* IMPORTANT CHATS SECTION */
-.important-chat-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.important-chat-container-2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-left: -15px;
-}
-.important-chat-container-2 img {
-    width: 100px;
-    border-radius: 20px;
-    padding: 6px;
-    background-color: #23203c;
-    margin-left: -5px;
-}
-.important-chat-container-2 p {
-    color: lightgrey;
-    font-size: 0.75rem;
-}
-.important-chat-container img {
-    width: 100px;
-    border-radius: 20px;
-    padding: 6px;
-    background-color: #23203c;
-    margin-left: -5px;
-}
-.important-chat-container p {
-    color: lightgrey;
-    font-size: 0.75rem;
-}
-
-
-
-
-
-
 .sent-time {
     color: rgb(165, 165, 165);
     font-weight: 700;
@@ -464,6 +446,7 @@ p {
 
 .sent-time-2 {
     align-self: flex-end;
+    color: rgb(187, 187, 187);
 }
 
 .sent-time-container {
@@ -505,14 +488,24 @@ p {
     justify-content: flex-start;
     align-items: flex-start;
 }
+.dashboard-body-container {
+    padding: 28px 20px 150px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
 .body-container h2 {
     font-family: Oswald, sans-serif;
     color: white;
 }
-.dashboard-important-body-container-0 {
-    display: flex;
-    flex-direction: row;
+.dashboard-body-container h2 {
+    font-family: Oswald, sans-serif;
+    color: white;
+    font-size: 1.6rem;
+    margin-bottom: 12px;
 }
+
 /* DASHBOARD IMPORTANT MESSAGES CONTAINER */
 .dashboard-important-body-container {
     padding: 50px 20px 0px 20px;
@@ -576,7 +569,7 @@ p {
     display: flex;
     align-items: flex-end;
     max-width: 70%;
-    background-color: #f3defb;
+    background: linear-gradient(90deg, #d9edf3, #a8d1de);
     padding: 15px;
     border-radius: 20px;
     margin-bottom: 15px;
@@ -586,7 +579,7 @@ p {
     display: flex;
     align-items: flex-end;
     width: auto;
-    background-color: #312e51;
+    background: linear-gradient(45deg, #367264, #2e6a5b);
     padding: 15px;
     border-radius: 20px;
     color: white;
@@ -606,16 +599,16 @@ p {
     margin-right: 15px;
 }
 
-.dasboard-article-info-container h2{
-    font-size: 1.25rem;
+.dasboard-article-info-container h3{
+    font-size: 1.1rem;
     margin: 0;
     font-family: Oswald, sans-serif;
 }
 
 .dasboard-article-info-container p{
   font-size: 0.80rem;
-  line-height: 1rem;
-  color: lightgrey;
+  line-height: 1.1rem;
+  color: white;
 }
 
 .dashboard-article-container-time-ago {
@@ -626,7 +619,6 @@ p {
     margin-right: 35px;
     margin-bottom: 50px;
     font-size: 0.75rem;
-    color: lightgray;
 }
 
 .sent-received-images {
@@ -672,7 +664,7 @@ p {
     rotate: 110deg;
     height: 0px;
     width: 0px;
-    border-bottom: 20px solid  #f3defb;
+    border-bottom: 20px solid  #d0ecf5;
     border-right: 17px solid transparent;
     transform: translateY(20%);
 }

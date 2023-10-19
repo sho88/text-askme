@@ -30,8 +30,8 @@ export const DashboardSearch = () => {
   return (
     <div className="dashboard-message">
       <div className="dashboard-search-container">
-        <button className="message-attatch-button">
-          <img src="/images/paper-clip-o.png"></img>
+        <button className="dashboard-message-attatch-button">
+          <img src="/images/fn-search2.png"></img>
         </button>
 
         <TextAreaInput />
@@ -45,23 +45,19 @@ export const DashboardBottomNav = () => {
     <div className="message">
       <div className="dashboard-nav-container">
         <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/home.png"></img>
+          <img src="/images/fn-home.png"></img>
         </button>
 
         <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/cube.png"></img>
+          <img src="/images/fn-add.png"></img>
         </button>
 
         <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/plus.png"></img>
+          <img src="/images/fn-comment.png"></img>
         </button>
 
         <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/message.png"></img>
-        </button>
-
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/user.png"></img>
+          <img src="/images/fn-user.png"></img>
         </button>
       </div>
     </div>
@@ -73,7 +69,7 @@ export const DashboardBody = (props) => {
   const [events, setEvents] = useState(Array.from({ length: 8 }));
 
   return (
-    <div className="body-container">
+    <div className="dashboard-body-container">
       <h2>All messages</h2>
       {events.map((event) => (
         <article
@@ -102,7 +98,7 @@ const DashBoardArticlePicture = () => {
 const DashboardArticleInfo = () => {
   return (
     <div className="dasboard-article-info-container">
-      <h2>Mark Davidson</h2>
+      <h3>Mark Davidson</h3>
       <p>
         fjhb dsfd smv dsc v dsn kjfdbv kjvsjd sbvdskm fdvfd v jbfndv fdm cmbv ds
         v 🔋
@@ -124,7 +120,7 @@ const BurgerMenu = () => {
 const WriteNewMessage = () => {
   return (
     <button className="write-new-message">
-      <img src="/images/pen.png"></img>
+      <img src="/images/fn-write2.png"></img>
     </button>
   );
 };
