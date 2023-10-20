@@ -15,7 +15,7 @@ export const Head = (props) => {
         </div>
         <div className="head-primary-info">
           <h2>Clive Stephenson</h2>
-          <h3>last seen 4 mins ago</h3>
+          <h3>last seen 3 mins ago</h3>
         </div>
         <ProfilePictureImage />
       </div>
