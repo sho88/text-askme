@@ -4,7 +4,7 @@ body {
     background-color: #294946;
     margin: 0;
     font-family: sans-serif;
-    color: rgb(88, 88, 88);
+    color: rgb(78, 78, 78);
 }
 
 p {
@@ -361,13 +361,13 @@ p {
 
 
 
-.whatnot0 {
+.cover1 {
     width: 70%;
     height: 100%;
     align-self: center;
 }
 
-.whatnot1 {
+.cover2 {
     background-color: transparent;
     height: 100%;
     border: 0;
@@ -398,7 +398,7 @@ p {
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    background-color: #d0ecf5;
+    background-color: #eed9ec;
     outline: none;
     border: 0;
     margin-right: 6px;
@@ -506,21 +506,6 @@ p {
     margin-bottom: 12px;
 }
 
-/* DASHBOARD IMPORTANT MESSAGES CONTAINER */
-.dashboard-important-body-container {
-    padding: 50px 20px 0px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    /* MARGIN BELOW BELOW IS TEMPPRARY FIX */
-    margin-bottom: -60px;
-}
-.dashboard-important-body-container h2 {
-    font-family: Oswald, sans-serif;
-    color: white;
-}
-
 
 .body-sent-messages-1 {
     display: flex;
@@ -549,7 +534,7 @@ p {
     align-self: flex-end;
     align-items: flex-end;
     max-width: 70%;
-    background-color: #edfec1;
+    background: linear-gradient(45deg, #dec5dc, #efe5ef);
     padding: 17px;
     border-radius: 20px;
     margin-bottom: 15px;
@@ -557,19 +542,23 @@ p {
 
 .body-sent-messages p {
     margin-right: -20px;
+    line-height: 1.15rem;
+    font-size: 0.95rem;
 }
 
 
 
 .body-received-messages p {
-    margin-left: -12px;
+    margin-left: -14px;
+    line-height: 1.15rem;
+    font-size: 0.95rem;
 }
 
 .body-received-messages {
     display: flex;
     align-items: flex-end;
     max-width: 70%;
-    background: linear-gradient(90deg, #d9edf3, #a8d1de);
+    background: linear-gradient(90deg, #e0f0f5, #a8d1de);
     padding: 15px;
     border-radius: 20px;
     margin-bottom: 15px;
@@ -648,11 +637,11 @@ p {
 
 .triangle {
     position: relative;
-    translate: 16px 24px;
+    translate: 16px 26px;
     rotate: 150deg;
     height: 0px;
     width: 0px;
-    border-bottom: 20px solid  #edfec1;
+    border-bottom: 20px solid  #e4d0e2;
     border-right: 17px solid transparent;
     transform: translateY(20%);
 }
@@ -779,17 +768,3 @@ position: relative;
 
 
 
-
-
-
-
-
-/*      SEPERATE   //   FOR ENIRE PAGES     */
-
-.chatPage {
-    /* display: none; */
-}
-
-.entire-dashboard-page {
-    /* display: none; */
-}

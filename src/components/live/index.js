@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
 import { RandomButton } from "./RandomButton";
-import { RandomDiv } from "./random-div";
 
 export const Head = (props) => {
   return (
@@ -14,7 +13,7 @@ export const Head = (props) => {
           <img src="/images/left-arrow.png"></img>
         </div>
         <div className="head-primary-info">
-          <h2>Clive Stephenson</h2>
+          <h2>Mark Davidson</h2>
           <h3>last seen 3 mins ago</h3>
         </div>
         <ProfilePictureImage />
@@ -93,8 +92,8 @@ export const TextAreaInput = () => {
   }, [val]);
 
   return (
-    <div className="whatnot0">
-      <div className="whatnot1">
+    <div className="cover1">
+      <div className="cover2">
         <textarea
           className="textarea1"
           placeholder="Type here..."
@@ -119,7 +118,7 @@ export const MessageTime = () => {
 export const MessageTime2 = () => {
   return (
     <div className="sent-time-container">
-      <time className="sent-time-2">11:45</time>
+      <time className="sent-time-2">11:51</time>
     </div>
   );
 };
@@ -127,7 +126,7 @@ export const MessageTime2 = () => {
 export const MessageTime3 = () => {
   return (
     <div className="sent-time-container-2">
-      <time className="sent-time-2">11:45</time>
+      <time className="sent-time-2">11:46</time>
     </div>
   );
 };
@@ -154,49 +153,134 @@ const MessageSentReceivedImage = () => {
 };
 
 export const Body = () => {
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    const eventSource = new EventSource(
-      "https://text-qanda-720b5eca6135.herokuapp.com/api/sse"
-    );
-    eventSource.addEventListener("message", (event) =>
-      setMessages(JSON.parse(event.data))
-    );
-    eventSource.addEventListener("error", (error) => console.log(error));
-  }, []);
-
-  useEffect(() => {
-    console.log(messages);
-  }, [messages]);
-
+  /* REFER TO backup.js */
   return (
-    /*DELETE SOON / THIS IS JUST FOR SHOW*/
     <div className="body-container">
       <div className="body-received-messages-1">
         <div className="body-received-messages">
           <MessageShape2 />
           <p>
-            dhsadv sadhvsa bfm dds mbds dsds mds for show and tnkd sd kjnsw dc
+            Good afternoon Sir! I thoroughly enjoyed your speech today. I have
+            been impacted greatly 🔥🔥🔥. When would you be speaking on the
+            topic of Esssenes next? Robert
           </p>
         </div>
         <MessageTime3 />
       </div>
 
-      <>
-        {/* THIS IS THE REASON WHY THE MESSAGES WERE PRINTING PLAINLY IN THE WEBSITE */}
-        {/* <pre>{JSON.stringify(messages, null, 2)}</pre> */}
+      <div className="body-sent-messages-1">
+        <div className="body-sent-messages">
+          <p>
+            Good morning Rob! I will be speaking on the topic next Wednesday.
+            Please tune into my past talks for a more compregensive
+            understanding 🙏
+          </p>
+          <MessageShape />
+        </div>
+        <div className="sent-time-container">
+          <time className="sent-time-2">11:49</time>
+        </div>
+      </div>
 
-        {messages.map((message) => (
-          <div className="body-received-messages-1">
-            <div className="body-received-messages">
-              <MessageShape2 />
-              <p>{message.body}</p>
-            </div>
-            <MessageTime3 />
+      <div className="body-received-messages-1">
+        <div className="body-received-messages">
+          <MessageShape2 />
+          <p>
+            Thank you sir, I sure will 😊
+            <br />
+            But into todays talk, it wasn't quite clear to me how they differed
+            from the Scribes. I mean, they valued highly ancient scriptures
+            right?
+          </p>
+        </div>
+        <div>
+          <div className="sent-time-container-2">
+            <time className="sent-time-2">12:05</time>
           </div>
-        ))}
-      </>
+        </div>
+      </div>
+
+      <div className="body-sent-messages-1">
+        <div className="body-sent-messages">
+          <p>
+            🤔 That's a very valid point, as I didn't expound on it in todays
+            session
+          </p>
+          <MessageShape />
+        </div>
+        <div className="sent-time-container">
+          <time className="sent-time-2">12:08</time>
+        </div>
+      </div>
+
+      <div className="body-sent-messages-1">
+        <div className="body-sent-messages">
+          <p>
+            The Essenes were a Jewish "sect". Some were celibate, disdained
+            marriage, and adopted children. The scribes adopted a different
+            lifestyle.
+          </p>
+          <MessageShape />
+        </div>
+        <div className="sent-time-container">
+          <time className="sent-time-2">12:09</time>
+        </div>
+      </div>
+
+      <div className="body-received-messages-1">
+        <div className="body-received-messages">
+          <MessageShape2 />
+          <p>
+            Ooh I cannot wait to hear more on what you have to say regarding the
+            topic! I feel that we need to labour this topic much more in our
+            services, as it's often neglected 🤔
+          </p>
+        </div>
+        <div>
+          <div className="sent-time-container-2">
+            <time className="sent-time-2">15:33</time>
+          </div>
+        </div>
+      </div>
+
+      <div className="body-sent-messages-1">
+        <div className="body-sent-messages">
+          <p>👏👏👏👏👏</p>
+          <MessageShape />
+        </div>
+        <div className="sent-time-container">
+          <time className="sent-time-2">15:39</time>
+        </div>
+      </div>
+
+      <div className="body-sent-messages-1">
+        <div className="body-sent-messages">
+          <p>
+            You are absolutely right sir! But how are doing in general? Have you
+            been coming to our services with friends and/of family?
+          </p>
+          <MessageShape />
+        </div>
+        <div className="sent-time-container">
+          <time className="sent-time-2">15:40</time>
+        </div>
+      </div>
+
+      <div className="body-received-messages-1">
+        <div className="body-received-messages">
+          <MessageShape2 />
+          <p>
+            So me and my Fiancée have been looking for a community like this. We
+            just happen to come across your Word on Social Media. Instagram to
+            be exact
+          </p>
+        </div>
+        <div>
+          <div className="sent-time-container-2">
+            <time className="sent-time-2">16:19</time>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

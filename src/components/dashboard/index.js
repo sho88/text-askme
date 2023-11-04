@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import Pusher from "pusher-js";
 import "./../live/style.css";
 import { ProfilePictureImage, TextAreaInput } from "./../live/index.js";
+import { DashboardBottomNav } from "./DashboardBottomNav";
+import { BurgerMenu } from "./BurgerMenu";
+import { DashboardArticleTimeAgo } from "./DashboardArticleTimeAgo";
+import { DashboardArticleInfo } from "./DashboardArticleInfo";
+import { DashBoardArticlePicture } from "./DashboardArticlePicture";
+import { WriteNewMessage } from "./WriteNewMessage";
+import { DashboardSearch } from "./DashboardSearch";
 
 import * as dotenv from "dotenv";
 
@@ -26,44 +33,6 @@ export default function DashboardComponent() {
   );
 }
 
-export const DashboardSearch = () => {
-  return (
-    <div className="dashboard-message">
-      <div className="dashboard-search-container">
-        <button className="dashboard-message-attatch-button">
-          <img src="/images/fn-search2.png"></img>
-        </button>
-
-        <TextAreaInput />
-      </div>
-    </div>
-  );
-};
-
-export const DashboardBottomNav = () => {
-  return (
-    <div className="message">
-      <div className="dashboard-nav-container">
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/fn-home.png"></img>
-        </button>
-
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/fn-add.png"></img>
-        </button>
-
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/fn-comment.png"></img>
-        </button>
-
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <img src="/images/fn-user.png"></img>
-        </button>
-      </div>
-    </div>
-  );
-};
-
 export const DashboardBody = (props) => {
   console.log(props);
   const [events, setEvents] = useState(Array.from({ length: 8 }));
@@ -83,88 +52,6 @@ export const DashboardBody = (props) => {
           </div>
         </article>
       ))}
-    </div>
-  );
-};
-
-const DashBoardArticlePicture = () => {
-  return (
-    <picture className="dasboard-article-profile-picture">
-      <img src="./../../images/ryan-young.jpeg"></img>
-    </picture>
-  );
-};
-
-const DashboardArticleInfo = () => {
-  return (
-    <div className="dasboard-article-info-container">
-      <h3>Mark Davidson</h3>
-      <p>
-        fjhb dsfd smv dsc v dsn kjfdbv kjvsjd sbvdskm fdvfd v jbfndv fdm cmbv ds
-        v 🔋
-      </p>
-    </div>
-  );
-};
-
-const BurgerMenu = () => {
-  return (
-    <button className="dashboard-burger-line-button">
-      <div className="dashboard-burger-line"></div>
-      <div className="dashboard-burger-line"></div>
-      <div className="dashboard-burger-line"></div>
-    </button>
-  );
-};
-
-const WriteNewMessage = () => {
-  return (
-    <button className="write-new-message">
-      <img src="/images/fn-write2.png"></img>
-    </button>
-  );
-};
-
-const DashboardArticleTimeAgo = () => {
-  return (
-    <div className="dashboard-article-container-time-ago">
-      <time>8 mins ago</time>
-    </div>
-  );
-};
-
-export const DashboardImportantMessagesSection = () => {
-  return (
-    <div className="dashboard-important-body-container">
-      <h2>Important</h2>
-      <div className="dashboard-important-body-container-0">
-        <ImportandChatContainer />
-        <ImportandChatContainer2 />
-        <ImportandChatContainer2 />
-        <ImportandChatContainer2 />
-      </div>
-    </div>
-  );
-};
-
-const ImportandChatContainer = () => {
-  return (
-    <div className="important-chat-container">
-      <picture>
-        <img src="images/sophie.png"></img>
-      </picture>
-      <p>Sophie A.</p>
-    </div>
-  );
-};
-
-const ImportandChatContainer2 = () => {
-  return (
-    <div className="important-chat-container-2">
-      <picture>
-        <img src="images/sophie.png"></img>
-      </picture>
-      <p>Sophie A.</p>
     </div>
   );
 };
