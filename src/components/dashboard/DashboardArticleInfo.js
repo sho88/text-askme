@@ -1,10 +1,10 @@
 export const DashboardArticleInfo = () => {
   return (
     <div className="dasboard-article-info-container">
-      <h3>Mark Davidson</h3>
+      <h3>Eugene Davidson on World Peace</h3>
       <p>
-        fjhb dsfd smv dsc v dsn kjfdbv kjvsjd sbvdskm fdvfd v jbfndv fdm cmbv ds
-        v 🔋
+        Please expand on Joe Biden’s contributions to the rest of the world.
+        Please explain in a b share more on what you mean 🤔
       </p>
     </div>
   );

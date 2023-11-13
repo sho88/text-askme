@@ -46,9 +46,9 @@ export const DashboardBody = (props) => {
           className="all-messages-article-1"
         >
           <div className="all-messages-article">
-            <DashBoardArticlePicture />
+            {/* <DashBoardArticlePicture /> */}
             <DashboardArticleInfo />
-            <DashboardArticleTimeAgo />
+            {/* <DashboardArticleTimeAgo /> */}
           </div>
         </article>
       ))}

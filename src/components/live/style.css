@@ -124,7 +124,7 @@ p {
     width: 50px;
     height: 50px;
     margin: 0px;
-    background-color: yellow;
+    background-color: #314846;
     border-radius: 50px;
     margin-right: 20px;
 }
@@ -161,7 +161,7 @@ p {
     width: 50px;
     height: 50px;
     margin: 0px;
-    background-color: yellow;
+    background-color: #314846;
     border-radius: 50px;
     margin-right: 20px;
 }
@@ -256,7 +256,7 @@ p {
 
 .message-container {
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
@@ -453,8 +453,8 @@ p {
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: flex-start;
+    justify-content: flex-start;
     color: gray;
     font-size: 0.7rem;
     font-weight: 700;
@@ -510,15 +510,15 @@ p {
 .body-sent-messages-1 {
     display: flex;
     flex-direction: column;
-    align-self: flex-end;
-    margin-bottom: 20px;
+    align-self: flex-start;
+    margin-bottom: 25px;
 }
 
 .body-received-messages-1 {
     display: flex;
     flex-direction: column;
     align-self: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 /* DASHBOARD "ALL MESSAGES" */
 .all-messages-article-1 {
@@ -531,9 +531,9 @@ p {
 
 .body-sent-messages {
     display: flex;
-    align-self: flex-end;
-    align-items: flex-end;
-    max-width: 70%;
+    align-self: flex-start;
+    align-items: flex-start;
+    max-width: 100%;
     background: linear-gradient(45deg, #dec5dc, #efe5ef);
     padding: 17px;
     border-radius: 20px;
@@ -541,7 +541,7 @@ p {
 }
 
 .body-sent-messages p {
-    margin-right: -20px;
+    margin-left: -14px;
     line-height: 1.15rem;
     font-size: 0.95rem;
 }
@@ -557,7 +557,7 @@ p {
 .body-received-messages {
     display: flex;
     align-items: flex-end;
-    max-width: 70%;
+    max-width: 100%;
     background: linear-gradient(90deg, #e0f0f5, #a8d1de);
     padding: 15px;
     border-radius: 20px;
@@ -576,7 +576,7 @@ p {
 
 .dasboard-article-info-container{
     display: flex;
-    height: 75px;
+    height: auto;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -589,14 +589,15 @@ p {
 }
 
 .dasboard-article-info-container h3{
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: 0;
+    padding: 5px 0 12px 0;
     font-family: Oswald, sans-serif;
 }
 
 .dasboard-article-info-container p{
-  font-size: 0.80rem;
-  line-height: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.4rem;
   color: white;
 }
 
@@ -637,8 +638,8 @@ p {
 
 .triangle {
     position: relative;
-    translate: 16px 26px;
-    rotate: 150deg;
+    translate: -8px 62px;
+    rotate: 110deg;
     height: 0px;
     width: 0px;
     border-bottom: 20px solid  #e4d0e2;

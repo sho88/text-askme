@@ -13,8 +13,8 @@ export const Head = (props) => {
           <img src="/images/left-arrow.png"></img>
         </div>
         <div className="head-primary-info">
-          <h2>Mark Davidson</h2>
-          <h3>last seen 3 mins ago</h3>
+          <h2>Text Q&amp;A</h2>
+          {/* <h3>last seen 3 mins ago</h3> */}
         </div>
         <ProfilePictureImage />
       </div>
@@ -36,7 +36,7 @@ export const ProfilePictureImage = () => {
         className={`head-profile-picture1${
           !showImage ? " head-profile-picture--hide" : ""
         }`}
-        src="/images/ryan-young.jpeg"
+        src="/images/green.jpg"
       ></img>
     </figure>
   );
@@ -96,7 +96,7 @@ export const TextAreaInput = () => {
       <div className="cover2">
         <textarea
           className="textarea1"
-          placeholder="Type here..."
+          placeholder="Search by name, message, etc..."
           value={val}
           onChange={handleChange2}
           rows="1"
@@ -160,9 +160,9 @@ export const Body = () => {
         <div className="body-received-messages">
           <MessageShape2 />
           <p>
-            Good afternoon Sir! I thoroughly enjoyed your speech today. I have
-            been impacted greatly 🔥🔥🔥. When would you be speaking on the
-            topic of Esssenes next? Robert
+            Does current world events parallel with ancient writings? If so,
+            which writing or scroll would be easier for the common person to
+            understand, interpret and be able to teach from? 🤔
           </p>
         </div>
         <MessageTime3 />
@@ -170,12 +170,12 @@ export const Body = () => {
 
       <div className="body-sent-messages-1">
         <div className="body-sent-messages">
-          <p>
-            Good morning Rob! I will be speaking on the topic next Wednesday.
-            Please tune into my past talks for a more compregensive
-            understanding 🙏
-          </p>
           <MessageShape />
+          <p>
+            How could I really help those in need? And how do I ensure that my
+            hard earned money would go towards those suffering the most and not
+            with many or no one publiciznig my deeds? 🙏🙏
+          </p>
         </div>
         <div className="sent-time-container">
           <time className="sent-time-2">11:49</time>
@@ -188,9 +188,8 @@ export const Body = () => {
           <p>
             Thank you sir, I sure will 😊
             <br />
-            But into todays talk, it wasn't quite clear to me how they differed
-            from the Scribes. I mean, they valued highly ancient scriptures
-            right?
+            Please elaborate on your point on the organizations influence on the
+            rest of the world or industry. Much appreciated. Many thanks.
           </p>
         </div>
         <div>
@@ -202,25 +201,8 @@ export const Body = () => {
 
       <div className="body-sent-messages-1">
         <div className="body-sent-messages">
-          <p>
-            🤔 That's a very valid point, as I didn't expound on it in todays
-            session
-          </p>
-          <MessageShape />
-        </div>
-        <div className="sent-time-container">
-          <time className="sent-time-2">12:08</time>
-        </div>
-      </div>
-
-      <div className="body-sent-messages-1">
-        <div className="body-sent-messages">
-          <p>
-            The Essenes were a Jewish "sect". Some were celibate, disdained
-            marriage, and adopted children. The scribes adopted a different
-            lifestyle.
-          </p>
-          <MessageShape />
+          {/* <MessageShape /> */}
+          <p>Could I find your teachings online? If so, where?</p>
         </div>
         <div className="sent-time-container">
           <time className="sent-time-2">12:09</time>
@@ -231,9 +213,8 @@ export const Body = () => {
         <div className="body-received-messages">
           <MessageShape2 />
           <p>
-            Ooh I cannot wait to hear more on what you have to say regarding the
-            topic! I feel that we need to labour this topic much more in our
-            services, as it's often neglected 🤔
+            What would you say are some of the best communities to join, if one
+            wants to be active in making a real change?
           </p>
         </div>
         <div>
@@ -245,21 +226,8 @@ export const Body = () => {
 
       <div className="body-sent-messages-1">
         <div className="body-sent-messages">
-          <p>👏👏👏👏👏</p>
-          <MessageShape />
-        </div>
-        <div className="sent-time-container">
-          <time className="sent-time-2">15:39</time>
-        </div>
-      </div>
-
-      <div className="body-sent-messages-1">
-        <div className="body-sent-messages">
-          <p>
-            You are absolutely right sir! But how are doing in general? Have you
-            been coming to our services with friends and/of family?
-          </p>
-          <MessageShape />
+          {/* <MessageShape /> */}
+          <p>Do you do podcasts?</p>
         </div>
         <div className="sent-time-container">
           <time className="sent-time-2">15:40</time>
@@ -270,9 +238,8 @@ export const Body = () => {
         <div className="body-received-messages">
           <MessageShape2 />
           <p>
-            So me and my Fiancée have been looking for a community like this. We
-            just happen to come across your Word on Social Media. Instagram to
-            be exact
+            So me and my Fiancée have been looking for conversations like this.
+            But could you please advise on your first point?
           </p>
         </div>
         <div>
