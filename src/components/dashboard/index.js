@@ -1,21 +1,8 @@
-import { useEffect, useState } from "react";
-import Pusher from "pusher-js";
+import { useState } from "react";
 import "./../live/style.css";
-import { ProfilePictureImage, TextAreaInput } from "./../live/index.js";
-import { DashboardBottomNav } from "./DashboardBottomNav";
 import { BurgerMenu } from "./BurgerMenu";
-import { DashboardArticleTimeAgo } from "./DashboardArticleTimeAgo";
 import { DashboardArticleInfo } from "./DashboardArticleInfo";
-import { DashBoardArticlePicture } from "./DashboardArticlePicture";
 import { WriteNewMessage } from "./WriteNewMessage";
-import { DashboardSearch } from "./DashboardSearch";
-
-import * as dotenv from "dotenv";
-
-dotenv.config();
-
-// Enable pusher logging - don't include this in production
-Pusher.logToConsole = true;
 
 export default function DashboardComponent() {
   return (
@@ -34,21 +21,37 @@ export default function DashboardComponent() {
 }
 
 export const DashboardBody = (props) => {
-  console.log(props);
-  const [events, setEvents] = useState(Array.from({ length: 8 }));
+  const [events, setEvents] = useState([
+    {
+      __id: 1,
+      header: 'Eugene Davidson on World Peace',
+      body: `
+        Please expand on Joe Biden’s contributions to the rest of the world.
+        Please explain in a b share more on what you mean 🤔
+      `
+    },
+
+    {
+      __id: 2,
+      header: 'Israel events Q and A',
+      body: `
+        Why is it important for the people of Israel to dwell in the land when there is no theocracy?
+      `
+    },
+  ]);
 
   return (
     <div className="dashboard-body-container">
       <h2>All messages</h2>
+
       {events.map((event) => (
         <article
+          key={event.__id}
           onClick={() => props.onHandleToggle(true)}
           className="all-messages-article-1"
         >
           <div className="all-messages-article">
-            {/* <DashBoardArticlePicture /> */}
-            <DashboardArticleInfo />
-            {/* <DashboardArticleTimeAgo /> */}
+            <DashboardArticleInfo event={event} />
           </div>
         </article>
       ))}

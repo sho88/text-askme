@@ -1,11 +1,8 @@
-export const DashboardArticleInfo = () => {
+export const DashboardArticleInfo = (props) => {
   return (
     <div className="dasboard-article-info-container">
-      <h3>Eugene Davidson on World Peace</h3>
-      <p>
-        Please expand on Joe Biden’s contributions to the rest of the world.
-        Please explain in a b share more on what you mean 🤔
-      </p>
+      <h3>{props.event.header}</h3>
+      <p>{props.event.body}</p>
     </div>
   );
 };
