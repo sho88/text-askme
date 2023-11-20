@@ -1,10 +1,10 @@
 import DashboardComponent, {
-  DashboardBottomNav,
   DashboardInput,
-  DashboardSearch,
   DashboardBody,
   DashboardImportantMessagesSection,
 } from "@/components/dashboard";
+import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
+import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 import {
   Head,
   Body,
