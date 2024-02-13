@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
 import { RandomButton } from "./RandomButton";
+import Image from "next/image";
 
 export const Head = (props) => {
   return (
@@ -10,7 +11,7 @@ export const Head = (props) => {
           className="head-button"
           onClick={() => props.onHandleToggle(false)}
         >
-          <img src="/images/left-arrow.png"></img>
+          <Image alt="" src="/images/left-arrow.png" />
         </div>
         <div className="head-primary-info">
           <h2>Text Q&amp;A</h2>
@@ -32,12 +33,12 @@ export const ProfilePictureImage = () => {
 
   return (
     <figure onClick={clickProfilePucFunction} className="head-profile-picture">
-      <img
+      <Image alt="" 
         className={`head-profile-picture1${
           !showImage ? " head-profile-picture--hide" : ""
         }`}
         src="/images/green.jpg"
-      ></img>
+      />
     </figure>
   );
 };
@@ -45,13 +46,13 @@ export const ProfilePictureImage = () => {
 export const ProFilePicture = () => {
   return (
     <picture className="profile-picture-full-size">
-      <img
+      <Image
         src="/images/ryan-young.jpeg"
         alt="Profile Picture"
         srcSet="/images/ryan-young.jpeg 1x,
                             /images/ryan-young.jpeg 2x,
                             /images/ryan-young.jpeg 3x"
-      ></img>
+      />
     </picture>
   );
 };
@@ -61,13 +62,13 @@ export const Input = () => {
     <div className="message">
       <div className="message-container">
         <button className="message-attatch-button">
-          <img src="/images/paper-clip-o.png"></img>
+          <Image alt=""  src="/images/paper-clip-o.png" />
         </button>
 
         <TextAreaInput />
 
         <button className="message-submit-button" type="submit">
-          <img src="/images/paper-plane-o.png"></img>
+          <Image alt=""  src="/images/paper-plane-o.png" />
         </button>
       </div>
     </div>
@@ -143,10 +144,10 @@ const MessageSentReceivedImage = () => {
   return (
     <picture>
       <div>
-        <img
+        <Image alt="" 
           className="sent-received-the-image"
           src="/images/purple-landscape.jpg"
-        ></img>
+        />
       </div>
     </picture>
   );

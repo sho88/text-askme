@@ -1,3 +1,4 @@
+import { Image } from 'next/image';
 import { TextAreaInput } from "./../live/index.js";
 
 export const DashboardSearch = () => {
@@ -5,7 +6,7 @@ export const DashboardSearch = () => {
     <div className="dashboard-message">
       <div className="dashboard-search-container">
         <button className="dashboard-message-attatch-button">
-          <img src="/images/fn-search2.png"></img>
+          <Image alt="" src="/images/fn-search2.png" />
         </button>
         <TextAreaInput />
       </div>
