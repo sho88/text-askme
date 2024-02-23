@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./../live/style.css";
 import { BurgerMenu } from "./BurgerMenu";
 import { DashboardArticleInfo } from "./DashboardArticleInfo";
 import { WriteNewMessage } from "./WriteNewMessage";
@@ -26,7 +25,7 @@ export const DashboardBody = (props) => {
       __id: 1,
       header: 'Eugene Davidson on World Peace',
       body: `
-        Please expand on Joe Biden’s contributions to the rest of the world.
+        Please expand on Joe Biden's contributions to the rest of the world.
         Please explain in a b share more on what you mean 🤔
       `
     },
@@ -47,7 +46,7 @@ export const DashboardBody = (props) => {
       {events.map((event) => (
         <article
           key={event.__id}
-          onClick={() => props.onHandleToggle(true)}
+          onClick={() => props.onHandleToggle(event)}
           className="all-messages-article-1"
         >
           <div className="all-messages-article">
