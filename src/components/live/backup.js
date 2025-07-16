@@ -1,3 +1,5 @@
+import { MessageShape2, MessageTime3 } from "../live"
+
 export const Body = () => {
   const [messages, setMessages] = useState([]);
 
@@ -11,24 +13,32 @@ export const Body = () => {
     eventSource.addEventListener("error", (error) => console.log(error));
   }, []);
 
-  useEffect(() => {
-    console.log(messages);
-  }, [messages]);
-
   return (
     /*DELETE SOON / THIS IS JUST FOR SHOW*/
     <div className="body-container">
       <div className="body-received-messages-1">
         <div className="body-received-messages">
+          <MessageShape2 />
           <p>
             dhsadv sadhvsa bfm dds mbds dsds mds for show and tnkd sd kjnsw dc
           </p>
         </div>
+        <MessageTime3 />
       </div>
 
       <>
         {/* THIS IS THE REASON WHY THE MESSAGES WERE PRINTING PLAINLY IN THE WEBSITE */}
-        <pre>{JSON.stringify(messages, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(messages, null, 2)}</pre> */}
+
+        {messages.map((message, keyIndex) => (
+          <div className="body-received-messages-1" key={keyIndex}>
+            <div className="body-received-messages">
+              <MessageShape2 />
+              <p>{message.body}</p>
+            </div>
+            <MessageTime3 />
+          </div>
+        ))}
       </>
     </div>
   );

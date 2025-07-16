@@ -1,42 +1,53 @@
 import "@/components/live/style.css";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import { ReduceBrowserSize } from "./ReduceBrowsingSize";
 
 export default function Index() {
-
   // states and other properties go here...
   const router = useRouter();
-
 
   // events go here...
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`You have submitted something...`);
-    return router.push('/dashboard');
-  }
+    return router.push("/dashboard");
+  };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form-page">
+      <ReduceBrowserSize />
+      {/* <Image
+        // RESUME WORK HERE
+        className="whats-this"
+        src="/images/opening-animation-logo.webp"
+        width={400}
+        height={1000}
+        alt="Picture of the author"
+      /> */}
+      <form className="form-section" onSubmit={handleSubmit}>
+        <div className="form-container">
+          <div>
+            <input
+              className="form-input-style"
+              placeholder="Enter email"
+              type="email"
+            />
+          </div>
 
-        <div>
-          <label htmlFor="email">
-            E-Mail <br />
-            <input type="email" />
-          </label>
+          <div>
+            <input
+              className="form-input-style"
+              placeholder="Enter password"
+              type="password"
+            />
+          </div>
+
+          <div>
+            <button className="form-button-style">Login</button>
+          </div>
         </div>
-
-        <div>
-          <label htmlFor="password">
-            Password <br />
-            <input type="password" />
-          </label>
-        </div>
-
-        <div>
-          <button>Login</button>
-        </div>
-
       </form>
+      <div className="logo-size"></div>
     </div>
   );
 }

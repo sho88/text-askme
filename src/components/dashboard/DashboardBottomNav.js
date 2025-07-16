@@ -1,25 +1,43 @@
 import Image from "next/image";
+import { ModalComponent } from "../modal";
+import { useState } from "react";
 
 export const DashboardBottomNav = () => {
+  // states go here...
+  const [showModal, setShowModal] = useState(false);
+
+  // events go here...
+  const handleAddClick = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
   return (
-    <div className="message">
-      <div className="dashboard-nav-container">
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <Image alt="" src="/images/fn-home.png" />
-        </button>
+    <>
+      {showModal && <ModalComponent onModalClose={handleModalClose} />}
 
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <Image alt="" src="/images/fn-add.png" />
-        </button>
+      <div className="message">
+        <div className="dashboard-nav-container">
+          <button className="dashboard-bottom-nav-buttons" type="">
+            <Image src="/images/fn-home.png" alt="" height="25" width="25" />
+          </button>
 
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <Image alt="" src="/images/fn-comment.png" />
-        </button>
+          <button
+            className="dashboard-bottom-nav-buttons"
+            type=""
+            onClick={handleAddClick}
+          >
+            <Image src="/images/fn-add.png" alt="" height="25" width="25" />
+          </button>
 
-        <button className="dashboard-bottom-nav-buttons" type="">
-          <Image alt="" src="/images/fn-user.png" />
-        </button>
+          <button className="dashboard-bottom-nav-buttons" type="">
+            <Image src="/images/fn-user.png" alt="" height="25" width="25" />
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -4,9 +4,8 @@ export default function QuestionsComponent() {
   const [numberOfTimes, changeNumberOfTimes] = useState(0)
 
   // events handlers go here...
-
   function handleClick() {
-    changeNumberOfTimes( numberOfTimes + 1 )
+    changeNumberOfTimes(numberOfTimes + 1)
   }
 
   return (
