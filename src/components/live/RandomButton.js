@@ -12,9 +12,9 @@ export const RandomButton = () => {
 
     return (
         <div>
-            {messages.map((message, index) => { /** we need to refactor this...and not use index for key... */
+            {messages.map((message, key) => {
                 return (
-                    <div key={index}>
+                    <div key={key}>
                         {message.body}
                     </div>
                 )

@@ -1,14 +1,16 @@
-import { Image } from 'next/image';
+import Image from "next/image";
 import { TextAreaInput } from "./../live/index.js";
+import InputField from "../input/InputField.js";
 
-export const DashboardSearch = () => {
+export const DashboardSearch = ({ whenInput = () => { } } = {}) => {
   return (
     <div className="dashboard-message">
       <div className="dashboard-search-container">
         <button className="dashboard-message-attatch-button">
-          <Image alt="" src="/images/fn-search2.png" />
+          <Image src="/images/fn-search2.png" alt="" height="25" width="25" />
         </button>
-        <TextAreaInput />
+
+        <InputField whenInput={whenInput} />
       </div>
     </div>
   );

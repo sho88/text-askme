@@ -1,7 +1,7 @@
 /* GENERAL RULES */
 
 body {
-  background-color: #294946;
+  background-color: #124259;
   margin: 0;
   font-family: sans-serif;
   color: rgb(78, 78, 78);
@@ -53,7 +53,7 @@ p {
   position: fixed;
   width: 100%;
   margin-top: 0px;
-  background-color: #294946; display: flex;
+  background-color: #124259; display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -77,6 +77,7 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transform: translate(6px);
 }
 
 .head-button {
@@ -235,7 +236,7 @@ p {
   justify-content: center;
   align-items: center;
   height: 50px;
-  bottom: 5%;
+  bottom: 10%;
   z-index: 1;
 }
 /* DASHBOARD */
@@ -283,19 +284,15 @@ p {
 }
 /* DASHBOARD BOTTOM NAV */
 .dashboard-nav-container {
-  width: 275px;
+  width: 280px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
-  background: linear-gradient(135deg, white lightgray);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 20px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  /* background: #124259; */
+  background: linear-gradient(60deg, #22698a, #0c2f3f);
+  padding: 10px 25px 10px 25px;
+  border: 1.5px solid white;
 }
 
 
@@ -316,7 +313,7 @@ p {
   border-radius: 50px;
   border: 0;
   outline: 0;
-  margin-left: 6px;
+  margin-left: 18px;
   background-color: transparent;
 }
 
@@ -432,6 +429,19 @@ p {
 }
 
 
+.dashboard-bottom-test {
+  width: 50px;
+  border: none;
+  background: white;
+  font-weight: 600;
+  color: #111;
+  border-radius: 100px;
+  height: 35px;
+  width: 35px;
+  align-self: flex-end;
+  transform: translateX(-10px);
+  transform: translateY(-15px);
+}
 
 
 .sent-time {
@@ -568,10 +578,10 @@ p {
   display: flex;
   align-items: flex-end;
   width: auto;
-  background: linear-gradient(45deg, #367264, #2e6a5b);
+  background: linear-gradient(45deg,  white, #8ad7d1);
   padding: 15px;
   border-radius: 20px;
-  color: white;
+  color: #393939;
 }
 
 .dasboard-article-info-container{
@@ -598,7 +608,7 @@ p {
 .dasboard-article-info-container p{
 font-size: 1rem;
 line-height: 1.4rem;
-color: white;
+color: #4e4e4e;
 }
 
 .dashboard-article-container-time-ago {
@@ -744,11 +754,6 @@ position: relative;
 
 
 
-
-
-
-
-
 .abd {
   font-size: 4rem;
   padding-top: 200px;
@@ -763,9 +768,29 @@ position: relative;
 
 
 
+.logo-size {
+  width: 50px;
+}
 
 
+.reduce-browser-width {
+  display: none;
 
+}
 
-
-
+@media screen and (min-width: 600px)
+ {
+  .reduce-browser-width {
+    display: flex;
+    position: fixed;
+    z-index: 3;
+    background-color: #222;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
