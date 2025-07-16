@@ -10,7 +10,7 @@ export default function Edit({ params }) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [id]);
 
   return <div>this is the edit page</div>;
 }
