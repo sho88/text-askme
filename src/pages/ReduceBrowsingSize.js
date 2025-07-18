@@ -1,4 +1,4 @@
-export const ReduceBrowserSize = () => {
+export default function ReduceBrowserSize() {
   return (
     <div className="reduce-browser-width">
       Please reduce browser width
@@ -7,4 +7,4 @@ export const ReduceBrowserSize = () => {
       This is an app compatible for mobile devices only
     </div>
   );
-};
+}
