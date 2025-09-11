@@ -1,6 +1,6 @@
 import "@/components/live/style.css";
 import { useRouter } from "next/router";
-import { ReduceBrowserSize } from "./ReduceBrowsingSize";
+import ReduceBrowserSize from "./ReduceBrowsingSize";
 
 export default function Index() {
   // states and other properties go here...
