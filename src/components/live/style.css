@@ -761,9 +761,18 @@ position: relative;
     align-items: center;
 }
 
+.form-container-2 {
+width: 90%;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
 
 .form-input-style {
-    width: 80vw;
+    width: 95%;
     border-width: 2px;
     border-color: #124259;
     border-style: solid;
@@ -783,6 +792,20 @@ position: relative;
     color: white;
 }
 
+.upload-button-style {
+    height: 125px;
+    width: 89vw;
+    border-color: #124259;
+    border-width: 2px;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px;
+    background-image: url(../../../public/images/upload-image-4.png);
+    background-size: cover;
+    background-position: center;
+    /* background: white; */
+    color: #124259;
+}
 
 
 

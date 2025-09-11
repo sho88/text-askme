@@ -1,6 +1,5 @@
 import "@/components/live/style.css";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import { ReduceBrowserSize } from "./ReduceBrowsingSize";
 
 export default function Index() {
@@ -16,17 +15,9 @@ export default function Index() {
   return (
     <div className="form-page">
       <ReduceBrowserSize />
-      {/* <Image
-        // RESUME WORK HERE
-        className="whats-this"
-        src="/images/opening-animation-logo.webp"
-        width={400}
-        height={1000}
-        alt="Picture of the author"
-      /> */}
       <form className="form-section" onSubmit={handleSubmit}>
         <div className="form-container">
-          <div>
+          <div className="form-container-2">
             <input
               className="form-input-style"
               placeholder="Enter email"
@@ -34,7 +25,7 @@ export default function Index() {
             />
           </div>
 
-          <div>
+          <div className="form-container-2">
             <input
               className="form-input-style"
               placeholder="Enter password"
@@ -48,6 +39,10 @@ export default function Index() {
         </div>
       </form>
       <div className="logo-size"></div>
+      <p>
+        <br />
+        Tap <u>here</u> to create an account
+      </p>
     </div>
   );
 }

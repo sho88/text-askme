@@ -11,6 +11,7 @@ import {
 import { database } from "@/utils/firebase";
 
 /**
+ * Equivalent to POST
  * Responsible for creating data
  * @param String path
  * @param Object data
@@ -27,6 +28,7 @@ export async function createData(path, data) {
 }
 
 /**
+ * Equivalent to GET
  * Responsible for reading data
  * @param String path
  * @returns
@@ -47,11 +49,14 @@ export async function readData(path) {
 }
 
 /**
+ * Equivalent to PUT
  * Responsible for updating data
  * @param String path
  * @param Object data
  * @returns
  */
+
+// hereeeee
 export async function updateData(path, data) {
   let updates = {};
 
@@ -72,6 +77,7 @@ export async function updateData(path, data) {
 }
 
 /**
+ * Equivalent to DELETE
  * Responsible for deleting data
  * @param String path
  * @returns

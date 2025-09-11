@@ -26,5 +26,5 @@ export const useRooms = () => {
       });
   });
 
-  return { rooms };
+  return { errors, rooms };
 };
