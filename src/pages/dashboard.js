@@ -1,43 +1,55 @@
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 import { useRooms } from "@/hooks/rooms";
 import mainStyle from "@/styles/main.css";
 import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
+import { createDocument } from "@/utils/firestore";
 
 export default function DashboardPageComponent() {
+
   // hooks go here...
   const router = useRouter();
   const { rooms } = useRooms();
-
-  // state related properties...
   const [term, setTerm] = useState("");
 
-  // utility functions
-  const filteredRooms = useMemo(
-    function filteredRooms() {
-      if (term.trim().length < 1) return rooms;
-      return rooms.filter(
-        (room) =>
-          room.description
-            .toLocaleLowerCase()
-            .includes(term.toLocaleLowerCase()) ||
-          room.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())
-      );
-    },
-    [rooms, term]
-  );
+
+  // hooks go here...
+  useEffect(() => {
+    async function createNewRoom () {
+      await createDocument("rooms", {
+        name: "Christology - Messianic Prophecies",
+        description: "A deep dive into theology about the messianic prophecies pertaining to Christ from the Old Testament.",
+      })
+    }
+
+    createNewRoom();
+  }, []);
+
+
+  // the equivalent to computed properties...for expensive calculations...
+  const filteredRooms = useMemo(() => {
+    if (term.trim().length < 1) return rooms;
+
+    const filter = rooms.filter(room =>
+      room.description .toLocaleLowerCase().includes(term.toLocaleLowerCase())
+        || room.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())
+    );
+
+    return filter;
+  }, [rooms, term])
 
   // events go here...
-  function handleRoomClick(id) {
+  const handleInput = input => {
+    setTerm( input );
+  }
+
+  const handleRoomClick = id => {
     return router.push(`/events/${id}`);
   }
 
-  function handleInput(input) {
-    setTerm(input);
-  }
 
   // return the renderer...
   return (
@@ -47,7 +59,7 @@ export default function DashboardPageComponent() {
 
         <DashboardSearch whenInput={handleInput} />
 
-        <RoomsList rooms={filteredRooms} onRoomClick={handleRoomClick} />
+        <RoomsList rooms={filteredRooms} whenRoomClick={handleRoomClick} />
 
         <DashboardBottomNav />
       </div>

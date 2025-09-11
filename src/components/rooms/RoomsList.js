@@ -2,11 +2,10 @@ import { RoomInformationComponent } from "../room/information";
 import { useState } from "react";
 import { ModalEventsOptionsComponent } from "../modal/modal-events-options";
 import { useRouter } from "next/router";
-// import "@/styles/globals.css";
 
 import "@/styles/globals.css";
 
-export default function RoomsList({ rooms = [], onRoomClick = () => {} } = {}) {
+export default function RoomsList({ rooms = [], whenRoomClick = () => {} } = {}) {
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const router = useRouter();
@@ -47,7 +46,7 @@ export default function RoomsList({ rooms = [], onRoomClick = () => {} } = {}) {
             <RoomInformationComponent
               {...room}
               // handleAddClick={handleAddClick}
-              onRoomClick={onRoomClick}
+              whenRoomClick={onRoomClick}
             />
             <button
               className="dashboard-bottom-test"

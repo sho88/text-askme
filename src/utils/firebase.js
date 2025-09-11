@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, push, set, get, update, remove } from 'firebase/database'
+import { getDatabase, ref, push, set, get, update, remove } from 'firebase/database' // Firebase RealTimeDatabase
+
+/**
+ * Migrating over to FireStore as of 16th August 2025
+ */
+import { getFirestore } from "firebase/firestore"; // Firebase FireStore
 
 const firebaseConfig = {
   apiKey: "AIzaSyBV2sUOt0NY9EuPrQk3eUThNv-zwTJprBg",
@@ -13,5 +18,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const database = getDatabase(app)
+const firestoreDatabase = getFirestore(app);
 
-export { app, database, get, push, ref, remove, set, update };
+export { app, database, firestoreDatabase, get, push, ref, remove, set, update };
