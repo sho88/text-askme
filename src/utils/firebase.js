@@ -8,6 +8,11 @@ import {
   update,
   remove,
 } from "firebase/database";
+import {
+  getStorage,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBV2sUOt0NY9EuPrQk3eUThNv-zwTJprBg",
@@ -21,5 +26,19 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const storage = getStorage(app);
 
-export { app, database, get, push, ref, remove, set, update };
+export {
+  app,
+  database,
+  get,
+  push,
+  ref,
+  remove,
+  set,
+  update,
+  storage,
+  uploadBytesResumable,
+  getDownloadURL,
+  getDatabase,
+};
