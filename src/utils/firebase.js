@@ -5,6 +5,11 @@ import { getDatabase, ref, push, set, get, update, remove } from 'firebase/datab
  * Migrating over to FireStore as of 16th August 2025
  */
 import { getFirestore } from "firebase/firestore"; // Firebase FireStore
+import {
+  getStorage,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBV2sUOt0NY9EuPrQk3eUThNv-zwTJprBg",
@@ -16,8 +21,23 @@ const firebaseConfig = {
   appId: "1:915111200842:web:63be87adfdccb67518beb3",
 };
 
-const app = initializeApp(firebaseConfig)
-const database = getDatabase(app)
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 const firestoreDatabase = getFirestore(app);
+const storage = getStorage(app);
 
-export { app, database, firestoreDatabase, get, push, ref, remove, set, update };
+export {
+  app,
+  database,
+  firestoreDatabase,
+  get,
+  push,
+  ref,
+  remove,
+  set,
+  update,
+  storage,
+  uploadBytesResumable,
+  getDownloadURL,
+  getDatabase,
+};
