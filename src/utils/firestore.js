@@ -1,4 +1,4 @@
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { firestoreDatabase } from "./firebase";
 
 /**
@@ -40,9 +40,23 @@ export async function readDocument(collectionName = null) {
  * @param String collectionName 
  * @returns 
  */
-export async function updateDocument(collectionName = null) {
-  if (collectionName === null) return null;
-  
+export async function updateDocument(collectionName = null, documentId = null, jsonObject = null) {
+  if (collectionName === null || documentId === null || jsonObject === null) {
+    console.error("Missing collection name, document ID, or update data.");
+    return false;
+  }
+
+  try {
+    const documentRef = doc(firestoreDatabase, collectionName, documentId);
+    await updateDoc(documentRef, {
+      ...jsonObject,
+      updatedAt: new Date(), // Always update the timestamp
+    });
+    return true; 
+  } catch (error) {
+    console.error("Error updating document:", error);
+    return false;
+  }
 }
 
 /**

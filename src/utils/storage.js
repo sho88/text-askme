@@ -1,30 +1,47 @@
-import { ref, getDownloadURL, storage, uploadBytesResumable } from "./firebase";
+import { storageRef, getDownloadURL, storage, uploadBytesResumable } from "./firebase";
 
-export const uploadImageToFirebase = (configuration) => {
-  console.clear();
-  console.log('Sending configuration data to:', `/files/${configuration.title}`);
+/**
+ * Responsible for uploading images to Firebase Storage
+ */
+export const uploadImageToFirebase = (imageMetaData) => new Promise((resolve, reject) => {
+  // FIRST, Create the unique name for the file that will be uploaded...
+  const uniqueFileName = `${imageMetaData.id}__${imageMetaData.imageFile.name}`;
 
-  // Create a storage reference
-  const storageRef = ref(storage, `/files/${configuration.title}`);
+  // THEN, Create a storage reference...
+  const storageReference = storageRef(storage, `/files/${uniqueFileName}`);
 
-  // Upload the file
-  const uploadTask = uploadBytesResumable(storageRef, configuration);
+  // THEN, Upload the file...
+  const uploadTask = uploadBytesResumable(storageReference, imageMetaData.imageFile, {
+    contentType: imageMetaData.imageFile.type,
+  });
 
-  uploadTask.on(
-    "state_changed",
+  // WHEN the uploadTask is running, every time the state_changed event happens...
+  uploadTask.on("state_changed",
     (snapshot) => {
       const percent = Math.round(
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       );
+
       // Update progress state
-      console.log(percent);
+      console.log(`Upload is ${percent}% done.`);
+
+      // WHEN the snapshot state is...
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
     },
-    (err) => console.log(err),
+    
+    // in the case of an error, log it...
+    (err) => console.error(err),
+    
     () => {
-      // Download the URL of the uploaded file
-      getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-        console.log(url);
-      });
+      // get the url of the recently uploaded file...
+      getDownloadURL(uploadTask.snapshot.ref).then((url) => resolve({ url }));
     }
   );
-};
+});

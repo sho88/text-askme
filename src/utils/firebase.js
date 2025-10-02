@@ -7,6 +7,7 @@ import { getDatabase, ref, push, set, get, update, remove } from 'firebase/datab
 import { getFirestore } from "firebase/firestore"; // Firebase FireStore
 import {
   getStorage,
+  ref as storageRef,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
@@ -21,6 +22,17 @@ const firebaseConfig = {
   appId: "1:915111200842:web:63be87adfdccb67518beb3",
 };
 
+// @TODO: Be sure to come back to this and keep the keys away...
+// const firebaseConfig = {
+//   apiKey: process.env.API_KEY,
+//   authDomain: process.env.AUTH_DOMAIN,
+//   databaseURL: process.env.DATABASE_URL,
+//   projectId: process.env.PROJECT_ID,
+//   storageBucket: process.env.STORAGE_BUCKET,
+//   messagingSenderId: process.env.MESSAGING_SENDER_ID,
+//   appId: process.env.APP_ID,
+// };
+
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const firestoreDatabase = getFirestore(app);
@@ -30,13 +42,14 @@ export {
   app,
   database,
   firestoreDatabase,
+  storage,
   get,
   push,
   ref,
+  storageRef,
   remove,
   set,
   update,
-  storage,
   uploadBytesResumable,
   getDownloadURL,
   getDatabase,

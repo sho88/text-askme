@@ -1,8 +1,8 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./style.css";
 import Image from "next/image";
-import { createData } from "@/utils/database";
 import { uploadImageToFirebase } from "@/utils/storage";
+import { createDocument, updateDocument } from "@/utils/firestore";
 
 export const ModalComponent = ({ onModalClose }) => {
   const [title, setTitle] = useState("");
@@ -11,6 +11,13 @@ export const ModalComponent = ({ onModalClose }) => {
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
 
+  // events will go here ==========================================================================
+
+  /**
+   * WHEN the user has made a change to the image (via drag and drop or upload)
+   * IF the file doesn't exist...THEN ignore (by returning)
+   * OTHERWISE set the image "state" 
+   */
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
@@ -20,34 +27,50 @@ export const ModalComponent = ({ onModalClose }) => {
     console.log(`The image file is:`, file)
   };
 
+  /**
+   * WHEN the user submits the form
+   * THEN set the loading "state" to true
+   * THEN prepare the FormData object and populate it with the title, description and image "state"
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // FIRST, set the loading "state" to true to disable the button below...
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    
-    // if there is an image file, then upload it to the form data
-    if (imageFile) formData.append("image", imageFile);
-    
+    // THEN, take the form element fields, and populate the FormData object...
+    const formData = new FormData(e.target);
 
-    // create the data, in the database
     try {
-      await createData("/rooms", formData, {
-        name: "Biblical Hebrew Challenge",
-        description: "Read through Genesis 1-6 in Biblical Hebrew.",
-      })
-  
-      console.log("Its working");
-      // now upload the image to firebase...
-      uploadImageToFirebase({ title, description, imageFile });
-      setLoading(false);
+      // AFTERWARDS, create the data, in the database...
+      const newEvent = await createDocument("rooms", {
+        title: formData.get('title'),
+        description: formData.get("description"),
+        image: formData.get("image"),
+      });
+      
+      // THEN, upload the image to firebase with the newEvent.id as the unique key/identifier...
+      const newEventImage = await uploadImageToFirebase({
+        id: newEvent.id,
+        title,
+        description,
+        imageFile
+      });
+
+      // @TODO: Come back to handle this error a bit better...
+      // IF there is no image url (in the case it's unsuccessful), THEN, return...
+      if (!newEventImage.url) return;
+
+      // THEN, update the document with the new firestore storage image url...
+      await updateDocument("rooms", newEvent.id, { image: newEventImage.url });
+
+      // THEN, emit this upwards to the parent component...
+      onModalClose({ ...newEvent, image: newEventImage.url });
     } catch (error) {
-      // in case there is an error
+      // IF there is an error...
       console.error("Error creating data:", error);
     } finally {
-      // then trigger the function prop to close this modal...
+      // FINALLY, set loading "state" to false, to release the disabled button...
       setLoading(false);
     }
   };
@@ -127,10 +150,6 @@ export const ModalComponent = ({ onModalClose }) => {
               )}
             </label>
           </div>
-
-          <hr />
-
-          <pre>{JSON.stringify({ title, description }, null, 2)}</pre>
         </form>
       </div>
     </div>

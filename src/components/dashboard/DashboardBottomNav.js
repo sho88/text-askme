@@ -11,8 +11,12 @@ export const DashboardBottomNav = () => {
     setShowModal(true);
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = (newEventData) => {
     setShowModal(false);
+
+    console.clear();
+    console.log(`New Data`);
+    console.log(newEventData);
   };
 
   return (
