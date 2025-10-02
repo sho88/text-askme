@@ -2,7 +2,7 @@ import Image from "next/image";
 import { TextAreaInput } from "./../live/index.js";
 import InputField from "../input/InputField.js";
 
-export const DashboardSearch = ({ whenInput = () => { } } = {}) => {
+export const DashboardSearch = ({ whenInput = () => {} } = {}) => {
   return (
     <div className="dashboard-message">
       <div className="dashboard-search-container">

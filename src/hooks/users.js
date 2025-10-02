@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 export function useUsers() {
-  const [users, setUsers] = useState([])
-  const [errors, setError] = useState(null)
+  const [users, setUsers] = useState([]);
+  const [errors, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('https://jsonplaceholder.typicode.com/users')
-        const data = await res.json()
-        setUsers(data)
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        const data = await res.json();
+        setUsers(data);
       } catch (error) {
-        setError(error)
+        setError(error);
       }
     }
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
-  return [errors, users]
+  return [errors, users];
 }

@@ -42,6 +42,7 @@ export const ModalComponent = ({ onModalClose }) => {
                 className="form-input-style"
                 placeholder="Enter your title"
                 type="text"
+                required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -55,6 +56,7 @@ export const ModalComponent = ({ onModalClose }) => {
                 name="description"
                 placeholder="Enter password"
                 type="password"
+                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               ></textarea>
@@ -64,8 +66,19 @@ export const ModalComponent = ({ onModalClose }) => {
           <div className="form__control">
             <label>
               {!loading && (
+                <button className="upload-button-style" type="submit">
+                  Upload Image ⬆
+                </button>
+              )}
+              {loading && (
+                <button className="upload-button-style" type="submit" disabled>
+                  Loading
+                </button>
+              )}
+
+              {!loading && (
                 <button className="form-button-style" type="submit">
-                  Create Event
+                  Create Event ➡
                 </button>
               )}
               {loading && (
