@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import "@/styles/globals.css";
 
-export default function RoomsList({ rooms = [], whenRoomClick = () => {} } = {}) {
+export default function RoomsList({ rooms = [] } = {}) {
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function RoomsList({ rooms = [], whenRoomClick = () => {} } = {})
   };
 
   const handleModalAction = () => {
-    router.push(`/event/${selectedEvent.id}/edit`);
+    router.push(`/event/${selectedEvent}/edit`);
   };
 
   return (
@@ -29,10 +29,7 @@ export default function RoomsList({ rooms = [], whenRoomClick = () => {} } = {})
       {showModal && (
         <ModalEventsOptionsComponent
           onModalClose={handleModalClose}
-          onModalAction={() => {
-            console.log("hello");
-            handleModalAction();
-          }}
+          onModalAction={handleModalAction}
         />
       )}
 
@@ -45,14 +42,11 @@ export default function RoomsList({ rooms = [], whenRoomClick = () => {} } = {})
           <article key={room.id} className="all-messages-article-1">
             <RoomInformationComponent
               {...room}
-              // handleAddClick={handleAddClick}
-              whenRoomClick={onRoomClick}
+              handleAddClick={handleAddClick}
             />
             <button
               className="dashboard-bottom-test"
               type=""
-              // onTouchMove={handleAddClick}
-              // onContextMenu={() => {
               onClick={() => {
                 handleAddClick(room);
               }}

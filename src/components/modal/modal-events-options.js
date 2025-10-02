@@ -6,9 +6,7 @@ export const ModalEventsOptionsComponent = ({
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-
     onModalAction();
-    // router.push("/event/" + params.id + "/edit");
   };
 
   return (
@@ -55,7 +53,10 @@ export const ModalEventsOptionsComponent = ({
               <button className="form-button-style" type="submit">
                 Edit Event
               </button>
-              <button className="form-button-style">Delete Event</button>
+
+              <button className="form-button-style">
+                Delete Event
+              </button>
             </label>
           </div>
         </form>

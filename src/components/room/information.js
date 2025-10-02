@@ -2,14 +2,14 @@ export const RoomInformationComponent = ({
   description,
   id,
   name,
-  onRoomClick,
+  handleAddClick,
 }) => (
   <div>
     {" "}
     <div
       className="all-messages-article"
       // onContextMenu={() => onRoomClick(id)}
-      onClick={() => onRoomClick(id)}
+      onClick={() => handleAddClick(id)}
     >
       <div className="dasboard-article-info-container">
         {/* RESUME WORK HERE */}
