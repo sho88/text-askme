@@ -13,37 +13,43 @@ export const ModalComponent = ({ onModalClose }) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
-    if (file) {
-      setImageFile(file);
-    }
+
+    if (!file) return;
+
+    setImageFile(file);
+    console.log(`The image file is:`, file)
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("name", title);
+    formData.append("title", title);
     formData.append("description", description);
-    if (imageFile) {
-      formData.append("image", imageFile);
-    }
+    
+    // if there is an image file, then upload it to the form data
+    if (imageFile) formData.append("image", imageFile);
+    
 
-    createData("/rooms", formData, {
-      name: "Biblical Hebrew Challenge",
-      description: "Read through Genesis 1-6 in Biblical Hebrew.",
-    })
-      .then(() => {
-        console.log("Its working");
-        uploadImageToFirebase({ name, description, imageFile });
-        setLoading(false);
-        onModalClose();
+    // create the data, in the database
+    try {
+      await createData("/rooms", formData, {
+        name: "Biblical Hebrew Challenge",
+        description: "Read through Genesis 1-6 in Biblical Hebrew.",
       })
-      .catch((error) => {
-        console.error("Error creating data:", error);
-        setLoading(false);
-      });
+  
+      console.log("Its working");
+      // now upload the image to firebase...
+      uploadImageToFirebase({ title, description, imageFile });
+      setLoading(false);
+    } catch (error) {
+      // in case there is an error
+      console.error("Error creating data:", error);
+    } finally {
+      // then trigger the function prop to close this modal...
+      setLoading(false);
+    }
   };
 
   return (
@@ -121,6 +127,10 @@ export const ModalComponent = ({ onModalClose }) => {
               )}
             </label>
           </div>
+
+          <hr />
+
+          <pre>{JSON.stringify({ title, description }, null, 2)}</pre>
         </form>
       </div>
     </div>
