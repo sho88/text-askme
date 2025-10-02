@@ -73,3 +73,10 @@ export async function deleteDocument(collectionName = null) {
 export async function createCollection() {
 
 }
+
+export async function getCollections(collectionName) {
+  const collectionReference = collection(firestoreDatabase, collectionName);
+  const querySnapshot = await getDocs(collectionReference);
+
+  
+}
