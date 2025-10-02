@@ -15,20 +15,6 @@ export default function DashboardPageComponent() {
   const { rooms } = useRooms();
   const [term, setTerm] = useState("");
 
-
-  // hooks go here...
-  useEffect(() => {
-    async function createNewRoom () {
-      await createDocument("rooms", {
-        name: "Christology - Messianic Prophecies",
-        description: "A deep dive into theology about the messianic prophecies pertaining to Christ from the Old Testament.",
-      })
-    }
-
-    createNewRoom();
-  }, []);
-
-
   // the equivalent to computed properties...for expensive calculations...
   const filteredRooms = useMemo(() => {
     if (term.trim().length < 1) return rooms;
