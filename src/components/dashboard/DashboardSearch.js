@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { TextAreaInput } from "./../live/index.js";
 import InputField from "../input/InputField.js";
 
 export const DashboardSearch = ({ whenInput = () => {} } = {}) => {

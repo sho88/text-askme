@@ -51,6 +51,10 @@ export const ModalEventsOptionsComponent = ({
           <div className="form__control">
             <label>
               <button className="form-button-style" type="submit">
+                View Event
+              </button>
+
+              <button className="form-button-style" type="submit">
                 Edit Event
               </button>
 

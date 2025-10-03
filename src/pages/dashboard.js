@@ -6,7 +6,6 @@ import { useRooms } from "@/hooks/rooms";
 import mainStyle from "@/styles/main.css";
 import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
-import { createDocument } from "@/utils/firestore";
 
 export default function DashboardPageComponent() {
 
@@ -20,7 +19,7 @@ export default function DashboardPageComponent() {
     if (term.trim().length < 1) return rooms;
 
     const filter = rooms.filter(room =>
-      room.description .toLocaleLowerCase().includes(term.toLocaleLowerCase())
+      room.description.toLocaleLowerCase().includes(term.toLocaleLowerCase())
         || room.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())
     );
 

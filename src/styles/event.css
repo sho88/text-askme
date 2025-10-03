@@ -1,0 +1,31 @@
+.event {
+  padding: 100px 20px;
+}
+
+.event__content {
+  border: 1px solid green;
+  color: white;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.event__footer {
+  border: 1px solid blue;
+  color: white;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.event__header {
+  border: 1px solid red;
+  color: white;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.event__messages {
+  border: 1px solid white;
+  color: white;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}

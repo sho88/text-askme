@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 import * as database from "@/utils/database";
+import { readDocument } from "@/utils/firestore";
 
 /**
  * Used primarily for retrieving specific room information (and messages)
- * @param {*} roomID
+ * @param String roomID
  * @returns
  */
 export default function useRoom(roomID) {
   const [messages, setMessages] = useState([]);
+  const [room, setRoom] = useState(null);
 
   useEffect(() => {
-    database
-      .readData(`rooms/${roomID}/messages`)
-      .then((data) => {
-        const roomsArray = data
-          ? Object.keys(data).map((id) => ({ id, ...data[id] }))
-          : [];
-        setMessages(roomsArray);
-      })
-      .catch((error) => {
-        // @TODO: Create a generic error handler on the app...
-        console.error(error);
-      });
-  }, [roomID]);
+    async function getRoomByID() {
+      try {
+        const document = await readDocument("rooms", roomID);        
+        setRoom(document);
+      } catch (error) {
+        console.error('ERROR:', error);
+      } finally {
+        return room;
+      }
+    }
 
-  return { messages };
+    getRoomByID()
+  }, [room, roomID]);
+
+  return { messages, room };
 }

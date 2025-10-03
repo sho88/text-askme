@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import * as database from "@/utils/database";
 import { asyncify } from "@/utils";
+import { getCollection } from "@/utils/firestore";
 
 /**
  * Used primarily for retriving rooms
@@ -13,7 +13,7 @@ export const useRooms = () => {
   // hooks...
   useEffect(() => {
     async function getData() {
-      const [error, data] = await asyncify(database.readData("rooms"));
+      const [error, data] = await asyncify(getCollection("rooms"));
 
       if (error) {
         // @TODO: Create a generic error handler on the app...

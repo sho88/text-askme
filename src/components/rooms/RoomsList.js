@@ -16,6 +16,10 @@ export default function RoomsList({ rooms = [] } = {}) {
     setSelectedEvent(event);
   };
 
+  const handleClick = (roomID) => {
+    router.push(`/event/${roomID}`);
+  }
+
   const handleModalClose = () => {
     setShowModal(false);
   };
@@ -42,7 +46,7 @@ export default function RoomsList({ rooms = [] } = {}) {
           <article key={room.id} className="all-messages-article-1">
             <RoomInformationComponent
               {...room}
-              handleAddClick={handleAddClick}
+              handleClick={handleClick}
             />
             <button
               className="dashboard-bottom-test"
