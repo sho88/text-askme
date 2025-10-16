@@ -16,7 +16,7 @@ export const ModalComponent = ({ onModalClose }) => {
   /**
    * WHEN the user has made a change to the image (via drag and drop or upload)
    * IF the file doesn't exist...THEN ignore (by returning)
-   * OTHERWISE set the image "state" 
+   * OTHERWISE set the image "state"
    */
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -24,7 +24,7 @@ export const ModalComponent = ({ onModalClose }) => {
     if (!file) return;
 
     setImageFile(file);
-    console.log(`The image file is:`, file)
+    console.log(`The image file is:`, file);
   };
 
   /**
@@ -44,17 +44,17 @@ export const ModalComponent = ({ onModalClose }) => {
     try {
       // AFTERWARDS, create the data, in the database...
       const newEvent = await createDocument("rooms", {
-        title: formData.get('title'),
+        title: formData.get("title"),
         description: formData.get("description"),
         image: formData.get("image"),
       });
-      
+
       // THEN, upload the image to firebase with the newEvent.id as the unique key/identifier...
       const newEventImage = await uploadImageToFirebase({
         id: newEvent.id,
         title,
         description,
-        imageFile
+        imageFile,
       });
 
       // @TODO: Come back to handle this error a bit better...
@@ -127,6 +127,7 @@ export const ModalComponent = ({ onModalClose }) => {
               </button>
             </label>
             <input
+              name="image"
               id="image-upload"
               type="file"
               accept="image/*"

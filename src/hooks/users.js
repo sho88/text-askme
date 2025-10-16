@@ -1,8 +1,14 @@
+// useUsers
+// users, error
+// function as fetchData
+// https://jsonplaceholder.typicode.com/users
+// no dependancies
+
 import { useEffect, useState } from "react";
 
-export function useUsers() {
+const useUsers = () => {
   const [users, setUsers] = useState([]);
-  const [errors, setError] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,5 +24,7 @@ export function useUsers() {
     fetchData();
   }, []);
 
-  return [errors, users];
-}
+  return [users, error];
+};
+
+export default useUsers;

@@ -22,8 +22,8 @@ export const useRooms = () => {
         return;
       }
 
-      const roomsArray = Object.keys(data).map(id => ({ id, ...data[id] }));
-      setRooms( roomsArray );
+      const roomsArray = Object.keys(data).map((id) => ({ id, ...data[id] }));
+      setRooms(roomsArray);
     }
 
     // invoke the function to get the data...

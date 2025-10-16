@@ -8,7 +8,6 @@ import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
 
 export default function DashboardPageComponent() {
-
   // hooks go here...
   const router = useRouter();
   const { rooms } = useRooms();
@@ -18,23 +17,25 @@ export default function DashboardPageComponent() {
   const filteredRooms = useMemo(() => {
     if (term.trim().length < 1) return rooms;
 
-    const filter = rooms.filter(room =>
-      room.description.toLocaleLowerCase().includes(term.toLocaleLowerCase())
-        || room.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())
+    const filter = rooms.filter(
+      (room) =>
+        room.description
+          .toLocaleLowerCase()
+          .includes(term.toLocaleLowerCase()) ||
+        room.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())
     );
 
     return filter;
-  }, [rooms, term])
+  }, [rooms, term]);
 
   // events go here...
-  const handleInput = input => {
-    setTerm( input );
-  }
+  const handleInput = (input) => {
+    setTerm(input);
+  };
 
-  const handleRoomClick = id => {
+  const handleRoomClick = (id) => {
     return router.push(`/events/${id}`);
-  }
-
+  };
 
   // return the renderer...
   return (

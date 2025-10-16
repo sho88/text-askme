@@ -1,5 +1,15 @@
-import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, push, set, get, update, remove } from 'firebase/database' // Firebase RealTimeDatabase
+// @TODO: being depreicated. don't need to study.
+
+import { initializeApp } from "firebase/app";
+import {
+  getDatabase,
+  ref,
+  push,
+  set,
+  get,
+  update,
+  remove,
+} from "firebase/database"; // Firebase RealTimeDatabase
 
 /**
  * Migrating over to FireStore as of 16th August 2025
