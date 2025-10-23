@@ -15,7 +15,7 @@ import { firestoreDatabase } from "./firebase";
  * @returns
  */
 export async function createDocument(collectionName = null, jsonObject = null) {
-  if (collectionName === null || jsonObject === null) return null;
+  if (collectionName === null || jsonObject === null) return false;
 
   try {
     const newDocument = await addDoc(
@@ -40,14 +40,14 @@ export async function createDocument(collectionName = null, jsonObject = null) {
  * @returns
  */
 export async function readDocument(collectionName, documentID = null) {
-  if (collectionName === null || documentID === null) return null;
+  if (collectionName === null || documentID === null) return false;
 
   const documentReference = doc(firestoreDatabase, collectionName, documentID);
   const documentSnapshot = await getDoc(documentReference);
 
   if (!documentSnapshot.exists()) {
     console.error(`ERROR:`, documentID, " does not exist");
-    return null;
+    return false;
   }
 
   // @TODO: Come back to allow it to return the updatedDate
@@ -56,8 +56,8 @@ export async function readDocument(collectionName, documentID = null) {
   return Object.keys(documentSnap)
     .filter((key) => key !== "createdAt" && key !== "updatedAt")
     .reduce(
-      (accumulator, key) => ({
-        ...accumulator,
+      (defaultObject, key) => ({
+        ...defaultObject,
         [key]: documentSnap[key],
       }),
       {}
@@ -99,7 +99,7 @@ export async function updateDocument(
  * @returns
  */
 export async function deleteDocument(collectionName = null) {
-  if (collectionName === null) return null;
+  if (collectionName === null) return false;
 }
 
 export async function createCollection() {}

@@ -2,7 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import "./style.css";
 import Image from "next/image";
 import { uploadImageToFirebase } from "@/utils/storage";
-import { createDocument, updateDocument } from "@/utils/firestore";
+import {
+  createDocument,
+  updateDocument,
+  deleteDocument,
+} from "@/utils/firestore";
 
 export const ModalComponent = ({ onModalClose }) => {
   const [title, setTitle] = useState("");
@@ -41,9 +45,11 @@ export const ModalComponent = ({ onModalClose }) => {
     // THEN, take the form element fields, and populate the FormData object...
     const formData = new FormData(e.target);
 
+    let newEvent = null; // Declaring outside try block so it's accessible in catch
+
     try {
       // AFTERWARDS, create the data, in the database...
-      const newEvent = await createDocument("rooms", {
+      newEvent = await createDocument("rooms", {
         title: formData.get("title"),
         description: formData.get("description"),
         image: formData.get("image"),
@@ -57,18 +63,25 @@ export const ModalComponent = ({ onModalClose }) => {
         imageFile,
       });
 
-      // @TODO: Come back to handle this error a bit better...
       // IF there is no image url (in the case it's unsuccessful), THEN, return...
-      if (!newEventImage.url) return;
+      if (!newEventImage || !newEventImage.url)
+        throw new Error("Failed to upload image.");
 
       // THEN, update the document with the new firestore storage image url...
       await updateDocument("rooms", newEvent.id, { image: newEventImage.url });
+      if (!updateDocument)
+        throw new Error("Failed to update document with image URL.");
 
       // THEN, emit this upwards to the parent component...
       onModalClose({ ...newEvent, image: newEventImage.url });
     } catch (error) {
       // IF there is an error...
       console.error("Error creating data:", error);
+      // Rollback logic: If a document was created but subsequent steps failed, delete it.
+      if (newEvent && newEvent.id) {
+        await deleteDocument("rooms", newEvent.id);
+        console.log(`Cleaned up orphaned document: ${newEvent.id}`);
+      }
     } finally {
       // FINALLY, set loading "state" to false, to release the disabled button...
       setLoading(false);
@@ -145,8 +158,8 @@ export const ModalComponent = ({ onModalClose }) => {
                 </button>
               )}
               {loading && (
-                <button className="form-button-style" type="submit" disabled>
-                  Loading
+                <button className="form-button-style" type="submit">
+                  Creating Event...
                 </button>
               )}
             </label>
