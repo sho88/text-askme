@@ -10,9 +10,9 @@ export default function HeaderComponent() {
         <BurgerMenu />
         <div className="head-primary-info">
           <Image
-            src="/images/logo-text-white-bubble-2.png"
-            width={70}
-            height={50}
+            src="/images/logo-text-small.png"
+            width={60}
+            height={40}
             alt="Picture of the author"
           />
         </div>

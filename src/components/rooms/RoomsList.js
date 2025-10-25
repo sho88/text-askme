@@ -18,7 +18,7 @@ export default function RoomsList({ rooms = [] } = {}) {
 
   const handleClick = (roomID) => {
     router.push(`/event/${roomID}`);
-  }
+  };
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -38,16 +38,13 @@ export default function RoomsList({ rooms = [] } = {}) {
       )}
 
       <div className="dashboard-body-container">
-        <h1 className="text-white text-2xl font-oswald font-bold mt-10 mb-5">
+        {/* <h1 className="text-navy text-2xl font-oswald font-bold mt-10 mb-5">
           All Rooms
-        </h1>
+        </h1> */}
 
         {rooms.map((room) => (
           <article key={room.id} className="all-messages-article-1">
-            <RoomInformationComponent
-              {...room}
-              handleClick={handleClick}
-            />
+            <RoomInformationComponent {...room} handleClick={handleClick} />
             <button
               className="dashboard-bottom-test"
               type=""

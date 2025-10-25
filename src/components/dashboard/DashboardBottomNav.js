@@ -26,7 +26,7 @@ export const DashboardBottomNav = () => {
       <div className="message">
         <div className="dashboard-nav-container">
           <button className="dashboard-bottom-nav-buttons" type="">
-            <Image src="/images/fn-home.png" alt="" height="25" width="25" />
+            <Image src="/images/fn-home-4.png" alt="" height="25" width="25" />
           </button>
 
           <button
@@ -34,11 +34,11 @@ export const DashboardBottomNav = () => {
             type=""
             onClick={handleAddClick}
           >
-            <Image src="/images/fn-add.png" alt="" height="25" width="25" />
+            <Image src="/images/fn-plus-4.png" alt="" height="25" width="25" />
           </button>
 
           <button className="dashboard-bottom-nav-buttons" type="">
-            <Image src="/images/fn-user.png" alt="" height="25" width="25" />
+            <Image src="/images/fn-user-4.png" alt="" height="25" width="25" />
           </button>
         </div>
       </div>

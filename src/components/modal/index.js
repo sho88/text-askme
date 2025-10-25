@@ -118,7 +118,7 @@ export const ModalComponent = ({ onModalClose }) => {
           <div className="form__control">
             <label>
               <textarea
-                className="form-input-style"
+                className="form-input-style-textarea"
                 name="description"
                 placeholder="Enter description"
                 required

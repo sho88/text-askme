@@ -46,6 +46,7 @@ export default function DashboardPageComponent() {
         <DashboardSearch whenInput={handleInput} />
 
         <RoomsList rooms={filteredRooms} whenRoomClick={handleRoomClick} />
+        <RoomsList rooms={filteredRooms} whenRoomClick={handleRoomClick} />
 
         <DashboardBottomNav />
       </div>
