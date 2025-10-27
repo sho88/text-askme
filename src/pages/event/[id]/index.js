@@ -1,5 +1,3 @@
-import { useParams } from 'next/navigation'
-import { useEffect } from "react";
 import { readDocument } from "@/utils/firestore";
 
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
@@ -8,49 +6,82 @@ import useRoom from "@/hooks/room";
 
 /**
  * Import the stylesheets here...
-*/
+ */
 import mainStyle from "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
 
 export async function getServerSideProps({ params }) {
-  const room = await readDocument("rooms", params.id)
-  return { props: { room } }
+  const room = await readDocument("rooms", params.id);
+  return { props: { room } };
 }
 
-
 export default function EventSingleComponent({ room }) {
-
   return (
     <div>
       <div className={mainStyle["entire-dashboard-page"]}>
         <HeaderComponent />
 
         <div className="event">
-          <div className="event__header">
-            <h1>{room.title}</h1>
-          </div>
+          <div className="event__container">
+            <div className="background-2"></div>
+            <div className="layer-1">
+              <div>
+                <div className="layer-1-filter"></div>
+                <div className="layer-2-filter"></div>
+                <img
+                  className="event__image"
+                  loading="lazy"
+                  alt={room.title}
+                  src={room.image}
+                />
+              </div>
+            </div>
+            <div className="layer-3">
+              <div className="event__header">
+                <h1>{room.title}</h1>
+              </div>
 
-          <div className="event__image">
-            <img loading="lazy" alt={room.title} src={room.image} />
-          </div>
+              <div className="event__content">
+                <p>
+                  {room.description} The event messages will go down here... The
+                  event messages will go down here... The event messagesThe
+                  event messages will go down here... The event messages will go
+                  down here... The event messages
+                </p>
+              </div>
 
-          <div className="event__content">
-            <p>{room.description}</p>
-          </div>
-
-          <div className="event__footer">
+              {/* There is currently no footer input in the form, nor footer functionality, thus, no footer information to display */}
+              {/* <div className="event__footer">
             <p>Footer information goes here...</p>
+          </div> */}
+            </div>
+
+            <div className="event__messages">
+              <h2 className="event__header-2">Questions from audience</h2>
+              <div className="event__messages-2">
+                And this is just a ranom question I could be talking abot? Give
+                more content? Just giving it a few more words and that, with a
+                question mark at the end of the question?
+              </div>
+              <div className="event__messages-2">
+                And this is just a ranom question I could be talking abot? Give
+                more content? Just giving it a few more words and that, with a
+                question mark at the end of the question?
+              </div>
+              <div className="event__messages-2">
+                And this is just a ranom question I could be talking abot? Give
+                more content? Just giving it a few more words and that, with a
+                question mark at the end of the question?
+              </div>
+            </div>
           </div>
 
-          <div className="event__messages">
-            <p>The event messages will go down here...</p>
-          </div>
+          <div className="random-box"></div>
         </div>
 
         <DashboardBottomNav />
       </div>
     </div>
-  )
-
+  );
 }

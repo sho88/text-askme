@@ -331,7 +331,7 @@ p {
   align-items: flex-end;
   background: white;
   /* background: linear-gradient(60deg, #22698a, #0c2f3f); */
-  padding: 15px 85px 15px 85px;
+  padding: 18px 85px 18px 85px;
   /* border: 1.5px solid white;
   backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(1.5px);
@@ -886,4 +886,98 @@ position: relative;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+}
+
+
+.modal__content {
+  width: 100vw;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.modal__close {
+  border: none;
+  background: none;
+  margin: 10px;
+}
+
+.modal__close img {
+  width: 18px;
+}
+
+
+.modal {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 9;
+}
+
+.form-input-style {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 100px;
+  padding-top: 6px;
+  padding-left: 30px;
+  padding-bottom: 6px;
+  box-shadow: 0px 0px 50px #ececec;
+  min-height: 50px;
+  margin-top: 20px;
+  border: none;
+  outline: none;
+}
+
+.form-input-style-textarea {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 30px;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-bottom: 6px;
+  box-shadow: 0px 0px 50px #ececec;
+  height: 170px;
+  margin-top: 20px;
+}
+
+.upload-button-style {
+  height: 125px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  /* background: white; */
+  margin-top: 20px;
+  color: #124259;
+  background-image: url(../../public/images/upload-image-5.png),
+  linear-gradient(200deg, white, rgb(13, 211, 218), white);
+  background-origin: border-box;
+  background-clip: padding-box, border-box; 
+  border-radius: 20px;
+  border: 1px solid transparent; 
+}
+
+.form-button-style {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  color: white;
+  background-image: linear-gradient(to right, #3cb7b4, #3cb7b4),
+  linear-gradient(200deg, white, #124259, white);
+  background-origin: border-box;
+  background-clip: padding-box, border-box; 
+  border-radius: 20px;
+  border: 1px solid transparent;
 }
