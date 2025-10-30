@@ -34,7 +34,10 @@ export default function Index() {
           </div>
 
           <div>
-            <button className="form-button-style">Login</button>
+            <button className="form-button-style">Login as Host</button>
+          </div>
+          <div>
+            <button className="form-button-style">Login as Guest</button>
           </div>
         </div>
       </form>
