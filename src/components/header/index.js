@@ -18,7 +18,6 @@ export default function HeaderComponent() {
         </div>
         <WriteNewMessage />
       </div>
-      <div className="divider"></div>
     </header>
   );
 }

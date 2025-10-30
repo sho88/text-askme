@@ -18,7 +18,6 @@ export const Head = (props) => {
         </div>
         <ProfilePictureImage />
       </div>
-      <div className="divider"></div>
     </header>
   );
 };

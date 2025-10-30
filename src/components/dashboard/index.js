@@ -12,7 +12,6 @@ export default function DashboardComponent() {
         </div>
         <WriteNewMessage />
       </div>
-      <div className="divider"></div>
     </header>
   );
 }
