@@ -17,12 +17,9 @@ export default function DashboardPageComponent() {
   const filteredRooms = useMemo(() => {
     if (term.trim().length < 1) return rooms;
 
-    const filter = rooms.filter(
-      (room) =>
-        room.description
-          .toLocaleLowerCase()
-          .includes(term.toLocaleLowerCase()) ||
-        room.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())
+    const filter = rooms.filter((room) => 
+      room.description.toLocaleLowerCase().includes(term.toLocaleLowerCase()) ||
+      room.title.toLocaleLowerCase().includes(term.toLocaleLowerCase())
     );
 
     return filter;
@@ -45,7 +42,6 @@ export default function DashboardPageComponent() {
 
         <DashboardSearch whenInput={handleInput} />
 
-        <RoomsList rooms={filteredRooms} whenRoomClick={handleRoomClick} />
         <RoomsList rooms={filteredRooms} whenRoomClick={handleRoomClick} />
 
         <DashboardBottomNav />

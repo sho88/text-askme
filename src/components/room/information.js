@@ -1,15 +1,13 @@
 import Image from "next/image";
-import { BurgerMenu } from "../dashboard/BurgerMenu";
-import { WriteNewMessage } from "../dashboard/WriteNewMessage";
 
 export const RoomInformationComponent = ({
   description,
   id,
   title,
   handleClick,
+  image,
 }) => (
   <div>
-    {" "}
     <div className="all-messages-article" onClick={() => handleClick(id)}>
       <div className="dasboard-article-info-container">
         {/* RESUME WORK HERE */}
