@@ -22,7 +22,7 @@ export default function Index() {
       password: formData.get("password"),
     };
 
-    const isEmpty = Object.values(data).some(value => !value);
+    const isEmpty = Object.values(data).some((value) => !value);
 
     if (isEmpty) {
       console.error("You need to login with email and password");
@@ -66,14 +66,16 @@ export default function Index() {
       </form>
 
       <div>
-        <button className="form-button-style" onClick={handleGuestLoginClick}>Login as Guest</button>
+        <button className="form-button-style" onClick={handleGuestLoginClick}>
+          Login as Guest
+        </button>
       </div>
-      
+
       <div className="logo-size"></div>
-      <p>
+      {/* <p>
         <br />
         Tap <u>here</u> to create an account
-      </p>
+      </p> */}
     </div>
   );
 }

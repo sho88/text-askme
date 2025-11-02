@@ -17,9 +17,12 @@ export default function DashboardPageComponent() {
   const filteredRooms = useMemo(() => {
     if (term.trim().length < 1) return rooms;
 
-    const filter = rooms.filter((room) => 
-      room.description.toLocaleLowerCase().includes(term.toLocaleLowerCase()) ||
-      room.title.toLocaleLowerCase().includes(term.toLocaleLowerCase())
+    const filter = rooms.filter(
+      (room) =>
+        room.description
+          .toLocaleLowerCase()
+          .includes(term.toLocaleLowerCase()) ||
+        room.title.toLocaleLowerCase().includes(term.toLocaleLowerCase())
     );
 
     return filter;

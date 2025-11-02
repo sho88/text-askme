@@ -1,5 +1,7 @@
-export default function EventPassword() {
+import mainStyle from "@/styles/main.css";
+import HeaderComponent from "@/components/header";
 
+export default function EventPassword() {
   function handleSubmit(ev) {
     ev.preventDefault();
 
@@ -12,22 +14,21 @@ export default function EventPassword() {
     // @TODO: ensure that it's 6 digits long...
 
     console.log(formData.get("pin"));
-
   }
 
   return (
-    <div>
-
+    <div className={mainStyle["entire-dashboard-page"]}>
       <form className="pin-form" onSubmit={handleSubmit}>
-        <label className="pin-form__label">
-          Please enter Event PIN
-          <input className="pin-form__input" name="pin" type="number" />
-        </label>
-
-        <button>Verify</button>
+        <div className="pin-form-container">
+          <input
+            className="pin-form__input"
+            name="pin"
+            type="number"
+            placeholder="Enter pin"
+          />
+          <button>Verify</button>
+        </div>
       </form>
-
     </div>
-  )
-
+  );
 }

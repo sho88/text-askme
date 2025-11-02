@@ -1,8 +1,8 @@
 import { readDocument } from "@/utils/firestore";
-
+import Image from "next/image";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
-import useRoom from "@/hooks/room";
+import SubmitQuestionsContainer from "./SubmitQuestionsContainer";
 
 /**
  * Import the stylesheets here...
@@ -46,8 +46,10 @@ export default function EventSingleComponent({ room }) {
                 <p>
                   {room.description} The event messages will go down here... The
                   event messages will go down here... The event messagesThe
-                  event messages will go down here... The event messages will go
-                  down here... The event messages
+                  event messages will go down here... The event messages
+                </p>
+                <p className="emphasis">
+                  <i>Submit questions below</i>
                 </p>
               </div>
 
@@ -58,7 +60,7 @@ export default function EventSingleComponent({ room }) {
             </div>
 
             <div className="event__messages">
-              <h2 className="event__header-2">Questions from audience</h2>
+              <h2 className="event__header-2">Questions</h2>
               <div className="event__messages-2">
                 And this is just a ranom question I could be talking abot? Give
                 more content? Just giving it a few more words and that, with a
@@ -75,6 +77,25 @@ export default function EventSingleComponent({ room }) {
                 question mark at the end of the question?
               </div>
             </div>
+            <SubmitQuestionsContainer>
+              <form>
+                <div className="submit-questions-container">
+                  <textarea
+                    className="submit-questions-textarea"
+                    placeholder="Submit questions here..."
+                    required
+                  ></textarea>
+                  <button className="submit-questions-button">
+                    <Image
+                      src="/images/fn-send.png"
+                      alt=""
+                      height="50"
+                      width="50"
+                    />
+                  </button>
+                </div>
+              </form>
+            </SubmitQuestionsContainer>
           </div>
 
           <div className="random-box"></div>
