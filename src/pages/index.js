@@ -1,6 +1,9 @@
 import "@/components/live/style.css";
+import mainStyle from "@/styles/main.css";
 import { useRouter } from "next/router";
 import ReduceBrowserSize from "./ReduceBrowsingSize";
+import Image from "next/image";
+import FadeOutElement from "./FadeOutElement";
 
 export default function Index() {
   // states and other properties go here...
@@ -34,7 +37,17 @@ export default function Index() {
 
   return (
     <div className="form-page">
+      <FadeOutElement />
+      {/* <div className="login-page-first">
+        <Image
+          src="/images/logo-1.png"
+          width={150}
+          height={150}
+          alt="Picture of the author"
+        ></Image>
+      </div> */}
       <ReduceBrowserSize />
+
       <form className="form-section" onSubmit={handleSubmit}>
         <div className="form-container">
           <div className="form-container-2">
@@ -59,18 +72,24 @@ export default function Index() {
             />
           </div>
 
-          <div>
-            <button className="form-button-style">Login as Host</button>
+          <div className="login-form-button-style-container">
+            <button className="login-form-button-style">Login as Host</button>
           </div>
         </div>
       </form>
+      <br />
+      <p style={{ color: "#111", fontSize: "14pt" }}>or</p>
 
-      <div>
-        <button className="form-button-style" onClick={handleGuestLoginClick}>
-          Login as Guest
-        </button>
+      <div className="form-container-2">
+        <div className="login-form-button-style-container">
+          <button
+            className="login-form-button-style"
+            onClick={handleGuestLoginClick}
+          >
+            Login as Guest
+          </button>
+        </div>
       </div>
-
       <div className="logo-size"></div>
       {/* <p>
         <br />

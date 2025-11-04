@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { MenuOptionIcon } from "./MenuOptionIcon";
 import { MenuOptionTitle } from "./MenuOptionTitle";
+import { useRouter } from "next/router";
 
 export const MenuOpen = () => {
+  const router = useRouter();
   return (
     <div className="menu-open-option-container">
       <div className="menu-open-option">

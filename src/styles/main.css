@@ -118,7 +118,22 @@ p {
 
 
 
-
+.login-page-first {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  color: white;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/images/backg-image-8.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
 
 
 
@@ -471,16 +486,16 @@ p {
 .dashboard-bottom-test {
   width: 50px;
   border: none;
-  background: rgb(255, 255, 255);
-  font-weight: 600;
-  color: #111;
-  border-radius: 100px;
+  /* background: rgb(255, 255, 255);
+  color: #111; */
+  border-radius: 50px;
   height: 35px;
   width: 35px;
   align-self: flex-end;
-  transform: translateX(-10px);
-  transform: translateY(-30px);
-  box-shadow: 0px 0px 50px #d3d3d3;
+  /* transform: translateX(0px); */
+  margin-right: 5px;
+  transform: translateY(-61px);
+  /* box-shadow: 0px 0px 50px #d3d3d3; */
 }
 
 
@@ -575,7 +590,7 @@ p {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  margin-bottom: -10px;
+  margin-bottom: -18px;
   width: 100%;
 }
 
@@ -872,6 +887,10 @@ position: relative;
   border-radius: 100px;
 }
 
+.the-pic-then {
+  padding-right: 25px;
+}
+
 .the-pic-then h3 {
   margin-bottom: 0;
 }
@@ -977,6 +996,24 @@ position: relative;
   border: 1px solid transparent;
 }
 
+.login-form-button-style-container {
+  width: 100%;
+}
+
+.login-form-button-style {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  color: white;
+  background-image: linear-gradient(to right, #3cb7b4, #3cb7b4),
+  linear-gradient(200deg, white, #124259, white);
+  background-origin: border-box;
+  background-clip: padding-box, border-box; 
+  border-radius: 20px;
+  border: 1px solid transparent;
+  font-size: 11pt;
+}
+
 .burger-menu-2 {
   width: 27px;
   height: 27px;
@@ -989,6 +1026,7 @@ position: relative;
   background-position: center center;
   /* border-radius: 50px; */
   margin-left: 20px;
+  background-color: transparent;
 }
 
 
@@ -1005,7 +1043,7 @@ position: relative;
   margin-top: 8%;
   padding: 150px 20px 20px 20px;
   z-index: 1;
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.065); 
@@ -1176,6 +1214,7 @@ position: relative;
 
 .pin-form-container button {
   width: 100%;
+  height: 50px;
   padding: 15px;
   margin-top: 20px;
   color: white;
@@ -1183,9 +1222,10 @@ position: relative;
   linear-gradient(200deg, white, #124259, white);
   background-origin: border-box;
   background-clip: padding-box, border-box; 
-  border-radius: 20px;
+  border-radius: 50px;
   border: 1px solid transparent;
   align-self: center;
+  font-size: 12pt;
 }
 
 .pin-form {
@@ -1213,7 +1253,37 @@ position: relative;
   padding-top: 6px;
   padding-bottom: 6px;
   box-shadow: 0px 0px 50px #ececec;
-  height: 35px;
+  height: 40px;
   text-align: center;
   outline: none;
+  border: none;
+  font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.quick-random {
+  background-color: gold;
+  font-size: 30pt;
+  border-radius: 50px;
+  position: fixed;
+}
+
+/* Initial State (When isVisible is true) */
+.login-page-first {
+  /* Set your initial layout styles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* ... other positioning/size styles */
+
+  /* Set the transition property and duration */
+  transition: opacity 1s ease-out; /* The 1s here must match the 1000ms in the React component's second setTimeout */
+}
+
+/* Visibility classes controlled by React state */
+.login-page-first.visible {
+  opacity: 1; /* Fully visible */
+}
+
+.login-page-first.hidden {
+  opacity: 0; /* Fully transparent (faded out) */
 }
