@@ -34,6 +34,8 @@ export default function EventSingleComponent({ room }) {
                   loading="lazy"
                   alt={room.title}
                   src={room.image}
+                  height={100}
+                  width={100}
                 />
               </div>
             </div>
