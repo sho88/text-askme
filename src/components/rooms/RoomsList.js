@@ -2,6 +2,7 @@ import { RoomInformationComponent } from "../room/information";
 import { useState } from "react";
 import { ModalEventsOptionsComponent } from "../modal/modal-events-options";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 import "@/styles/globals.css";
 
@@ -52,7 +53,12 @@ export default function RoomsList({ rooms = [] } = {}) {
                 handleAddClick(room);
               }}
             >
-              ☰
+              <Image
+                src="/images/fn-settings-4.png"
+                width={15}
+                height={14}
+                alt="Picture of the author"
+              />
             </button>
           </article>
         ))}

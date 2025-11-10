@@ -9,10 +9,10 @@ export const RoomInformationComponent = ({
 }) => (
   <div>
     <div className="all-messages-article" onClick={() => handleClick(id)}>
-      <div className="dasboard-article-info-container">
-        {/* RESUME WORK HERE */}
-        <div className="the-pic-0">
-          <div className="the-pic">
+      <div className="rooms">
+        <div className="room-container">
+          <div className="room-image">
+            {/* <div> {image} </div> */}
             <Image
               src="/images/ryan-young.jpeg"
               width={55}
@@ -20,13 +20,13 @@ export const RoomInformationComponent = ({
               alt="Picture of the author"
             />
           </div>
-          <div className="the-pic-then">
+          <div className="room-description">
             <h3 className="text-?? text-xs font-oswald font-bold pb-10">
               {title}
             </h3>
             <p>
               {description.length && description.length > 200
-                ? description.substring(0, 150) + "..."
+                ? description.substring(0, 70) + "..."
                 : description}
             </p>
           </div>

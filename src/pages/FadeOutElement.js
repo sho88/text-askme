@@ -11,7 +11,7 @@ const FadeOutElement = () => {
     // Phase 1: After a short delay (e.g., 2000ms), start the fade-out
     const fadeTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 2000); // Element visible for 2 seconds
+    }, 1200); // Element visible for 2 seconds
 
     // Phase 2: After the fade-out duration (must match the CSS transition duration), set display: none
     // Assuming the CSS transition is 1000ms (1 second)

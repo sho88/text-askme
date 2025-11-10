@@ -37,15 +37,7 @@ export default function Index() {
 
   return (
     <div className="form-page">
-      <FadeOutElement />
-      {/* <div className="login-page-first">
-        <Image
-          src="/images/logo-1.png"
-          width={150}
-          height={150}
-          alt="Picture of the author"
-        ></Image>
-      </div> */}
+      {/* <FadeOutElement /> */}
       <ReduceBrowserSize />
 
       <form className="form-section" onSubmit={handleSubmit}>

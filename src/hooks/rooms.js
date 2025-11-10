@@ -22,7 +22,10 @@ export const useRooms = () => {
         return;
       }
 
-      const roomsArray = Object.keys(data).map((id) => ({ id, ...data[id] }));
+      const roomsArray = Object.keys(data).map((id) => ({
+        id,
+        ...data[id],
+      }));
       setRooms(roomsArray);
     }
 

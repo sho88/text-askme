@@ -7,7 +7,7 @@ export default function HeaderComponent() {
   return (
     <header className="head">
       <div className="head-container">
-        <BurgerMenu />
+        <WriteNewMessage />
         <div className="head-primary-info">
           <Image
             src="/images/logo-text-small.png"
@@ -16,7 +16,8 @@ export default function HeaderComponent() {
             alt="Picture of the author"
           />
         </div>
-        <WriteNewMessage />
+
+        <BurgerMenu />
       </div>
     </header>
   );

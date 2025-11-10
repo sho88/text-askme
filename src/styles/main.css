@@ -55,6 +55,8 @@ p {
 /* HEAD */
 
 .head {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   width: 100%;
   margin-top: 0px;
@@ -72,7 +74,7 @@ p {
 .head-container {
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 90%;
   height: 98px;
   display: flex;
   flex-direction: row;
@@ -85,7 +87,7 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: translate(6px);
+  /* transform: translate(6px); */
 }
 
 .head-button {
@@ -151,17 +153,16 @@ p {
 .write-new-message {
   width: auto;
   height: auto;
-  margin: 0px;
   border-radius: 50px;
-  margin-right: 20px;
   outline: none;
   border: none;
   background-color: transparent;
   padding: 0;
 }
 .write-new-message img {
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 20px;
+  margin-left: -3px;
 }
 
 
@@ -484,18 +485,13 @@ p {
 
 
 .dashboard-bottom-test {
-  width: 50px;
   border: none;
-  /* background: rgb(255, 255, 255);
-  color: #111; */
   border-radius: 50px;
   height: 35px;
   width: 35px;
   align-self: flex-end;
-  /* transform: translateX(0px); */
-  margin-right: 5px;
-  transform: translateY(-61px);
-  /* box-shadow: 0px 0px 50px #d3d3d3; */
+  transform: translateY(-71px);
+  opacity: 80%;
 }
 
 
@@ -589,6 +585,7 @@ p {
 .all-messages-article-1 {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-self: flex-start;
   margin-bottom: -18px;
   width: 100%;
@@ -631,23 +628,25 @@ p {
 /* DASHBOARD "ALL MESSAGES" */
 .all-messages-article {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   width: auto;
   color: #393939;
   border-radius: 20px;
   border: 0.5px solid transparent; 
-  padding: 13px;
+  padding: 11px;
   background-image: linear-gradient(to right, #ffffff, #ffffff),
                     linear-gradient(200deg, white, rgb(13, 211, 218), white);
   background-origin: border-box;
   background-clip: padding-box, border-box; 
 }
 
-.dasboard-article-info-container{
+.rooms{
   display: flex;
-  height: auto;
-  flex-direction: column;
-  justify-content: space-between;
+  min-height: 80px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .dasboard-article-profile-picture img {
@@ -657,7 +656,7 @@ p {
   margin-right: 15px;
 }
 
-.dasboard-article-info-container h3{
+.rooms h3{
   font-size: 13.5pt;
   margin: 0;
   padding: 5px 0 2px 0;
@@ -665,7 +664,7 @@ p {
   color: rgb(93, 93, 93);
 }
 
-.dasboard-article-info-container p{
+.rooms p{
 font-size: 10pt;
 line-height: 0pt;
 color: #a8a8a8;
@@ -871,7 +870,7 @@ position: relative;
   color: white;
 }
 
-.the-pic {
+.room-image {
   border-radius: 100px;
   display: flex;
   padding-right: 20px;
@@ -880,26 +879,35 @@ position: relative;
   align-items: center;
   transform: translate(6px);
   min-width: 75px;
-  padding-top: 5px;
+  outline: none;
+  border: none;
 }
 
-.the-pic img {
+.room-image img {
   border-radius: 100px;
 }
 
-.the-pic-then {
+.room-description {
   padding-right: 25px;
 }
 
-.the-pic-then h3 {
+.room-description h3 {
   margin-bottom: 0;
 }
 
-.the-pic-0 {
+.room-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.room-options-icon {
+  justify-self:flex-end;
+  align-self: center;
+  background-color: yellow;
+  padding: 5px;
 }
 
 
@@ -1015,17 +1023,15 @@ position: relative;
 }
 
 .burger-menu-2 {
-  width: 27px;
+
+  width: 20px;
   height: 27px;
   margin: 5px 0 0 0;
   border: none;
   outline: none;
-  /* background-image: url("/images/back.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  /* border-radius: 50px; */
-  margin-left: 20px;
   background-color: transparent;
 }
 
@@ -1043,7 +1049,7 @@ position: relative;
   margin-top: 8%;
   padding: 150px 20px 20px 20px;
   z-index: 1;
-  background-color: rgba(255, 255, 255, 0.45);
+  background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.065); 
@@ -1286,4 +1292,12 @@ position: relative;
 
 .login-page-first.hidden {
   opacity: 0; /* Fully transparent (faded out) */
+}
+
+.test321 {
+  background-color: purple;
+}
+
+.verify-back-button {
+  margin-left: -10px;
 }

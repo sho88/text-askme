@@ -129,24 +129,6 @@ p {
     border-radius: 50px;
     margin-right: 20px;
 }
-/* DASHBOARD - WRITE NEW MESSAGE */
-.write-new-message {
-    width: auto;
-    height: auto;
-    margin: 0px;
-    border-radius: 50px;
-    margin-right: 20px;
-    outline: none;
-    border: none;
-    background-color: transparent;
-    padding: 0;
-}
-.write-new-message img {
-    width: 25px;
-    height: 25px;
-}
-
-
 
 .head-profile-picture--hide {
     animation-name: profile-pic-animation-1;
@@ -741,7 +723,7 @@ position: relative;
 
 .form-page {
     /* src: url(../../../public/fonts/Oswald-SemiBold.ttf); */
-    background-image: url(../../../public/images/backg-image-5.webp);
+    background-image: url(../../../public/images/backg-image-4.webp);
     background-repeat: no-repeat;
     background-size: cover;
     /* background: white; */

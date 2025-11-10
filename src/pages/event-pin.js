@@ -28,9 +28,10 @@ export default function EventPassword() {
         <div className="head-container">
           <button onClick={handleClick} className="burger-menu-2">
             <Image
-              src="/images/fn-back.png"
-              width={35}
-              height={35}
+              className="verify-back-button"
+              src="/images/back.png"
+              width={25}
+              height={23}
               alt="Picture of the author"
             ></Image>
           </button>
@@ -53,3 +54,5 @@ export default function EventPassword() {
     </div>
   );
 }
+// generate 6-digit pin, via react.
+// retrieve event by 6-digit pin

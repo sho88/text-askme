@@ -26,7 +26,7 @@ function SubmitQuestionsContainer({ children }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isVisible]);
+  }, [isVisible, SCROLL_THRESHOLD]);
 
   // If isVisible is true, use the default class; if false, use 'hidden-on-scroll'
   const containerClasses = `submit-questions ${

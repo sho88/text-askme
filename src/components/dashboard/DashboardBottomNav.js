@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { ModalComponent } from "../modal";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const DashboardBottomNav = () => {
+  const router = useRouter();
+
   // states go here...
   const [showModal, setShowModal] = useState(false);
 
@@ -19,6 +22,10 @@ export const DashboardBottomNav = () => {
     console.log(newEventData);
   };
 
+  const handleClick = () => {
+    return router.push("/dashboard");
+  };
+
   return (
     <>
       {showModal && <ModalComponent onModalClose={handleModalClose} />}
@@ -26,7 +33,13 @@ export const DashboardBottomNav = () => {
       <div className="message">
         <div className="dashboard-nav-container">
           <button className="dashboard-bottom-nav-buttons" type="">
-            <Image src="/images/fn-home-4.png" alt="" height="25" width="25" />
+            <Image
+              onClick={handleClick}
+              src="/images/fn-home-4.png"
+              alt=""
+              height="25"
+              width="25"
+            />
           </button>
 
           <button

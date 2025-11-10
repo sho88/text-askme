@@ -29,7 +29,7 @@ export default function EventSingleComponent({ room }) {
               <div>
                 <div className="layer-1-filter"></div>
                 <div className="layer-2-filter"></div>
-                <img
+                <Image
                   className="event__image"
                   loading="lazy"
                   alt={room.title}
