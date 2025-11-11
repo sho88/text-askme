@@ -7,17 +7,17 @@ export const MenuOpen = () => {
     <div className="menu-open-option-container">
       <div className="menu-open-option">
         <MenuOptionTitle label="Home" id="special" />
-        <MenuOptionIcon imageUrl={"/images/fn-home-4.png"} />
+        <MenuOptionIcon imageUrl={"/images/fn-home-5.png"} />
       </div>
       <div className="menu-open-option">
         <MenuOptionTitle label="New Event" id="special" />
 
-        <MenuOptionIcon imageUrl={"/images/fn-plus-4.png"} />
+        <MenuOptionIcon imageUrl={"/images/fn-plus-5.png"} />
       </div>
       <div className="menu-open-option">
         <MenuOptionTitle label="Sign Out" id="special" />
 
-        <MenuOptionIcon imageUrl={"/images/fn-user-4.png"} />
+        <MenuOptionIcon imageUrl={"/images/fn-user-5.png"} />
       </div>
     </div>
   );

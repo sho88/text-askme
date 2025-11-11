@@ -22,8 +22,12 @@ export const DashboardBottomNav = () => {
     console.log(newEventData);
   };
 
-  const handleClick = () => {
+  const handleClickHome = () => {
     return router.push("/dashboard");
+  };
+
+  const handleClickLogout = () => {
+    return router.push("/");
   };
 
   return (
@@ -34,8 +38,8 @@ export const DashboardBottomNav = () => {
         <div className="dashboard-nav-container">
           <button className="dashboard-bottom-nav-buttons" type="">
             <Image
-              onClick={handleClick}
-              src="/images/fn-home-4.png"
+              onClick={handleClickHome}
+              src="/images/fn-home-5.png"
               alt=""
               height="25"
               width="25"
@@ -47,11 +51,17 @@ export const DashboardBottomNav = () => {
             type=""
             onClick={handleAddClick}
           >
-            <Image src="/images/fn-plus-4.png" alt="" height="25" width="25" />
+            <Image src="/images/fn-plus-5.png" alt="" height="25" width="25" />
           </button>
 
           <button className="dashboard-bottom-nav-buttons" type="">
-            <Image src="/images/fn-user-4.png" alt="" height="25" width="25" />
+            <Image
+              src="/images/fn-user-5.png"
+              alt=""
+              height="25"
+              width="25"
+              onClick={handleClickLogout}
+            />
           </button>
         </div>
       </div>
