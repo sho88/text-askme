@@ -2,7 +2,7 @@ import { readDocument } from "@/utils/firestore";
 import Image from "next/image";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
-import SubmitQuestionsContainer from "./SubmitQuestionsContainer";
+import SubmitQuestionsContainer from "@/components/submit-questions-container/SubmitQuestionsContainer";
 
 /**
  * Import the stylesheets here...
