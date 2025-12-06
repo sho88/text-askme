@@ -12,9 +12,8 @@ export const RoomInformationComponent = ({
       <div className="rooms">
         <div className="room-container">
           <div className="room-image">
-            {/* <div> {image} </div> */}
             <Image
-              src="/images/ryan-young.jpeg"
+              src={image}
               width={55}
               height={55}
               alt="Picture of the author"

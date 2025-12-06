@@ -15,17 +15,19 @@ export default function DashboardPageComponent() {
 
   // the equivalent to computed properties...for expensive calculations...
   const filteredRooms = useMemo(() => {
-    if (term.trim().length < 1) return rooms;
-
-    const filter = rooms.filter(
-      (room) =>
-        room.description
-          .toLocaleLowerCase()
-          .includes(term.toLocaleLowerCase()) ||
-        room.title.toLocaleLowerCase().includes(term.toLocaleLowerCase())
-    );
-
-    return filter;
+    if (term.trim().length < 1) {
+      return rooms;
+    } else {
+      const filtered = rooms.filter((callBack) => {
+        return (
+          callBack.description
+            .toLocaleLowerCase()
+            .includes(term.toLocaleLowerCase()) ||
+          callBack.title.toLocaleLowerCase().includes(term.toLocaleLowerCase())
+        );
+      });
+      return filtered;
+    }
   }, [rooms, term]);
 
   // events go here...
@@ -42,11 +44,8 @@ export default function DashboardPageComponent() {
     <div>
       <div className={mainStyle["entire-dashboard-page"]}>
         <HeaderComponent />
-
         <DashboardSearch whenInput={handleInput} />
-
         <RoomsList rooms={filteredRooms} whenRoomClick={handleRoomClick} />
-
         <DashboardBottomNav />
       </div>
     </div>

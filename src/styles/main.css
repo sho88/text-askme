@@ -64,10 +64,16 @@ p {
   justify-content: center;
   align-items: center;
   z-index: 2;
-  background-image: linear-gradient(180deg, rgb(255, 255, 255, 0.92), transparent);
-  /* backdrop-filter: blur(1.5px);
+  /* background-image: linear-gradient(180deg, rgb(255, 255, 255, 0.92), transparent); */
+  backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(1.5px);
-  background-color: rgba(255, 255, 255, 0.15); */
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.head-menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
@@ -878,13 +884,17 @@ position: relative;
   justify-content: center;
   align-items: center;
   transform: translate(6px);
-  min-width: 75px;
   outline: none;
   border: none;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.16));
 }
 
 .room-image img {
   border-radius: 100px;
+  height: 55px;
+  min-width: 55px;
+  object-fit: cover;
+  object-position: top;
 }
 
 .room-description {
@@ -1040,20 +1050,16 @@ position: relative;
   /* --- Layout & Positioning --- */
   position: fixed;
   right: -100%;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 82vh;
-  width: 95%;
-  margin-top: 8%;
+  align-items: center; */
+  height: 100vh;
+  width: 100%;
   padding: 150px 20px 20px 20px;
-  z-index: 1;
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.065); 
-  border-radius: 40px;
+  z-index: 0;
+  background-color: rgb(255, 255, 255, 0.97);
+  margin-top: -62px;
 }
 
 
@@ -1078,30 +1084,23 @@ position: relative;
 
 @keyframes open-menu {
   0% {
-      left: -90%;
       opacity: 0;
-      margin-top: -20px;
-      border-radius: 500px;
   }
   25% {
     opacity: 0;
-    border-radius: 500px;
   }
   35% {
-      left: 4%;
       width: 25%;
   }
   50% {
     left: 2.75%;
-    border-radius: 500px;
   }
   85% {
-    margin-top: 8%;
+    
   }
   100% {
-    left: 2.75%;
+    left: 0%;
     opacity: 1;
-    border-radius: 40px;
   }
 }
 
@@ -1281,4 +1280,13 @@ position: relative;
 
 .verify-back-button {
   margin-left: -10px;
+}
+
+
+.menu-open-option-xx {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
