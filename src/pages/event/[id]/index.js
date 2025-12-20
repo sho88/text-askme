@@ -13,6 +13,11 @@ import "@/styles/globals.css";
 
 export async function getServerSideProps({ params }) {
   const room = await readDocument("rooms", params.id);
+  const response = await fetch("http://localhost:3000/api/data");
+  console.log(response.status);
+  if (response.status === 200) {
+    console.log(await response.json());
+  }
   return { props: { room } };
 }
 
