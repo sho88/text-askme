@@ -48,17 +48,18 @@
 }
 
 .event__messages {
-  margin-top: 40px;
+margin-top: 40px;
 width: 100%;
 display: flex;
 flex-direction: column;
 justify-content: center;
-align-items: center;
+align-items: flex-start;
 }
 
 .event__messages-2 {
   display: flex;
-  align-items: flex-end;
+  align-self: flex-start;
+  align-items: flex-start;
   width: auto;
   color: #393939;
   border-radius: 20px;
@@ -68,7 +69,8 @@ align-items: center;
                     linear-gradient(200deg, white, rgb(13, 211, 218), white);
   background-origin: border-box;
   background-clip: padding-box, border-box; 
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .layer-1 {

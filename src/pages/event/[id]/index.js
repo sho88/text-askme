@@ -1,3 +1,4 @@
+import { useState } from "react"; // 1. Import useState
 import { readDocument } from "@/utils/firestore";
 import Image from "next/image";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
@@ -11,17 +12,71 @@ import mainStyle from "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
 
-export async function getServerSideProps({ params }) {
-  const room = await readDocument("rooms", params.id);
-  const response = await fetch("http://localhost:3000/api/data");
-  console.log(response.status);
-  if (response.status === 200) {
-    console.log(await response.json());
-  }
-  return { props: { room } };
-}
+// Added { params } destructuring to fix the reference error in your fetch
+export const getServerSideProps = async ({ params }) => {
+  let room = {};
+  let error = null;
 
-export default function EventSingleComponent({ room }) {
+  try {
+    const res = await fetch(`http://localhost:3000/api/events/${params.id}`);
+
+    if (res.status === 200) {
+      room = await res.json();
+    } else {
+      error = `There has been an error. This is the code for it: ${res.status}`;
+      console.error(error);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  return { props: { room, error } };
+};
+
+export default function EventSingleComponent({ room, error }) {
+  // 2. Initialize state to hold questions
+  const [questions, setQuestions] = useState([]);
+
+  if (error) {
+    return (
+      <div style={{ color: "red", padding: "20px", border: "1px solid red" }}>
+        <h3>Error</h3>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (!room) {
+    return <p>Loading. Please wait...</p>;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const formValues = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch("/api/questions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      const data = await res.json();
+      console.log("Server response:", data);
+
+      if (res.ok) {
+        setQuestions((prev) => [...prev, formValues.question]);
+        e.target.reset();
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
+
   return (
     <div>
       <div className={mainStyle["entire-dashboard-page"]}>
@@ -37,7 +92,7 @@ export default function EventSingleComponent({ room }) {
                 <Image
                   className="event__image"
                   loading="lazy"
-                  alt={room.title}
+                  alt={room.title || "Event Image"}
                   src={room.image}
                   height={100}
                   width={100}
@@ -50,52 +105,42 @@ export default function EventSingleComponent({ room }) {
               </div>
 
               <div className="event__content">
-                <p>
-                  {room.description} The event messages will go down here... The
-                  event messages will go down here... The event messagesThe
-                  event messages will go down here... The event messages
-                </p>
+                <p>{room.description}</p>
                 <p className="emphasis">
                   <i>Submit questions below</i>
                 </p>
               </div>
-
-              {/* There is currently no footer input in the form, nor footer functionality, thus, no footer information to display */}
-              {/* <div className="event__footer">
-            <p>Footer information goes here...</p>
-          </div> */}
             </div>
 
             <div className="event__messages">
               <h2 className="event__header-2">Questions</h2>
-              <div className="event__messages-2">
-                And this is just a ranom question I could be talking abot? Give
-                more content? Just giving it a few more words and that, with a
-                question mark at the end of the question?
-              </div>
-              <div className="event__messages-2">
-                And this is just a ranom question I could be talking abot? Give
-                more content? Just giving it a few more words and that, with a
-                question mark at the end of the question?
-              </div>
-              <div className="event__messages-2">
-                And this is just a ranom question I could be talking abot? Give
-                more content? Just giving it a few more words and that, with a
-                question mark at the end of the question?
-              </div>
+
+              {questions.length === 0 ? (
+                <p style={{ paddingLeft: "10px", opacity: 0.55 }}>
+                  No questions yet. Be the first!
+                </p>
+              ) : (
+                questions.map((msg, index) => (
+                  <div key={index} className="event__messages-2">
+                    <p>{msg}</p>
+                  </div>
+                ))
+              )}
             </div>
+
             <SubmitQuestionsContainer>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="submit-questions-container">
                   <textarea
+                    name="question"
                     className="submit-questions-textarea"
                     placeholder="Submit questions here..."
                     required
                   ></textarea>
-                  <button className="submit-questions-button">
+                  <button className="submit-questions-button" type="submit">
                     <Image
                       src="/images/fn-send.png"
-                      alt=""
+                      alt="Paper plane"
                       height="50"
                       width="50"
                     />

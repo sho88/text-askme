@@ -1290,3 +1290,8 @@ position: relative;
   align-items: center;
   height: 100vh;
 }
+
+.event__messages-2 {
+  background-color: gold;
+  width: 100vw;
+}
