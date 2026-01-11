@@ -12,8 +12,7 @@ export default function EventPassword() {
     // @TODO: take the "pin" property...
 
     // @TODO: ensure that it's a number...if it isn't, then return
-
-    // @TODO: ensure that it's 6 digits long...
+    // if i add a "+" before the string, it converts to a number. so check if it is NaN.
 
     console.log(formData.get("pin"));
   }
@@ -43,7 +42,6 @@ export default function EventPassword() {
           <input
             className="pin-form__input"
             name="pin"
-            // type="number"
             placeholder="Enter 6-digit Pin"
             type="password"
             maxlength="6"

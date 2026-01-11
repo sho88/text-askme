@@ -1,4 +1,4 @@
-import { useState } from "react"; // 1. Import useState
+import { useState, useEffect } from "react";
 import { readDocument } from "@/utils/firestore";
 import Image from "next/image";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
@@ -34,17 +34,24 @@ export const getServerSideProps = async ({ params }) => {
 };
 
 export default function EventSingleComponent({ room, error }) {
-  // 2. Initialize state to hold questions
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState([]); // Now stores [{_id, question}, ...]
 
-  if (error) {
-    return (
-      <div style={{ color: "red", padding: "20px", border: "1px solid red" }}>
-        <h3>Error</h3>
-        <p>{error}</p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      const res = await fetch("/api/questions");
+      const result = await res.json();
+      if (result.success) setQuestions(result.data); // Store full objects
+    };
+    fetchQuestions();
+  }, []);
+
+  const handleDelete = async (id) => {
+    const res = await fetch(`/api/questions?id=${id}`, { method: "DELETE" });
+    if (res.ok) {
+      // Remove from UI immediately
+      setQuestions(questions.filter((q) => q._id !== id));
+    }
+  };
 
   if (!room) {
     return <p>Loading. Please wait...</p>;
@@ -52,24 +59,21 @@ export default function EventSingleComponent({ room, error }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const formValues = Object.fromEntries(formData.entries());
 
     try {
       const res = await fetch("/api/questions", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formValues),
       });
 
-      const data = await res.json();
-      console.log("Server response:", data);
-
       if (res.ok) {
-        setQuestions((prev) => [...prev, formValues.question]);
+        const result = await res.json();
+        // UPDATE STATE HERE: Add the new question to your existing list
+        // This triggers an immediate re-render!
+        setQuestions((prev) => [result.data, ...prev]);
         e.target.reset();
       }
     } catch (error) {
@@ -115,17 +119,26 @@ export default function EventSingleComponent({ room, error }) {
             <div className="event__messages">
               <h2 className="event__header-2">Questions</h2>
 
-              {questions.length === 0 ? (
-                <p style={{ paddingLeft: "10px", opacity: 0.55 }}>
-                  No questions yet. Be the first!
-                </p>
-              ) : (
-                questions.map((msg, index) => (
-                  <div key={index} className="event__messages-2">
-                    <p>{msg}</p>
-                  </div>
-                ))
-              )}
+              {questions.map((msgObj) => (
+                <div
+                  key={msgObj._id}
+                  className="event__messages-2"
+                  // style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <p>{msgObj.question}</p>
+                  <button
+                    onClick={() => handleDelete(msgObj._id)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "red",
+                      cursor: "pointer",
+                    }}
+                  >
+                    XX
+                  </button>
+                </div>
+              ))}
             </div>
 
             <SubmitQuestionsContainer>
@@ -134,7 +147,7 @@ export default function EventSingleComponent({ room, error }) {
                   <textarea
                     name="question"
                     className="submit-questions-textarea"
-                    placeholder="Submit questions here..."
+                    placeholder="Ask a question here..."
                     required
                   ></textarea>
                   <button className="submit-questions-button" type="submit">
