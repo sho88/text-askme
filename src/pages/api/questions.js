@@ -12,16 +12,16 @@ export default async function questionsHandler(req, res) {
       try {
         const questions = await Question.find({}).sort({ createdAt: -1 });
         return res.status(200).json({ success: true, data: questions });
-      } catch (e) {
-        return res.status(500).json({ error: e.message });
+      } catch (error) {
+        return res.status(500).json({ error: error.message });
       }
 
     case "POST":
       try {
         const newQuestion = await Question.create(req.body);
         return res.status(201).json({ success: true, data: newQuestion });
-      } catch (e) {
-        return res.status(400).json({ error: e.message });
+      } catch (error) {
+        return res.status(400).json({ error: error.message });
       }
 
     case "DELETE":
@@ -30,8 +30,8 @@ export default async function questionsHandler(req, res) {
         if (!deletedQuestion)
           return res.status(404).json({ message: "Not found" });
         return res.status(200).json({ success: true });
-      } catch (e) {
-        return res.status(400).json({ error: e.message });
+      } catch (error) {
+        return res.status(400).json({ error: error.message });
       }
 
     default:

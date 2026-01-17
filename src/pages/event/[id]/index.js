@@ -71,8 +71,6 @@ export default function EventSingleComponent({ room, error }) {
 
       if (res.ok) {
         const result = await res.json();
-        // UPDATE STATE HERE: Add the new question to your existing list
-        // This triggers an immediate re-render!
         setQuestions((prev) => [result.data, ...prev]);
         e.target.reset();
       }
@@ -135,7 +133,13 @@ export default function EventSingleComponent({ room, error }) {
                       cursor: "pointer",
                     }}
                   >
-                    XX
+                    <Image
+                      className="delete-question"
+                      src="/images/cross-cancel.png"
+                      alt="Paper plane"
+                      height="10"
+                      width="10"
+                    />
                   </button>
                 </div>
               ))}

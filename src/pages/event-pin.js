@@ -9,12 +9,18 @@ export default function EventPassword() {
 
     const formData = new FormData(ev.target);
 
-    // @TODO: take the "pin" property...
+    const pin = formData.get("pin");
+
+    // const cleanPin = isNaN(pin) ? "" : pin;
+
+    const cleanPin = +pin;
+
+    console.log(cleanPin);
+
+    // make an if statement. if oin clean, proceed. if not, return errors.
 
     // @TODO: ensure that it's a number...if it isn't, then return
     // if i add a "+" before the string, it converts to a number. so check if it is NaN.
-
-    console.log(formData.get("pin"));
   }
 
   const handleClick = () => {
@@ -44,7 +50,7 @@ export default function EventPassword() {
             name="pin"
             placeholder="Enter 6-digit Pin"
             type="password"
-            maxlength="6"
+            maxLength="6"
           />
           <button>Verify</button>
         </div>

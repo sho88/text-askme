@@ -54,7 +54,7 @@ export const ModalComponent = ({ onModalClose }) => {
         title: formData.get("title"),
         description: formData.get("description"),
         image: formData.get("image"),
-        pin: Math.ceil(Math.random() * 1000000)
+        pin: Math.ceil(Math.random() * 1000000),
       });
 
       // THEN, upload the image to firebase with the newEvent.id as the unique key/identifier...
