@@ -31,14 +31,17 @@ export const ModalComponent = ({ onModalClose }) => {
     try {
       // 1. Create document in MongoDB via API
       // MongoDB usually returns the created object including the "_id"
-      newEvent = await createDocument("rooms", {
+
+      newEvent = createDocument("rooms", {
         title,
         description,
         image: null,
         pin: Math.ceil(Math.random() * 1000000),
       });
-  
-      if (!newEvent || !newEvent._id) throw new Error("Failed to create document.");
+
+      if (!newEvent || !newEvet._id) throw new Error("Error in making a new document in the database.");
+      
+      // if (!newEvent || !newEvent._id) throw new Error("Failed to create document.");
   
       // 2. Upload the image to your storage provider
       const uploadResult = await uploadImage({
@@ -50,6 +53,7 @@ export const ModalComponent = ({ onModalClose }) => {
         throw new Error("Failed to upload image.");
       
       // 3. Update MongoDB document with the new image URL
+
       const updateSuccess = await updateDocument("rooms", newEvent._id, {
         image: uploadResult.url
       });
