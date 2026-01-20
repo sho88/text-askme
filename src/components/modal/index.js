@@ -22,15 +22,15 @@ export const ModalComponent = ({ onModalClose }) => {
    * IF the file doesn't exist...THEN ignore (by returning)
    * OTHERWISE set the image "state"
    */
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
 
-    if (!file) return;
+  //   if (!file) return;
 
-    // @TODO: Notify the user that the image has been successfully uploaded...
-    setImageFile(file);
-    console.log(`The image file is:`, file);
-  };
+  //   // @TODO: Notify the user that the image has been successfully uploaded...
+  //   setImageFile(file);
+  //   console.log(`The image file is:`, file);
+  // };
 
   /**
    * WHEN the user submits the form
@@ -44,7 +44,9 @@ export const ModalComponent = ({ onModalClose }) => {
     setLoading(true);
 
     // THEN, take the form element fields, and populate the FormData object...
-    const formData = new FormData(e.target);
+    // const formData = new FormData(e.target); No more need to pull data from FormData.
+    // It makes code messy, and harder to debug and test.
+    // Pulling data from the set states makes things more streamline. 
 
     let newEvent = null; // Declaring outside try block so it's accessible in catch
 
