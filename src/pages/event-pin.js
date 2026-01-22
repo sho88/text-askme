@@ -27,6 +27,10 @@ export default function EventPassword() {
     return router.back();
   };
 
+  function handleGuestLoginClick() {
+    return router.push("/dashboard");
+  }
+
   return (
     <div className={mainStyle["entire-dashboard-page"]}>
       <div className="head">
@@ -52,7 +56,9 @@ export default function EventPassword() {
             type="password"
             maxLength="6"
           />
-          <button>Verify</button>
+          <button onClick={handleGuestLoginClick}>
+            <b>Verify</b>
+          </button>
         </div>
       </form>
     </div>

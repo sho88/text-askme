@@ -10,20 +10,29 @@ import HeaderComponent from "@/components/header";
 export default function DashboardPageComponent() {
   // hooks go here...
   const router = useRouter();
-  const { rooms } = useRooms();
+
+  // Updated: Destructure refreshRooms but keep the logic exactly as it was
+  const { rooms, refreshRooms } = useRooms();
   const [term, setTerm] = useState("");
 
   // the equivalent to computed properties...for expensive calculations...
   const filteredRooms = useMemo(() => {
+    // 1. Ensure we have an array
+    const roomList = Array.isArray(rooms) ? rooms : [];
+
+    // 2. Create a shallow copy and reverse it (Newest First)
+    // We use [...roomList] because .reverse() modifies the original array
+    const sortedRooms = [...roomList].reverse();
+
     if (term.trim().length < 1) {
-      return rooms;
+      return sortedRooms;
     } else {
-      const filtered = rooms.filter((callBack) => {
+      const filtered = sortedRooms.filter((callBack) => {
         return (
           callBack.description
-            .toLocaleLowerCase()
+            ?.toLocaleLowerCase()
             .includes(term.toLocaleLowerCase()) ||
-          callBack.title.toLocaleLowerCase().includes(term.toLocaleLowerCase())
+          callBack.title?.toLocaleLowerCase().includes(term.toLocaleLowerCase())
         );
       });
       return filtered;
@@ -45,7 +54,12 @@ export default function DashboardPageComponent() {
       <div className={mainStyle["entire-dashboard-page"]}>
         <HeaderComponent />
         <DashboardSearch whenInput={handleInput} />
-        <RoomsList rooms={filteredRooms} whenRoomClick={handleRoomClick} />
+        {/* Updated: Added onNewDataCreated prop only */}
+        <RoomsList
+          rooms={filteredRooms}
+          whenRoomClick={handleRoomClick}
+          onNewDataCreated={refreshRooms}
+        />
         <DashboardBottomNav />
       </div>
     </div>

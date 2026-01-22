@@ -1,28 +1,32 @@
-/**
-* Utility for MongoDB API calls
-*/
+export const createDocument = async (collection, data) => {
+  const response = await fetch(`/api/database?collection=${collection}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
 
-export async function createDocument(collection, data) {
-const response = await fetch(`/api/${collection}`, {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify(data),
-});
-return response.ok ? await response.json() : null;
-}
+  const result = await response.json(); // If this fails, the server sent HTML instead of JSON
+  if (!response.ok)
+    throw new Error(result.error || "Failed to create document");
+  return result;
+};
 
-export async function updateDocument(collection, id, data) {
-const response = await fetch(`/api/${collection}/${id}`, {
-method: 'PATCH',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify(data),
-});
-return response.ok;
-}
+export const updateDocument = async (collection, id, data) => {
+  const response = await fetch(
+    `/api/database?collection=${collection}&id=${id}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+  return response.ok;
+};
 
+// src/utils/api.js
 export async function deleteDocument(collection, id) {
-const response = await fetch(`/api/${collection}/${id}`, {
-method: 'DELETE',
-});
-return response.ok;
+  const res = await fetch(`/api/database?collection=${collection}&id=${id}`, {
+    method: "DELETE",
+  });
+  return res.ok;
 }

@@ -1,22 +1,23 @@
 import Image from "next/image";
 
 export const RoomInformationComponent = ({
-  description,
+  description = "", // Default to empty string
   id,
   title,
   handleClick,
   image,
 }) => (
   <div>
+    {/* RESTORED: Original class hierarchy */}
     <div className="all-messages-article" onClick={() => handleClick(id)}>
       <div className="rooms">
         <div className="room-container">
           <div className="room-image">
             <Image
-              src={image}
-              width={55}
+              src={image || "/images/placeholder.png"} // Safety fallback
+              width={55} // RESTORED: Original dimensions
               height={55}
-              alt="Picture of the author"
+              alt={title || "Room Image"}
             />
           </div>
           <div className="room-description">
@@ -24,7 +25,7 @@ export const RoomInformationComponent = ({
               {title}
             </h3>
             <p>
-              {description.length && description.length > 200
+              {description && description.length > 200
                 ? description.substring(0, 70) + "..."
                 : description}
             </p>
@@ -34,3 +35,6 @@ export const RoomInformationComponent = ({
     </div>
   </div>
 );
+
+// Keep this as default export so RoomsList can import it easily
+export default RoomInformationComponent;

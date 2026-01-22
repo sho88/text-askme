@@ -1,37 +1,30 @@
-import { useEffect, useMemo, useState } from "react";
-import { asyncify } from "@/utils";
-import { getCollection } from "@/utils/firestore";
+import { useEffect, useState } from "react";
 
-/**
- * Used primarily for retriving rooms
- * @returns Object
- */
-export const useRooms = () => {
+// 1. Ensure the function name is 'useRooms' (plural) to match your export
+export const useRooms = (id) => {
+  // 2. Initialize with an empty array [] instead of null
   const [rooms, setRooms] = useState([]);
-  const [errors, setErrors] = useState([]);
 
-  // hooks...
   useEffect(() => {
-    async function getData() {
-      const [error, data] = await asyncify(getCollection("rooms"));
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch(
+          `/api/database?collection=rooms${id ? `&id=${id}` : ""}`
+        );
+        const data = await response.json();
 
-      if (error) {
-        // @TODO: Create a generic error handler on the app...
-        console.error(error);
-        setErrors([...errors, { error }]);
-        return;
+        // 3. Ensure we are setting an array
+        setRooms(Array.isArray(data) ? data : [data]);
+      } catch (error) {
+        console.error("Fetch error:", error);
+        setRooms([]); // Fallback to empty array on error
       }
+    };
 
-      const roomsArray = Object.keys(data).map((id) => ({
-        id,
-        ...data[id],
-      }));
-      setRooms(roomsArray);
-    }
+    fetchRooms();
+  }, [id]);
 
-    // invoke the function to get the data...
-    getData();
-  });
-
-  return { errors, rooms };
+  return { rooms };
 };
+
+export default useRooms;

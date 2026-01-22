@@ -1,13 +1,8 @@
 import { useState, useRef } from "react";
 import "./style.css";
 import Image from "next/image";
-// Assuming you still use a cloud storage for images (S3/Cloudinary/Uploadthing)
 import { uploadImage } from "@/utils/storage";
-import {
-  createDocument,
-  updateDocument,
-  deleteDocument,
-} from "@/utils/api"; // Updated import
+import { createDocument, updateDocument, deleteDocument } from "@/utils/api";
 
 export const ModalComponent = ({ onModalClose }) => {
   const [title, setTitle] = useState("");
@@ -21,114 +16,119 @@ export const ModalComponent = ({ onModalClose }) => {
     if (!file) return;
     setImageFile(file);
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
-    let newEvent = null;
-  
-    try {
-      // 1. Create document in MongoDB via API
-      // MongoDB usually returns the created object including the "_id"
 
-      newEvent = createDocument("rooms", {
+    let newEvent = null;
+
+    try {
+      // 1. Create document in MongoDB (Initial save)
+      // We await this to get the _id back from Mongo
+      newEvent = await createDocument("rooms", {
         title,
         description,
         image: null,
         pin: Math.ceil(Math.random() * 1000000),
       });
 
-      if (!newEvent || !newEvet._id) throw new Error("Error in making a new document in the database.");
-      
-      // if (!newEvent || !newEvent._id) throw new Error("Failed to create document.");
-  
-      // 2. Upload the image to your storage provider
+      if (!newEvent || !newEvent._id) {
+        throw new Error("Failed to create document in MongoDB.");
+      }
+
+      // 2. Upload the image to your server
       const uploadResult = await uploadImage({
-        id: newEvent._id, // MongoDB uses _id
         imageFile,
       });
-      
-      if (!uploadResult || !uploadResult.url)
-        throw new Error("Failed to upload image.");
-      
-      // 3. Update MongoDB document with the new image URL
 
+      // 3. Update MongoDB document with the new image URL
       const updateSuccess = await updateDocument("rooms", newEvent._id, {
-        image: uploadResult.url
+        image: uploadResult.url,
       });
-      
-      if (!updateSuccess)
+
+      if (!updateSuccess) {
         throw new Error("Failed to update document with image URL.");
-      
-      // Pass the final data back to the parent
+      }
+
+      // Success: Close modal and pass updated data back to parent
       onModalClose({ ...newEvent, image: uploadResult.url });
-      
     } catch (error) {
       console.error("Error creating data:", error);
-      // Rollback: Delete the MongoDB document if image upload/update fails
+      // Rollback: If anything failed after creating the doc, delete it to keep DB clean
       if (newEvent && newEvent._id) {
         await deleteDocument("rooms", newEvent._id);
       }
+      alert("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
-      }
-    };
-      
-      return (
-        <div className="modal">
-          <div className="modal__content">
-            <button className="modal__close" onClick={onModalClose}>
-              <Image alt="x" src="/images/cross-cancel.png" height="18" width="18" />
-            </button>
-      
-            <form onSubmit={handleSubmit} className="form">
-              <div className="form__control">
-                <input
-                  className="form-input-style"
-                  placeholder="Enter your title"
-                  type="text"
-                  required
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </div>
-                  
-              <div className="form__control">
-                <textarea
-                  className="form-input-style-textarea"
-                  placeholder="Enter description"
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </div>
-                  
-              <div className="form__control">
-                <button
-                  className="upload-button-style"
-                  type="button"
-                  onClick={() => fileInputRef.current.click()}
-                  disabled={loading}
-                >
-                  {imageFile ? "Image Selected ✅" : "Upload Image ⬆"}
-                </button>
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={fileInputRef}
-                  onChange={handleImageChange}
-                  style={{ display: "none" }}
-                />
-              </div>
-                  
-              <div className="form__control">
-                <button className="form-button-style" type="submit" disabled={loading}>
-                  {loading ? "Creating..." : "Create Event"}
-                </button>
-              </div>
-            </form>
+    }
+  };
+
+  return (
+    <div className="modal">
+      <div className="modal__content">
+        <button className="modal__close" onClick={() => onModalClose(null)}>
+          <Image
+            alt="x"
+            src="/images/cross-cancel.png"
+            height="18"
+            width="18"
+          />
+        </button>
+
+        <form onSubmit={handleSubmit} className="form">
+          <div className="form__control">
+            <input
+              className="form-input-style"
+              placeholder="Enter your title"
+              type="text"
+              required
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </div>
-        </div>
-       );
-     };
+
+          <div className="form__control">
+            <textarea
+              className="form-input-style-textarea"
+              placeholder="Enter description"
+              required
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+          </div>
+
+          <div className="form__control">
+            <button
+              className="upload-button-style"
+              type="button"
+              onClick={() => fileInputRef.current.click()}
+              disabled={loading}
+            >
+              {imageFile ? "Image Selected ✅" : "Upload Image ⬆"}
+            </button>
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+              required // Added required so users must pick an image
+            />
+          </div>
+
+          <div className="form__control">
+            <button
+              className="form-button-style"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? "Creating..." : "Create Event"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};

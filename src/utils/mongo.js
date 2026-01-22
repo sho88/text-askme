@@ -1,8 +1,7 @@
+// src/utils/mongo.js
 import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
 
-// Construct the URI using your provided credentials
-const uri =
-  "mongo-connection-string - but do it the professional, secure way...";
+const uri = process.env.MONGODB_URI; // Correctly pulls from .env.local
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -14,13 +13,11 @@ const client = new MongoClient(uri, {
 
 let db;
 
-/**
- * Initializes the connection to MongoDB
- */
 export async function start() {
+  if (db) return; // Prevent multiple connections
   try {
     await client.connect();
-    db = client.db("textqanda_"); // Your DB name
+    db = client.db("textqanda"); // Ensure this matches your URI database name
     console.log("Successfully connected to MongoDB");
   } catch (error) {
     console.error(`[CONNECTION ERROR]:`, error.message);
