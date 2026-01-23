@@ -2,7 +2,7 @@ import mainStyle from "@/styles/main.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-const intro = () => {
+const Intro = () => {
   const router = useRouter();
 
   // events go here...
@@ -35,12 +35,14 @@ const intro = () => {
             }}
           >
             <Image
+              alt="Opening hand..."
               className="qa-opening-hand"
               src="/images/qa-opening-hand.png"
               fill
               style={{ objectFit: "cover" }}
             />
             <Image
+              alt="Opening..."
               src="/images/qa-opening.png"
               fill
               style={{ objectFit: "cover" }}
@@ -193,7 +195,7 @@ const intro = () => {
               <div className="intro-footer-body-text">App</div>
             </div>
             <div>
-              <div className="intro-footer-body-text">What's New</div>
+              <div className="intro-footer-body-text">Whats New</div>
               <div className="intro-footer-body-text">Help Centre</div>
               <div className="intro-footer-body-text">Contact</div>
               <div className="intro-footer-body-text">Site Map</div>
@@ -226,4 +228,4 @@ const intro = () => {
   );
 };
 
-export default intro;
+export default Intro;
