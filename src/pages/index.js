@@ -91,9 +91,7 @@ const intro = () => {
               width="10"
             />
           </div>
-          <div className="qa-article-reactions">
-            👍❤️<small>2</small>
-          </div>
+          <div className="qa-article-reactions">👍❤️2</div>
           <div className="qa-article-3">
             fdf dsfvdsjf vsjm fdg fdgfdsg fd fdsb vdwhn
             <Image
@@ -104,9 +102,7 @@ const intro = () => {
               width="10"
             />
           </div>
-          <div className="qa-article-reactions">
-            🙏❗<small>5</small>
-          </div>
+          <div className="qa-article-reactions">🙏❗5</div>
           <h2 className="qa-heading-2">
             Text QA allows you to ask questions to the speaker in real-time!
             Worry no more about being unheard or shy to speak!
@@ -121,9 +117,7 @@ const intro = () => {
               width="10"
             />
           </div>
-          <div className="qa-article-reactions">
-            👏✅<small>2</small>
-          </div>
+          <div className="qa-article-reactions">👏✅2</div>
           <div className="qa-article-3">
             fscsa
             <Image
@@ -146,9 +140,7 @@ const intro = () => {
               width="10"
             />
           </div>
-          <div className="qa-article-reactions">
-            👍❤️<small>7</small>
-          </div>
+          <div className="qa-article-reactions">👍❤️7</div>
           <div className="qa-article-3">
             fdf dsfvdsjf vsjm fdg fdgfdsg fd fdsb vdwhn
             <Image
@@ -169,13 +161,11 @@ const intro = () => {
               width="10"
             />
           </div>
-          <div className="qa-article-reactions">
-            ✍️🥰<small>4</small>
-          </div>
+          <div className="qa-article-reactions">✍️🥰4</div>
           <h2 className="qa-heading-2">
-            Just say what you want here. say a benefit of using this service.
-            say a benefit of using this service. say a benefit of using this
-            service.
+            Here, the speaker will answer your question or comment in real-time!
+            benefit of using this service. say a benefit of using this service.
+            say a benefit of using this service.
           </h2>
         </div>
       </div>
