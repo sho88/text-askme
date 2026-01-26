@@ -969,6 +969,15 @@ position: relative;
   outline: none;
 }
 
+/* These are react codes for a chat app, where within each <article></article> in the dashboard 
+represents a room. a room is an event made by the user/speaker. an event is something that is to be 
+spoken about. as we click on this event in the dashboard, users/audience can submit their questions
+ about the event made by the user/speaker. as we can see in this app, all rooms/events have the same
+  set of questions - i do not want this. i want each room/event to have their own set of subnitted
+  questions. I will send you necessary code relatting to this task. Produce final code for this task, 
+  where i can just copy and paste the whole code file.
+  */
+
 .form-input-style-textarea {
   width: 100%;
   display: flex;
