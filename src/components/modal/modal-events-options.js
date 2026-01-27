@@ -25,19 +25,15 @@ export const ModalEventsOptionsComponent = ({
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
               <button className="form-button-style" onClick={onView}>
-                View Event
+                View Topic
               </button>
 
               <button className="form-button-style" onClick={onModalAction}>
-                Edit Event
+                Edit Topic
               </button>
 
-              <button
-                className="form-button-style"
-                style={{ backgroundColor: "#ff4d4d", color: "black" }}
-                onClick={onDelete}
-              >
-                Delete Event
+              <button className="form-button-style-delete" onClick={onDelete}>
+                <b>Delete Topic</b>
               </button>
             </div>
           </div>

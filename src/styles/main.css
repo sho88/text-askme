@@ -969,14 +969,6 @@ position: relative;
   outline: none;
 }
 
-/* These are react codes for a chat app, where within each <article></article> in the dashboard 
-represents a room. a room is an event made by the user/speaker. an event is something that is to be 
-spoken about. as we click on this event in the dashboard, users/audience can submit their questions
- about the event made by the user/speaker. as we can see in this app, all rooms/events have the same
-  set of questions - i do not want this. i want each room/event to have their own set of subnitted
-  questions. I will send you necessary code relatting to this task. Produce final code for this task, 
-  where i can just copy and paste the whole code file.
-  */
 
 .form-input-style-textarea {
   width: 100%;
@@ -1309,13 +1301,6 @@ spoken about. as we click on this event in the dashboard, users/audience can sub
   height: 100vh;
 }
 
-.event__messages-2 {
-  background-color: gold;
-  width: 100vw;
-}
-
-.intro-background {
-}
 
 /* This container spans the full image and centers its children */
 .header-overlay {
@@ -1422,7 +1407,7 @@ spoken about. as we click on this event in the dashboard, users/audience can sub
   margin-top: -30px;
   margin-left: 20px;
   letter-spacing: 5px;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .intro-call-to-action {
@@ -1503,4 +1488,85 @@ spoken about. as we click on this event in the dashboard, users/audience can sub
 
 .test276 {
   transform: translateX(-44vw) translateY(-31vh);
+}
+
+.intro-additional-section {
+  margin-top: 100px;
+  height: 40vh;
+  background-color: #124257;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-additional-section-body {
+  color: white;
+  font-family: Oswald, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  line-height: 25px;
+  padding: 80px;
+}
+
+.intro-image-section {
+  background-color: #124257;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: -2px;
+  padding-bottom: 75px;
+}
+
+.intro-image-section-image {
+  width: 100%;
+  height: auto;
+  border-radius: 40px;
+}
+
+.placeholder {
+  width: 70%;
+  height: auto;
+  margin-top: -175px;
+  z-index: 2;
+  border-radius: 0px;
+}
+
+.placeholder-2 {
+  width: 65vw;
+  height: 500px;
+  background-color: #a8a8a8;
+  margin-top: 50px;
+  z-index: 2;
+  border-radius: 0px;
+}
+
+.intro-image-section-image-overlay {
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  /* opacity: 0.75; */
+  background-image: linear-gradient(180deg, transparent -60%, #124257 70%);
+}
+
+.questions-cross {
+  min-width: 12px;
+  min-height: 12px;
+  margin-left: 7px;
+  align-self: center;
+}
+
+.form-button-style-delete {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  color: rgb(227, 64, 64);
+  background-image: linear-gradient(to right, #ffffff, #ffffff),
+  linear-gradient(200deg, white, #124259, white);
+  background-origin: border-box;
+  background-clip: padding-box, border-box; 
+  border-radius: 20px;
+  border: 1px solid transparent;
 }

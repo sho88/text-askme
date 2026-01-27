@@ -106,7 +106,7 @@ export const ModalComponent = ({ onModalClose }) => {
               onClick={() => fileInputRef.current.click()}
               disabled={loading}
             >
-              {imageFile ? "Image Selected ✅" : "Upload Image ⬆"}
+              {imageFile ? "Image Uploaded ✅" : "Upload Image ⬆"}
             </button>
             <input
               type="file"
@@ -124,7 +124,7 @@ export const ModalComponent = ({ onModalClose }) => {
               type="submit"
               disabled={loading}
             >
-              {loading ? "Creating..." : "Create Event"}
+              {loading ? "Creating..." : "Create Topic"}
             </button>
           </div>
         </form>

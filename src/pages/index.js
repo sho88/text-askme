@@ -69,7 +69,7 @@ const Intro = () => {
         <div className="qa-article-2">
           <div>
             <div className="qa-article-3">
-              How can this be applied today?
+              Travel insurance for a short trip?
               <Image
                 className="delete-question"
                 src="/images/cross-cancel.png"
@@ -79,12 +79,10 @@ const Intro = () => {
               />
             </div>
           </div>
+
           <div className="qa-article-3">
-            fdf dsfvdsjf vsjm jbdhsfdsfv dshjfv dshfv dsfjhv dsfjhdsv jdshfv
-            dsfv dsfvdsjvf mdsvdfs vsf sfg dsjf vsjm jbdhsfdsfv dshjfv dshfv
-            dsfjhv dsfjhdsv jdshfv dsfv dsfvdsjvf mdsvdfs vsf sfg dsjf vsjm
-            jbdhsfdsfv dshjfv dshfv dsfjhv dsfjhdsv jdshfv dsfv dsfvdsjvf
-            mdsvdfs vsf sfg
+            What are the most important cultural etiquette rules to research
+            before visiting a Middle Eastern country?
             <Image
               className="delete-question"
               src="/images/cross-cancel.png"
@@ -94,8 +92,24 @@ const Intro = () => {
             />
           </div>
           <div className="qa-article-reactions">👍❤️2</div>
+
           <div className="qa-article-3">
-            fdf dsfvdsjf vsjm fdg fdgfdsg fd fdsb vdwhn
+            In light of recent global health changes, what documentation—such as
+            digital health passes or specific proof of recovery—is currently
+            necessary for entry into most major European Union countries, and
+            how far in advance should these be verified?
+            <Image
+              className="delete-question"
+              src="/images/cross-cancel.png"
+              alt="cross"
+              height="10"
+              width="10"
+            />
+          </div>
+          <div className="qa-article-reactions">👍❤️2</div>
+
+          <div className="qa-article-3">
+            Best travel apps?
             <Image
               className="delete-question"
               src="/images/cross-cancel.png"
@@ -105,12 +119,26 @@ const Intro = () => {
             />
           </div>
           <div className="qa-article-reactions">🙏❗5</div>
+
+          <div className="qa-article-3">
+            Can I use my mobile data without extra fees?
+            <Image
+              className="delete-question"
+              src="/images/cross-cancel.png"
+              alt="cross"
+              height="10"
+              width="10"
+            />
+          </div>
+          <div className="qa-article-reactions">🙏❗5</div>
+
           <h2 className="qa-heading-2">
             Text QA allows you to ask questions to the speaker in real-time!
             Worry no more about being unheard or shy to speak!
           </h2>
+
           <div className="qa-article-3">
-            fdf dsfvdsjf vsjm
+            Best vitamins for marathon recovery?
             <Image
               className="delete-question"
               src="/images/cross-cancel.png"
@@ -121,7 +149,7 @@ const Intro = () => {
           </div>
           <div className="qa-article-reactions">👏✅2</div>
           <div className="qa-article-3">
-            fscsa
+            Best leg stretches?
             <Image
               className="delete-question"
               src="/images/cross-cancel.png"
@@ -131,9 +159,9 @@ const Intro = () => {
             />
           </div>
           <div className="qa-article-3">
-            G jms bjcd, c,d? sfdsfv dshjfv dshfv dsfjhv dsfjhdsv jdshfv dsfv
-            dsfvdsjvf mdsvdfs vsf sfg dsjf vsjm jbdhsfdsfv dshjfv dshfv dsfjhv
-            dsfjhds
+            How can I balance a high-volume marathon training plan with a
+            full-time desk job to ensure I am getting enough sleep and active
+            recovery to prevent the onset of chronic overtraining syndrome?
             <Image
               className="delete-question"
               src="/images/cross-cancel.png"
@@ -144,7 +172,7 @@ const Intro = () => {
           </div>
           <div className="qa-article-reactions">👍❤️7</div>
           <div className="qa-article-3">
-            fdf dsfvdsjf vsjm fdg fdgfdsg fd fdsb vdwhn
+            Carbon plate shoes worth the high cost?
             <Image
               className="delete-question"
               src="/images/cross-cancel.png"
@@ -154,7 +182,9 @@ const Intro = () => {
             />
           </div>
           <div className="qa-article-3">
-            fdf dsfvdsjf vsjm
+            What role does iron deficiency play in marathon fatigue, and should
+            runners get regular blood tests to monitor their ferritin levels
+            during training?
             <Image
               className="delete-question"
               src="/images/cross-cancel.png"
@@ -169,8 +199,67 @@ const Intro = () => {
             benefit of using this service. say a benefit of using this service.
             say a benefit of using this service.
           </h2>
+          {/* 
+          <div className="qa-article-3">
+            Who found them? 📜
+            <Image
+              className="delete-question"
+              src="/images/cross-cancel.png"
+              alt="cross"
+              height="10"
+              width="10"
+            />
+          </div>
+          <div className="qa-article-reactions">👍❤️7</div>
+          <div className="qa-article-3">
+            How has DNA testing on the parchment skins helped researchers piece
+            together fragmented Dead Sea scrolls?
+            <Image
+              className="delete-question"
+              src="/images/cross-cancel.png"
+              alt="cross"
+              height="10"
+              width="10"
+            />
+          </div>
+          <div className="qa-article-reactions">👍❤️7</div> */}
         </div>
+
+        <div className="intro-additional-section">
+          <div className="intro-additional-section-body">
+            <h2>Section for dark background statement bit</h2>
+          </div>
+        </div>
+
+        <div className="intro-image-section">
+          <div className="intro-image-section-image-overlay"></div>
+          <Image
+            className="intro-image-section-image"
+            src="/images/ryan-young.jpeg"
+            alt="pic"
+            width={200}
+            height={200}
+          />
+          <div className="placeholder">
+            {" "}
+            <Image
+              className="intro-image-section-image"
+              src="/images/kante.png"
+              alt="pic"
+              width={100}
+              height={100}
+            />
+          </div>
+          <div className="placeholder-2">Demonstration template thing</div>
+        </div>
+
+        {/* <h2 className="qa-heading-2">
+          Here, the speaker will answer your question or comment in real-time!
+          benefit of using this service. say a benefit of using this service.
+          say a benefit of using this service.
+        </h2> */}
       </div>
+
       <div className="intro-footer-container">
         <footer>
           <div className="intro-cta-button-container">
@@ -187,6 +276,7 @@ const Intro = () => {
               <b>Host Login</b>
             </u>
           </div>
+
           <div className="intro-footer-body">
             <div>
               <div className="intro-footer-body-text">About Us</div>
@@ -211,7 +301,7 @@ const Intro = () => {
               >
                 Isaac Ola.
               </a>
-              {"  "}Text QA 2026ⓒ
+              {"  "}2026 ⓒ TextQ&A
             </small>
 
             {/* <Image

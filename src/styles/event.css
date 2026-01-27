@@ -58,8 +58,9 @@ align-items: flex-start;
 
 .event__messages-2 {
   display: flex;
+  flex-direction: row;
   align-self: flex-start;
-  align-items: flex-start;
+  align-items: center;
   width: auto;
   color: #393939;
   border-radius: 20px;
