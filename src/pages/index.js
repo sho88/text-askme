@@ -244,10 +244,10 @@ const Intro = () => {
             {" "}
             <Image
               className="intro-image-section-image"
-              src="/images/kante.png"
+              src="/images/screenshot-spacex.png"
               alt="pic"
-              width={100}
-              height={100}
+              width={1000}
+              height={1000}
             />
           </div>
           <div className="placeholder-2">Demonstration template thing</div>
