@@ -133,8 +133,7 @@ const Intro = () => {
           <div className="qa-article-reactions">🙏❗5</div>
 
           <h2 className="qa-heading-2">
-            Text QA allows you to ask questions to the speaker in real-time!
-            Worry no more about being unheard or shy to speak!
+            Tuned into a live speech, seminar, or podcast? Submit your questions to get them instantly answered by the host.
           </h2>
 
           <div className="qa-article-3">
@@ -195,9 +194,7 @@ const Intro = () => {
           </div>
           <div className="qa-article-reactions">✍️🥰4</div>
           <h2 className="qa-heading-2">
-            Here, the speaker will answer your question or comment in real-time!
-            benefit of using this service. say a benefit of using this service.
-            say a benefit of using this service.
+            Your text questions are instantly visible to the host, enabling for a qucik response via live speech.
           </h2>
           {/* 
           <div className="qa-article-3">
@@ -227,7 +224,7 @@ const Intro = () => {
 
         <div className="intro-additional-section">
           <div className="intro-additional-section-body">
-            <h2>Section for dark background statement bit</h2>
+            <h2>Many are using this platform to get their questions answered in real-time!</h2>
           </div>
         </div>
 
