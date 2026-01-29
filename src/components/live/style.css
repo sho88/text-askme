@@ -72,13 +72,7 @@ p {
     justify-content: space-between;
     align-items: center;
 }
-
-.head-primary-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+/* 
 
 .head-button {
     width: 50px;
@@ -148,36 +142,6 @@ p {
     border-radius: 50px;
     margin-right: 20px;
 }
-
-
-.head-primary-info h1{
-    color: white;
-    margin: 0;
-    font-family: Oswald, sans-serif;
-    font-size: 1.8rem;
-    margin: 4px 0 4px 0;
-}
-.head-primary-info h2{
-    color: white;
-    margin: 0;
-    font-family: Oswald, sans-serif;
-    font-size: 1.5rem;
-    margin: 4px 0 4px 0;
-}
-
-.head-primary-info h3{
-    color: white;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    font-size: 9pt;
-}
-
-.head-primary-info h3{
-    margin: 0;
-}
-
-
 
 .profile-picture-full-size {
     position: fixed;

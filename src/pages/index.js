@@ -1,9 +1,24 @@
+import { useState, useEffect } from "react"; // Add this
 import mainStyle from "@/styles/main.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
 const Intro = () => {
   const router = useRouter();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    // Use passive listener for better scroll performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // events go here...
   function handleGuestLoginClick() {
@@ -133,7 +148,8 @@ const Intro = () => {
           <div className="qa-article-reactions">🙏❗5</div>
 
           <h2 className="qa-heading-2">
-            Tuned into a live speech, seminar, or podcast? Submit your questions to get them instantly answered by the host.
+            Tuned into a live speech, seminar, or podcast? Submit your questions
+            to get them instantly answered by the host.
           </h2>
 
           <div className="qa-article-3">
@@ -194,7 +210,8 @@ const Intro = () => {
           </div>
           <div className="qa-article-reactions">✍️🥰4</div>
           <h2 className="qa-heading-2">
-            Your text questions are instantly visible to the host, enabling for a qucik response via live speech.
+            Your text questions are instantly visible to the host, enabling for
+            a qucik response via live speech.
           </h2>
           {/* 
           <div className="qa-article-3">
@@ -224,30 +241,40 @@ const Intro = () => {
 
         <div className="intro-additional-section">
           <div className="intro-additional-section-body">
-            <h2>Many are using this platform to get their questions answered in real-time!</h2>
+            <h2>
+              Many are using this platform to get their questions answered in
+              real-time!
+            </h2>
           </div>
         </div>
-
         <div className="intro-image-section">
           <div className="intro-image-section-image-overlay"></div>
           <Image
             className="intro-image-section-image"
-            src="/images/ryan-young.jpeg"
+            src="/images/tqa-ss-5.webp"
             alt="pic"
-            width={200}
-            height={200}
+            width={2000}
+            height={2000}
           />
           <div className="placeholder">
             {" "}
             <Image
               className="intro-image-section-image"
-              src="/images/screenshot-spacex.png"
+              src="/images/tqa-ss-1.webp"
               alt="pic"
               width={1000}
               height={1000}
             />
           </div>
-          <div className="placeholder-2">Demonstration template thing</div>
+          <div className="placeholder-2" style={{ "--scroll-offset": scrollY }}>
+            <Image
+              className="intro-image-section-image-2"
+              src="/images/tqa-ss-3.webp"
+              alt="pic"
+              width={1000}
+              height={1000}
+            />
+          </div>
         </div>
 
         {/* <h2 className="qa-heading-2">

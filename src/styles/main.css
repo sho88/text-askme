@@ -93,7 +93,6 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* transform: translate(6px); */
 }
 
 .head-button {
@@ -190,34 +189,6 @@ p {
   background-color: #314846;
   border-radius: 50px;
   margin-right: 20px;
-}
-
-
-.head-primary-info h1{
-  color: white;
-  margin: 0;
-  font-family: Oswald, sans-serif;
-  font-size: 1.8rem;
-  margin: 4px 0 4px 0;
-}
-.head-primary-info h2{
-  color: white;
-  margin: 0;
-  font-family: Oswald, sans-serif;
-  font-size: 1.5rem;
-  margin: 4px 0 4px 0;
-}
-
-.head-primary-info h3{
-  color: white;
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  font-size: 9pt;
-}
-
-.head-primary-info h3{
-  margin: 0;
 }
 
 
@@ -1033,111 +1004,6 @@ position: relative;
   font-size: 11pt;
 }
 
-.burger-menu-2 {
-
-  width: 20px;
-  height: 27px;
-  margin: 5px 0 0 0;
-  border: none;
-  outline: none;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-color: transparent;
-}
-
-
-.side-menu-expanded {
-  /* --- Layout & Positioning --- */
-  position: fixed;
-  right: -100%;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-  height: 100vh;
-  width: 100%;
-  padding: 150px 20px 20px 20px;
-  z-index: 0;
-  background-color: rgb(255, 255, 255, 0.97);
-  margin-top: -62px;
-}
-
-
-
-
-.burger-menu-2--hide {
-  animation-name: open-menu;
-  animation-duration: 0.5s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  animation-delay: 0s;
-}
-
-
-.dashboard-burger-line-button {
-  width: 100%;
-  background-color: transparent;
-  outline: none;
-  border: 0;
-  margin-top: -40%;
-}
-
-@keyframes open-menu {
-  0% {
-      opacity: 0;
-  }
-  25% {
-    opacity: 0;
-  }
-  35% {
-      width: 25%;
-  }
-  50% {
-    left: 2.75%;
-  }
-  85% {
-    
-  }
-  100% {
-    left: 0%;
-    opacity: 1;
-  }
-}
-
-.menu-open-option {
-  width: 90%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 20px;
-}
-
-.menu-open-option-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.menu-open-option button {
-  outline: 0;
-  border: none;
-  background-color: transparent;
-  color: rgb(55, 55, 55);
-  font-family: Oswald, sans-serif;
-  font-size: 14pt;
-  font-weight: 500;
-}
-
-.menu-open-option-icon {
-  height: 25px;
-  width: 25px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
 
 .submit-questions-container {
   width: 92%;
@@ -1294,9 +1160,10 @@ position: relative;
 
 
 .menu-open-option-xx {
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100vh;
 }
@@ -1365,7 +1232,7 @@ position: relative;
   font-family: Oswald, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
   line-height: 25px;
-  padding: 80px;
+  padding: 60px 60px 80px 60px;
 }
 
 .qa-button {
@@ -1491,8 +1358,7 @@ position: relative;
 }
 
 .intro-additional-section {
-  margin-top: 100px;
-  height: 40vh;
+  height: auto;
   background-color: #124257;
   display: flex;
   flex-direction: column;
@@ -1523,24 +1389,39 @@ position: relative;
 .intro-image-section-image {
   width: 100%;
   height: auto;
-  border-radius: 40px;
+  border-radius: 30px;
+}
+
+.intro-image-section-image-2 {
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+  
+  /* Parallax Logic */
+  transform: translateY(calc(var(--scroll-offset, 0) * -0.15px));
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+  filter: drop-shadow(0 0 50px rgba(0, 0, 0, 0.159));
 }
 
 .placeholder {
+  position: relative; 
   width: 70%;
-  height: auto;
   margin-top: -175px;
+  margin-left: 15px;
   z-index: 2;
   border-radius: 0px;
+  align-self: flex-start;
 }
 
 .placeholder-2 {
-  width: 65vw;
-  height: 500px;
-  background-color: #a8a8a8;
-  margin-top: 50px;
+  position: relative;
+  width: 55%;
+  margin-right: 15px;
   z-index: 2;
   border-radius: 0px;
+  align-self: flex-end;
+  height: 80px;
 }
 
 .intro-image-section-image-overlay {
@@ -1569,4 +1450,101 @@ position: relative;
   background-clip: padding-box, border-box; 
   border-radius: 20px;
   border: 1px solid transparent;
+}
+
+
+/* --- Trigger Icon --- */
+.burger-menu-2 {
+  width: 20px;
+  height: 27px;
+  margin: 5px 0 0 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative; /* Ensures it stays in place */
+}
+
+.dashboard-burger-line {
+  width: 20px;
+  height: 2px;
+  margin-top: 5px;
+  margin-bottom: 3px;
+  background-color: #124259;
+  border-radius: 10px;
+}
+
+/* --- Menu Overlay (Fade-In & Fade-Out Logic) --- */
+.side-menu-expanded {
+  /* Layout & Positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.96);
+  
+  /* Gradual Appearance Logic */
+  opacity: 0;
+  visibility: hidden;
+  /* transition handles both fading in AND fading out over 0.5s */
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  pointer-events: none; 
+}
+
+/* Triggered when sideMenu is true */
+.side-menu-expanded.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* --- Inner Menu Content & Layout --- */
+.dashboard-burger-line-button {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+}
+
+.menu-open-option {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 0 35px 0;
+  border-top: 1px;
+  border-style: solid;
+  border-color: #a8a8a8;
+}
+
+.menu-open-option button {
+  outline: 0;
+  border: none;
+  background-color: transparent;
+  color: rgb(55, 55, 55);
+  font-family: Oswald, sans-serif;
+  font-size: 17pt;
+  font-weight: 500;
+}
+
+.menu-open-option-icon {
+  height: 25px;
+  width: 25px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.head-menu-container {
+  width: 100%;
+}
+
+/* Kept from original - ensures consistency */
+.menu-open-option-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
