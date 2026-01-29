@@ -16,6 +16,15 @@ export default async function questionsHandler(req, res) {
          * Otherwise, fetch nothing or everything based on your preference.
          * Using { eventId } ensures rooms don't share questions.
          */
+
+        const pinCode = req.query.pinCode;
+        if (pinCode) {
+          const questions = await Question.find({ pin: pinCode }).sort({
+            createdAt: -1,
+          });
+          return res.status(200).json({ success: true, data: questions });
+        }
+
         const filter = eventId ? { eventId } : {};
         const questions = await Question.find(filter).sort({ createdAt: -1 });
 

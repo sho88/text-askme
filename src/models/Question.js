@@ -6,10 +6,14 @@ const QuestionSchema = new mongoose.Schema({
     required: [true, "Please provide a question."],
     maxlength: [500, "Question cannot be more than 500 characters."],
   },
-  // ADD THIS: Links the question to a specific room/event
   eventId: {
     type: String,
     required: [true, "Event ID is required"],
+  },
+  pin: {
+    // Add this field
+    type: Number,
+    required: [true, "PIN is required"],
   },
   createdAt: {
     type: Date,

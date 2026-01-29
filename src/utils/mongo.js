@@ -64,13 +64,11 @@ export async function readData(collectionName, id = null) {
 export async function readDataByParams(collectionName, pinCode = null) {
   try {
     const collection = db.collection(collectionName);
-    if (id) {
-      // Find one by ID
-      return await collection.findOne({ pin: pinCode });
-    } else {
-      // Find all in collection
-      return await collection.find({}).toArray();
+    if (pinCode) {
+      // Ensure this matches the parameter name
+      return await collection.find({ pin: pinCode }).toArray();
     }
+    return await collection.find({}).toArray();
   } catch (error) {
     console.error("Error reading data:", error);
     return null;

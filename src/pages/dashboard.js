@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
@@ -10,9 +10,11 @@ import HeaderComponent from "@/components/header";
 export default function DashboardPageComponent() {
   // hooks go here...
   const router = useRouter();
+  const { eventId } = router.query; // Grabs the eventId passed from the PIN page
 
   // Updated: Destructure refreshRooms but keep the logic exactly as it was
-  const { rooms, refreshRooms } = useRooms();
+  // Pass eventId to the hook to fetch only the room matching the PIN result
+  const { rooms, refreshRooms } = useRooms(eventId);
   const [term, setTerm] = useState("");
 
   // the equivalent to computed properties...for expensive calculations...
