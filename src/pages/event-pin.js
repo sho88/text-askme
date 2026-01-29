@@ -1,9 +1,26 @@
 import mainStyle from "@/styles/main.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useState } from "react";
+import { readDataByParams } from "@/utils/mongo";
+
+const useRoomsHook = () => {
+  const [room, setRoom] = useState(null);
+  const getRoomByPinCode = async (pinCode) => {
+    const room = await readDataByParams("rooms", pinCode);
+    console.log(room);
+  };
+
+  return {
+    room,
+    getRoomByPinCode,
+  };
+};
 
 export default function EventPassword() {
   const router = useRouter();
+  const { room, getRoomByPinCode } = useRoomsHook();
+
   function handleSubmit(ev) {
     ev.preventDefault();
 
@@ -11,15 +28,11 @@ export default function EventPassword() {
 
     const pin = formData.get("pin");
 
-    // const cleanPin = isNaN(pin) ? "" : pin;
-
     const cleanPin = +pin;
 
-    console.log(cleanPin);
+    getRoomByPinCode(cleanPin);
+    // make an if statement. if pin clean, proceed. if not, return errors.
 
-    // make an if statement. if oin clean, proceed. if not, return errors.
-
-    // @TODO: ensure that it's a number...if it isn't, then return
     // if i add a "+" before the string, it converts to a number. so check if it is NaN.
   }
 

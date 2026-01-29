@@ -242,8 +242,8 @@ const Intro = () => {
         <div className="intro-additional-section">
           <div className="intro-additional-section-body">
             <h2>
-              Many are using this platform to get their questions answered in
-              real-time!
+              You get the benefits of asking your speaker live questions, in
+              which they'll respond to you in real-time!
             </h2>
           </div>
         </div>
