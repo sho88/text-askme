@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"; // Add this
 import mainStyle from "@/styles/main.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import ReduceBrowserSize from "./ReduceBrowsingSize";
 
 const Intro = () => {
   const router = useRouter();
@@ -29,6 +30,7 @@ const Intro = () => {
   }
   return (
     <div>
+      <ReduceBrowserSize />
       <div>
         <div style={{ position: "relative", width: "100%" }}>
           <div className="intro-header-container">
@@ -85,26 +87,19 @@ const Intro = () => {
           <div>
             <div className="qa-article-3">
               Travel insurance for a short trip?
-              <Image
+              {/* <Image
                 className="delete-question"
                 src="/images/cross-cancel.png"
                 alt="cross"
                 height="10"
                 width="10"
-              />
+              /> */}
             </div>
           </div>
 
           <div className="qa-article-3">
             What are the most important cultural etiquette rules to research
             before visiting a Middle Eastern country?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
           </div>
           <div className="qa-article-reactions">👍❤️2</div>
 
@@ -113,37 +108,14 @@ const Intro = () => {
             digital health passes or specific proof of recovery—is currently
             necessary for entry into most major European Union countries, and
             how far in advance should these be verified?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
           </div>
           <div className="qa-article-reactions">👍❤️2</div>
 
-          <div className="qa-article-3">
-            Best travel apps?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
-          </div>
+          <div className="qa-article-3">Best travel apps?</div>
           <div className="qa-article-reactions">🙏❗5</div>
 
           <div className="qa-article-3">
             Can I use my mobile data without extra fees?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
           </div>
           <div className="qa-article-reactions">🙏❗5</div>
 
@@ -154,89 +126,28 @@ const Intro = () => {
 
           <div className="qa-article-3">
             Best vitamins for marathon recovery?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
           </div>
           <div className="qa-article-reactions">👏✅2</div>
-          <div className="qa-article-3">
-            Best leg stretches?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
-          </div>
+          <div className="qa-article-3">Best leg stretches?</div>
           <div className="qa-article-3">
             How can I balance a high-volume marathon training plan with a
             full-time desk job to ensure I am getting enough sleep and active
             recovery to prevent the onset of chronic overtraining syndrome?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
           </div>
           <div className="qa-article-reactions">👍❤️7</div>
           <div className="qa-article-3">
             Carbon plate shoes worth the high cost?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
           </div>
           <div className="qa-article-3">
             What role does iron deficiency play in marathon fatigue, and should
             runners get regular blood tests to monitor their ferritin levels
             during training?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
           </div>
           <div className="qa-article-reactions">✍️🥰4</div>
           <h2 className="qa-heading-2">
             Your text questions are instantly visible to the host, enabling for
             a qucik response via live speech.
           </h2>
-          {/* 
-          <div className="qa-article-3">
-            Who found them? 📜
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
-          </div>
-          <div className="qa-article-reactions">👍❤️7</div>
-          <div className="qa-article-3">
-            How has DNA testing on the parchment skins helped researchers piece
-            together fragmented Dead Sea scrolls?
-            <Image
-              className="delete-question"
-              src="/images/cross-cancel.png"
-              alt="cross"
-              height="10"
-              width="10"
-            />
-          </div>
-          <div className="qa-article-reactions">👍❤️7</div> */}
         </div>
 
         <div className="intro-additional-section">
@@ -244,6 +155,9 @@ const Intro = () => {
             <h2>
               You get the benefits of asking your speaker live questions, in
               which they'll respond to you in real-time!
+              <br />
+              <br />
+              Here's what you'll see on yur device...
             </h2>
           </div>
         </div>
@@ -251,7 +165,7 @@ const Intro = () => {
           <div className="intro-image-section-image-overlay"></div>
           <Image
             className="intro-image-section-image"
-            src="/images/tqa-ss-5.webp"
+            src="/images/tqa-ss-8.webp"
             alt="pic"
             width={2000}
             height={2000}
@@ -269,19 +183,32 @@ const Intro = () => {
           <div className="placeholder-2" style={{ "--scroll-offset": scrollY }}>
             <Image
               className="intro-image-section-image-2"
-              src="/images/tqa-ss-3.webp"
+              src="/images/tqa-ss-6.webp"
+              alt="pic"
+              width={1000}
+              height={1000}
+            />
+          </div>
+          <div className="placeholder-3" style={{ "--scroll-offset": scrollY }}>
+            <Image
+              className="intro-image-section-image-3"
+              src="/images/tqa-ss-5.png"
+              alt="pic"
+              width={1000}
+              height={1000}
+            />
+          </div>
+          <div className="placeholder-4" style={{ "--scroll-offset": scrollY }}>
+            {/* <textarea className="intro-image-section-image-4"></textarea> */}
+            <Image
+              className="intro-image-section-image-4"
+              src="/images/tqa-ss-7.png"
               alt="pic"
               width={1000}
               height={1000}
             />
           </div>
         </div>
-
-        {/* <h2 className="qa-heading-2">
-          Here, the speaker will answer your question or comment in real-time!
-          benefit of using this service. say a benefit of using this service.
-          say a benefit of using this service.
-        </h2> */}
       </div>
 
       <div className="intro-footer-container">

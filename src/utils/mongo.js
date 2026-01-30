@@ -64,11 +64,8 @@ export async function readData(collectionName, id = null) {
 export async function readDataByParams(collectionName, pinCode = null) {
   try {
     const collection = db.collection(collectionName);
-    if (pinCode) {
-      // Ensure this matches the parameter name
-      return await collection.find({ pin: pinCode }).toArray();
-    }
-    return await collection.find({}).toArray();
+    // This looks for the 'pin' field in your 'rooms' document
+    return await collection.find({ pin: pinCode }).toArray();
   } catch (error) {
     console.error("Error reading data:", error);
     return null;

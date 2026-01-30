@@ -12,19 +12,18 @@ export default function EventPassword() {
     const pin = formData.get("pin");
 
     try {
-      // 1. Verify if questions exist for this PIN
-      const res = await fetch(`/api/questions?pinCode=${pin}`);
+      // Call the new verification route
+      const res = await fetch(`/api/verify-pin?pinCode=${pin}`);
       const result = await res.json();
 
-      if (result.success && result.data.length > 0) {
-        // 2. Redirect to dashboard and pass the eventId in the URL
-        const firstQuestion = result.data[0];
-        router.push(`/dashboard?eventId=${firstQuestion.eventId}`);
+      if (result.success) {
+        // Redirect to the dashboard with the specific Room ID
+        router.push(`/dashboard?eventId=${result.eventId}`);
       } else {
-        alert("Invalid PIN or no questions found for this event.");
+        alert("Invalid PIN. Please check with your host.");
       }
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Verification error:", error);
     }
   };
 

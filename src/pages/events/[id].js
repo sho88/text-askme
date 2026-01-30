@@ -56,6 +56,7 @@ export default function EventSingleComponent({ room }) {
     const payload = {
       ...formValues,
       eventId: room._id,
+      pin: Number(room.pin),
     };
 
     try {
