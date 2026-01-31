@@ -14,7 +14,7 @@ export default function DashboardPageComponent() {
 
   // Updated: Destructure refreshRooms but keep the logic exactly as it was
   // Pass eventId to the hook to fetch only the room matching the PIN result
-  const { rooms, refreshRooms } = useRooms(eventId);
+  const { rooms } = useRooms(eventId);
   const [term, setTerm] = useState("");
 
   // the equivalent to computed properties...for expensive calculations...
@@ -60,7 +60,7 @@ export default function DashboardPageComponent() {
         <RoomsList
           rooms={filteredRooms}
           whenRoomClick={handleRoomClick}
-          onNewDataCreated={refreshRooms}
+          // onNewDataCreated={refreshRooms}
         />
         <DashboardBottomNav />
       </div>
