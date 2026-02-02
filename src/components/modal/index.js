@@ -9,12 +9,17 @@ export const ModalComponent = ({ onModalClose }) => {
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [refreshRooms, setRefreshRooms] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
     setImageFile(file);
+  };
+
+  const handleRefresh = () => {
+    router.push("/dashboard");
   };
 
   const handleSubmit = async (e) => {

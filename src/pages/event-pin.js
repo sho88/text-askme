@@ -18,7 +18,13 @@ export default function EventPassword() {
 
       if (result.success) {
         // Redirect to the dashboard with the specific Room ID
-        router.push(`/dashboard?eventId=${result.eventId}`);
+
+        // TODO
+        // No, change to direct to the event room with that specific Room ID.
+        // The guest user should not see the host dashoard at any time.
+        // router.push(`/dashboard?eventId=${result.eventId}`);
+        router.push(`/events/${result.eventId}`);
+        // router.push(`/events/${id}`);
       } else {
         alert("Invalid PIN. Please check with your host.");
       }
