@@ -30,6 +30,8 @@ export async function start() {
  * @param {object} data - The document to insert
  */
 export async function createData(collectionName, data) {
+  await start(); // Ensure DB is connected
+
   try {
     const collection = db.collection(collectionName);
     const result = await collection.insertOne(data);
@@ -46,6 +48,8 @@ export async function createData(collectionName, data) {
  * @param {string} id - Optional ID to find a specific document
  */
 export async function readData(collectionName, id = null) {
+  await start(); // Ensure DB is connected
+
   try {
     const collection = db.collection(collectionName);
     if (id) {
@@ -62,6 +66,8 @@ export async function readData(collectionName, id = null) {
 }
 
 export async function readDataByParams(collectionName, pinCode = null) {
+  await start(); // Ensure DB is connected
+
   try {
     const collection = db.collection(collectionName);
     // This looks for the 'pin' field in your 'rooms' document
@@ -79,6 +85,8 @@ export async function readDataByParams(collectionName, pinCode = null) {
  * @param {object} data - The data to set
  */
 export async function updateData(collectionName, id, data) {
+  await start(); // Ensure DB is connected
+  
   try {
     const collection = db.collection(collectionName);
 
@@ -103,6 +111,8 @@ export async function updateData(collectionName, id, data) {
  * @param {string} id - The document ID to delete
  */
 export async function deleteData(collectionName, id) {
+  await start(); // Ensure DB is connected
+
   try {
     const collection = db.collection(collectionName);
     await collection.deleteOne({ _id: new ObjectId(id) });

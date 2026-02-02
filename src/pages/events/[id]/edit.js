@@ -5,6 +5,8 @@ import { readData } from "@/utils/mongo"; // Use @ alias to avoid path issues
 import "@/styles/main.css";
 import "@/styles/globals.css";
 
+
+// Edit Page component goes here...
 export default function EditPage({ room }) {
   if (!room) return <p className="text-black">Room not found.</p>;
 
@@ -19,6 +21,8 @@ export default function EditPage({ room }) {
   );
 }
 
+
+// Server-side data fetching function...necessary for pre-populating the edit form in the Edit Page Component
 export async function getServerSideProps(context) {
   const { id } = context.params;
 

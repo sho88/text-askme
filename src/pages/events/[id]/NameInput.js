@@ -47,21 +47,29 @@ export default function NameInput({ initialData }) {
         <h1 className="text-white text-2xl font-oswald font-bold mb-5">
           Edit Event
         </h1>
-        <input
-          className="edit-page-input"
-          placeholder="New event name...."
-          required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <textarea
-          className="edit-page-input"
-          style={{ minHeight: "150px" }}
-          placeholder="New description name..."
-          required
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+
+        <label>
+          Event Name
+          <input
+            className="edit-page-input"
+            placeholder="New event name...."
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+
+        <label>
+          Event Description
+          <textarea
+            className="edit-page-input"
+            style={{ minHeight: "150px" }}
+            placeholder="New description name..."
+            required
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
         <button className="form-submit-button" disabled={loading}>
           {loading ? "Saving..." : "Update Changes"}
         </button>

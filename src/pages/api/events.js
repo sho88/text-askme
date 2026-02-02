@@ -1,13 +1,11 @@
-export default function handler(req, res) {
-  console.log(req.slug);
-  res.status(200).json({
+const handler = (_, response) => {
+
+  return response.status(200).json({
     event_id: "EVT-55021-Z",
     event_name: "Modern Web Architecture 2026",
     title: "Building Scalable Microservices",
-    image:
-      "https://cdn.example.com/assets/event-banners/microservices-workshop.png",
-    description:
-      "A hard study covering the transition from monolithic architectures to cloud-native microservices using Docker and Kubernetes.",
+    image: "https://cdn.example.com/assets/event-banners/microservices-workshop.png",
+    description: "A hard study covering the transition from monolithic architectures to cloud-native microservices using Docker and Kubernetes.",
     questions: [
       {
         question_id: 63921,
@@ -30,4 +28,8 @@ export default function handler(req, res) {
       },
     ],
   });
+
 }
+
+export default handler;
+
