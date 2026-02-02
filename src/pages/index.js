@@ -154,10 +154,10 @@ const Intro = () => {
           <div className="intro-additional-section-body">
             <h2>
               You get the benefits of asking your speaker live questions, in
-              which they'll respond to you in real-time!
+              which they&apos;ll respond to you in real-time!
               <br />
               <br />
-              Here's what you'll see on yur device...
+              Here&apos;s what you&apos;ll see on yur device...
             </h2>
           </div>
         </div>
