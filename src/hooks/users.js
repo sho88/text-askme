@@ -1,9 +1,3 @@
-// useUsers
-// users, error
-// function as fetchData
-// https://jsonplaceholder.typicode.com/users
-// no dependancies
-
 import { useEffect, useState } from "react";
 
 const useUsers = () => {

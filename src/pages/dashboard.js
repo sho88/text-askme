@@ -12,24 +12,19 @@ export default function DashboardPageComponent() {
   const router = useRouter();
   const { eventId } = router.query; // Grabs the eventId passed from the PIN page
 
-  // Updated: Destructure refreshRooms but keep the logic exactly as it was
   // Pass eventId to the hook to fetch only the room matching the PIN result
   const { rooms } = useRooms(eventId);
   const [term, setTerm] = useState("");
 
   // the equivalent to computed properties...for expensive calculations...
   const filteredRooms = useMemo(() => {
-    // 1. Ensure we have an array
-    const roomList = Array.isArray(rooms) ? rooms : [];
-
-    // 2. Create a shallow copy and reverse it (Newest First)
-    // We use [...roomList] because .reverse() modifies the original array
-    const sortedRooms = [...roomList].reverse();
+    // no need to make another const, as rooms is already an array. we made sure of this in the custom hook itself.
+    const reverseOrder = rooms.reverse();
 
     if (term.trim().length < 1) {
-      return sortedRooms;
+      return reverseOrder;
     } else {
-      const filtered = sortedRooms.filter((callBack) => {
+      const filtered = reverseOrder.filter((callBack) => {
         return (
           callBack.description
             ?.toLocaleLowerCase()
