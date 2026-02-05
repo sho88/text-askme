@@ -51,7 +51,7 @@
 
 import { createContext, useReducer } from "react";
 
-const theFather = createContext();
+export const TheFatherContext = createContext(null);
 
 const initialState = 0;
 
@@ -68,27 +68,15 @@ const reducer = (state, action) => {
   }
 };
 
-export const Provider2 = ({ children }) => {
+export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const handlePlus = () => {
-    dispatch("increment");
-  };
-
-  const handleMinus = () => {
-    dispatch("decrement");
-  };
-
-  const handleReset = () => {
-    dispatch("reset");
-  };
 
   const values = {
     state,
     dispatch,
   };
 
-  return <theFather.Provider value={values}>{children}</theFather.Provider>;
+  return <TheFatherContext.Provider value={values}>{children}</TheFatherContext.Provider>;
 };
 
-export default Provider2;
+export default Provider;

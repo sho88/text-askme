@@ -1,27 +1,29 @@
-import { useContext } from "react";
-import Provider2 from "@/context/app";
-import { theFather } from "@/context/app";
+import { useContext, useEffect } from "react";
+import Provider, { TheFatherContext } from "@/context/app";
 
-export const notLocal = () => {
-  const handlePlus = () => {
-    theFather.dispatch("increment");
-  };
 
-  const handleMinus = () => {
-    dispatch("decrement");
-  };
-
-  const handleReset = () => {
-    dispatch("reset");
-  };
+// Meh...buttons component
+const ButtonsComponent = () => {
+  const { dispatch, state } = useContext(TheFatherContext);
 
   return (
-    <Provider2>
-      <button onClick={handlePlus}>Plus 2</button>
-      <button onClick={handleMinus}>Minus 3</button>
-      <button onClick={handleReset}>Reset</button>
-    </Provider2>
+    <div>
+      <p>Value: {state}</p>
+      <button onClick={() => dispatch("increment")}>Plus 2</button>
+      <button onClick={() => dispatch("decrement")}>Minus 3</button>
+      <button onClick={() => dispatch("reset")}>Reset</button>
+    </div>
+  )
+}
+
+
+// Default Index3 component to be exported...
+export const Index3 = () => {
+  return (
+    <Provider>
+      <ButtonsComponent />
+    </Provider>
   );
 };
 
-export default notLocal;
+export default Index3;
