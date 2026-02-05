@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import Provider2 from "@/context/app";
-import { theFather } from "@/context/app";
+import { theFather, Provider2 } from "@/context/app";
+
+const { dispatch, state } = useContext(Provider2);
 
 export const notLocal = () => {
   const handlePlus = () => {
