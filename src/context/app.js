@@ -49,46 +49,71 @@
 //   );
 // };
 
+// import { createContext, useReducer } from "react";
+
+// export const TheFatherContext = createContext(null);
+
+// const initialState = 0;
+
+// const reducer = (state, action) => {
+//   switch (action) {
+//     case "increment":
+//       return state + 2;
+//     case "decrement":
+//       return state - 3;
+//     case "reset":
+//       return initialState;
+//     default:
+//       return state;
+//   }
+// };
+
+// export const Provider = ({ children }) => {
+//   const [state, dispatch] = useReducer(reducer, initialState);
+
+//   const values = {
+//     state,
+//     dispatch,
+//   };
+
+//   return <TheFatherContext.Provider value={values}>{children}</TheFatherContext.Provider>;
+// };
+
+// export default Provider;
+
 import { createContext, useReducer } from "react";
 
-const theFather = createContext();
+export const TheFatherContext = createContext(null);
 
-const initialState = 0;
+const initialState = {
+  count: 0,
+  role: "guest", // Default is 'guest'
+  user: null,
+};
 
 const reducer = (state, action) => {
-  switch (action) {
+  switch (action.type) {
+    case "SET_ROLE":
+      return { ...state, role: action.payload };
+    case "SET_USER":
+      return { ...state, user: action.payload };
     case "increment":
-      return state + 2;
-    case "decrement":
-      return state - 3;
+      return { ...state, count: state.count + 1 };
     case "reset":
-      return initialState;
+      return { ...state, count: 0 };
     default:
       return state;
   }
 };
 
-export const Provider2 = ({ children }) => {
+export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handlePlus = () => {
-    dispatch("increment");
-  };
-
-  const handleMinus = () => {
-    dispatch("decrement");
-  };
-
-  const handleReset = () => {
-    dispatch("reset");
-  };
-
-  const values = {
-    state,
-    dispatch,
-  };
-
-  return <theFather.Provider value={values}>{children}</theFather.Provider>;
+  return (
+    <TheFatherContext.Provider value={{ state, dispatch }}>
+      {children}
+    </TheFatherContext.Provider>
+  );
 };
 
-export default Provider2;
+export default Provider;
