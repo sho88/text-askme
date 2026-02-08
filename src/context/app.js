@@ -49,45 +49,14 @@
 //   );
 // };
 
-// import { createContext, useReducer } from "react";
-
-// export const TheFatherContext = createContext(null);
-
-// const initialState = 0;
-
-// const reducer = (state, action) => {
-//   switch (action) {
-//     case "increment":
-//       return state + 2;
-//     case "decrement":
-//       return state - 3;
-//     case "reset":
-//       return initialState;
-//     default:
-//       return state;
-//   }
-// };
-
-// export const Provider = ({ children }) => {
-//   const [state, dispatch] = useReducer(reducer, initialState);
-
-//   const values = {
-//     state,
-//     dispatch,
-//   };
-
-//   return <TheFatherContext.Provider value={values}>{children}</TheFatherContext.Provider>;
-// };
-
-// export default Provider;
-
 import { createContext, useReducer } from "react";
 
 export const TheFatherContext = createContext(null);
 
 const initialState = {
   count: 0,
-  role: "guest", // Default is 'guest'
+  role: "host",
+  // Will change to default "guests" when host logins are sorted with Sho
   user: null,
 };
 
@@ -97,10 +66,6 @@ const reducer = (state, action) => {
       return { ...state, role: action.payload };
     case "SET_USER":
       return { ...state, user: action.payload };
-    case "increment":
-      return { ...state, count: state.count + 1 };
-    case "reset":
-      return { ...state, count: 0 };
     default:
       return state;
   }

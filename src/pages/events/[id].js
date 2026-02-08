@@ -3,9 +3,15 @@ import Image from "next/image";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
 import SubmitQuestionsContainer from "@/components/submit-questions-container/SubmitQuestionsContainer";
+import { useRouter } from "next/router";
+
+import { useContext } from "react";
+import Provider, { TheFatherContext } from "@/context/app";
+
 import mainStyle from "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
+import GuestHeader from "@/components/header/GuestHeader";
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -25,9 +31,68 @@ export const getServerSideProps = async ({ params }) => {
     return { notFound: true };
   }
 };
+//
+//
+// DUE TO BE FLIPPED THE OTHER WAY - default will soon be "guest" when host logins and users are sorted with Sho
+// SO, logic below will be flipped. Work to be done!
+//
+//
+const HeaderComponent2 = () => (
+  <header style={{ borderBottom: "2px solid red", padding: "10px" }}>
+    <button>← Back</button> <button>☰ Menu</button>
+    <span> (Host Header)</span>
+  </header>
+);
 
-export default function EventSingleComponent({ room }) {
+const ButtonsComponent = () => {
+  const { dispatch, state } = useContext(TheFatherContext);
+
+  const isGuest = state.role === "guest";
+
+  return (
+    <div style={{ padding: "20px" }}>
+      This is proof that you don't need always need to reference state and
+      dispatch when rendering...
+      {!isGuest && <HeaderComponent2 />}
+      <h2>Current SETUP: {state.role.toUpperCase()}</h2>
+      <p>
+        Status:{" "}
+        {isGuest ? "Access restricted to Guest view." : "You have full access."}
+      </p>
+      <div style={{ margin: "20px 0" }}>
+        <button
+          onClick={() => dispatch({ type: "SET_ROLE", payload: "guest" })}
+        >
+          Switch to Guest
+        </button>
+        <br />
+        <br />
+        <button onClick={() => dispatch({ type: "SET_ROLE", payload: "host" })}>
+          Switch to Host
+        </button>
+      </div>
+      <hr />
+      <p>Counter: {state.count}</p>
+      <button onClick={() => dispatch({ type: "increment" })}>Add 1</button>
+      {/* 2. Only show Bottom Nav if User is Host */}
+      {/* {!isGuest && <DashboardBottomNav />} */}
+    </div>
+  );
+};
+
+function EventSingleComponent({ room }) {
+  const { dispatch, state } = useContext(TheFatherContext);
   const [questions, setQuestions] = useState([]);
+
+  // ADDED FROM GEMINI
+  const router = useRouter(); // Put this at the top with other hooks
+
+  useEffect(() => {
+    if (router.query.fromPin === "true") {
+      dispatch({ type: "SET_ROLE", payload: "guest" });
+    }
+  }, [router.query.fromPin, dispatch]);
+  // ADDED FROM GEMINI
 
   // FETCH: Only get questions for THIS room ID
   useEffect(() => {
@@ -78,10 +143,13 @@ export default function EventSingleComponent({ room }) {
 
   if (!room) return <p>Loading. Please wait...</p>;
 
+  const isGuest = state.role === "guest";
+
   return (
     <div>
       <div className={mainStyle["entire-dashboard-page"]}>
-        <HeaderComponent />
+        {!isGuest ? <HeaderComponent /> : <GuestHeader />}
+
         <div className="event">
           <div className="event__container">
             <div className="background-2"></div>
@@ -105,41 +173,77 @@ export default function EventSingleComponent({ room }) {
               </div>
               <div className="event__content">
                 <p>{room.description}</p>
-                <p className="emphasis">
-                  <i>Submit questions below</i>
-                </p>
+                {isGuest ? (
+                  <p className="emphasis">
+                    <i>Submit questions below</i>
+                  </p>
+                ) : (
+                  <p className="emphasis">
+                    <i>Answer Audience's questions below</i>
+                  </p>
+                )}
               </div>
             </div>
+
+            <br />
+
+            {/* <button
+              onClick={() => dispatch({ type: "SET_ROLE", payload: "guest" })}
+              style={{ border: "2px", borderStyle: "solid" }}
+            >
+              Guest Version
+            </button> */}
+            {/* 
+            <br />
+
+            <button
+              onClick={() => dispatch({ type: "SET_ROLE", payload: "host" })}
+              style={{ border: "2px", borderStyle: "solid" }}
+            >
+              Switch to Host
+            </button> */}
 
             <div className="event__messages">
               <h2 className="event__header-2">
                 Questions ({questions.length})
               </h2>
+
               {questions.map((msgObj) => (
                 <div key={msgObj._id} className="event__messages-2">
                   <p>{msgObj.question}</p>
                   <button onClick={() => handleDelete(msgObj._id)}>
-                    <Image
-                      className="questions-cross"
-                      src="/images/cross-cancel.png"
-                      alt="Delete"
-                      height="10"
-                      width="10"
-                    />
+                    {!isGuest && (
+                      <Image
+                        className="questions-cross"
+                        src="/images/cross-cancel.png"
+                        alt="Delete"
+                        height="10"
+                        width="10"
+                      />
+                    )}
                   </button>
                 </div>
               ))}
             </div>
-
             <SubmitQuestionsContainer>
               <form onSubmit={handleSubmit}>
                 <div className="submit-questions-container">
-                  <textarea
-                    name="question"
-                    className="submit-questions-textarea"
-                    placeholder="Ask a question here..."
-                    required
-                  ></textarea>
+                  {isGuest ? (
+                    <textarea
+                      name="question"
+                      className="submit-questions-textarea"
+                      placeholder="Ask a question here..."
+                      required
+                    ></textarea>
+                  ) : (
+                    <textarea
+                      name="question"
+                      className="submit-questions-textarea"
+                      placeholder="Answer audience's questions here..."
+                      required
+                    ></textarea>
+                  )}
+
                   <button className="submit-questions-button" type="submit">
                     <Image
                       src="/images/fn-send.png"
@@ -154,8 +258,19 @@ export default function EventSingleComponent({ room }) {
           </div>
           <div className="random-box"></div>
         </div>
-        <DashboardBottomNav />
+        {!isGuest && <DashboardBottomNav />}
       </div>
     </div>
   );
 }
+
+export const exportThis = ({ room }) => {
+  return (
+    <Provider>
+      <EventSingleComponent room={room} />
+      {/* <ButtonsComponent /> */}
+    </Provider>
+  );
+};
+
+export default exportThis;

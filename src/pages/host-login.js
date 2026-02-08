@@ -13,11 +13,6 @@ export default function Index() {
     return router.back();
   };
 
-  // events go here...
-  function handleGuestLoginClick() {
-    return router.push("/event-pin");
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -52,7 +47,7 @@ export default function Index() {
               src="/images/back.png"
               width={25}
               height={23}
-              alt="Picture of the author"
+              alt="Back button"
             ></Image>
           </button>
         </div>

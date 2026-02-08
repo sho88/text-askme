@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; // Add this
+import { useState, useEffect } from "react";
 import mainStyle from "@/styles/main.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -250,9 +250,12 @@ const Intro = () => {
                 rel="noreferrer"
                 style={{ color: "white" }}
               >
-                Isaac Ola.
-              </a>
-              {"  "}2026 ⓒ TextQ&A
+                Isaac Ola
+              </a>{" "}
+              & Sho-Carter.
+              {"  "}
+              <br />
+              2026 ⓒ TextQ&A
             </small>
 
             {/* <Image

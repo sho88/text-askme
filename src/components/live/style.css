@@ -72,7 +72,13 @@ p {
     justify-content: space-between;
     align-items: center;
 }
-/* 
+
+.head-primary-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .head-button {
     width: 50px;
@@ -142,6 +148,36 @@ p {
     border-radius: 50px;
     margin-right: 20px;
 }
+
+
+.head-primary-info h1{
+    color: white;
+    margin: 0;
+    font-family: Oswald, sans-serif;
+    font-size: 1.8rem;
+    margin: 4px 0 4px 0;
+}
+.head-primary-info h2{
+    color: white;
+    margin: 0;
+    font-family: Oswald, sans-serif;
+    font-size: 1.5rem;
+    margin: 4px 0 4px 0;
+}
+
+.head-primary-info h3{
+    color: white;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 9pt;
+}
+
+.head-primary-info h3{
+    margin: 0;
+}
+
+
 
 .profile-picture-full-size {
     position: fixed;
@@ -687,7 +723,7 @@ position: relative;
 
 .form-page {
     /* src: url(../../../public/fonts/Oswald-SemiBold.ttf); */
-    background-image: url(../../../public/images/backg-image-4.webp);
+    background-image: url("/images/backg-image-8.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     /* background: white; */
@@ -724,14 +760,13 @@ align-items: center;
     align-items: center;
     background-color: white;
     border-radius: 100px;
-    padding-top: 6px;
     padding-left: 30px;
-    padding-bottom: 6px;
     box-shadow: 0px 0px 50px #ececec;
     min-height: 50px;
     margin-top: 20px;
     border: none;
     outline: none;
+    font-size: 16px;
 }
 
 .form-input-style-textarea {

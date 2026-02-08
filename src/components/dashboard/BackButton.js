@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-export const WriteNewMessage = () => {
+export const BackButton = () => {
   const router = useRouter();
   const handleClick = () => {
     return router.back();

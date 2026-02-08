@@ -930,9 +930,7 @@ position: relative;
   align-items: center;
   background-color: white;
   border-radius: 100px;
-  padding-top: 6px;
   padding-left: 30px;
-  padding-bottom: 6px;
   box-shadow: 0px 0px 50px #ececec;
   min-height: 50px;
   margin-top: 20px;
@@ -999,7 +997,7 @@ position: relative;
   linear-gradient(200deg, white, #124259, white);
   background-origin: border-box;
   background-clip: padding-box, border-box; 
-  border-radius: 20px;
+  border-radius: 50px;
   border: 1px solid transparent;
   font-size: 11pt;
 }
@@ -1339,6 +1337,7 @@ position: relative;
   justify-content: center;
   align-items: center;
   margin-top: 80px;
+  text-align: center;
 }
 
 .intro-footer-body-text {
