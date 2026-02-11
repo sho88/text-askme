@@ -31,7 +31,7 @@ const Intro = () => {
   return (
     <div>
       <ReduceBrowserSize />
-      <div>
+      <div className="intro-body-container">
         <div style={{ position: "relative", width: "100%" }}>
           <div className="intro-header-container">
             <Image
@@ -83,89 +83,28 @@ const Intro = () => {
         </div>
       </div>
       <div className="qa-article-1">
-        <div className="qa-article-2">
-          <div>
-            <div className="qa-article-3">
-              Travel insurance for a short trip?
-              {/* <Image
-                className="delete-question"
-                src="/images/cross-cancel.png"
-                alt="cross"
-                height="10"
-                width="10"
-              /> */}
-            </div>
-          </div>
-
-          <div className="qa-article-3">
-            What are the most important cultural etiquette rules to research
-            before visiting a Middle Eastern country?
-          </div>
-          <div className="qa-article-reactions">👍❤️2</div>
-
-          <div className="qa-article-3">
-            In light of recent global health changes, what documentation—such as
-            digital health passes or specific proof of recovery—is currently
-            necessary for entry into most major European Union countries, and
-            how far in advance should these be verified?
-          </div>
-          <div className="qa-article-reactions">👍❤️2</div>
-
-          <div className="qa-article-3">Best travel apps?</div>
-          <div className="qa-article-reactions">🙏❗5</div>
-
-          <div className="qa-article-3">
-            Can I use my mobile data without extra fees?
-          </div>
-          <div className="qa-article-reactions">🙏❗5</div>
-
-          <h2 className="qa-heading-2">
-            Tuned into a live speech, seminar, or podcast? Submit your questions
-            to get them instantly answered by the host.
-          </h2>
-
-          <div className="qa-article-3">
-            Best vitamins for marathon recovery?
-          </div>
-          <div className="qa-article-reactions">👏✅2</div>
-          <div className="qa-article-3">Best leg stretches?</div>
-          <div className="qa-article-3">
-            How can I balance a high-volume marathon training plan with a
-            full-time desk job to ensure I am getting enough sleep and active
-            recovery to prevent the onset of chronic overtraining syndrome?
-          </div>
-          <div className="qa-article-reactions">👍❤️7</div>
-          <div className="qa-article-3">
-            Carbon plate shoes worth the high cost?
-          </div>
-          <div className="qa-article-3">
-            What role does iron deficiency play in marathon fatigue, and should
-            runners get regular blood tests to monitor their ferritin levels
-            during training?
-          </div>
-          <div className="qa-article-reactions">✍️🥰4</div>
-          <h2 className="qa-heading-2">
-            Your text questions are instantly visible to the host, enabling for
-            a qucik response via live speech.
-          </h2>
-        </div>
-
         <div className="intro-additional-section">
           <div className="intro-additional-section-body">
             <h2>
-              You get the benefits of asking your speaker live questions, in
-              which they&apos;ll respond to you in real-time!
-              <br />
-              <br />
-              Here&apos;s what you&apos;ll see on yur device...
+              Experience seamless interaction with live, two-way communication.
+              Submit your questions instantly, from the comfort of your own
+              home, and watch as speakers respond to you in real-time!
             </h2>
+
+            {/* <h2>
+              Step into the conversation with
+              a seamless, live interface designed for your device. Submit
+              questions instantly and engage with the event as it happens—here
+              is a preview of exactly how your dashboard will look once you're
+              inside.
+            </h2> */}
           </div>
         </div>
         <div className="intro-image-section">
           <div className="intro-image-section-image-overlay"></div>
           <Image
             className="intro-image-section-image"
-            src="/images/tqa-ss-8.webp"
+            src="/images/tqa-ss-9.webp"
             alt="pic"
             width={2000}
             height={2000}
@@ -252,7 +191,7 @@ const Intro = () => {
               >
                 Isaac Ola
               </a>{" "}
-              & Sho-Carter.
+              & Sho-Carter Daniel.
               {"  "}
               <br />
               2026 ⓒ TextQ&A
@@ -273,3 +212,65 @@ const Intro = () => {
 };
 
 export default Intro;
+
+{
+  /* <div className="qa-article-2">
+<div>
+  <div className="qa-article-3">
+    Travel insurance for a short trip?
+  </div>
+</div>
+
+<div className="qa-article-3">
+  What are the most important cultural etiquette rules to research
+  before visiting a Middle Eastern country?
+</div>
+<div className="qa-article-reactions">👍❤️2</div>
+
+<div className="qa-article-3">
+  In light of recent global health changes, what documentation—such as
+  digital health passes or specific proof of recovery—is currently
+  necessary for entry into most major European Union countries, and
+  how far in advance should these be verified?
+</div>
+<div className="qa-article-reactions">👍❤️2</div>
+
+<div className="qa-article-3">Best travel apps?</div>
+<div className="qa-article-reactions">🙏❗5</div>
+
+<div className="qa-article-3">
+  Can I use my mobile data without extra fees?
+</div>
+<div className="qa-article-reactions">🙏❗5</div>
+
+<h2 className="qa-heading-2">
+  Tuned into a live speech, seminar, or podcast? Submit your questions
+  to get them instantly answered by the host.
+</h2>
+
+<div className="qa-article-3">
+  Best vitamins for marathon recovery?
+</div>
+<div className="qa-article-reactions">👏✅2</div>
+<div className="qa-article-3">Best leg stretches?</div>
+<div className="qa-article-3">
+  How can I balance a high-volume marathon training plan with a
+  full-time desk job to ensure I am getting enough sleep and active
+  recovery to prevent the onset of chronic overtraining syndrome?
+</div>
+<div className="qa-article-reactions">👍❤️7</div>
+<div className="qa-article-3">
+  Carbon plate shoes worth the high cost?
+</div>
+<div className="qa-article-3">
+  What role does iron deficiency play in marathon fatigue, and should
+  runners get regular blood tests to monitor their ferritin levels
+  during training?
+</div>
+<div className="qa-article-reactions">✍️🥰4</div>
+<h2 className="qa-heading-2">
+  Your text questions are instantly visible to the host, enabling for
+  a qucik response via live speech.
+</h2>
+</div> */
+}

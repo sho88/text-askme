@@ -44,10 +44,6 @@ export const MenuOpen = ({ onClose }) => {
           {/* <MenuOptionIcon imageUrl={"/images/fn-home-5.png"} /> */}
         </div>
         <div className="menu-open-option">
-          <MenuOptionTitle label="New Event" />
-          {/* <MenuOptionIcon imageUrl={"/images/fn-plus-5.png"} /> */}
-        </div>
-        <div className="menu-open-option">
           <MenuOptionTitle
             label="Switch to Audience User"
             menLink={"/event-pin"}
@@ -55,7 +51,7 @@ export const MenuOpen = ({ onClose }) => {
           {/* <MenuOptionIcon imageUrl={"/images/fn-user-5.png"} /> */}
         </div>
         <div className="menu-open-option">
-          <MenuOptionTitle label="View Topics" />
+          <MenuOptionTitle label="View Topics" menLink={"/dashboard"} />
         </div>
         <div className="menu-open-option">
           <MenuOptionTitle label="Sign Out →" menLink={"/"} />
