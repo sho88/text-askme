@@ -52,7 +52,7 @@ const ButtonsComponent = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      This is proof that you don't need always need to reference state and
+      This is proof that you do not need always need to reference state and
       dispatch when rendering...
       {!isGuest && <HeaderComponent2 />}
       <h2>Current SETUP: {state.role.toUpperCase()}</h2>
