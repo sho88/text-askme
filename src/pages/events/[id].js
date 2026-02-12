@@ -12,6 +12,7 @@ import mainStyle from "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
 import GuestHeader from "@/components/header/GuestHeader";
+import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -114,10 +115,13 @@ function EventSingleComponent({ room }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Changing 'instant' to 'smooth' creates the glide effect
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     const formData = new FormData(e.target);
     const formValues = Object.fromEntries(formData.entries());
 
-    // ATTACH ID: Add the current room's ID to the payload
     const payload = {
       ...formValues,
       eventId: room._id,
@@ -145,6 +149,17 @@ function EventSingleComponent({ room }) {
 
   const isGuest = state.role === "guest";
 
+  const handleToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div>
       <div className={mainStyle["entire-dashboard-page"]}>
@@ -153,6 +168,24 @@ function EventSingleComponent({ room }) {
         <div className="event">
           <div className="event__container">
             <div className="background-2"></div>
+            {isGuest ? (
+              <div
+                onClick={handleToBottom}
+                className="pop-up-indicator"
+                id="hideMe"
+              >
+                Scroll down to Ask Questions
+              </div>
+            ) : (
+              <div
+                onClick={handleToBottom}
+                className="pop-up-indicator"
+                id="hideMe"
+              >
+                Scroll down to Answer Questions
+              </div>
+            )}
+
             <div className="layer-1">
               <div>
                 <div className="layer-1-filter"></div>
@@ -173,15 +206,6 @@ function EventSingleComponent({ room }) {
               </div>
               <div className="event__content">
                 <p>{room.description}</p>
-                {isGuest ? (
-                  <p className="emphasis">
-                    <i>Submit questions below</i>
-                  </p>
-                ) : (
-                  <p className="emphasis">
-                    <i>Answer Audience's questions below</i>
-                  </p>
-                )}
               </div>
             </div>
 
@@ -225,6 +249,19 @@ function EventSingleComponent({ room }) {
                 </div>
               ))}
             </div>
+            <ScrollToTopButton>
+              <div className="scroll-to-top">
+                <button onClick={handleToTop}>
+                  <Image
+                    src="/images/up-arrow-3.png"
+                    alt="Up arrow"
+                    height="33"
+                    width="33"
+                  />
+                </button>
+              </div>
+            </ScrollToTopButton>
+
             <SubmitQuestionsContainer>
               <form onSubmit={handleSubmit}>
                 <div className="submit-questions-container">

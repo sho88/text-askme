@@ -47,31 +47,42 @@ export default function NameInput({ initialData }) {
         <h1 className="text-white text-2xl font-oswald font-bold mb-5">
           Edit Event
         </h1>
-
         <label>
-          Event Name
+          <div className="event__header-2">New Topic Name</div>
+
           <input
             className="edit-page-input"
-            placeholder="New event name...."
+            placeholder="Type in new topic name..."
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>
-
         <label>
-          Event Description
+          <div className="event__header-2">New Description</div>
           <textarea
             className="edit-page-input"
             style={{ minHeight: "150px" }}
-            placeholder="New description name..."
+            placeholder="Type in new description..."
             required
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+          <div>
+            <small>
+              &nbsp; &nbsp; &nbsp; Please note: Images cannot be changed at this
+              time
+            </small>
+            <br />
+          </div>
         </label>
-        <button className="form-submit-button" disabled={loading}>
-          {loading ? "Saving..." : "Update Changes"}
+
+        <button
+          className="intro-call-to-action-button"
+          disabled={loading}
+          style={{ width: "100%" }}
+        >
+          <b>{loading ? "Saving..." : "Update Changes"}</b>
         </button>
       </form>
     </div>
