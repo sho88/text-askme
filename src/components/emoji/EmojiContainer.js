@@ -1,6 +1,3 @@
-import "@/styles/event.css";
-import "@/styles/globals.css";
-import mainStyle from "@/styles/main.css";
 import Image from "next/image";
 
 export const EmojiContainer = () => {

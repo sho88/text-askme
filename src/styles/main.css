@@ -1030,7 +1030,7 @@ position: relative;
   transform: translateY(-400%);
   align-items: center;
   height: 50px;
-  bottom: 10%;
+  bottom: 12%;
   z-index: 2;
 }
 
@@ -1746,7 +1746,7 @@ position: relative;
 }
 
 .emoji-modal-container div {
-  font-size: 29pt;
+  font-size: 26pt;
   display: flex;
   align-items: center;
   justify-content: center;
