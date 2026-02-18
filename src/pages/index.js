@@ -71,7 +71,7 @@ const Intro = () => {
           </div>
           <div className="header-overlay">
             <h1 className="qa-opening-header">
-              BRIDGE <br />
+              BRIDGING <br />
               THE <br />
               <span style={{ color: "#124259" }}>GAP</span>
             </h1>

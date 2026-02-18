@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.13.0",
     "@tailwindcss/postcss": "^4.1.4",
     "@tailwindcss/vite": "^4.0.17",
+    "@uidotdev/usehooks": "^2.4.1",
     "cloudinary": "^2.9.0",
     "collect.js": "^4.36.1",
     "dayjs": "^1.11.12",

@@ -1010,12 +1010,12 @@ position: relative;
   position: fixed;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   left: 50%;
   transform: translateX(-50%);
-  align-items: center;
+  /* align-items: center; */
   height: 280px;
-  bottom: 10%;
+  bottom: 1%;
   z-index: 1;
 }
 
@@ -1071,6 +1071,16 @@ position: relative;
   padding: 10px 50px 10px 15px;
   height: 110px;
   outline: none;
+}
+
+.submit-name-textarea {
+  background-color: white;
+  border-radius: 20px;
+  padding: 12px 50px 10px 15px;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  margin-top: 15px;
 }
 
 .emphasis {
@@ -1198,13 +1208,13 @@ position: relative;
 }
 
 .qa-opening-header {
-  margin-top: 459px;
+  margin-top: 456px;
   padding: 0;
   color: rgb(255, 255, 255);
   font-family: Oswald;
-  font-size: 80px;
+  font-size: 77px;
   line-height: 75px;
-  margin-left: -45px;
+  /* margin-left: -25px; */
   z-index: 1;
   /* filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.1)); */
 }
@@ -1503,6 +1513,7 @@ position: relative;
   min-width: 12px;
   min-height: 12px;
   margin-left: 7px;
+  margin-top: 6px;
   align-self: center;
 }
 
@@ -1678,4 +1689,107 @@ position: relative;
   width: 90%;
   min-height: 100vh;
   align-self: center;
+}
+
+.four {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.emoji-on-question-bar {
+  min-width: 15px;
+  max-width: 15px;
+  margin-left: 10px;
+  opacity: 15%;
+  margin-top: 5px;
+}
+
+.time-stampped {
+  font-size: 12px;
+  color: #bebebe;
+  align-self: flex-end;
+  margin-left: 5px;
+}
+
+.emoji-modal {
+  display: flex;
+  padding: 10px;
+  width: 92%;
+  height: auto;
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -110%);
+
+  z-index: 3;
+  background-color: white;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.16));
+  margin-top: 200px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.emoji-modal-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* gap: 10px; */
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+  margin-top: 20px;
+  /* padding: 20px; */
+}
+
+.emoji-modal-container div {
+  font-size: 29pt;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-heart {
+  grid-column: span 2;
+  grid-row: span 2;
+  font-size: 98px !important;
+  margin-top: -25px;
+  margin-bottom: -25px;
+}
+
+.big-shock {
+  grid-column: span 2;
+  grid-row: span 2;
+  font-size: 95px !important;
+  margin-bottom: -15px;
+  margin-right: -10px;
+}
+
+.random1ne {
+  background-color: coral;
+  color: white;
+  padding: 20px;
+  z-index: 3;
+}
+
+.emoji-modal-background {
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 2;
+}
+
+
+.emoji-modal-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 4%;
 }

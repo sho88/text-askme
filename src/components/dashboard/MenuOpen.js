@@ -48,10 +48,15 @@ export const MenuOpen = ({ onClose }) => {
             label="Switch to Audience User"
             menLink={"/event-pin"}
           />
-          {/* <MenuOptionIcon imageUrl={"/images/fn-user-5.png"} /> */}
         </div>
         <div className="menu-open-option">
           <MenuOptionTitle label="View Topics" menLink={"/dashboard"} />
+        </div>
+        <div className="menu-open-option">
+          <MenuOptionTitle label="Clear All Topics" menLink={"/"} />
+        </div>
+        <div className="menu-open-option">
+          <MenuOptionTitle label="Help" menLink={"/"} />
         </div>
         <div className="menu-open-option">
           <MenuOptionTitle label="Sign Out →" menLink={"/"} />

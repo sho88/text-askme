@@ -6,6 +6,19 @@ import { useRooms } from "@/hooks/rooms";
 import mainStyle from "@/styles/main.css";
 import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
+import { Auth0Provider } from "@auth0/auth0-react";
+
+{
+  /* <Auth0Provider
+    domain="YOUR_AUTH0_DOMAIN"
+    clientId="YOUR_AUTH0_CLIENT_ID"
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  >
+    <App />
+  </Auth0Provider> */
+}
 
 export default function DashboardPageComponent() {
   // hooks go here...

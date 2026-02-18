@@ -13,6 +13,7 @@ import "@/styles/event.css";
 import "@/styles/globals.css";
 import GuestHeader from "@/components/header/GuestHeader";
 import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
+import EmojiContainer from "@/components/emoji/EmojiContainer";
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -38,61 +39,34 @@ export const getServerSideProps = async ({ params }) => {
 // SO, logic below will be flipped. Work to be done!
 //
 //
-const HeaderComponent2 = () => (
-  <header style={{ borderBottom: "2px solid red", padding: "10px" }}>
-    <button>← Back</button> <button>☰ Menu</button>
-    <span> (Host Header)</span>
-  </header>
-);
-
-const ButtonsComponent = () => {
-  const { dispatch, state } = useContext(TheFatherContext);
-
-  const isGuest = state.role === "guest";
-
-  return (
-    <div style={{ padding: "20px" }}>
-      This is proof that you do not need always need to reference state and
-      dispatch when rendering...
-      {!isGuest && <HeaderComponent2 />}
-      <h2>Current SETUP: {state.role.toUpperCase()}</h2>
-      <p>
-        Status:{" "}
-        {isGuest ? "Access restricted to Guest view." : "You have full access."}
-      </p>
-      <div style={{ margin: "20px 0" }}>
-        <button
-          onClick={() => dispatch({ type: "SET_ROLE", payload: "guest" })}
-        >
-          Switch to Guest
-        </button>
-        <br />
-        <br />
-        <button onClick={() => dispatch({ type: "SET_ROLE", payload: "host" })}>
-          Switch to Host
-        </button>
-      </div>
-      <hr />
-      <p>Counter: {state.count}</p>
-      <button onClick={() => dispatch({ type: "increment" })}>Add 1</button>
-      {/* 2. Only show Bottom Nav if User is Host */}
-      {/* {!isGuest && <DashboardBottomNav />} */}
-    </div>
-  );
-};
 
 function EventSingleComponent({ room }) {
   const { dispatch, state } = useContext(TheFatherContext);
   const [questions, setQuestions] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
-  // ADDED FROM GEMINI
-  const router = useRouter(); // Put this at the top with other hooks
+  // This tells the browser: "If the modal is open, hide the scrollbar. If not, show it."
+  useEffect(() => {
+    document.body.style.overflow = showModal ? "hidden" : "unset";
+  }, [showModal]);
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  const handleAddClick = () => {
+    setShowModal(true);
+  };
+
+  const router = useRouter();
 
   useEffect(() => {
     if (router.query.fromPin === "true") {
       dispatch({ type: "SET_ROLE", payload: "guest" });
     }
   }, [router.query.fromPin, dispatch]);
+
+  // ... (rest of your component remains exactly the same)
   // ADDED FROM GEMINI
 
   // FETCH: Only get questions for THIS room ID
@@ -165,6 +139,8 @@ function EventSingleComponent({ room }) {
       <div className={mainStyle["entire-dashboard-page"]}>
         {!isGuest ? <HeaderComponent /> : <GuestHeader />}
 
+        {showModal && <EmojiContainer onModalClose={handleModalClose} />}
+
         <div className="event">
           <div className="event__container">
             <div className="background-2"></div>
@@ -211,32 +187,23 @@ function EventSingleComponent({ room }) {
 
             <br />
 
-            {/* <button
-              onClick={() => dispatch({ type: "SET_ROLE", payload: "guest" })}
-              style={{ border: "2px", borderStyle: "solid" }}
-            >
-              Guest Version
-            </button> */}
-            {/* 
-            <br />
-
-            <button
-              onClick={() => dispatch({ type: "SET_ROLE", payload: "host" })}
-              style={{ border: "2px", borderStyle: "solid" }}
-            >
-              Switch to Host
-            </button> */}
-
             <div className="event__messages">
               <h2 className="event__header-2">
                 Questions ({questions.length})
               </h2>
+              {/* <button className="random1ne" onClick={handleModalClose}>
+                HIDE
+              </button> */}
 
               {questions.map((msgObj) => (
                 <div key={msgObj._id} className="event__messages-2">
-                  <p>{msgObj.question}</p>
-                  <button onClick={() => handleDelete(msgObj._id)}>
-                    {!isGuest && (
+                  <div>
+                    <p>{msgObj.question}</p>
+                    <span className="time-stampped">18:04</span>
+                  </div>
+
+                  {!isGuest ? (
+                    <button onClick={() => handleDelete(msgObj._id)}>
                       <Image
                         className="questions-cross"
                         src="/images/cross-cancel.png"
@@ -244,8 +211,20 @@ function EventSingleComponent({ room }) {
                         height="10"
                         width="10"
                       />
-                    )}
-                  </button>
+                    </button>
+                  ) : (
+                    <button>
+                      {/* TODO - create handleEmoji for functionality */}
+                      <Image
+                        onClick={handleAddClick}
+                        className="emoji-on-question-bar"
+                        src="/images/select-emoji-5.png"
+                        alt="Up arrow"
+                        height="15"
+                        width="15"
+                      />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
@@ -266,29 +245,46 @@ function EventSingleComponent({ room }) {
               <form onSubmit={handleSubmit}>
                 <div className="submit-questions-container">
                   {isGuest ? (
-                    <textarea
-                      name="question"
-                      className="submit-questions-textarea"
-                      placeholder="Ask a question here..."
-                      required
-                    ></textarea>
-                  ) : (
-                    <textarea
-                      name="question"
-                      className="submit-questions-textarea"
-                      placeholder="Answer audience's questions here..."
-                      required
-                    ></textarea>
-                  )}
+                    <div className="four">
+                      <textarea
+                        name="question"
+                        className="submit-questions-textarea"
+                        placeholder="Ask a question here..."
+                        required
+                      ></textarea>
+                      <button className="submit-questions-button" type="submit">
+                        <Image
+                          src="/images/fn-send.png"
+                          alt="Paper plane"
+                          height="50"
+                          width="50"
+                        />
+                      </button>
 
-                  <button className="submit-questions-button" type="submit">
-                    <Image
-                      src="/images/fn-send.png"
-                      alt="Paper plane"
-                      height="50"
-                      width="50"
-                    />
-                  </button>
+                      <textarea
+                        name="name"
+                        className="submit-name-textarea"
+                        placeholder="Submit name (optional)"
+                      ></textarea>
+                    </div>
+                  ) : (
+                    <div className="four">
+                      <textarea
+                        name="question"
+                        className="submit-questions-textarea"
+                        placeholder="Answer audience's questions here..."
+                        required
+                      ></textarea>
+                      <button className="submit-questions-button" type="submit">
+                        <Image
+                          src="/images/fn-send.png"
+                          alt="Paper plane"
+                          height="50"
+                          width="50"
+                        />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </form>
             </SubmitQuestionsContainer>
@@ -305,7 +301,6 @@ export const exportThis = ({ room }) => {
   return (
     <Provider>
       <EventSingleComponent room={room} />
-      {/* <ButtonsComponent /> */}
     </Provider>
   );
 };

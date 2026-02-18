@@ -60,7 +60,7 @@ align-items: flex-start;
   display: flex;
   flex-direction: row;
   align-self: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: auto;
   color: #393939;
   border-radius: 20px;
