@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
@@ -15,6 +15,7 @@ import GuestHeader from "@/components/header/GuestHeader";
 import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
 import EmojiContainer from "@/components/emoji/EmojiContainer";
 import { formatDate } from "@/utils/dates";
+import useRoom from "@/hooks/room";
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -34,6 +35,7 @@ export const getServerSideProps = async ({ params }) => {
     return { notFound: true };
   }
 };
+
 //
 //
 // DUE TO BE FLIPPED THE OTHER WAY - default will soon be "guest" when host logins and users are sorted with Sho
@@ -41,25 +43,19 @@ export const getServerSideProps = async ({ params }) => {
 //
 //
 
-function EventSingleComponent({ room }) {
+export function EventSingleComponent({ room }) {  
+  // initialise the hooks here...
+  const { questions, setQuestions, createQuestionApi, deleteQuestionApi } = useRoom(room);
+  const router = useRouter();
   const { dispatch, state } = useContext(TheFatherContext);
-  const [questions, setQuestions] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const isGuest = useMemo(() => state.role === "guest", [state.role]);
 
+  // useEffects etc go here...
   // This tells the browser: "If the modal is open, hide the scrollbar. If not, show it."
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "unset";
   }, [showModal]);
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
-
-  const handleAddClick = () => {
-    setShowModal(true);
-  };
-
-  const router = useRouter();
 
   useEffect(() => {
     if (router.query.fromPin === "true") {
@@ -67,26 +63,23 @@ function EventSingleComponent({ room }) {
     }
   }, [router.query.fromPin, dispatch]);
 
-  // ... (rest of your component remains exactly the same)
-  // ADDED FROM GEMINI
-
-  // FETCH: Only get questions for THIS room ID
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      if (!room?._id) return;
-      const res = await fetch(`/api/questions?eventId=${room._id}`);
-      const result = await res.json();
-      if (result.success) setQuestions(result.data);
-    };
-    fetchQuestions();
-  }, [room?._id]);
+  // events handlers go here...
+  const handleAddClick = () => {
+    setShowModal(true);
+  };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`/api/questions?id=${id}`, { method: "DELETE" });
-    if (res.ok) {
-      setQuestions(questions.filter((q) => q._id !== id));
+    const deleteQuestion = await deleteQuestionApi(id);
+
+    if (!deleteQuestion.success) {
+      console.error("Failed to delete question:", deleteQuestion.message);
+      return;
     }
   };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,33 +90,18 @@ function EventSingleComponent({ room }) {
     const formData = new FormData(e.target);
     const formValues = Object.fromEntries(formData.entries());
 
-    const payload = {
+    const create = await createQuestionApi({
       ...formValues,
       eventId: room._id,
       pin: Number(room.pin),
-    };
+    });
 
-    try {
-      const res = await fetch("/api/questions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (res.ok) {
-        const result = await res.json();
-        setQuestions((prev) => [result.data, ...prev]);
-        e.target.reset();
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    if (!create.success) {
+      console.error("Failed to create question:", create.message);
+      return;
     }
-  };
 
-  const isGuest = state.role === "guest";
-
-  const handleToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    e.target.reset();
   };
 
   const handleToBottom = () => {
@@ -133,6 +111,11 @@ function EventSingleComponent({ room }) {
     });
   };
 
+  const handleToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // rendering
   return (
     <div>
       {!room ? <p>Loading. Please wait...</p> : null}
@@ -200,7 +183,7 @@ function EventSingleComponent({ room }) {
                 <div key={msgObj._id} className="event__messages-2">
                   <div>
                     <p>{msgObj.question}</p>
-                    <span className="time-stampped">{formatDate(msgObj) || "18:04"}</span>
+                    <span className="time-stampped">{formatDate(msgObj) || ""}</span>
                   </div>
 
                   {!isGuest ? (
@@ -292,6 +275,7 @@ function EventSingleComponent({ room }) {
           </div>
           <div className="random-box"></div>
         </div>
+
         {!isGuest && <DashboardBottomNav />}
       </div>
     </div>

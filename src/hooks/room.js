@@ -1,3 +1,4 @@
+import { asyncify } from "@/utils";
 import { useEffect, useState } from "react";
 
 /**
@@ -5,43 +6,96 @@ import { useEffect, useState } from "react";
  * @param {string} roomID
  * @returns {object} { messages, room }
  */
-const useRoom = (roomID) => {
-  const [messages, setMessages] = useState([]);
-  const [room, setRoom] = useState(null);
+const useRoom = (room) => {
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
-    // Only run if we actually have a roomID
-    if (!roomID) return;
+    const fetchQuestions = async () => {
+      if (!room?._id) return;
 
-    const getRoomByID = async () => {
-      try {
-        // 1. Fetch from your API route instead of calling Firestore directly
-        const response = await fetch(
-          `/api/database?collection=rooms&id=${roomID}`
-        );
+      const [error, response] = await asyncify(fetch(`/api/questions?eventId=${room._id}`));
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch room data");
-        }
-
-        const data = await response.json();
-
-        // 2. Update state with the returned data
-        setRoom(data);
-
-        // Note: If your API also returns messages, set them here
-        if (data.messages) {
-          setMessages(data.messages);
-        }
-      } catch (error) {
-        console.error("Error fetching room:", error);
+      if (error) {
+        console.error("Error fetching questions:", error);
+        return;
       }
+
+      const result = await response.json();
+
+      if (!result.success) return;
+      
+      setQuestions(result.data);
     };
 
-    getRoomByID();
-  }, [roomID]); // Removed 'room' from dependency to prevent infinite loops
+    fetchQuestions();
+  }, [room?._id]);
 
-  return { messages, room };
+  async function createQuestionApi(newQuestion) {
+    const status = { success: false, message: "" };
+
+    const [error, response] = await asyncify(fetch("/api/questions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newQuestion),
+    }));
+
+    if (error) {
+      console.error("Error creating question:", error);
+      
+      return {
+        ...status,
+        message: "Failed to create question",
+        error,
+      };
+    }
+
+    const result = await response.json();
+    
+    setQuestions((prev) => [result.data, ...prev]);
+
+    return {
+      ...status,
+      success: true,
+      message: "Question created successfully"
+    };
+  }
+
+  async function deleteQuestionApi(id) {
+    const status = { success: false, message: "" };
+
+    const [error, response] = await asyncify(fetch(`/api/questions?id=${id}`, { method: "DELETE" }));
+
+    if (error) {
+      return {
+        ...status,
+        message: "Failed to delete question",
+        error,
+      };
+    }
+
+    if (!response.ok) {
+      return {
+        ...status,
+        message: "Failed to delete question",
+      };
+    }
+
+    setQuestions(questions.filter((q) => q._id !== id));
+    
+    return {
+      ...status,
+      success: true,
+    };
+  }
+
+  return {
+    questions,
+    setQuestions,
+    room,
+
+    createQuestionApi,
+    deleteQuestionApi,
+  };
 };
 
 export default useRoom;
