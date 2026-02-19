@@ -85,7 +85,7 @@ align-items: flex-start;
   justify-content: space-between;
   width: 92%;
   align-self: center;
-  text-shadow: 0 0px 18px #20202032;
+  /* text-shadow: 0 0px 18px #20202032; */
 }
 
 .layer-1-filter {

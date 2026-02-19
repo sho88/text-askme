@@ -13,5 +13,5 @@ export function formatDate(dateObject = undefined) {
 
   const date = parseISO(dateObject.createdAt);
 
-  return format(date, "d MMMM yyyy // HH:mm");
+  return format(date, "d MMMM yyyy @ HH:mm");
 }

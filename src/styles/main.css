@@ -1031,7 +1031,7 @@ position: relative;
   align-items: center;
   height: 50px;
   bottom: 12%;
-  z-index: 2;
+  z-index: 1;
 }
 
 .submit-questions {
@@ -1724,7 +1724,7 @@ position: relative;
   /* bring your own prefixes */
   transform: translate(-50%, -110%);
 
-  z-index: 3;
+  z-index: 2;
   background-color: white;
   border-radius: 20px;
   filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.16));
