@@ -200,7 +200,10 @@ function EventSingleComponent({ room }) {
                 <div key={msgObj._id} className="event__messages-2">
                   <div>
                     <p>{msgObj.question}</p>
-                    <span className="time-stampped">{formatDate(msgObj) || "18:04"}</span>
+                    <span className="time-stampped">
+                      {formatDate(msgObj) || "18:04"}
+                    </span>
+                    {/* <span className="time-stampped">18:04</span> */}
                   </div>
 
                   {!isGuest ? (
