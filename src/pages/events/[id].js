@@ -14,6 +14,7 @@ import "@/styles/globals.css";
 import GuestHeader from "@/components/header/GuestHeader";
 import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
 import EmojiContainer from "@/components/emoji/EmojiContainer";
+import { formatDate } from "@/utils/dates";
 
 export const getServerSideProps = async ({ params }) => {
   try {
@@ -119,8 +120,6 @@ function EventSingleComponent({ room }) {
     }
   };
 
-  if (!room) return <p>Loading. Please wait...</p>;
-
   const isGuest = state.role === "guest";
 
   const handleToTop = () => {
@@ -136,6 +135,8 @@ function EventSingleComponent({ room }) {
 
   return (
     <div>
+      {!room ? <p>Loading. Please wait...</p> : null}
+
       <div className={mainStyle["entire-dashboard-page"]}>
         {!isGuest ? <HeaderComponent /> : <GuestHeader />}
 
@@ -199,7 +200,7 @@ function EventSingleComponent({ room }) {
                 <div key={msgObj._id} className="event__messages-2">
                   <div>
                     <p>{msgObj.question}</p>
-                    <span className="time-stampped">18:04</span>
+                    <span className="time-stampped">{formatDate(msgObj) || "18:04"}</span>
                   </div>
 
                   {!isGuest ? (
