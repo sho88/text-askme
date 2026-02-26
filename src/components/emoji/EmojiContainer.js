@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export const EmojiContainer = () => {
+export const EmojiContainer = ({ onModalClose }) => {
   return (
     <div className="emoji-modal-background">
       <div className="emoji-modal">
@@ -12,6 +12,7 @@ export const EmojiContainer = () => {
             alt="Delete"
             height="10"
             width="10"
+            onClick={onModalClose}
           />
         </div>
 

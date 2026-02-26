@@ -42,7 +42,7 @@ export const getServerSideProps = async ({ params }) => {
 //
 //
 
-export function EventSingleComponent({ room }) {  
+export function EventSingleComponent({ room }) {
   // initialise the hooks here...
   const { questions, setQuestions, createQuestionApi, deleteQuestionApi } = useRoom(room);
 
@@ -79,7 +79,7 @@ export function EventSingleComponent({ room }) {
 
   const handleModalClose = () => {
     setShowModal(false);
-  };  
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -175,7 +175,10 @@ export function EventSingleComponent({ room }) {
                 <div key={msgObj._id} className="event__messages-2">
                   <div>
                     <p>{msgObj.question}</p>
-                    <span className="time-stampped">{formatDate(msgObj) || ""}</span>
+                    <span className="time-stampped">
+                      {/* {formatDate(msgObj) || "18:04"} */}
+                      19.05
+                    </span>
                   </div>
 
                   {!isGuest ? (
