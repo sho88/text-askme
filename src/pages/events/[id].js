@@ -19,8 +19,7 @@ import useRoom from "@/hooks/room";
 
 export const getServerSideProps = async ({ params }) => {
   try {
-    const { start, readData } = await import("@/utils/mongo");
-    await start();
+    const { readData } = await import("@/utils/mongo");
     const roomData = await readData("rooms", params.id);
 
     if (!roomData) return { notFound: true };
@@ -46,6 +45,7 @@ export const getServerSideProps = async ({ params }) => {
 export function EventSingleComponent({ room }) {  
   // initialise the hooks here...
   const { questions, setQuestions, createQuestionApi, deleteQuestionApi } = useRoom(room);
+
   const router = useRouter();
   const { dispatch, state } = useContext(TheFatherContext);
   const [showModal, setShowModal] = useState(false);
@@ -128,23 +128,15 @@ export function EventSingleComponent({ room }) {
         <div className="event">
           <div className="event__container">
             <div className="background-2"></div>
-            {isGuest ? (
               <div
                 onClick={handleToBottom}
                 className="pop-up-indicator"
                 id="hideMe"
               >
-                Scroll down to Ask Questions
+                <span>
+                  {isGuest ? "Scroll down to Ask Questions" : "Scroll down to Answer Questions"}
+                </span>
               </div>
-            ) : (
-              <div
-                onClick={handleToBottom}
-                className="pop-up-indicator"
-                id="hideMe"
-              >
-                Scroll down to Answer Questions
-              </div>
-            )}
 
             <div className="layer-1">
               <div>

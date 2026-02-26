@@ -8,6 +8,16 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.auth0.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "s.gravatar.com",
+        pathname: "/**",
+      }
     ],
   },
 };
