@@ -2,11 +2,10 @@
 
 export default function LogoutButton() {
   return (
-    <a
-      href="/auth/logout"
-      className="button logout"
-    >
-      Log Out
-    </a>
+    <button className="qa-button">
+      <a href="/auth/logout?returnTo=/logged-out" className="button logout">
+        Host Logout
+      </a>
+    </button>
   );
 }

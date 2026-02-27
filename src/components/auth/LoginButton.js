@@ -1,12 +1,19 @@
+// "use client";
+
+// export default function LoginButton() {
+//   return (
+//     <button className="qa-button">
+//       <a href="/auth/login">Host Login</a>
+//     </button>
+//   );
+// }
+
 "use client";
 
 export default function LoginButton() {
   return (
-    <a
-      href="/auth/login"
-      className="button login"
-    >
-      Log In
-    </a>
+    <button className="qa-button">
+      <a href="/auth/login?returnTo=/dashboard">Host Login</a>
+    </button>
   );
 }

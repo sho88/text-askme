@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import Image from "next/image";
-
+import { useRouter } from "next/router";
 import { auth0 } from "@/lib/auth0";
 import LoginButton from "@/components/auth/LoginButton";
 import LogoutButton from "@/components/auth/LogoutButton";
 import ProfileComponent from "@/components/auth/Profile";
 import { asyncify } from "@/utils";
+import mainStyle from "@/styles/main.css";
+import "@/components/live/style.css";
+import Image from "next/image";
 
 // This page is for testing Auth0 integration. It will display the user's profile if logged in, or a login button if not.
 export const getServerSideProps = async (context) => {
-  const [error, session] = await asyncify(auth0.getSession(context.req, context.res));
+  const [error, session] = await asyncify(
+    auth0.getSession(context.req, context.res)
+  );
 
   if (error) {
     console.error("Error fetching session:", error);
@@ -19,7 +23,7 @@ export const getServerSideProps = async (context) => {
   }
 
   return {
-    props: { session: session || null }
+    props: { session: session || null },
   };
 };
 
@@ -42,7 +46,7 @@ export default function TestComponent({ session }) {
           width={200}
         />
         <h1 className="main-title">Next.js + Auth0</h1>
-        
+
         <div className="action-card">
           {user ? (
             <div className="logged-in-section">
@@ -53,7 +57,7 @@ export default function TestComponent({ session }) {
           ) : (
             <>
               <p className="action-text">
-                Welcome! Please log in to access your protected content.
+                Welcome! Please log in to access your account.
               </p>
               <LoginButton />
             </>

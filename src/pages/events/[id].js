@@ -44,7 +44,8 @@ export const getServerSideProps = async ({ params }) => {
 
 export function EventSingleComponent({ room }) {
   // initialise the hooks here...
-  const { questions, setQuestions, createQuestionApi, deleteQuestionApi } = useRoom(room);
+  const { questions, setQuestions, createQuestionApi, deleteQuestionApi } =
+    useRoom(room);
 
   const router = useRouter();
   const { dispatch, state } = useContext(TheFatherContext);
@@ -120,7 +121,7 @@ export function EventSingleComponent({ room }) {
     <div>
       {!room ? <p>Loading. Please wait...</p> : null}
 
-      <div className={mainStyle["entire-dashboard-page"]}>
+      <div>
         {!isGuest ? <HeaderComponent /> : <GuestHeader />}
 
         {showModal && <EmojiContainer onModalClose={handleModalClose} />}
@@ -128,15 +129,17 @@ export function EventSingleComponent({ room }) {
         <div className="event">
           <div className="event__container">
             <div className="background-2"></div>
-              <div
-                onClick={handleToBottom}
-                className="pop-up-indicator"
-                id="hideMe"
-              >
-                <span>
-                  {isGuest ? "Scroll down to Ask Questions" : "Scroll down to Answer Questions"}
-                </span>
-              </div>
+            <div
+              onClick={handleToBottom}
+              className="pop-up-indicator"
+              id="hideMe"
+            >
+              <span>
+                {isGuest
+                  ? "Scroll down to Ask Questions"
+                  : "Scroll down to Answer Questions"}
+              </span>
+            </div>
 
             <div className="layer-1">
               <div>

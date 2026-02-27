@@ -3,10 +3,36 @@ import mainStyle from "@/styles/main.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import ReduceBrowserSize from "./ReduceBrowsingSize";
+import { auth0 } from "@/lib/auth0";
+import { asyncify } from "@/utils";
+import LogoutButton from "@/components/auth/LogoutButton";
+import LoginButton from "@/components/auth/LoginButton";
 
-const Intro = () => {
+export const getServerSideProps = async (context) => {
+  const [error, session] = await asyncify(
+    auth0.getSession(context.req, context.res)
+  );
+
+  if (error) {
+    console.error("Error fetching session:", error);
+    return {
+      props: { session: null },
+    };
+  }
+
+  return {
+    props: { session: session || null },
+  };
+};
+
+const Intro = ({ session }) => {
+  const [user, setUser] = useState(session?.user || null);
   const router = useRouter();
   const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    setUser(session?.user || null);
+  }, [session]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,9 +70,15 @@ const Intro = () => {
               height={45}
               alt="Picture of the author"
             />
-            <button className="qa-button" onClick={handleHostLoginClick}>
-              Host Login
-            </button>
+
+            {user ? (
+              // <button className="qa-button" onClick={handleHostLoginClick}>
+              //   Host Logout
+              // </button>
+              <LogoutButton />
+            ) : (
+              <LoginButton />
+            )}
           </div>
           <div
             style={{

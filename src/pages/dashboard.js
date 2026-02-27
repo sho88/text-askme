@@ -3,22 +3,8 @@ import { useEffect, useMemo, useState } from "react";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 import { useRooms } from "@/hooks/rooms";
-import mainStyle from "@/styles/main.css";
 import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
-import { Auth0Provider } from "@auth0/auth0-react";
-
-{
-  /* <Auth0Provider
-    domain="YOUR_AUTH0_DOMAIN"
-    clientId="YOUR_AUTH0_CLIENT_ID"
-    authorizationParams={{
-      redirect_uri: window.location.origin
-    }}
-  >
-    <App />
-  </Auth0Provider> */
-}
 
 export default function DashboardPageComponent() {
   // hooks go here...
@@ -61,7 +47,7 @@ export default function DashboardPageComponent() {
   // return the renderer...
   return (
     <div>
-      <div className={mainStyle["entire-dashboard-page"]}>
+      <div className="entire-dashboard-page">
         <HeaderComponent />
         <DashboardSearch whenInput={handleInput} />
         {/* Updated: Added onNewDataCreated prop only */}

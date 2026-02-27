@@ -20,7 +20,6 @@ p {
 
 
 
-
 /* FONTS */
 @font-face {
   font-family: Oswald;
@@ -1272,6 +1271,11 @@ position: relative;
   padding: 8px 13px 8px 13px;
   background-color: rgb(236, 236, 236);
   color: #111;
+}
+
+.qa-button a {
+  color: #141324;
+  text-decoration: none;
 }
 
 .intro-header-container {

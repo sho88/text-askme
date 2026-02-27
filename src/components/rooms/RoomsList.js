@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { deleteDocument } from "@/utils/api";
 import "@/styles/globals.css";
+import "@/styles/main.css";
 
 export default function RoomsList({
   rooms = [],

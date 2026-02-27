@@ -32,7 +32,7 @@ export default function EventPassword() {
   const handleClick = () => router.back();
 
   return (
-    <div className={mainStyle["entire-dashboard-page"]}>
+    <div>
       <div className="head">
         <div className="head-container">
           <button onClick={handleClick} className="burger-menu-2">
