@@ -58,6 +58,10 @@ const Intro = ({ session }) => {
     return router.push("/footer/about");
   };
 
+  const handleToDashboard = () => {
+    return router.push("/dashboard");
+  };
+
   return (
     <div>
       <ReduceBrowserSize />
@@ -70,19 +74,7 @@ const Intro = ({ session }) => {
               height={45}
               alt="Picture of the author"
             />
-
-            {user ? (
-              // <button className="qa-button" onClick={handleHostLoginClick}>
-              //   Host Logout
-              // </button>
-              <div>
-                {" "}
-                <LogoutButton />
-                <button>Go to my dashboard</button>
-              </div>
-            ) : (
-              <LoginButton />
-            )}
+            {user ? <LogoutButton /> : <LoginButton />}
           </div>
           <div
             style={{
@@ -114,30 +106,41 @@ const Intro = ({ session }) => {
           </div>
         </div>
         <div className="intro-call-to-action">
-          <button
-            className="intro-call-to-action-button"
-            onClick={handleGuestLoginClick}
-          >
-            <b>Start using now!</b>
-          </button>
+          {user ? (
+            <button
+              className="intro-call-to-action-button"
+              onClick={handleToDashboard}
+            >
+              <b>My Dashboard</b>
+            </button>
+          ) : (
+            <button
+              className="intro-call-to-action-button"
+              onClick={handleGuestLoginClick}
+            >
+              <b>Start using now!</b>
+            </button>
+          )}
         </div>
       </div>
       <div className="qa-article-1">
         <div className="intro-additional-section">
           <div className="intro-additional-section-body">
-            <h2>
-              Experience seamless interaction with live, two-way communication.
-              Submit your questions instantly, from the comfort of your own
-              home, and watch as speakers respond to you in real-time!
-            </h2>
-
-            {/* <h2>
-              Step into the conversation with
-              a seamless, live interface designed for your device. Submit
-              questions instantly and engage with the event as it happens—here
-              is a preview of exactly how your dashboard will look once you're
-              inside.
-            </h2> */}
+            {user ? (
+              <h2>
+                Provide seamless interaction with your audience with a live,
+                two-way communication. Your audience will submit their questions
+                through the app, as you respond to them in real-time! Audience's
+                view:
+              </h2>
+            ) : (
+              <h2>
+                Experience seamless interaction with live, two-way
+                communication. Submit your questions instantly, from the comfort
+                of your own home, and watch as speakers respond to you in
+                real-time!
+              </h2>
+            )}
           </div>
         </div>
         <div className="intro-image-section">
@@ -193,18 +196,34 @@ const Intro = ({ session }) => {
       <div className="intro-footer-container">
         <footer>
           <div className="intro-cta-button-container">
-            <button
-              className="intro-call-to-action-button-footer"
-              onClick={handleGuestLoginClick}
-            >
-              <b>Start using now!</b>
-            </button>
+            {user ? (
+              <button
+                className="intro-call-to-action-button-footer"
+                onClick={handleToDashboard}
+              >
+                <b>My Dashboard</b>
+              </button>
+            ) : (
+              <button
+                className="intro-call-to-action-button-footer"
+                onClick={handleGuestLoginClick}
+              >
+                <b>Start using now!</b>
+              </button>
+            )}
           </div>
           <div className="intro-cta-button-container">
-            <u onClick={handleHostLoginClick}>
-              <br />
-              <b>Host Login</b>
-            </u>
+            {user ? (
+              <u>
+                <br />
+                <b>Logout</b>
+              </u>
+            ) : (
+              <u onClick={handleHostLoginClick}>
+                <br />
+                <b>Host Login</b>
+              </u>
+            )}
           </div>
 
           <div className="intro-footer-body">

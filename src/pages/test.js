@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { auth0 } from "@/lib/auth0";
 import LoginButton from "@/components/auth/LoginButton";
 import LogoutButton from "@/components/auth/LogoutButton";
 import ProfileComponent from "@/components/auth/Profile";
-import { asyncify } from "@/utils";
 import mainStyle from "@/styles/main.css";
 import "@/components/live/style.css";
 import Image from "next/image";
 
 // This page is for testing Auth0 integration. It will display the user's profile if logged in, or a login button if not.
+
+import { useEffect, useState } from "react";
+import { auth0 } from "@/lib/auth0";
+import { asyncify } from "@/utils";
+
 export const getServerSideProps = async (context) => {
   const [error, session] = await asyncify(
     auth0.getSession(context.req, context.res)

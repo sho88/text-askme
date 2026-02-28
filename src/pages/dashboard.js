@@ -6,7 +6,37 @@ import { useRooms } from "@/hooks/rooms";
 import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
 
-export default function DashboardPageComponent() {
+import { auth0 } from "@/lib/auth0";
+import { asyncify } from "@/utils";
+import GuestHeader from "@/components/header/GuestHeader";
+import LoginButton from "@/components/auth/LoginButton";
+import LogoutButton from "@/components/auth/LogoutButton";
+import LogoutButtonInMenu from "@/components/auth/LogoutButtonInMenu";
+
+export const getServerSideProps = async (context) => {
+  const [error, session] = await asyncify(
+    auth0.getSession(context.req, context.res)
+  );
+
+  if (error) {
+    console.error("Error fetching session:", error);
+    return {
+      props: { session: null },
+    };
+  }
+
+  return {
+    props: { session: session || null },
+  };
+};
+
+export default function DashboardPageComponent({ session }) {
+  const [user, setUser] = useState(session?.user || null);
+
+  useEffect(() => {
+    setUser(session?.user || null);
+  }, [session]);
+
   // hooks go here...
   const router = useRouter();
   const { eventId } = router.query; // Grabs the eventId passed from the PIN page
@@ -47,16 +77,49 @@ export default function DashboardPageComponent() {
   // return the renderer...
   return (
     <div>
-      <div className="entire-dashboard-page">
-        <HeaderComponent />
-        <DashboardSearch whenInput={handleInput} />
-        {/* Updated: Added onNewDataCreated prop only */}
-        <RoomsList
-          rooms={filteredRooms}
-          whenRoomClick={handleRoomClick}
-          // onNewDataCreated={refreshRooms}
-        />
-        <DashboardBottomNav />
+      <div>
+        {user ? (
+          <div>
+            <HeaderComponent />
+            <DashboardSearch whenInput={handleInput} />
+            {/* Updated: Added onNewDataCreated prop only */}
+            <RoomsList
+              rooms={filteredRooms}
+              whenRoomClick={handleRoomClick}
+              // onNewDataCreated={refreshRooms}
+            />
+
+            <DashboardBottomNav />
+          </div>
+        ) : (
+          <div>
+            <GuestHeader />
+            <div className="dashboard-message"></div>
+            <div className="dashboard-body-container">
+              <div className="event__header">
+                <h1>Woah... ⛔✋</h1>
+              </div>
+              <br />
+              <p>You'll need to be signed in to get full access to Text Q&A.</p>
+              <br />
+              <p>
+                Text Q&A Offers vdsbcdsv dsvdmsn vdsmv bdsmv nbds vmdsbv dsmvb
+                dsmv bdsmbv mdsb vdsmvmds bcs vcsj vcjm.
+              </p>
+              <br />
+              <button>
+                <b>
+                  <u>
+                    {" "}
+                    <a href="/auth/login?returnTo=/dashboard">
+                      Login or sign up here
+                    </a>
+                  </u>
+                </b>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

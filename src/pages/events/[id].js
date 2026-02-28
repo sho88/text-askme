@@ -4,10 +4,8 @@ import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
 import SubmitQuestionsContainer from "@/components/submit-questions-container/SubmitQuestionsContainer";
 import { useRouter } from "next/router";
-
 import { useContext } from "react";
 import Provider, { TheFatherContext } from "@/context/app";
-
 import mainStyle from "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
@@ -16,17 +14,25 @@ import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButt
 import EmojiContainer from "@/components/emoji/EmojiContainer";
 import { formatDate } from "@/utils/dates";
 import useRoom from "@/hooks/room";
+import { auth0 } from "@/lib/auth0";
+import { asyncify } from "@/utils";
 
-export const getServerSideProps = async ({ params }) => {
+// 1. THE MERGED SERVER FUNCTION
+export const getServerSideProps = async (context) => {
+  const { params, req, res } = context;
   try {
+    // Get Room Data
     const { readData } = await import("@/utils/mongo");
     const roomData = await readData("rooms", params.id);
-
     if (!roomData) return { notFound: true };
+
+    // Get Auth0 Session
+    const [error, session] = await asyncify(auth0.getSession(req, res));
 
     return {
       props: {
         room: JSON.parse(JSON.stringify(roomData)),
+        session: session || null, // Pass the session here!
       },
     };
   } catch (err) {
@@ -35,22 +41,19 @@ export const getServerSideProps = async ({ params }) => {
   }
 };
 
-//
-//
-// DUE TO BE FLIPPED THE OTHER WAY - default will soon be "guest" when host logins and users are sorted with Sho
-// SO, logic below will be flipped. Work to be done!
-//
-//
-
-export function EventSingleComponent({ room }) {
+export function EventSingleComponent({ room, session }) {
   // initialise the hooks here...
   const { questions, setQuestions, createQuestionApi, deleteQuestionApi } =
     useRoom(room);
+  const [user, setUser] = useState(session?.user || null);
 
   const router = useRouter();
   const { dispatch, state } = useContext(TheFatherContext);
   const [showModal, setShowModal] = useState(false);
-  const isGuest = useMemo(() => state.role === "guest", [state.role]);
+
+  useEffect(() => {
+    setUser(session?.user || null);
+  }, [session]);
 
   // useEffects etc go here...
   // This tells the browser: "If the modal is open, hide the scrollbar. If not, show it."
@@ -58,13 +61,6 @@ export function EventSingleComponent({ room }) {
     document.body.style.overflow = showModal ? "hidden" : "unset";
   }, [showModal]);
 
-  useEffect(() => {
-    if (router.query.fromPin === "true") {
-      dispatch({ type: "SET_ROLE", payload: "guest" });
-    }
-  }, [router.query.fromPin, dispatch]);
-
-  // events handlers go here...
   const handleAddClick = () => {
     setShowModal(true);
   };
@@ -122,7 +118,7 @@ export function EventSingleComponent({ room }) {
       {!room ? <p>Loading. Please wait...</p> : null}
 
       <div>
-        {!isGuest ? <HeaderComponent /> : <GuestHeader />}
+        {user ? <HeaderComponent /> : <GuestHeader />}
 
         {showModal && <EmojiContainer onModalClose={handleModalClose} />}
 
@@ -135,7 +131,7 @@ export function EventSingleComponent({ room }) {
               id="hideMe"
             >
               <span>
-                {isGuest
+                {!user
                   ? "Scroll down to Ask Questions"
                   : "Scroll down to Answer Questions"}
               </span>
@@ -184,7 +180,7 @@ export function EventSingleComponent({ room }) {
                     </span>
                   </div>
 
-                  {!isGuest ? (
+                  {user ? (
                     <button onClick={() => handleDelete(msgObj._id)}>
                       <Image
                         className="questions-cross"
@@ -226,7 +222,7 @@ export function EventSingleComponent({ room }) {
             <SubmitQuestionsContainer>
               <form onSubmit={handleSubmit}>
                 <div className="submit-questions-container">
-                  {isGuest ? (
+                  {!user ? (
                     <div className="four">
                       <textarea
                         name="question"
@@ -274,16 +270,16 @@ export function EventSingleComponent({ room }) {
           <div className="random-box"></div>
         </div>
 
-        {!isGuest && <DashboardBottomNav />}
+        {user && <DashboardBottomNav />}
       </div>
     </div>
   );
 }
 
-export const exportThis = ({ room }) => {
+export const exportThis = ({ room, session }) => {
   return (
     <Provider>
-      <EventSingleComponent room={room} />
+      <EventSingleComponent room={room} session={session} />
     </Provider>
   );
 };

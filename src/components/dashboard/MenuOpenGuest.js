@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { MenuOptionIcon } from "./MenuOptionIcon";
 import { MenuOptionTitle } from "./MenuOptionTitle";
+import LogoutButtonInMenu from "../auth/LogoutButtonInMenu";
+import LoginButtonInMenu from "../auth/LoginButtonInMenu";
 
 export const MenuOpenGuest = ({ onClose }) => {
   return (
@@ -46,7 +48,7 @@ export const MenuOpenGuest = ({ onClose }) => {
           <MenuOptionTitle label="Visit another room" menLink={"/event-pin"} />
         </div>
         <div className="menu-open-option">
-          <MenuOptionTitle label="Login as Host →" menLink={"/host-login"} />
+          <LoginButtonInMenu />
         </div>
       </div>
     </div>
