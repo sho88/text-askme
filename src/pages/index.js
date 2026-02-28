@@ -75,7 +75,11 @@ const Intro = ({ session }) => {
               // <button className="qa-button" onClick={handleHostLoginClick}>
               //   Host Logout
               // </button>
-              <LogoutButton />
+              <div>
+                {" "}
+                <LogoutButton />
+                <button>Go to my dashboard</button>
+              </div>
             ) : (
               <LoginButton />
             )}

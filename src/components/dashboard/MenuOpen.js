@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { MenuOptionIcon } from "./MenuOptionIcon";
 import { MenuOptionTitle } from "./MenuOptionTitle";
+import LogoutButton from "../auth/LogoutButton";
 
 export const MenuOpen = ({ onClose }) => {
   return (
@@ -59,7 +60,8 @@ export const MenuOpen = ({ onClose }) => {
           <MenuOptionTitle label="Help" menLink={"/"} />
         </div>
         <div className="menu-open-option">
-          <MenuOptionTitle label="Sign Out →" menLink={"/"} />
+          <LogoutButton />
+          {/* <MenuOptionTitle label="Sign Out →" menLink={"/"} /> */}
         </div>
       </div>
     </div>
