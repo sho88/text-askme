@@ -100,10 +100,12 @@ export default function DashboardPageComponent({ session }) {
                 <h1>Woah... ⛔✋</h1>
               </div>
               <br />
-              <p>You'll need to be signed in to get full access to Text Q&A.</p>
+              <p>
+                You will need to be signed in to get full access to Text QA.
+              </p>
               <br />
               <p>
-                Text Q&A Offers vdsbcdsv dsvdmsn vdsmv bdsmv nbds vmdsbv dsmvb
+                Text QA Offers vdsbcdsv dsvdmsn vdsmv bdsmv nbds vmdsbv dsmvb
                 dsmv bdsmbv mdsb vdsmvmds bcs vcsj vcjm.
               </p>
               <br />

@@ -130,7 +130,7 @@ const Intro = ({ session }) => {
               <h2>
                 Provide seamless interaction with your audience with a live,
                 two-way communication. Your audience will submit their questions
-                through the app, as you respond to them in real-time! Audience's
+                through the app, as you respond to them in real-time! Audiences
                 view:
               </h2>
             ) : (
