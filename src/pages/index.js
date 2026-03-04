@@ -118,7 +118,7 @@ const Intro = ({ session }) => {
               className="intro-call-to-action-button"
               onClick={handleGuestLoginClick}
             >
-              <b>Start using now!</b>
+              <b>Use Now as Guest!</b>
             </button>
           )}
         </div>
@@ -258,6 +258,7 @@ const Intro = ({ session }) => {
               2026 ⓒ TextQ&A
             </small>
 
+            {/* logo for the footer */}
             {/* <Image
               className="footer-sole-logo"
               src="/images/logo-text-white.png"

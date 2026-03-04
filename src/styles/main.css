@@ -1797,3 +1797,9 @@ position: relative;
   width: 100%;
   padding-right: 4%;
 }
+
+mark {
+  background-color: rgb(252, 227, 239);
+  margin-right: 5px;
+  padding: 2px 5px
+}
