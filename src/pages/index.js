@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import mainStyle from "@/styles/main.css";
+import "@/styles/main.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import ReduceBrowserSize from "./ReduceBrowsingSize";
