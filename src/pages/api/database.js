@@ -21,31 +21,73 @@ export async function createDocument(collection, data) {
   return await createData(collection, data);
 }
 
-/**
- * DEFAULT EXPORT for API Route use (fetch)
- */
+// /**
+//  * DEFAULT EXPORT for API Route use (fetch)
+//  */
+// export default async function handler(req, res) {
+//   try {
+//     await start();
+
+//     const { collection, id } = req.query;
+
+//     if (!collection) {
+//       return res.status(400).json({ error: "Collection name is required" });
+//     }
+
+//     // --- HANDLE GET (READ) ---
+//     if (req.method === "GET") {
+//       const data = await readData(collection, id);
+//       if (!data) return res.status(404).json({ error: "Data not found" });
+//       return res.status(200).json(data);
+//     }
+
+//     // --- HANDLE POST (CREATE) ---
+//     if (req.method === "POST") {
+//       const insertedId = await createData(collection, req.body);
+//       return res.status(200).json({ ...req.body, _id: insertedId });
+//     }
+
+// Add this import at the top
+import { auth0 } from "@/lib/auth0";
+
 export default async function handler(req, res) {
   try {
     await start();
-
     const { collection, id } = req.query;
 
-    if (!collection) {
+    // 1. Get the current user session
+    const session = await auth0.getSession(req, res);
+    const userId = session?.user?.sub; // This is the unique "Name Tag"
+
+    if (!collection)
       return res.status(400).json({ error: "Collection name is required" });
-    }
 
     // --- HANDLE GET (READ) ---
     if (req.method === "GET") {
+      // If asking for rooms and logged in, ONLY show rooms owned by this user
+      let query = id;
+      if (collection === "rooms" && userId && !id) {
+        // This is the secret sauce: filtering by userId
+        const allRooms = await readData(collection);
+        const userRooms = allRooms.filter((room) => room.userId === userId);
+        return res.status(200).json(userRooms);
+      }
+
       const data = await readData(collection, id);
-      if (!data) return res.status(404).json({ error: "Data not found" });
       return res.status(200).json(data);
     }
 
     // --- HANDLE POST (CREATE) ---
     if (req.method === "POST") {
-      const insertedId = await createData(collection, req.body);
-      return res.status(200).json({ ...req.body, _id: insertedId });
+      // Attach the owner's ID to the data before saving it
+      const dataWithStatus = {
+        ...req.body,
+        userId: userId, // Permanently labels the room with the creator's ID
+      };
+      const insertedId = await createData(collection, dataWithStatus);
+      return res.status(200).json({ ...dataWithStatus, _id: insertedId });
     }
+    // ... rest of your code
 
     // --- HANDLE PUT (UPDATE) ---
     if (req.method === "PUT") {

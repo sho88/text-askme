@@ -40,7 +40,7 @@ export const MenuOpen = ({ onClose }) => {
 
       <div className="menu-open-option-xx">
         <div className="menu-open-option">
-          <MenuOptionTitle label="Home" menLink={"/dashboard"} />
+          <MenuOptionTitle label="Dashboard" menLink={"/dashboard"} />
           {/* <MenuOptionIcon imageUrl={"/images/fn-home-5.png"} /> */}
         </div>
         <div className="menu-open-option">
@@ -52,11 +52,11 @@ export const MenuOpen = ({ onClose }) => {
         <div className="menu-open-option">
           <MenuOptionTitle label="View Topics" menLink={"/dashboard"} />
         </div>
-        <div className="menu-open-option">
+        {/* <div className="menu-open-option">
           <MenuOptionTitle label="Clear All Topics" menLink={"/"} />
-        </div>
+        </div> */}
         <div className="menu-open-option">
-          <MenuOptionTitle label="Help" menLink={"/"} />
+          <MenuOptionTitle label="My Profile" menLink={"/users-profile"} />
         </div>
         <div className="menu-open-option">
           <LogoutButtonInMenu />

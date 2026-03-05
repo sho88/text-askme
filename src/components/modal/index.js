@@ -86,7 +86,7 @@ export const ModalComponent = ({ onModalClose }) => {
           <div className="form__control">
             <input
               className="form-input-style"
-              placeholder="Enter your title"
+              placeholder="Enter your topic title"
               type="text"
               required
               value={title}
@@ -97,7 +97,7 @@ export const ModalComponent = ({ onModalClose }) => {
           <div className="form__control">
             <textarea
               className="form-input-style-textarea"
-              placeholder="Enter description"
+              placeholder="Enter topic description"
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -111,7 +111,7 @@ export const ModalComponent = ({ onModalClose }) => {
               onClick={() => fileInputRef.current.click()}
               disabled={loading}
             >
-              {imageFile ? "Image Uploaded ✅" : "Upload Image ⬆"}
+              {imageFile ? "Image Uploaded ✅" : "Upload topic image ⬆"}
             </button>
             <input
               type="file"
