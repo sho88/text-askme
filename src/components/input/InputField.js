@@ -1,12 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-
-export default function InputField({ whenInput = () => { } } = {}) {
-
+export default function InputField({ whenInput = () => {} } = {}) {
   // properties etc...
   const [value, setValue] = useState("");
   const textAreaReference = useRef(null);
-
 
   // hooks...
   useEffect(() => {
@@ -15,13 +12,11 @@ export default function InputField({ whenInput = () => { } } = {}) {
       textAreaReference.current.scrollHeight + "px";
   }, [value]);
 
-
   // events...
   function handleChange(e) {
     setValue(e.target.value);
-    whenInput(value)
+    whenInput(value);
   }
-
 
   // return to the renderer...
   return (
@@ -29,7 +24,7 @@ export default function InputField({ whenInput = () => { } } = {}) {
       <div className="cover2">
         <textarea
           className="textarea1"
-          placeholder="Search by name, message, etc..."
+          placeholder="Search by name or message..."
           value={value}
           onChange={handleChange}
           onKeyUp={handleChange}

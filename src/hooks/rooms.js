@@ -1,30 +1,58 @@
-import { useEffect, useState } from "react";
-import * as database from "@/utils/database";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
-/**
- * Used primarily for retriving rooms
- * @returns Object
- */
-export const useRooms = () => {
+// export const useRooms = (id) => {
+//   const router = useRouter();
+//   const [rooms, setRooms] = useState([]);
+
+//   useEffect(() => {
+//     const fetchingRooms = async () => {
+//       try {
+//         const res = await fetch(
+//           `/api/database?collection=rooms${id ? `&id=${id}` : []}`
+//         );
+
+//         const data = await res.json();
+
+//         setRooms(Array.isArray(data) ? data : [data]);
+//       } catch (err) {
+//         console.error(
+//           "Cannot fetch any rooms. There's been an error in the process",
+//           err
+//         );
+//       }
+//     };
+//     fetchingRooms();
+//   }, [id]);
+
+//   return { rooms };
+// };
+
+// export default useRooms;
+
+// Create isLoading functionality                     LOADING
+// Create refreshRooms functionality                  REFRESH
+// Create functioning error catching in set states    ERROR
+
+export const useRooms = (id, user) => {
+  // Accept 'user' as a second argument
   const [rooms, setRooms] = useState([]);
-  const [errors, setErrors] = useState([]);
 
-  // hooks...
   useEffect(() => {
-    database
-      .readData("rooms")
-      .then((data) => {
-        const roomsArray = data
-          ? Object.keys(data).map((id) => ({ id, ...data[id] }))
-          : [];
-        setRooms(roomsArray);
-      })
-      .catch((error) => {
-        // @TODO: Create a generic error handler on the app...
-        console.error(error);
-        setErrors([...errors, { error }]);
-      });
-  });
+    const fetchingRooms = async () => {
+      try {
+        const res = await fetch(
+          `/api/database?collection=rooms${id ? `&id=${id}` : ""}`
+        );
+        const data = await res.json();
+        setRooms(Array.isArray(data) ? data : [data]);
+      } catch (err) {
+        console.error("Error fetching rooms", err);
+      }
+    };
+
+    fetchingRooms();
+  }, [id, user?.sub]); // Re-run the search if the User ID changes
 
   return { rooms };
 };

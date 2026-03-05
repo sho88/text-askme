@@ -2,63 +2,80 @@ import { RoomInformationComponent } from "../room/information";
 import { useState } from "react";
 import { ModalEventsOptionsComponent } from "../modal/modal-events-options";
 import { useRouter } from "next/router";
-// import "@/styles/globals.css";
-
+import Image from "next/image";
+import { deleteDocument } from "@/utils/api";
 import "@/styles/globals.css";
+import "@/styles/main.css";
 
-export default function RoomsList({ rooms = [], onRoomClick = () => {} } = {}) {
+export default function RoomsList({
+  rooms = [],
+  whenRoomClick,
+  onNewDataCreated,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const router = useRouter();
 
-  // events go here...
   const handleAddClick = (event) => {
     setShowModal(true);
     setSelectedEvent(event);
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = (shouldRefresh) => {
     setShowModal(false);
+    if (shouldRefresh && onNewDataCreated) {
+      onNewDataCreated();
+    }
   };
 
-  const handleModalAction = () => {
-    router.push(`/event/${selectedEvent.id}/edit`);
+  const handleEditAction = () => {
+    const id = selectedEvent?._id || selectedEvent;
+    router.push(`/events/${id}/edit`);
+  };
+
+  // THE DELETE LOGIC
+  const handleDeleteAction = async () => {
+    const id = selectedEvent?._id || selectedEvent;
+    if (window.confirm("Are you sure you want to delete this room?")) {
+      const success = await deleteDocument("rooms", id);
+      if (success) {
+        handleModalClose(true); // Close and refresh dashboard
+      } else {
+        alert("Delete failed.");
+      }
+    }
   };
 
   return (
     <>
       {showModal && (
         <ModalEventsOptionsComponent
-          onModalClose={handleModalClose}
-          onModalAction={() => {
-            console.log("hello");
-            handleModalAction();
-          }}
+          onModalClose={() => handleModalClose(false)}
+          onModalAction={handleEditAction}
+          onDelete={handleDeleteAction}
+          onView={() => router.push(`/events/${selectedEvent?._id}`)} // Add this line!
         />
       )}
 
       <div className="dashboard-body-container">
-        <h1 className="text-white text-2xl font-oswald font-bold mt-10 mb-5">
-          All Rooms
-        </h1>
-
         {rooms.map((room) => (
-          <article key={room.id} className="all-messages-article-1">
+          <article key={room._id} className="all-messages-article-1">
             <RoomInformationComponent
               {...room}
-              // handleAddClick={handleAddClick}
-              onRoomClick={onRoomClick}
+              id={room._id}
+              handleClick={whenRoomClick}
             />
             <button
               className="dashboard-bottom-test"
-              type=""
-              // onTouchMove={handleAddClick}
-              // onContextMenu={() => {
-              onClick={() => {
-                handleAddClick(room);
-              }}
+              onClick={() => handleAddClick(room)}
             >
-              ☰
+              <Image
+                src="/images/fn-settings-6.png"
+                width={15}
+                height={14}
+                alt="Settings"
+                style={{ opacity: 0.5 }}
+              />
             </button>
           </article>
         ))}
