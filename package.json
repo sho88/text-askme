@@ -1,0 +1,40 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth0/auth0-react": "^2.13.0",
+    "@auth0/nextjs-auth0": "^4.15.0",
+    "@tailwindcss/postcss": "^4.1.4",
+    "@tailwindcss/vite": "^4.0.17",
+    "@uidotdev/usehooks": "^2.4.1",
+    "cloudinary": "^2.9.0",
+    "collect.js": "^4.36.1",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.12",
+    "dotenv": "^16.3.1",
+    "eslint": "8.44.0",
+    "eslint-config-next": "13.4.9",
+    "firebase": "^10.12.4",
+    "formidable": "^3.5.4",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.2",
+    "next": "^15.4.6",
+    "prop-types": "^15.8.1",
+    "pusher-js": "^8.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "^6.16.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.4"
+  }
+}
