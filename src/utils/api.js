@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 const BASE_PATH = "/api/database";
 
 // Redo this whole file. Make it into a custom hook
@@ -39,3 +41,66 @@ export const updateDocument = async (collection, id, data) => {
   return response.ok;
 };
 export const deleteDocument = (collection, id) => api.delete(collection, id);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// const useEvents = (room) => {
+//   const [events, setEvents] = useState([]);
+//   const [error, setError] = useState(false);
+//   // optional loading state possible
+
+//   // GET method
+//   useEffect(() => {
+//     const fetchingEvent = async () => {
+//       if (!room._id) return;
+
+//       try {
+//         const res = await fetch(`/api/database?${collection}&eventId=${room._id}`);
+//         if (!res.ok) {
+//           throw new Error("This operation has failed. Error");
+//         }
+//         const data = await res.json();
+//         setEvents(data);
+//       } catch (err) {
+//         console.error(err.message);
+//         setError(true);
+//       }
+//     };
+//     fetchingEvent();
+//   }, [collection, room?._id]);
+
+// // POST method
+//   const postingEvent = async (newEventData) => {
+
+//     if (!newEventData) return;
+//     try {
+//       const res = await fetch(`/api/database?${collection}`, {
+//         method: "POST",
+//         headers: {
+//           "content-type" : "application/JSON"
+//         },
+//         body: JSON.stringify(newEventData)
+//         })
+//       const data = res.json()
+//       if (!res.ok) { throw new Error("No collection has been found.") }
+//     }
+
+//     catch (err) {
+//       console.error(err.message)
+//       setError(true)
+//     }
+
+//   }
+
+// return data();
+
+// };

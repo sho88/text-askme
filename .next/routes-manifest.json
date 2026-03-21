@@ -1,1 +1,141 @@
-{"version":3,"caseSensitive":false,"basePath":"","rewrites":{"beforeFiles":[],"afterFiles":[],"fallback":[]},"redirects":[{"source":"/:path+/","destination":"/:path+","permanent":true,"internal":true,"regex":"^(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))\\/$"}],"headers":[]}
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/events/[id]",
+      "regex": "^/events/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/events/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/events/[id]/edit",
+      "regex": "^/events/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/events/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/events/[id]/NameInput",
+      "regex": "^/events/([^/]+?)/NameInput(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/events/(?<nxtPid>[^/]+?)/NameInput(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/dashboard",
+      "regex": "^/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard(?:/)?$"
+    },
+    {
+      "page": "/event-pin",
+      "regex": "^/event\\-pin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/event\\-pin(?:/)?$"
+    },
+    {
+      "page": "/FadeOutElement",
+      "regex": "^/FadeOutElement(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/FadeOutElement(?:/)?$"
+    },
+    {
+      "page": "/ReduceBrowsingSize",
+      "regex": "^/ReduceBrowsingSize(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ReduceBrowsingSize(?:/)?$"
+    },
+    {
+      "page": "/test",
+      "regex": "^/test(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/test(?:/)?$"
+    },
+    {
+      "page": "/users-profile",
+      "regex": "^/users\\-profile(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/users\\-profile(?:/)?$"
+    }
+  ],
+  "dataRoutes": [
+    {
+      "page": "/",
+      "dataRouteRegex": "^/_next/data/yd4VaCSFysU44kl8fK2Bk/index\\.json$"
+    },
+    {
+      "page": "/dashboard",
+      "dataRouteRegex": "^/_next/data/yd4VaCSFysU44kl8fK2Bk/dashboard\\.json$"
+    },
+    {
+      "page": "/events/[id]",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "dataRouteRegex": "^/_next/data/yd4VaCSFysU44kl8fK2Bk/events/([^/]+?)\\.json$",
+      "namedDataRouteRegex": "^/_next/data/yd4VaCSFysU44kl8fK2Bk/events/(?<nxtPid>[^/]+?)\\.json$"
+    },
+    {
+      "page": "/events/[id]/edit",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "dataRouteRegex": "^/_next/data/yd4VaCSFysU44kl8fK2Bk/events/([^/]+?)/edit\\.json$",
+      "namedDataRouteRegex": "^/_next/data/yd4VaCSFysU44kl8fK2Bk/events/(?<nxtPid>[^/]+?)/edit\\.json$"
+    },
+    {
+      "page": "/test",
+      "dataRouteRegex": "^/_next/data/yd4VaCSFysU44kl8fK2Bk/test\\.json$"
+    },
+    {
+      "page": "/users-profile",
+      "dataRouteRegex": "^/_next/data/yd4VaCSFysU44kl8fK2Bk/users-profile\\.json$"
+    }
+  ],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

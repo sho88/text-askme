@@ -1707,6 +1707,8 @@ position: relative;
   flex-direction: column;
 }
 
+/* EMOJI SECTION */
+/* EMOJI SECTION */
 .emoji-on-question-bar {
   min-width: 15px;
   max-width: 15px;
@@ -1715,25 +1717,15 @@ position: relative;
   margin-top: 5px;
 }
 
-.time-stampped {
-  font-size: 12px;
-  color: #bebebe;
-  align-self: flex-end;
-  margin-left: 5px;
-}
-
 .emoji-modal {
   display: flex;
   padding: 10px;
   width: 92%;
   height: auto;
   position: fixed;
-
   top: 50%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, -110%);
-
   z-index: 2;
   background-color: white;
   border-radius: 20px;
@@ -1746,7 +1738,7 @@ position: relative;
 
 .emoji-modal-container {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   /* gap: 10px; */
   width: 100%;
   align-items: center;
@@ -1756,7 +1748,7 @@ position: relative;
 }
 
 .emoji-modal-container div {
-  font-size: 26pt;
+  font-size: 30pt;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1770,19 +1762,12 @@ position: relative;
   margin-bottom: -25px;
 }
 
-.big-shock {
+.emoji-thumbs-up {
   grid-column: span 2;
   grid-row: span 2;
-  font-size: 95px !important;
+  font-size: 96px !important;
   margin-bottom: -15px;
   margin-right: -10px;
-}
-
-.random1ne {
-  background-color: coral;
-  color: white;
-  padding: 20px;
-  z-index: 3;
 }
 
 .emoji-modal-background {
@@ -1795,14 +1780,25 @@ position: relative;
   z-index: 2;
 }
 
-
 .emoji-modal-header-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding-right: 4%;
-}
+  padding-right: 4%; }
+
+ .reactions-container {
+  position: absolute;
+  align-self: flex-end;
+  font-size: 18px;
+  letter-spacing: 4px;
+  transform: translate(5px, 28px);
+  /* background-color: rgb(224, 198, 149); */
+  border-radius: 50px;
+  display: flex;
+ } 
+/* EMOJI SECTION */
+/* EMOJI SECTION */
 
 .host-answer {
   background-color: rgb(250, 236, 244);
@@ -1812,4 +1808,11 @@ position: relative;
 .event__pin {
 
   font-size: 17px;
+}
+
+.time-stampped {
+  font-size: 12px;
+  color: #bebebe;
+  align-self: flex-end;
+  margin-left: 5px;
 }

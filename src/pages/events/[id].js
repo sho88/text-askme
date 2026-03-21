@@ -6,7 +6,7 @@ import SubmitQuestionsContainer from "@/components/submit-questions-container/Su
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import Provider, { TheFatherContext } from "@/context/app";
-import mainStyle from "@/styles/main.css";
+import "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
 import GuestHeader from "@/components/header/GuestHeader";
@@ -16,6 +16,7 @@ import { formatDate } from "@/utils/dates";
 import useRoom from "@/hooks/room";
 import { auth0 } from "@/lib/auth0";
 import { asyncify } from "@/utils";
+import { updateDocument } from "@/utils/api";
 
 // 1. THE MERGED SERVER FUNCTION
 export const getServerSideProps = async (context) => {
@@ -27,7 +28,7 @@ export const getServerSideProps = async (context) => {
     if (!roomData) return { notFound: true };
 
     // Get Auth0 Session
-    const [error, session] = await asyncify(auth0.getSession(req, res));
+    const [, session] = await asyncify(auth0.getSession(req, res));
 
     return {
       props: {
@@ -51,6 +52,7 @@ export function EventSingleComponent({ room, session }) {
   const router = useRouter();
   const { dispatch, state } = useContext(TheFatherContext);
   const [showModal, setShowModal] = useState(false);
+  const [selectedQuestionId, setSelectedQuestionId] = useState(null);
 
   useEffect(() => {
     setUser(session?.user || null);
@@ -62,7 +64,8 @@ export function EventSingleComponent({ room, session }) {
     document.body.style.overflow = showModal ? "hidden" : "unset";
   }, [showModal]);
 
-  const handleAddClick = () => {
+  const handleAddClick = (questionId) => {
+    setSelectedQuestionId(questionId); // Remember which question we are reacting to
     setShowModal(true);
   };
 
@@ -77,6 +80,33 @@ export function EventSingleComponent({ room, session }) {
 
   const handleModalClose = () => {
     setShowModal(false);
+  };
+
+  const handleEmojiSelect = async (emoji) => {
+    if (!selectedQuestionId) return;
+
+    // Find the current question to see existing reactions
+    const question = questions.find((q) => q._id === selectedQuestionId);
+    const currentReactions = question.reactions || [];
+
+    // Add the new emoji to the array
+    const updatedReactions = [...currentReactions, emoji];
+
+    // Update the database (using your updateDocument utility)
+    const success = await updateDocument("questions", selectedQuestionId, {
+      reactions: updatedReactions,
+    });
+
+    if (success) {
+      // Update local state so the UI changes immediately
+      setQuestions((prev) =>
+        prev.map((q) =>
+          q._id === selectedQuestionId
+            ? { ...q, reactions: updatedReactions }
+            : q
+        )
+      );
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -120,7 +150,13 @@ export function EventSingleComponent({ room, session }) {
       <div>
         {user ? <HeaderComponent /> : <GuestHeader />}
 
-        {showModal && <EmojiContainer onModalClose={handleModalClose} />}
+        {/* In your JSX, update the EmojiContainer call: */}
+        {showModal && (
+          <EmojiContainer
+            onModalClose={handleModalClose}
+            onEmojiSelect={handleEmojiSelect}
+          />
+        )}
 
         <div className="event">
           <div className="event__container">
@@ -187,7 +223,6 @@ export function EventSingleComponent({ room, session }) {
 
                     <span className="time-stampped">{formatDate(msgObj)}</span>
                   </div>
-
                   {user ? (
                     <button onClick={() => handleDelete(msgObj._id)}>
                       <Image
@@ -202,15 +237,21 @@ export function EventSingleComponent({ room, session }) {
                     <button>
                       {/* TODO - create handleEmoji for functionality */}
                       <Image
-                        onClick={handleAddClick}
+                        onClick={() => handleAddClick(msgObj._id)} // Pass the ID here
                         className="emoji-on-question-bar"
                         src="/images/select-emoji-5.png"
-                        alt="Up arrow"
+                        alt="React"
                         height="15"
                         width="15"
                       />
                     </button>
                   )}
+                  {/* And display the reactions below the question: */}
+                  <div className="reactions-container">
+                    {msgObj.reactions?.map((r, i) => (
+                      <span key={i}> {r} </span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
