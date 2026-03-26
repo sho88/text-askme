@@ -52,7 +52,7 @@ export default function EventPassword() {
           <input
             className="pin-form__input"
             name="pin"
-            placeholder="Enter 6-digit Pin"
+            placeholder="Enter Pin (up to 6-digits)"
             type="password"
             maxLength="6"
             required

@@ -17,6 +17,7 @@ import useRoom from "@/hooks/room";
 import { auth0 } from "@/lib/auth0";
 import { asyncify } from "@/utils";
 import { updateDocument } from "@/utils/api";
+import ReduceBrowserSize from "../ReduceBrowsingSize";
 
 // 1. THE MERGED SERVER FUNCTION
 export const getServerSideProps = async (context) => {
@@ -145,6 +146,7 @@ export function EventSingleComponent({ room, session }) {
   // rendering
   return (
     <div>
+      <ReduceBrowserSize />
       {!room ? <p>Loading. Please wait...</p> : null}
 
       <div>
@@ -249,7 +251,7 @@ export function EventSingleComponent({ room, session }) {
                   {/* And display the reactions below the question: */}
                   <div className="reactions-container">
                     {msgObj.reactions?.map((r, i) => (
-                      <span key={i}> {r} </span>
+                      <span key={i}>{r}</span>
                     ))}
                   </div>
                 </div>

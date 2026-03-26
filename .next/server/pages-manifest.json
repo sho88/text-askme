@@ -1,19 +1,8 @@
 {
   "/_app": "pages/_app.js",
-  "/FadeOutElement": "pages/FadeOutElement.html",
   "/_error": "pages/_error.js",
-  "/api/database": "pages/api/database.js",
-  "/ReduceBrowsingSize": "pages/ReduceBrowsingSize.html",
-  "/api/verify-pin": "pages/api/verify-pin.js",
-  "/event-pin": "pages/event-pin.html",
-  "/events/[id]/NameInput": "pages/events/[id]/NameInput.html",
-  "/events/[id]/edit": "pages/events/[id]/edit.js",
-  "/api/upload": "pages/api/upload.js",
-  "/test": "pages/test.js",
-  "/users-profile": "pages/users-profile.js",
-  "/dashboard": "pages/dashboard.js",
   "/_document": "pages/_document.js",
+  "/dashboard": "pages/dashboard.js",
   "/events/[id]": "pages/events/[id].js",
-  "/": "pages/index.js",
-  "/404": "pages/404.html"
+  "/": "pages/index.js"
 }

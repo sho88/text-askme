@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { updateDocument } from "@/utils/api";
 import "@/styles/main.css";
+import useEvents from "@/hooks/useEvents";
 
 export default function NameInput({ initialData }) {
   const router = useRouter();
@@ -10,6 +11,7 @@ export default function NameInput({ initialData }) {
     initialData?.description || ""
   );
   const [loading, setLoading] = useState(false);
+  // const { editEvent } = useEvents(null, "rooms");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +23,7 @@ export default function NameInput({ initialData }) {
     };
 
     try {
-      // updateDocument(collection, id, data)
+      // const success = await editEvent(initialData._id, updatedFields);
       const success = await updateDocument(
         "rooms",
         initialData._id,
@@ -32,7 +34,7 @@ export default function NameInput({ initialData }) {
         alert("Changes saved successfully!");
         router.push("/dashboard"); // Redirect back to dashboard after saving
       } else {
-        alert("Failed to update event.");
+        alert("Failed to update event. ERROR");
       }
     } catch (error) {
       console.error("Update error:", error);

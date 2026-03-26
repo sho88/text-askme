@@ -10,6 +10,7 @@ import mainStyle from "@/styles/main.css";
 import { auth0 } from "@/lib/auth0";
 import { asyncify } from "@/utils";
 import GuestHeader from "@/components/header/GuestHeader";
+import ReduceBrowserSize from "./ReduceBrowsingSize";
 
 export const getServerSideProps = async (context) => {
   const [error, session] = await asyncify(
@@ -56,6 +57,7 @@ export default function DashboardPageComponent({ session }) {
 
   return (
     <div>
+      <ReduceBrowserSize />
       {user ? (
         <div>
           <HeaderComponent />

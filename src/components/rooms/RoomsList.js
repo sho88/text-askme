@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ModalEventsOptionsComponent } from "../modal/modal-events-options";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { deleteDocument } from "@/utils/api";
+import useEvents from "@/hooks/useEvents";
 import "@/styles/globals.css";
 import "@/styles/main.css";
 
@@ -16,9 +16,15 @@ export default function RoomsList({
   const [selectedEvent, setSelectedEvent] = useState(null);
   const router = useRouter();
 
-  const handleAddClick = (event) => {
+  // 1. Initialize the hook
+  // We pass 'null' for room initially because the hook needs a room object,
+  // but here we are managing a LIST of rooms.
+
+  const { deleteEventTwo } = useEvents(null, "rooms");
+
+  const handleAddClick = (room) => {
     setShowModal(true);
-    setSelectedEvent(event);
+    setSelectedEvent(room);
   };
 
   const handleModalClose = (shouldRefresh) => {
@@ -29,19 +35,23 @@ export default function RoomsList({
   };
 
   const handleEditAction = () => {
-    const id = selectedEvent?._id || selectedEvent;
+    const id = selectedEvent?._id;
     router.push(`/events/${id}/edit`);
   };
 
-  // THE DELETE LOGIC
+  // 2. USE THE HOOK METHOD HERE
   const handleDeleteAction = async () => {
-    const id = selectedEvent?._id || selectedEvent;
-    if (window.confirm("Are you sure you want to delete this room?")) {
-      const success = await deleteDocument("rooms", id);
-      if (success) {
-        handleModalClose(true); // Close and refresh dashboard
-      } else {
-        alert("Delete failed.");
+    const id = selectedEvent?._id;
+
+    if (window.confirm("Are you sure you want to delete this tpoic?")) {
+      try {
+        // Use the function from your useEvents hook
+        await deleteEventTwo(id);
+
+        // Close modal and tell the parent to refresh the list
+        handleModalClose(true);
+      } catch (err) {
+        alert("Delete failed: " + err.message);
       }
     }
   };
@@ -83,3 +93,5 @@ export default function RoomsList({
     </>
   );
 }
+
+// 6 23 49

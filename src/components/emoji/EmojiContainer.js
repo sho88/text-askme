@@ -61,7 +61,6 @@ export const EmojiContainer = ({ onModalClose, onEmojiSelect }) => {
               <div
                 key={emoji}
                 className={className}
-                style={{ cursor: "pointer" }}
                 onClick={() => {
                   onEmojiSelect(emoji); // This tells the main page which one you picked
                   onModalClose(); // This closes the pop-up

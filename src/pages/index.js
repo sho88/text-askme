@@ -64,7 +64,7 @@ const Intro = ({ session }) => {
 
   return (
     <div>
-      <ReduceBrowserSize />
+      {/* <ReduceBrowserSize /> */}
       <div className="intro-body-container">
         <div style={{ position: "relative", width: "100%" }}>
           <div className="intro-header-container">
@@ -77,9 +77,9 @@ const Intro = ({ session }) => {
             {user ? <LogoutButton /> : <LoginButton />}
           </div>
           <div
+            className="qa-image-wrapper"
             style={{
               position: "relative",
-              height: "400px",
               overflow: "hidden",
             }}
           >
@@ -92,7 +92,8 @@ const Intro = ({ session }) => {
             />
             <Image
               alt="Opening..."
-              src="/images/qa-opening.png"
+              className="qa-opening-image"
+              src="/images/qa-opening-cropped-2.png"
               fill
               style={{ objectFit: "cover" }}
             />
@@ -130,8 +131,7 @@ const Intro = ({ session }) => {
               <h2>
                 Provide seamless interaction with your audience with a live,
                 two-way communication. Your audience will submit their questions
-                through the app, as you respond to them in real-time! Audiences
-                view:
+                through the app, as you respond to them in real-time!
               </h2>
             ) : (
               <h2>
@@ -145,6 +145,7 @@ const Intro = ({ session }) => {
         </div>
         <div className="intro-image-section">
           <div className="intro-image-section-image-overlay"></div>
+
           <Image
             className="intro-image-section-image"
             src="/images/tqa-ss-9.webp"
@@ -152,14 +153,15 @@ const Intro = ({ session }) => {
             width={2000}
             height={2000}
           />
+          <div className="resol">i</div>
           <div className="placeholder">
             {" "}
             <Image
               className="intro-image-section-image"
               src="/images/tqa-ss-1.webp"
               alt="pic"
-              width={1000}
-              height={1000}
+              width={3000}
+              height={3000}
             />
           </div>
           <div className="placeholder-2" style={{ "--scroll-offset": scrollY }}>
@@ -167,8 +169,8 @@ const Intro = ({ session }) => {
               className="intro-image-section-image-2"
               src="/images/tqa-ss-6.webp"
               alt="pic"
-              width={1000}
-              height={1000}
+              width={3000}
+              height={3000}
             />
           </div>
           <div className="placeholder-3" style={{ "--scroll-offset": scrollY }}>
@@ -225,7 +227,6 @@ const Intro = ({ session }) => {
               </u>
             )}
           </div>
-
           <div className="intro-footer-body">
             <div>
               <div className="intro-footer-body-text" onClick={handleAboutMe}>
@@ -266,6 +267,14 @@ const Intro = ({ session }) => {
               height={35}
               alt="Picture of the author"
             /> */}
+          </div>
+          <div className="cover-footer-gap">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
           </div>
         </footer>
       </div>
