@@ -56,35 +56,6 @@ const useEvents = (room, collection) => {
     }
   };
 
-  // DELETE method
-  // DELETE method
-  // DELETE method
-  const deleteEventTwo = async (id) => {
-    if (!id) return;
-    try {
-      const res = await fetch(
-        `/api/database?collection=${collection}&id=${id}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error("Res is not okay. Failed to delete event. ERROR");
-      }
-
-      const deleteFunction = (prev) => {
-        const thisOne = prev.filter((callBack) => callBack._id !== id);
-        return thisOne;
-      };
-
-      setEvents(deleteFunction);
-    } catch (err) {
-      console.error(err.message);
-      setError(true);
-    }
-  };
-
   // EDIT (PUT) method
   // EDIT (PUT) method
   // EDIT (PUT) method
@@ -116,6 +87,35 @@ const useEvents = (room, collection) => {
           return item._id === id ? updatedData : item;
         });
       });
+    } catch (err) {
+      console.error(err.message);
+      setError(true);
+    }
+  };
+
+  // DELETE method
+  // DELETE method
+  // DELETE method
+  const deleteEventTwo = async (id) => {
+    if (!id) return;
+    try {
+      const res = await fetch(
+        `/api/database?collection=${collection}&id=${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Res is not okay. Failed to delete event. ERROR");
+      }
+
+      const deleteFunction = (prev) => {
+        const thisOne = prev.filter((callBack) => callBack._id !== id);
+        return thisOne;
+      };
+
+      setEvents(deleteFunction);
     } catch (err) {
       console.error(err.message);
       setError(true);
