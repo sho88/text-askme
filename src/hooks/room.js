@@ -1,8 +1,9 @@
 import { asyncify } from "@/utils";
 import { useEffect, useState } from "react";
 
+// Hook responsible for QUESTIONS
+
 /**
- * Used primarily for retrieving specific room information (and messages)
  * @param {string} roomID
  * @returns {object} { messages, room }
  */

@@ -1,6 +1,8 @@
+// Hook responsible for EVENTS
+
 import { useEffect, useState } from "react";
 
-const useEvents = (room, collection) => {
+export const useEvents = (event, collection, id, user) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(false);
   // optional loading state in thought
@@ -9,24 +11,20 @@ const useEvents = (room, collection) => {
   // GET method
   // GET method
   useEffect(() => {
-    const fetchingEvent = async () => {
-      if (!room || !collection) return;
+    const fetchingEvents = async () => {
       try {
         const res = await fetch(
-          `/api/database?collection=${collection}&eventId=${room._id}`
+          `/api/database?collection=rooms${id ? `&id=${id}` : ""}`
         );
-        if (!res.ok) {
-          throw new Error("Res is not okay. Operation failed. Error.");
-        }
         const data = await res.json();
-        setEvents(data);
+        setEvents(Array.isArray(data) ? data : [data]);
       } catch (err) {
-        console.error(err.message);
-        setError(true);
+        console.error("Error fetching rooms", err);
       }
     };
-    fetchingEvent();
-  }, [collection, room?._id]);
+
+    fetchingEvents();
+  }, [id, user?.sub]); // Re-run the search if the User ID changes
 
   // POST method
   // POST method
@@ -49,7 +47,8 @@ const useEvents = (room, collection) => {
         const finalData = [...previous, data];
         return finalData;
       };
-      setEvents(actualData);
+
+      setEvents(theData);
     } catch (err) {
       console.error(err.message);
       setError(true);
@@ -128,7 +127,7 @@ const useEvents = (room, collection) => {
     postingEventsFive,
     deleteEventTwo,
     editEvent,
-    room,
+    event,
     collection,
   };
 };

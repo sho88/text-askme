@@ -91,35 +91,35 @@
   "dataRoutes": [
     {
       "page": "/",
-      "dataRouteRegex": "^/_next/data/\\-UJ1EJuuTDDU3f4a4v7CC/index\\.json$"
+      "dataRouteRegex": "^/_next/data/X\\-gjfY1DrOHiWpCkH6reY/index\\.json$"
     },
     {
       "page": "/dashboard",
-      "dataRouteRegex": "^/_next/data/\\-UJ1EJuuTDDU3f4a4v7CC/dashboard\\.json$"
+      "dataRouteRegex": "^/_next/data/X\\-gjfY1DrOHiWpCkH6reY/dashboard\\.json$"
     },
     {
       "page": "/events/[id]",
       "routeKeys": {
         "nxtPid": "nxtPid"
       },
-      "dataRouteRegex": "^/_next/data/\\-UJ1EJuuTDDU3f4a4v7CC/events/([^/]+?)\\.json$",
-      "namedDataRouteRegex": "^/_next/data/\\-UJ1EJuuTDDU3f4a4v7CC/events/(?<nxtPid>[^/]+?)\\.json$"
+      "dataRouteRegex": "^/_next/data/X\\-gjfY1DrOHiWpCkH6reY/events/([^/]+?)\\.json$",
+      "namedDataRouteRegex": "^/_next/data/X\\-gjfY1DrOHiWpCkH6reY/events/(?<nxtPid>[^/]+?)\\.json$"
     },
     {
       "page": "/events/[id]/edit",
       "routeKeys": {
         "nxtPid": "nxtPid"
       },
-      "dataRouteRegex": "^/_next/data/\\-UJ1EJuuTDDU3f4a4v7CC/events/([^/]+?)/edit\\.json$",
-      "namedDataRouteRegex": "^/_next/data/\\-UJ1EJuuTDDU3f4a4v7CC/events/(?<nxtPid>[^/]+?)/edit\\.json$"
+      "dataRouteRegex": "^/_next/data/X\\-gjfY1DrOHiWpCkH6reY/events/([^/]+?)/edit\\.json$",
+      "namedDataRouteRegex": "^/_next/data/X\\-gjfY1DrOHiWpCkH6reY/events/(?<nxtPid>[^/]+?)/edit\\.json$"
     },
     {
       "page": "/test",
-      "dataRouteRegex": "^/_next/data/\\-UJ1EJuuTDDU3f4a4v7CC/test\\.json$"
+      "dataRouteRegex": "^/_next/data/X\\-gjfY1DrOHiWpCkH6reY/test\\.json$"
     },
     {
       "page": "/users-profile",
-      "dataRouteRegex": "^/_next/data/\\-UJ1EJuuTDDU3f4a4v7CC/users-profile\\.json$"
+      "dataRouteRegex": "^/_next/data/X\\-gjfY1DrOHiWpCkH6reY/users-profile\\.json$"
     }
   ],
   "rsc": {

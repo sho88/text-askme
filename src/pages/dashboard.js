@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
-import { useRooms } from "@/hooks/rooms";
+import { useEvents } from "@/hooks/useEvents";
 import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
 import EmptyDashboard from "@/components/dashboard/EmptyDashboard"; // New Import
@@ -29,7 +29,8 @@ export default function DashboardPageComponent({ session }) {
   const [user, setUser] = useState(session?.user || null);
   const router = useRouter();
   const { eventId } = router.query;
-  const { rooms } = useRooms(eventId, user); // Pass user to filter by owner
+  // const { rooms } = useRooms(eventId, user);
+  const { events } = useEvents(eventId, user);
   const [term, setTerm] = useState("");
 
   useEffect(() => {
@@ -37,8 +38,7 @@ export default function DashboardPageComponent({ session }) {
   }, [session]);
 
   const filteredRooms = useMemo(() => {
-    // Slice(0) creates a copy so we don't mutate the original array
-    const reverseOrder = [...rooms].reverse();
+    const reverseOrder = [...events].reverse();
 
     if (term.trim().length < 1) {
       return reverseOrder;
@@ -50,7 +50,7 @@ export default function DashboardPageComponent({ session }) {
         );
       });
     }
-  }, [rooms, term]);
+  }, [events, term]);
 
   const handleInput = (input) => setTerm(input);
   const handleRoomClick = (id) => router.push(`/events/${id}`);
@@ -62,8 +62,11 @@ export default function DashboardPageComponent({ session }) {
         <div>
           <HeaderComponent />
           <DashboardSearch whenInput={handleInput} />
-          {rooms.length > 0 ? (
-            <RoomsList rooms={filteredRooms} whenRoomClick={handleRoomClick} />
+          {events.length > 0 ? (
+            <RoomsList
+              eventsProp={filteredRooms}
+              whenRoomClick={handleRoomClick}
+            />
           ) : (
             <EmptyDashboard />
           )}

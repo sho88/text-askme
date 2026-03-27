@@ -1249,6 +1249,12 @@ position: relative;
   z-index: 2;
 }
 
+@media screen and (min-width: 600px) {
+  .qa-opening-hand {
+    display: none;
+  }
+}
+
 .qa-article-1 {
   /* margin-top: 90px; */
   width: 100%;

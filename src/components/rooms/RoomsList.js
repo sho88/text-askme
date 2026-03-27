@@ -8,7 +8,7 @@ import "@/styles/globals.css";
 import "@/styles/main.css";
 
 export default function RoomsList({
-  rooms = [],
+  eventsProp = [],
   whenRoomClick,
   onNewDataCreated,
 }) {
@@ -43,7 +43,7 @@ export default function RoomsList({
   const handleDeleteAction = async () => {
     const id = selectedEvent?._id;
 
-    if (window.confirm("Are you sure you want to delete this tpoic?")) {
+    if (window.confirm("Are you sure you want to delete this topic?")) {
       try {
         // Use the function from your useEvents hook
         await deleteEventTwo(id);
@@ -68,16 +68,16 @@ export default function RoomsList({
       )}
 
       <div className="dashboard-body-container">
-        {rooms.map((room) => (
-          <article key={room._id} className="all-messages-article-1">
+        {eventsProp.map((event) => (
+          <article key={event._id} className="all-messages-article-1">
             <RoomInformationComponent
-              {...room}
-              id={room._id}
+              {...event}
+              id={event._id}
               handleClick={whenRoomClick}
             />
             <button
               className="dashboard-bottom-test"
-              onClick={() => handleAddClick(room)}
+              onClick={() => handleAddClick(event)}
             >
               <Image
                 src="/images/fn-settings-6.png"
@@ -93,5 +93,3 @@ export default function RoomsList({
     </>
   );
 }
-
-// 6 23 49
