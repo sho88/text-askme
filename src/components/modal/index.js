@@ -12,9 +12,7 @@ export const ModalComponent = ({ onModalClose }) => {
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
 
-  // 2. Call your hook at the top level
-  // We pass an empty object {} initially because we don't have a room yet
-  const { postingEventsFive } = useEvents({}, "rooms");
+  const { postingEventsFive } = useEvents(null, "rooms");
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];

@@ -8,28 +8,25 @@ import HeaderComponent from "@/components/header";
 import EmptyDashboard from "@/components/dashboard/EmptyDashboard"; // New Import
 import mainStyle from "@/styles/main.css";
 import { auth0 } from "@/lib/auth0";
-import { asyncify } from "@/utils";
 import GuestHeader from "@/components/header/GuestHeader";
 import ReduceBrowserSize from "./ReduceBrowsingSize";
 
 export const getServerSideProps = async (context) => {
-  const [error, session] = await asyncify(
-    auth0.getSession(context.req, context.res)
-  );
+  const { req, res } = context;
 
-  if (error) {
-    console.error("Error fetching session:", error);
+  try {
+    const session = await auth0.getSession(req, res);
+    return { props: { session: session || null } };
+  } catch (err) {
+    console.error("Error fetching session:", err);
     return { props: { session: null } };
   }
-
-  return { props: { session: session || null } };
 };
 
 export default function DashboardPageComponent({ session }) {
   const [user, setUser] = useState(session?.user || null);
   const router = useRouter();
   const { eventId } = router.query;
-  // const { rooms } = useRooms(eventId, user);
   const { events } = useEvents(eventId, user);
   const [term, setTerm] = useState("");
 

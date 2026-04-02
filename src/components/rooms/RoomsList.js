@@ -45,13 +45,13 @@ export default function RoomsList({
 
     if (window.confirm("Are you sure you want to delete this topic?")) {
       try {
-        // Use the function from your useEvents hook
         await deleteEventTwo(id);
-
-        // Close modal and tell the parent to refresh the list
+        alert("Topic Deleted");
         handleModalClose(true);
       } catch (err) {
         alert("Delete failed: " + err.message);
+      } finally {
+        router.push("/dashboard");
       }
     }
   };

@@ -14,15 +14,20 @@ export const useEvents = (event, collection, id, user) => {
     const fetchingEvents = async () => {
       try {
         const res = await fetch(
-          `/api/database?collection=rooms${id ? `&id=${id}` : ""}`
+          // `/api/database?collection=rooms${id ? `&id=${id}` : ""}`
+          `/api/database?collection=rooms&id=${""}`
         );
+        if (!res.ok) {
+          throw new Error("Res is not okay. Operation failed.");
+        }
         const data = await res.json();
-        setEvents(Array.isArray(data) ? data : [data]);
+
+        const makeSureArray = Array.isArray(data) ? data : [data];
+        setEvents(makeSureArray);
       } catch (err) {
-        console.error("Error fetching rooms", err);
+        console.error("Error fetching rooms", err.message);
       }
     };
-
     fetchingEvents();
   }, [id, user?.sub]); // Re-run the search if the User ID changes
 

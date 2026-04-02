@@ -18,12 +18,11 @@ import { auth0 } from "@/lib/auth0";
 import { asyncify } from "@/utils";
 import { updateDocument } from "@/utils/api";
 import ReduceBrowserSize from "../ReduceBrowsingSize";
+import { notFound } from "next/navigation";
 
-// 1. THE MERGED SERVER FUNCTION
 export const getServerSideProps = async (context) => {
   const { params, req, res } = context;
   try {
-    // Get Room Data
     const { readData } = await import("@/utils/mongo");
     const roomData = await readData("rooms", params.id);
     if (!roomData) return { notFound: true };

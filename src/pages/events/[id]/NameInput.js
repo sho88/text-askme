@@ -11,7 +11,8 @@ export default function NameInput({ initialData }) {
     initialData?.description || ""
   );
   const [loading, setLoading] = useState(false);
-  // const { editEvent } = useEvents(null, "rooms");
+
+  const { editEvent } = useEvents(null, "rooms");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

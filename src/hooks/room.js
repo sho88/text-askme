@@ -1,7 +1,7 @@
+// Hook responsible for QUESTIONS
+
 import { asyncify } from "@/utils";
 import { useEffect, useState } from "react";
-
-// Hook responsible for QUESTIONS
 
 /**
  * @param {string} roomID
