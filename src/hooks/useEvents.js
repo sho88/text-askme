@@ -13,10 +13,7 @@ export const useEvents = (event, collection, id, user) => {
   useEffect(() => {
     const fetchingEvents = async () => {
       try {
-        const res = await fetch(
-          // `/api/database?collection=rooms${id ? `&id=${id}` : ""}`
-          `/api/database?collection=rooms&id=${""}`
-        );
+        const res = await fetch(`/api/database?collection=rooms&id=${""}`);
         if (!res.ok) {
           throw new Error("Res is not okay. Operation failed.");
         }
@@ -29,7 +26,7 @@ export const useEvents = (event, collection, id, user) => {
       }
     };
     fetchingEvents();
-  }, [id, user?.sub]); // Re-run the search if the User ID changes
+  }, [id, user?.sub]);
 
   // POST method
   // POST method
@@ -65,6 +62,7 @@ export const useEvents = (event, collection, id, user) => {
   // EDIT (PUT) method
   const editEvent = async (id, updatedPayload) => {
     if (!id || !updatedPayload) return;
+
     try {
       const res = await fetch(
         `/api/database?collection=${collection}&id=${id}`,
@@ -76,24 +74,24 @@ export const useEvents = (event, collection, id, user) => {
           body: JSON.stringify(updatedPayload),
         }
       );
-
       if (!res.ok) {
-        throw new Error("Res is not okay. Failed to update event. ERROR");
+        throw new Error("Operation failed. Res is not okay.");
       }
+      const newData = await res.json();
 
-      const updatedData = await res.json();
+      const replacingData = (prev) => {
+        const theFunction = prev.map((callBack) =>
+          callBack._id === id ? newData : prev
+        );
+        return theFunction;
+      };
 
-      // Update the local state to show the change immediately
-      setEvents((prev) => {
-        return prev.map((item) => {
-          // If the ID matches, swap the old item for the new 'updatedData'
-          // Otherwise, just keep the item as it was
-          return item._id === id ? updatedData : item;
-        });
-      });
+      setEvents(replacingData);
+      return true;
     } catch (err) {
       console.error(err.message);
       setError(true);
+      return false;
     }
   };
 
@@ -123,6 +121,7 @@ export const useEvents = (event, collection, id, user) => {
     } catch (err) {
       console.error(err.message);
       setError(true);
+      return false;
     }
   };
 
@@ -131,8 +130,8 @@ export const useEvents = (event, collection, id, user) => {
     setEvents,
     postingEventsFive,
     deleteEventTwo,
-    editEvent,
     event,
+    editEvent,
     collection,
   };
 };

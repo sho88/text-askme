@@ -64,7 +64,6 @@ const Intro = ({ session }) => {
 
   return (
     <div>
-      {/* <ReduceBrowserSize /> */}
       <div className="intro-body-container">
         <div style={{ position: "relative", width: "100%" }}>
           <div className="intro-header-container">

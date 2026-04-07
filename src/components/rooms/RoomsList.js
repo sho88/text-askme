@@ -16,9 +16,7 @@ export default function RoomsList({
   const [selectedEvent, setSelectedEvent] = useState(null);
   const router = useRouter();
 
-  // 1. Initialize the hook
-  // We pass 'null' for room initially because the hook needs a room object,
-  // but here we are managing a LIST of rooms.
+  // Passing 'null' for room initially because the hook needs a room object, but here we are managing a LIST of rooms.
 
   const { deleteEventTwo } = useEvents(null, "rooms");
 
@@ -39,7 +37,6 @@ export default function RoomsList({
     router.push(`/events/${id}/edit`);
   };
 
-  // 2. USE THE HOOK METHOD HERE
   const handleDeleteAction = async () => {
     const id = selectedEvent?._id;
 
@@ -56,6 +53,10 @@ export default function RoomsList({
     }
   };
 
+  const handleOnView = () => {
+    router.push(`/events/${selectedEvent?._id}`);
+  };
+
   return (
     <>
       {showModal && (
@@ -63,7 +64,7 @@ export default function RoomsList({
           onModalClose={() => handleModalClose(false)}
           onModalAction={handleEditAction}
           onDelete={handleDeleteAction}
-          onView={() => router.push(`/events/${selectedEvent?._id}`)} // Add this line!
+          onView={handleOnView}
         />
       )}
 
@@ -84,7 +85,7 @@ export default function RoomsList({
                 width={15}
                 height={14}
                 alt="Settings"
-                style={{ opacity: 0.5 }}
+                style={{ opacity: 0.45 }}
               />
             </button>
           </article>

@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import "./style.css";
 import Image from "next/image";
 import { uploadImage } from "@/utils/storage";
-// 1. Import your new hook (assuming it's in a hooks folder)
 import useEvents from "@/hooks/useEvents";
 
 export const ModalComponent = ({ onModalClose }) => {
@@ -26,14 +25,14 @@ export const ModalComponent = ({ onModalClose }) => {
 
     try {
       // 1. Upload the image FIRST to get the URL
-      // (This is better logic so you don't create a "broken" room with no image)
       const uploadResult = await uploadImage({ imageFile });
 
       if (!uploadResult?.url) {
-        throw new Error("Image upload failed");
+        throw new Error(
+          "Image upload failed. Cloudinary did not return back a URL."
+        );
       }
 
-      // 2. Use your hook's 'postingEvent' to save everything at once
       const newRoomData = {
         title,
         description,
@@ -41,13 +40,12 @@ export const ModalComponent = ({ onModalClose }) => {
         pin: Math.ceil(Math.random() * 1000000),
       };
 
-      // This calls the logic we built in your hook!
       await postingEventsFive(newRoomData);
 
       // 3. Success: Close modal
       onModalClose(newRoomData);
     } catch (error) {
-      console.error("Error creating data:", error);
+      console.error("Error creating data:", error.message);
       alert("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -57,7 +55,6 @@ export const ModalComponent = ({ onModalClose }) => {
   return (
     <div className="modal">
       <div className="modal__content">
-        {/* ... (Close button stays the same) ... */}
         <button className="modal__close" onClick={() => onModalClose(null)}>
           <Image
             alt="x"
@@ -91,7 +88,7 @@ export const ModalComponent = ({ onModalClose }) => {
             onClick={() => fileInputRef.current.click()}
             disabled={loading}
           >
-            {imageFile ? "Image Uploaded ✅" : "Upload topic image ⬆"}
+            {imageFile ? "Image Uploaded ✅" : "Upload topic image* ⬆"}
           </button>
 
           <input

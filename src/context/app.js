@@ -1,3 +1,5 @@
+// Page has been depricated. Replaced with auth0 authentification & getServerSideProobs
+
 // import { createContext, useReducer } from "react";
 
 // export const AppContext = createContext();

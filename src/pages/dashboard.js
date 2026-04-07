@@ -5,7 +5,7 @@ import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 import { useEvents } from "@/hooks/useEvents";
 import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
-import EmptyDashboard from "@/components/dashboard/EmptyDashboard"; // New Import
+import EmptyDashboard from "@/components/dashboard/EmptyDashboard";
 import mainStyle from "@/styles/main.css";
 import { auth0 } from "@/lib/auth0";
 import GuestHeader from "@/components/header/GuestHeader";
@@ -15,10 +15,14 @@ export const getServerSideProps = async (context) => {
   const { req, res } = context;
 
   try {
-    const session = await auth0.getSession(req, res);
-    return { props: { session: session || null } };
+    const theSession = await auth0.getSession(req, res);
+    return {
+      props: {
+        session: theSession || null,
+      },
+    };
   } catch (err) {
-    console.error("Error fetching session:", err);
+    console.err(err, "Operation failed.");
     return { props: { session: null } };
   }
 };

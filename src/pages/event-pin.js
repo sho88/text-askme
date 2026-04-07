@@ -1,5 +1,5 @@
 import mainStyle from "@/styles/main.css";
-import { useRouter } from "next/router"; // Changed to next/router for Pages directory
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -12,12 +12,11 @@ export default function EventPassword() {
     const pin = formData.get("pin");
 
     try {
-      // Call the new verification route
       const res = await fetch(`/api/verify-pin?pinCode=${pin}`);
       const result = await res.json();
 
       if (result.success) {
-        // redirects to the actual events-page
+        // redirecting to actual events-page
         // attempting to declare that this is a "guest" incoming, so make necessary changes
         router.push(`/events/${result.eventId}?fromPin=true`);
         // router.push(`/events/${id}`);

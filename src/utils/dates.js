@@ -12,5 +12,6 @@ export function formatDate(dateObject = undefined) {
   return format(date, "HH:mm d/MM");
   // return format(date, "d MMMM yyyy @ HH:mm d MMMM");
 
+  // My homework:
   // https://www.youtube.com/watch?v=RsFf7_9jUrw
 }

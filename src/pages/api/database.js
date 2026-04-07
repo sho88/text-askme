@@ -28,7 +28,7 @@ export default async function handler(req, res) {
             : eventId
             ? { eventId }
             : {};
-          const db = await start(); // Get the db instance
+          const db = await start();
           const data = await db
             .collection("questions")
             .find(filter)
@@ -47,7 +47,6 @@ export default async function handler(req, res) {
             .json(allRooms.filter((r) => r.userId === userId));
         }
 
-        // Default: Read specific item or all items
         const result = await readData(collection, id);
         return res.status(200).json(result);
 

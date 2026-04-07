@@ -3,10 +3,6 @@
 import { asyncify } from "@/utils";
 import { useEffect, useState } from "react";
 
-/**
- * @param {string} roomID
- * @returns {object} { messages, room }
- */
 const useRoom = (room) => {
   const [questions, setQuestions] = useState([]);
 
@@ -14,7 +10,6 @@ const useRoom = (room) => {
     const fetchQuestions = async () => {
       if (!room?._id) return;
 
-      // ADDED: collection=questions
       const [error, response] = await asyncify(
         fetch(`/api/database?collection=questions&eventId=${room._id}`)
       );
@@ -25,9 +20,6 @@ const useRoom = (room) => {
       }
 
       const result = await response.json();
-
-      // The backend returns the array directly or inside result.data
-      // Based on the unified handler, it likely returns the array directly
       if (result) {
         setQuestions(Array.isArray(result) ? result : result.data || []);
       }
@@ -39,7 +31,6 @@ const useRoom = (room) => {
   async function createQuestionApi(newQuestion) {
     const status = { success: false, message: "" };
 
-    // ADDED: collection=questions
     const [error, response] = await asyncify(
       fetch("/api/database?collection=questions", {
         method: "POST",
@@ -60,7 +51,6 @@ const useRoom = (room) => {
 
     const result = await response.json();
 
-    // The backend returns the new object
     const newDoc = result.data || result;
     setQuestions((prev) => [newDoc, ...prev]);
 
@@ -74,7 +64,6 @@ const useRoom = (room) => {
   async function deleteQuestionApi(id) {
     const status = { success: false, message: "" };
 
-    // ADDED: collection=questions
     const [error, response] = await asyncify(
       fetch(`/api/database?collection=questions&id=${id}`, { method: "DELETE" })
     );

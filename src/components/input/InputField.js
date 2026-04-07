@@ -1,24 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function InputField({ whenInput = () => {} } = {}) {
-  // properties etc...
   const [value, setValue] = useState("");
   const textAreaReference = useRef(null);
 
-  // hooks...
   useEffect(() => {
     textAreaReference.current.style.height = "auto";
     textAreaReference.current.style.height =
       textAreaReference.current.scrollHeight + "px";
   }, [value]);
 
-  // events...
   function handleChange(e) {
     setValue(e.target.value);
     whenInput(value);
   }
 
-  // return to the renderer...
   return (
     <div className="cover1">
       <div className="cover2">

@@ -22,28 +22,29 @@ import { notFound } from "next/navigation";
 
 export const getServerSideProps = async (context) => {
   const { params, req, res } = context;
+
   try {
     const { readData } = await import("@/utils/mongo");
-    const roomData = await readData("rooms", params.id);
-    if (!roomData) return { notFound: true };
-
-    // Get Auth0 Session
-    const [, session] = await asyncify(auth0.getSession(req, res));
+    const theSession = await auth0.getSession(req, res);
+    const theData = await readData("rooms", params.id);
+    if (!theData)
+      return {
+        notFound: true,
+      };
 
     return {
       props: {
-        room: JSON.parse(JSON.stringify(roomData)),
-        session: session || null,
+        room: JSON.parse(JSON.stringify(theData)),
+        session: theSession || null,
       },
     };
   } catch (err) {
-    console.error("SSR Error:", err);
+    console.error(err, "Operation failed. ERROR");
     return { notFound: true };
   }
 };
 
 export function EventSingleComponent({ room, session }) {
-  // LEARN HOW GETTING OF PIN WAS DONE
   console.log("Event PIN:", room?.pin);
   const { questions, setQuestions, createQuestionApi, deleteQuestionApi } =
     useRoom(room);
@@ -58,14 +59,8 @@ export function EventSingleComponent({ room, session }) {
     setUser(session?.user || null);
   }, [session]);
 
-  // useEffects etc go here...
-  // This tells the browser: "If the modal is open, hide the scrollbar. If not, show it."
-  useEffect(() => {
-    document.body.style.overflow = showModal ? "hidden" : "unset";
-  }, [showModal]);
-
   const handleAddClick = (questionId) => {
-    setSelectedQuestionId(questionId); // Remember which question we are reacting to
+    setSelectedQuestionId(questionId);
     setShowModal(true);
   };
 
@@ -85,20 +80,16 @@ export function EventSingleComponent({ room, session }) {
   const handleEmojiSelect = async (emoji) => {
     if (!selectedQuestionId) return;
 
-    // Find the current question to see existing reactions
     const question = questions.find((q) => q._id === selectedQuestionId);
     const currentReactions = question.reactions || [];
 
-    // Add the new emoji to the array
     const updatedReactions = [...currentReactions, emoji];
 
-    // Update the database (using your updateDocument utility)
     const success = await updateDocument("questions", selectedQuestionId, {
       reactions: updatedReactions,
     });
 
     if (success) {
-      // Update local state so the UI changes immediately
       setQuestions((prev) =>
         prev.map((q) =>
           q._id === selectedQuestionId
@@ -142,7 +133,6 @@ export function EventSingleComponent({ room, session }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // rendering
   return (
     <div>
       <ReduceBrowserSize />
@@ -151,7 +141,6 @@ export function EventSingleComponent({ room, session }) {
       <div>
         {user ? <HeaderComponent /> : <GuestHeader />}
 
-        {/* In your JSX, update the EmojiContainer call: */}
         {showModal && (
           <EmojiContainer
             onModalClose={handleModalClose}
@@ -191,7 +180,6 @@ export function EventSingleComponent({ room, session }) {
             <div className="layer-3">
               <div className="event__header">
                 <h1>{room.title || room.name}</h1>
-                {/* RESTYLE THIS EVENT PIN PRINT */}
 
                 {user && <p className="event__pin">Event pin: {room.pin}</p>}
               </div>
@@ -236,9 +224,8 @@ export function EventSingleComponent({ room, session }) {
                     </button>
                   ) : (
                     <button>
-                      {/* TODO - create handleEmoji for functionality */}
                       <Image
-                        onClick={() => handleAddClick(msgObj._id)} // Pass the ID here
+                        onClick={() => handleAddClick(msgObj._id)}
                         className="emoji-on-question-bar"
                         src="/images/select-emoji-5.png"
                         alt="React"
@@ -247,7 +234,6 @@ export function EventSingleComponent({ room, session }) {
                       />
                     </button>
                   )}
-                  {/* And display the reactions below the question: */}
                   <div className="reactions-container">
                     {msgObj.reactions?.map((r, i) => (
                       <span key={i}>{r}</span>
