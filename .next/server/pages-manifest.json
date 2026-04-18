@@ -1,18 +1,8 @@
 {
-  "/_error": "pages/_error.js",
   "/_app": "pages/_app.js",
-  "/ReduceBrowsingSize": "pages/ReduceBrowsingSize.html",
-  "/api/verify-pin": "pages/api/verify-pin.js",
-  "/FadeOutElement": "pages/FadeOutElement.html",
-  "/api/database": "pages/api/database.js",
-  "/event-pin": "pages/event-pin.html",
-  "/events/[id]/NameInput": "pages/events/[id]/NameInput.html",
-  "/api/upload": "pages/api/upload.js",
-  "/dashboard": "pages/dashboard.js",
-  "/events/[id]": "pages/events/[id].js",
+  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/events/[id]/edit": "pages/events/[id]/edit.js",
-  "/users-profile": "pages/users-profile.js",
+  "/dashboard": "pages/dashboard.js",
   "/": "pages/index.js",
-  "/404": "pages/404.html"
+  "/events/[id]": "pages/events/[id].js"
 }

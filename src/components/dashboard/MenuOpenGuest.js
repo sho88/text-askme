@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { MenuOptionIcon } from "./MenuOptionIcon";
 import { MenuOptionTitle } from "./MenuOptionTitle";
 import LogoutButtonInMenu from "../auth/LogoutButtonInMenu";
 import LoginButtonInMenu from "../auth/LoginButtonInMenu";

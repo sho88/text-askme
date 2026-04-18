@@ -1,6 +1,6 @@
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
-import NameInput from "./NameInput";
+import { EditEvent } from "./NameInput";
 import { readData } from "@/utils/mongo";
 import "@/styles/main.css";
 import "@/styles/globals.css";
@@ -12,7 +12,7 @@ export default function EditPage({ room }) {
     <div>
       <HeaderComponent />
       <div className="edit-page-layout">
-        <NameInput initialData={room} />
+        <EditEvent initialData={room} />
       </div>
       <DashboardBottomNav />
     </div>

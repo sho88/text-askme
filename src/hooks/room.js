@@ -1,103 +1,116 @@
 // Hook responsible for QUESTIONS
 
-import { asyncify } from "@/utils";
+import { add } from "date-fns";
 import { useEffect, useState } from "react";
 
 const useRoom = (room) => {
   const [questions, setQuestions] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      if (!room?._id) return;
-
-      const [error, response] = await asyncify(
-        fetch(`/api/database?collection=questions&eventId=${room._id}`)
-      );
-
-      if (error) {
-        console.error("Error fetching questions:", error);
-        return;
-      }
-
-      const result = await response.json();
-      if (result) {
-        setQuestions(Array.isArray(result) ? result : result.data || []);
+    const fetchingRoomsOne = async () => {
+      if (!room) return;
+      try {
+        const res = await fetch(
+          `/api/database?collection=questions&eventId=${room._id}`
+        );
+        const data = await res.json();
+        // no need for a function to ensure it's an array
+        setQuestions(data);
+      } catch (err) {
+        console.error(err.message);
+        setError(true);
       }
     };
-
-    fetchQuestions();
+    fetchingRoomsOne();
   }, [room?._id]);
 
-  async function createQuestionApi(newQuestion) {
-    const status = { success: false, message: "" };
+  const createQuestionApi = async (payload) => {
+    if (!payload) return;
 
-    const [error, response] = await asyncify(
-      fetch("/api/database?collection=questions", {
+    try {
+      const res = await fetch(`/api/database?collection=questions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newQuestion),
-      })
-    );
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!res) {
+        throw new Error("ERROR, as res is not okay.");
+      }
+      const data = await res.json();
 
-    if (error) {
-      console.error("Error creating question:", error);
-
-      return {
-        ...status,
-        message: "Failed to create question",
-        error,
+      const addingToPrev = (prev) => {
+        const adding = [data, ...prev];
+        return adding;
       };
+
+      setQuestions(addingToPrev);
+    } catch (err) {
+      console.error(err.message);
     }
+  };
 
-    const result = await response.json();
+  const deleteQuestionApi = async (id) => {
+    if (!id) return;
 
-    const newDoc = result.data || result;
-    setQuestions((prev) => [newDoc, ...prev]);
+    try {
+      const res = await fetch(`/api/database?collection=questions&id=${id}`, {
+        method: "DELETE",
+      });
 
-    return {
-      ...status,
-      success: true,
-      message: "Question created successfully",
-    };
-  }
+      if (!res.ok) {
+        throw new Error("ERROR, as res is not okay.");
+      }
 
-  async function deleteQuestionApi(id) {
-    const status = { success: false, message: "" };
-
-    const [error, response] = await asyncify(
-      fetch(`/api/database?collection=questions&id=${id}`, { method: "DELETE" })
-    );
-
-    if (error) {
-      return {
-        ...status,
-        message: "Failed to delete question",
-        error,
+      const deleteFunction = (prev) => {
+        const remaining = prev.filter((question) => question._id !== id);
+        return remaining;
       };
-    }
 
-    if (!response.ok) {
-      return {
-        ...status,
-        message: "Failed to delete question",
+      setQuestions(deleteFunction);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const updateQuestionApi = async (id, payload) => {
+    if (!id || !payload) return;
+
+    try {
+      const res = await fetch(`/api/database?collection=questions&id=${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error("ERROR, as res is not okay.");
+      }
+
+      const updatingFunction = (prev) => {
+        const updated = prev.map((q) =>
+          q._id === id ? { ...q, ...payload } : q
+        );
+        return updated;
       };
+
+      setQuestions(updatingFunction);
+    } catch (err) {
+      console.error(err.message);
     }
-
-    setQuestions(questions.filter((q) => q._id !== id));
-
-    return {
-      ...status,
-      success: true,
-    };
-  }
+  };
 
   return {
     questions,
     setQuestions,
     room,
-
     createQuestionApi,
     deleteQuestionApi,
+    updateQuestionApi,
   };
 };
 

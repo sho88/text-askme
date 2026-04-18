@@ -1,7 +1,6 @@
 import mainStyle from "@/styles/main.css";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useState } from "react";
 
 export default function EventPassword() {
   const router = useRouter();
@@ -19,7 +18,6 @@ export default function EventPassword() {
         // redirecting to actual events-page
         // attempting to declare that this is a "guest" incoming, so make necessary changes
         router.push(`/events/${result.eventId}?fromPin=true`);
-        // router.push(`/events/${id}`);
       } else {
         alert("Invalid PIN. Please check with your host.");
       }

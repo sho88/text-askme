@@ -9,7 +9,7 @@ import EmptyDashboard from "@/components/dashboard/EmptyDashboard";
 import mainStyle from "@/styles/main.css";
 import { auth0 } from "@/lib/auth0";
 import GuestHeader from "@/components/header/GuestHeader";
-import ReduceBrowserSize from "./ReduceBrowsingSize";
+import ReduceBrowserSize from "./reduce-browsing-size";
 
 export const getServerSideProps = async (context) => {
   const { req, res } = context;
@@ -52,6 +52,10 @@ export default function DashboardPageComponent({ session }) {
       });
     }
   }, [events, term]);
+
+  // reverse array of events in room
+  // if nothing has been entered, return original array of events
+  // else, filter events (that's shown in dashboard) by input term
 
   const handleInput = (input) => setTerm(input);
   const handleRoomClick = (id) => router.push(`/events/${id}`);

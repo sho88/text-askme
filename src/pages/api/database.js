@@ -19,8 +19,6 @@ export default async function handler(req, res) {
 
     switch (req.method) {
       case "GET":
-        // Logic for Questions: Filter by EventId or Pin
-        //
         // Fetching questions
         if (collection === "questions") {
           const filter = pinCode
@@ -37,8 +35,6 @@ export default async function handler(req, res) {
           return res.status(200).json(data);
         }
 
-        // // Logic for Rooms: If logged in and no specific ID, show only user's rooms
-        //
         // Fetching rooms
         if (collection === "rooms" && userId && !id) {
           const allRooms = await readData(collection);
@@ -52,11 +48,10 @@ export default async function handler(req, res) {
 
       case "POST":
         const payload = { ...req.body, createdAt: new Date() };
-        if (collection === "rooms") payload.userId = userId; // Tag room owner
+        if (collection === "rooms") payload.userId = userId;
         const newId = await createData(collection, payload);
         return res.status(201).json({ ...payload, _id: newId });
 
-      // Inside src/pages/api/database.js switch statement:
       case "PUT":
         if (!id)
           return res.status(400).json({ error: "ID required for update" });

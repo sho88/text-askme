@@ -24,7 +24,6 @@ export const ModalComponent = ({ onModalClose }) => {
     setLoading(true);
 
     try {
-      // 1. Upload the image FIRST to get the URL
       const uploadResult = await uploadImage({ imageFile });
 
       if (!uploadResult?.url) {
@@ -42,7 +41,6 @@ export const ModalComponent = ({ onModalClose }) => {
 
       await postingEventsFive(newRoomData);
 
-      // 3. Success: Close modal
       onModalClose(newRoomData);
     } catch (error) {
       console.error("Error creating data:", error.message);

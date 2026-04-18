@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import "@/styles/main.css";
 import useEvents from "@/hooks/useEvents";
 
-export default function NameInput({ initialData }) {
+export const EditEvent = ({ initialData }) => {
   const router = useRouter();
   const [name, setName] = useState(initialData?.title || "");
   const [description, setDescription] = useState(
@@ -84,4 +84,4 @@ export default function NameInput({ initialData }) {
       </form>
     </div>
   );
-}
+};

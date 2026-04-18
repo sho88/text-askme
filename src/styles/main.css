@@ -131,6 +131,15 @@ p {
   border-radius: 10px;
 }
 
+.dashboard-burger-line-half {
+  width: 12px;
+  height: 2px;
+  margin-top: 5px;
+  margin-bottom: 3px;
+  background-color: #124259;
+  border-radius: 10px;
+}
+
 
 .head-button img {
   object-fit: contain;
@@ -1917,14 +1926,26 @@ position: relative;
  .reactions-container {
   position: absolute;
   align-self: flex-end;
-  font-size: 14px;
-  letter-spacing: 4px;
-  transform: translate(5px, 26px);
-  /* background-color: rgb(255, 255, 255); */
-  padding: 3px;
-  border-radius: 50px;
   display: flex;
- } 
+  gap: 8px;
+  transform: translate(5px, 26px);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid #eee;
+}
+
+.reaction-badge {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.reaction-count {
+  font-size: 14px;
+  color: #555;
+  margin-left: 2px;
+}
 /* EMOJI SECTION */
 /* EMOJI SECTION */
 

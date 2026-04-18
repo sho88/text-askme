@@ -15,9 +15,7 @@ import EmojiContainer from "@/components/emoji/EmojiContainer";
 import { formatDate } from "@/utils/dates";
 import useRoom from "@/hooks/room";
 import { auth0 } from "@/lib/auth0";
-import { asyncify } from "@/utils";
-import { updateDocument } from "@/utils/api";
-import ReduceBrowserSize from "../ReduceBrowsingSize";
+import ReduceBrowserSize from "../reduce-browsing-size";
 import { notFound } from "next/navigation";
 
 export const getServerSideProps = async (context) => {
@@ -46,12 +44,17 @@ export const getServerSideProps = async (context) => {
 
 export function EventSingleComponent({ room, session }) {
   console.log("Event PIN:", room?.pin);
-  const { questions, setQuestions, createQuestionApi, deleteQuestionApi } =
-    useRoom(room);
+  const {
+    questions,
+    setQuestions,
+    createQuestionApi,
+    deleteQuestionApi,
+    updateQuestionApi,
+  } = useRoom(room);
   const [user, setUser] = useState(session?.user || null);
 
   const router = useRouter();
-  const { dispatch, state } = useContext(TheFatherContext);
+  // const { dispatch, state } = useContext(TheFatherContext);
   const [showModal, setShowModal] = useState(false);
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
 
@@ -66,38 +69,23 @@ export function EventSingleComponent({ room, session }) {
 
   const handleDelete = async (id) => {
     const deleteQuestion = await deleteQuestionApi(id);
-
-    if (!deleteQuestion.success) {
-      console.error("Failed to delete question:", deleteQuestion.message);
-      return;
-    }
   };
 
   const handleModalClose = () => {
     setShowModal(false);
   };
 
+  // Study below
   const handleEmojiSelect = async (emoji) => {
     if (!selectedQuestionId) return;
 
     const question = questions.find((q) => q._id === selectedQuestionId);
     const currentReactions = question.reactions || [];
-
     const updatedReactions = [...currentReactions, emoji];
 
-    const success = await updateDocument("questions", selectedQuestionId, {
+    await updateQuestionApi(selectedQuestionId, {
       reactions: updatedReactions,
     });
-
-    if (success) {
-      setQuestions((prev) =>
-        prev.map((q) =>
-          q._id === selectedQuestionId
-            ? { ...q, reactions: updatedReactions }
-            : q
-        )
-      );
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -113,11 +101,6 @@ export function EventSingleComponent({ room, session }) {
       eventId: room._id,
       pin: Number(room.pin),
     });
-
-    if (!create.success) {
-      console.error("Failed to create question:", create.message);
-      return;
-    }
 
     e.target.reset();
   };
@@ -234,9 +217,24 @@ export function EventSingleComponent({ room, session }) {
                       />
                     </button>
                   )}
-                  <div className="reactions-container">
+                  {/* <div className="reactions-container">
                     {msgObj.reactions?.map((r, i) => (
                       <span key={i}>{r}</span>
+                    ))}
+                  </div> */}
+                  <div className="reactions-container">
+                    {Object.entries(
+                      (msgObj.reactions || []).reduce((acc, emoji) => {
+                        acc[emoji] = (acc[emoji] || 0) + 1;
+                        return acc;
+                      }, {})
+                    ).map(([emoji, count]) => (
+                      <div key={emoji} className="reaction-badge">
+                        <span>{emoji}</span>
+                        {count > 1 && (
+                          <span className="reaction-count">{count}</span>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>

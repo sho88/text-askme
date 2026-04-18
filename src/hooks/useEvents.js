@@ -1,4 +1,4 @@
-// Hook responsible for EVENTS
+// Hook responsible for EVENTS "rooms"
 
 import { useEffect, useState } from "react";
 
@@ -19,6 +19,7 @@ export const useEvents = (event, collection, id, user) => {
         }
         const data = await res.json();
 
+        // For safety, I am making sure we receive back an array
         const makeSureArray = Array.isArray(data) ? data : [data];
         setEvents(makeSureArray);
       } catch (err) {

@@ -6,10 +6,8 @@ import { useRouter } from "next/navigation";
 export const DashboardBottomNav = () => {
   const router = useRouter();
 
-  // states go here...
   const [showModal, setShowModal] = useState(false);
 
-  // events go here...
   const handleAddClick = () => {
     setShowModal(true);
   };

@@ -1,6 +1,6 @@
 import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
 
-const uri = process.env.MONGODB_URI; // Pulling from .env.local
+const uri = process.env.MONGODB_URI;
 
 const client = new MongoClient(uri, {
   serverApi: {

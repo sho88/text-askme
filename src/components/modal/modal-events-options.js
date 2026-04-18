@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export const ModalEventsOptionsComponent = ({
   onModalClose,
-  onModalAction, // This is your 'Edit' action
-  onDelete, // New prop for deleting
-  onView, // New prop for viewing
+  onModalAction,
+  onDelete,
+  onView,
 }) => {
   return (
     <div className="modal">

@@ -2,27 +2,21 @@ import { useState, useEffect } from "react";
 import "@/styles/main.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import ReduceBrowserSize from "./ReduceBrowsingSize";
+import ReduceBrowserSize from "./reduce-browsing-size";
 import { auth0 } from "@/lib/auth0";
-import { asyncify } from "@/utils";
 import LogoutButton from "@/components/auth/LogoutButton";
 import LoginButton from "@/components/auth/LoginButton";
 
 export const getServerSideProps = async (context) => {
-  const [error, session] = await asyncify(
-    auth0.getSession(context.req, context.res)
-  );
-
-  if (error) {
-    console.error("Error fetching session:", error);
+  const { req, res } = context;
+  try {
+    const session = await auth0.getSession(req, res);
     return {
-      props: { session: null },
+      props: { session: session || null },
     };
+  } catch (err) {
+    console.error(err, "Error fetching the session");
   }
-
-  return {
-    props: { session: session || null },
-  };
 };
 
 const Intro = ({ session }) => {
@@ -39,7 +33,6 @@ const Intro = ({ session }) => {
       setScrollY(window.scrollY);
     };
 
-    // Use passive listener for better scroll performance
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
@@ -47,7 +40,7 @@ const Intro = ({ session }) => {
     };
   }, []);
 
-  // events go here...
+  // events...
   function handleGuestLoginClick() {
     return router.push("/event-pin");
   }

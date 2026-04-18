@@ -51,8 +51,6 @@ export const EmojiContainer = ({ onModalClose, onEmojiSelect }) => {
 
         <div className="emoji-modal-container">
           {emojis.map((emoji) => {
-            // This logic checks which emoji we are currently looking at
-            // and gives it the special "Big" class from your CSS if needed.
             let className = "";
             if (emoji === "❤️") className = "big-heart";
             else if (emoji === "👍") className = "emoji-thumbs-up";
@@ -62,8 +60,8 @@ export const EmojiContainer = ({ onModalClose, onEmojiSelect }) => {
                 key={emoji}
                 className={className}
                 onClick={() => {
-                  onEmojiSelect(emoji); // This tells the main page which one you picked
-                  onModalClose(); // This closes the pop-up
+                  onEmojiSelect(emoji);
+                  onModalClose();
                 }}
               >
                 {emoji}

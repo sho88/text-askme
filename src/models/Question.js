@@ -11,7 +11,6 @@ const QuestionSchema = new mongoose.Schema({
     required: [true, "Event ID is required"],
   },
   pin: {
-    // Add this field
     type: Number,
     required: [true, "PIN is required"],
   },
