@@ -85,3 +85,4 @@ export const EditEvent = ({ initialData }) => {
     </div>
   );
 };
+export default EditEvent;
