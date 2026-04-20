@@ -13,7 +13,7 @@ export const RoomInformationComponent = ({
         <div className="room-container">
           <div className="room-image">
             <Image
-              src={image || "/images/placeholder.png"} // Safety fallback
+              src={image || "/images/placeholder.png"}
               width={55}
               height={55}
               alt={title || "Room Image"}
