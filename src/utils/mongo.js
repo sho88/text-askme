@@ -1,7 +1,6 @@
-// src/utils/mongo.js
 import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
 
-const uri = process.env.MONGODB_URI; // Correctly pulls from .env.local
+const uri = process.env.MONGODB_URI;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -14,28 +13,29 @@ const client = new MongoClient(uri, {
 let db;
 
 export async function start() {
-  if (db) return; // Prevent multiple connections
+  if (db) return db;
   try {
     await client.connect();
-    db = client.db("textqanda"); // Ensure this matches your URI database name
+    db = client.db("textqanda");
     console.log("Successfully connected to MongoDB");
+    return db;
   } catch (error) {
     console.error(`[CONNECTION ERROR]:`, error.message);
+    throw error;
   }
 }
 
 /**
- * Equivalent to POST / Firebase Push
- * @param {string} collectionName - The name of the collection
- * @param {object} data - The document to insert
+ * POST
+ * @param {string} collectionName
+ * @param {object} data
  */
 export async function createData(collectionName, data) {
-  await start(); // Ensure DB is connected
-
+  await start();
   try {
     const collection = db.collection(collectionName);
     const result = await collection.insertOne(data);
-    return result.insertedId; // Returns the new MongoDB ObjectId
+    return result.insertedId;
   } catch (error) {
     console.error("Error creating data:", error);
     return null;
@@ -43,20 +43,18 @@ export async function createData(collectionName, data) {
 }
 
 /**
- * Equivalent to GET
+GET
  * @param {string} collectionName
- * @param {string} id - Optional ID to find a specific document
+ * @param {string} id
  */
 export async function readData(collectionName, id = null) {
-  await start(); // Ensure DB is connected
-
+  await start();
   try {
     const collection = db.collection(collectionName);
     if (id) {
-      // Find one by ID
+      // Find one by ID // finding specific rooms by userId or EventId, or either?
       return await collection.findOne({ _id: new ObjectId(id) });
     } else {
-      // Find all in collection
       return await collection.find({}).toArray();
     }
   } catch (error) {
@@ -65,12 +63,13 @@ export async function readData(collectionName, id = null) {
   }
 }
 
+// Accessing a particular room by its PinCode / Guest experience of the app
 export async function readDataByParams(collectionName, pinCode = null) {
-  await start(); // Ensure DB is connected
+  await start();
 
   try {
     const collection = db.collection(collectionName);
-    // This looks for the 'pin' field in your 'rooms' document
+    // Looking for the 'pin' field in our 'rooms' document
     return await collection.find({ pin: pinCode }).toArray();
   } catch (error) {
     console.error("Error reading data:", error);
@@ -79,24 +78,21 @@ export async function readDataByParams(collectionName, pinCode = null) {
 }
 
 /**
- * Equivalent to PUT / Update
+PUT / Update
  * @param {string} collectionName
- * @param {string} id - The document ID to update
- * @param {object} data - The data to set
+ * @param {string} id
+ * @param {object} data
  */
 export async function updateData(collectionName, id, data) {
-  await start(); // Ensure DB is connected
-  
+  await start();
+
   try {
     const collection = db.collection(collectionName);
-
-    // If data is an array, we treat it as an insertMany (per your Firebase logic)
     if (Array.isArray(data)) {
       const result = await collection.insertMany(data);
       return result.acknowledged;
     }
 
-    // Otherwise, perform a standard update
     await collection.updateOne({ _id: new ObjectId(id) }, { $set: data });
     return true;
   } catch (error) {
@@ -108,10 +104,10 @@ export async function updateData(collectionName, id, data) {
 /**
  * Equivalent to DELETE
  * @param {string} collectionName
- * @param {string} id - The document ID to delete
+ * @param {string} id
  */
 export async function deleteData(collectionName, id) {
-  await start(); // Ensure DB is connected
+  await start();
 
   try {
     const collection = db.collection(collectionName);

@@ -2,7 +2,6 @@ import { BackButton } from "../dashboard/BackButton";
 import Image from "next/image";
 import { BurgerMenuGuest } from "../dashboard/BurgerMenuGuest";
 
-// @TODO: This should be moved to a header...
 export const GuestHeader = () => {
   return (
     <header className="head">

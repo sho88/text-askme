@@ -1,7 +1,6 @@
 import mainStyle from "@/styles/main.css";
-import { useRouter } from "next/router"; // Changed to next/router for Pages directory
+import { useRouter } from "next/router";
 import Image from "next/image";
-import { useState } from "react";
 
 export default function EventPassword() {
   const router = useRouter();
@@ -12,15 +11,13 @@ export default function EventPassword() {
     const pin = formData.get("pin");
 
     try {
-      // Call the new verification route
       const res = await fetch(`/api/verify-pin?pinCode=${pin}`);
       const result = await res.json();
 
       if (result.success) {
-        // redirects to the actual events-page
+        // redirecting to actual events-page
         // attempting to declare that this is a "guest" incoming, so make necessary changes
         router.push(`/events/${result.eventId}?fromPin=true`);
-        // router.push(`/events/${id}`);
       } else {
         alert("Invalid PIN. Please check with your host.");
       }
@@ -52,7 +49,7 @@ export default function EventPassword() {
           <input
             className="pin-form__input"
             name="pin"
-            placeholder="Enter 6-digit Pin"
+            placeholder="Enter Pin (up to 6-digits)"
             type="password"
             maxLength="6"
             required

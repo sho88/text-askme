@@ -9,5 +9,5 @@ export const uploadImage = async ({ imageFile }) => {
 
   if (!response.ok) throw new Error("Failed to upload image.");
 
-  return await response.json(); // Returns { url: "/images/your-image.png" }
+  return await response.json();
 };

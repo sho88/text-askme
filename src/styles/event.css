@@ -70,7 +70,7 @@ align-items: flex-start;
                     linear-gradient(200deg, white, rgb(13, 211, 218), white);
   background-origin: border-box;
   background-clip: padding-box, border-box; 
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   margin-top: 10px;
 }
 

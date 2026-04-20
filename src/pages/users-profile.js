@@ -1,39 +1,27 @@
-import LoginButton from "@/components/auth/LoginButton";
-import LogoutButton from "@/components/auth/LogoutButton";
-import ProfileComponent from "@/components/auth/Profile";
 import mainStyle from "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
-import { useUser } from "@auth0/nextjs-auth0/client";
 
 // This page is for testing Auth0 integration. It will display the user's profile if logged in, or a login button if not.
 
 import { auth0 } from "@/lib/auth0";
-import { asyncify } from "@/utils";
 import HeaderComponent from "@/components/header";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 
 export const getServerSideProps = async (context) => {
-  const [error, session] = await asyncify(
-    auth0.getSession(context.req, context.res)
-  );
-
-  if (error) {
-    console.error("Error fetching session:", error);
+  const { req, res } = context;
+  try {
+    const session = await auth0.getSession(req, res);
     return {
-      props: { session: null },
+      props: { session: session || null },
     };
+  } catch (err) {
+    console.error(err, "Error fetching the session");
   }
-
-  return {
-    props: { session: session || null },
-  };
 };
 
-// The main component that renders the test page
 export default function UserProfile({ session }) {
   const [user, setUser] = useState(session?.user || null);
 

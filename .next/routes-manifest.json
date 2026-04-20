@@ -1,0 +1,131 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/events/[id]",
+      "regex": "^/events/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/events/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/events/[id]/edit",
+      "regex": "^/events/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/events/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
+      "page": "/events/[id]/NameInput",
+      "regex": "^/events/([^/]+?)/NameInput(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/events/(?<nxtPid>[^/]+?)/NameInput(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/dashboard",
+      "regex": "^/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard(?:/)?$"
+    },
+    {
+      "page": "/event-pin",
+      "regex": "^/event\\-pin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/event\\-pin(?:/)?$"
+    },
+    {
+      "page": "/FadeOutElement",
+      "regex": "^/FadeOutElement(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/FadeOutElement(?:/)?$"
+    },
+    {
+      "page": "/reduce-browsing-size",
+      "regex": "^/reduce\\-browsing\\-size(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/reduce\\-browsing\\-size(?:/)?$"
+    },
+    {
+      "page": "/users-profile",
+      "regex": "^/users\\-profile(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/users\\-profile(?:/)?$"
+    }
+  ],
+  "dataRoutes": [
+    {
+      "page": "/",
+      "dataRouteRegex": "^/_next/data/En4gocRNX6O_3GWs8XKNr/index\\.json$"
+    },
+    {
+      "page": "/dashboard",
+      "dataRouteRegex": "^/_next/data/En4gocRNX6O_3GWs8XKNr/dashboard\\.json$"
+    },
+    {
+      "page": "/events/[id]",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "dataRouteRegex": "^/_next/data/En4gocRNX6O_3GWs8XKNr/events/([^/]+?)\\.json$",
+      "namedDataRouteRegex": "^/_next/data/En4gocRNX6O_3GWs8XKNr/events/(?<nxtPid>[^/]+?)\\.json$"
+    },
+    {
+      "page": "/events/[id]/edit",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "dataRouteRegex": "^/_next/data/En4gocRNX6O_3GWs8XKNr/events/([^/]+?)/edit\\.json$",
+      "namedDataRouteRegex": "^/_next/data/En4gocRNX6O_3GWs8XKNr/events/(?<nxtPid>[^/]+?)/edit\\.json$"
+    },
+    {
+      "page": "/users-profile",
+      "dataRouteRegex": "^/_next/data/En4gocRNX6O_3GWs8XKNr/users-profile\\.json$"
+    }
+  ],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

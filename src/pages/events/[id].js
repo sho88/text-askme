@@ -6,7 +6,7 @@ import SubmitQuestionsContainer from "@/components/submit-questions-container/Su
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import Provider, { TheFatherContext } from "@/context/app";
-import mainStyle from "@/styles/main.css";
+import "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
 import GuestHeader from "@/components/header/GuestHeader";
@@ -15,73 +15,82 @@ import EmojiContainer from "@/components/emoji/EmojiContainer";
 import { formatDate } from "@/utils/dates";
 import useRoom from "@/hooks/room";
 import { auth0 } from "@/lib/auth0";
-import { asyncify } from "@/utils";
+import ReduceBrowserSize from "../reduce-browsing-size";
+import { notFound } from "next/navigation";
 
-// 1. THE MERGED SERVER FUNCTION
 export const getServerSideProps = async (context) => {
   const { params, req, res } = context;
-  try {
-    // Get Room Data
-    const { readData } = await import("@/utils/mongo");
-    const roomData = await readData("rooms", params.id);
-    if (!roomData) return { notFound: true };
 
-    // Get Auth0 Session
-    const [error, session] = await asyncify(auth0.getSession(req, res));
+  try {
+    const { readData } = await import("@/utils/mongo");
+    const theSession = await auth0.getSession(req, res);
+    const theData = await readData("rooms", params.id);
+    if (!theData)
+      return {
+        notFound: true,
+      };
 
     return {
       props: {
-        room: JSON.parse(JSON.stringify(roomData)),
-        session: session || null, // Pass the session here!
+        room: JSON.parse(JSON.stringify(theData)),
+        session: theSession || null,
       },
     };
   } catch (err) {
-    console.error("SSR Error:", err);
+    console.error(err, "Operation failed. ERROR");
     return { notFound: true };
   }
 };
 
 export function EventSingleComponent({ room, session }) {
-  // initialise the hooks here...
-  const { questions, setQuestions, createQuestionApi, deleteQuestionApi } =
-    useRoom(room);
+  console.log("Event PIN:", room?.pin);
+  const {
+    questions,
+    setQuestions,
+    createQuestionApi,
+    deleteQuestionApi,
+    updateQuestionApi,
+  } = useRoom(room);
   const [user, setUser] = useState(session?.user || null);
 
   const router = useRouter();
-  const { dispatch, state } = useContext(TheFatherContext);
+  // const { dispatch, state } = useContext(TheFatherContext);
   const [showModal, setShowModal] = useState(false);
+  const [selectedQuestionId, setSelectedQuestionId] = useState(null);
 
   useEffect(() => {
     setUser(session?.user || null);
   }, [session]);
 
-  // useEffects etc go here...
-  // This tells the browser: "If the modal is open, hide the scrollbar. If not, show it."
-  useEffect(() => {
-    document.body.style.overflow = showModal ? "hidden" : "unset";
-  }, [showModal]);
-
-  const handleAddClick = () => {
+  const handleAddClick = (questionId) => {
+    setSelectedQuestionId(questionId);
     setShowModal(true);
   };
 
   const handleDelete = async (id) => {
     const deleteQuestion = await deleteQuestionApi(id);
-
-    if (!deleteQuestion.success) {
-      console.error("Failed to delete question:", deleteQuestion.message);
-      return;
-    }
   };
 
   const handleModalClose = () => {
     setShowModal(false);
   };
 
+  // Study below
+  const handleEmojiSelect = async (emoji) => {
+    if (!selectedQuestionId) return;
+
+    const question = questions.find((q) => q._id === selectedQuestionId);
+    const currentReactions = question.reactions || [];
+    const updatedReactions = [...currentReactions, emoji];
+
+    await updateQuestionApi(selectedQuestionId, {
+      reactions: updatedReactions,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Changing 'instant' to 'smooth' creates the glide effect
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     const formData = new FormData(e.target);
@@ -92,11 +101,6 @@ export function EventSingleComponent({ room, session }) {
       eventId: room._id,
       pin: Number(room.pin),
     });
-
-    if (!create.success) {
-      console.error("Failed to create question:", create.message);
-      return;
-    }
 
     e.target.reset();
   };
@@ -112,15 +116,20 @@ export function EventSingleComponent({ room, session }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // rendering
   return (
     <div>
+      <ReduceBrowserSize />
       {!room ? <p>Loading. Please wait...</p> : null}
 
       <div>
         {user ? <HeaderComponent /> : <GuestHeader />}
 
-        {showModal && <EmojiContainer onModalClose={handleModalClose} />}
+        {showModal && (
+          <EmojiContainer
+            onModalClose={handleModalClose}
+            onEmojiSelect={handleEmojiSelect}
+          />
+        )}
 
         <div className="event">
           <div className="event__container">
@@ -154,6 +163,8 @@ export function EventSingleComponent({ room, session }) {
             <div className="layer-3">
               <div className="event__header">
                 <h1>{room.title || room.name}</h1>
+
+                {user && <p className="event__pin">Event pin: {room.pin}</p>}
               </div>
               <div className="event__content">
                 <p>{room.description}</p>
@@ -163,23 +174,27 @@ export function EventSingleComponent({ room, session }) {
             <br />
 
             <div className="event__messages">
-              <h2 className="event__header-2">
-                Questions ({questions.length})
-              </h2>
-              {/* <button className="random1ne" onClick={handleModalClose}>
-                HIDE
-              </button> */}
+              <h2 className="event__header-2">{questions.length} questions</h2>
 
               {questions.map((msgObj) => (
                 <div key={msgObj._id} className="event__messages-2">
                   <div>
+                    <p>
+                      <small>
+                        <b>{msgObj.name} </b>
+                      </small>
+                    </p>
                     <p>{msgObj.question}</p>
-                    <span className="time-stampped">
-                      {/* {formatDate(msgObj) || "18:04"} */}
-                      19.05
-                    </span>
-                  </div>
+                    <small>
+                      <b>
+                        <p className="host-answer">{msgObj.hostname} </p>
+                      </b>
+                    </small>
 
+                    <p className="host-answer">{msgObj.answer}</p>
+
+                    <span className="time-stampped">{formatDate(msgObj)}</span>
+                  </div>
                   {user ? (
                     <button onClick={() => handleDelete(msgObj._id)}>
                       <Image
@@ -192,17 +207,36 @@ export function EventSingleComponent({ room, session }) {
                     </button>
                   ) : (
                     <button>
-                      {/* TODO - create handleEmoji for functionality */}
                       <Image
-                        onClick={handleAddClick}
+                        onClick={() => handleAddClick(msgObj._id)}
                         className="emoji-on-question-bar"
                         src="/images/select-emoji-5.png"
-                        alt="Up arrow"
+                        alt="React"
                         height="15"
                         width="15"
                       />
                     </button>
                   )}
+                  {/* <div className="reactions-container">
+                    {msgObj.reactions?.map((r, i) => (
+                      <span key={i}>{r}</span>
+                    ))}
+                  </div> */}
+                  <div className="reactions-container">
+                    {Object.entries(
+                      (msgObj.reactions || []).reduce((acc, emoji) => {
+                        acc[emoji] = (acc[emoji] || 0) + 1;
+                        return acc;
+                      }, {})
+                    ).map(([emoji, count]) => (
+                      <div key={emoji} className="reaction-badge">
+                        <span>{emoji}</span>
+                        {count > 1 && (
+                          <span className="reaction-count">{count}</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -248,7 +282,14 @@ export function EventSingleComponent({ room, session }) {
                   ) : (
                     <div className="four">
                       <textarea
-                        name="question"
+                        hidden="hidden"
+                        name="hostname"
+                        placeholder="Answer audience's questions here..."
+                      >
+                        Host says:
+                      </textarea>
+                      <textarea
+                        name="answer"
                         className="submit-questions-textarea"
                         placeholder="Answer audience's questions here..."
                         required
