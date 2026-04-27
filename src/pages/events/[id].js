@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
