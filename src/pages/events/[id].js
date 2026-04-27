@@ -179,7 +179,7 @@ export function EventSingleComponent({ room, session }) {
             <div className="event__messages">
               <h2 className="event__header-2">{questions.length} questions</h2>
 
-              {!user && <SocketComponent roomId={room._id} />}
+              {user && <SocketComponent roomId={room._id} />}
 
               {questions.map((questionObject) => (
                 <EventQuestionComponent
