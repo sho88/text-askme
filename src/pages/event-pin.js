@@ -1,6 +1,6 @@
-import mainStyle from "@/styles/main.css";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import "@/styles/main.css";
 
 export default function EventPassword() {
   const router = useRouter();
@@ -45,9 +45,10 @@ export default function EventPassword() {
       </div>
 
       <form className="pin-form" onSubmit={handleSubmit}>
-        <div className="pin-form-container">
+        <div className="pin-form__container">
           <input
             className="pin-form__input"
+            inputMode="numeric"
             name="pin"
             placeholder="Enter Pin (up to 6-digits)"
             type="password"

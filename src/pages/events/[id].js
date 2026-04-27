@@ -11,6 +11,7 @@ import useRoom from "@/hooks/room";
 import { auth0 } from "@/lib/auth0";
 import ReduceBrowserSize from "../reduce-browsing-size";
 import SocketComponent from "@/components/socket/socket";
+import EventQuestionComponent from "@/components/event-question/event-question";
 
 import "@/styles/main.css";
 import "@/styles/event.css";
@@ -133,6 +134,7 @@ export function EventSingleComponent({ room, session }) {
 
         <div className="event">
           <div className="event__container">
+
             <div className="background-2"></div>
             <div
               onClick={handleToBottom}
@@ -160,7 +162,8 @@ export function EventSingleComponent({ room, session }) {
                 />
               </div>
             </div>
-            <div className="layer-3">
+
+            <div className="event__details layer-3">
               <div className="event__header">
                 <h1>{room.title || room.name}</h1>
 
@@ -176,70 +179,19 @@ export function EventSingleComponent({ room, session }) {
             <div className="event__messages">
               <h2 className="event__header-2">{questions.length} questions</h2>
 
-              {questions.map((msgObj) => (
-                <div key={msgObj._id} className="event__messages-2">
-                  <div>
-                    <p>
-                      <small>
-                        <b>{msgObj.name} </b>
-                      </small>
-                    </p>
-                    <p>{msgObj.question}</p>
-                    <small>
-                      <b>
-                        <p className="host-answer">{msgObj.hostname} </p>
-                      </b>
-                    </small>
+              {!user && <SocketComponent roomId={room._id} />}
 
-                    <p className="host-answer">{msgObj.answer}</p>
-
-                    <span className="time-stampped">{formatDate(msgObj)}</span>
-                  </div>
-                  {user ? (
-                    <button onClick={() => handleDelete(msgObj._id)}>
-                      <Image
-                        className="questions-cross"
-                        src="/images/cross-cancel.png"
-                        alt="Delete"
-                        height="10"
-                        width="10"
-                      />
-                    </button>
-                  ) : (
-                    <button>
-                      <Image
-                        onClick={() => handleAddClick(msgObj._id)}
-                        className="emoji-on-question-bar"
-                        src="/images/select-emoji-5.png"
-                        alt="React"
-                        height="15"
-                        width="15"
-                      />
-                    </button>
-                  )}
-                  {/* <div className="reactions-container">
-                    {msgObj.reactions?.map((r, i) => (
-                      <span key={i}>{r}</span>
-                    ))}
-                  </div> */}
-                  <div className="reactions-container">
-                    {Object.entries(
-                      (msgObj.reactions || []).reduce((acc, emoji) => {
-                        acc[emoji] = (acc[emoji] || 0) + 1;
-                        return acc;
-                      }, {})
-                    ).map(([emoji, count]) => (
-                      <div key={emoji} className="reaction-badge">
-                        <span>{emoji}</span>
-                        {count > 1 && (
-                          <span className="reaction-count">{count}</span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              {questions.map((questionObject) => (
+                <EventQuestionComponent
+                  { ...questionObject }
+                  key={questionObject._id}
+                  user={user}
+                  handleDelete={handleDelete}
+                  handleAddClick={handleAddClick}
+                />
               ))}
             </div>
+
             <ScrollToTopButton>
               <div className="scroll-to-top">
                 <button onClick={handleToTop}>
@@ -254,8 +206,6 @@ export function EventSingleComponent({ room, session }) {
             </ScrollToTopButton>
 
             <SubmitQuestionsContainer>
-              {!user && <SocketComponent />}
-
               <form onSubmit={handleSubmit}>
                 <div className="submit-questions-container">
                   {!user ? (
@@ -310,6 +260,7 @@ export function EventSingleComponent({ room, session }) {
               </form>
             </SubmitQuestionsContainer>
           </div>
+
           <div className="random-box"></div>
         </div>
 
