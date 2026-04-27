@@ -6,7 +6,6 @@ import { useEvents } from "@/hooks/useEvents";
 import RoomsList from "@/components/rooms/RoomsList";
 import HeaderComponent from "@/components/header";
 import EmptyDashboard from "@/components/dashboard/EmptyDashboard";
-import mainStyle from "@/styles/main.css";
 import { auth0 } from "@/lib/auth0";
 import GuestHeader from "@/components/header/GuestHeader";
 import ReduceBrowserSize from "./reduce-browsing-size";
@@ -22,7 +21,7 @@ export const getServerSideProps = async (context) => {
       },
     };
   } catch (err) {
-    console.err(err, "Operation failed.");
+    console.error(err, "Operation failed.");
     return { props: { session: null } };
   }
 };
