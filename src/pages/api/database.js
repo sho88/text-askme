@@ -8,7 +8,6 @@ import {
 import { auth0 } from "@/lib/auth0";
 import { pusherServer } from "@/lib/pusher-server";
 
-
 export default async function handler(req, res) {
   try {
     await start();
@@ -16,7 +15,8 @@ export default async function handler(req, res) {
     const session = await auth0.getSession(req, res);
     const userId = session?.user?.sub;
 
-    if (!collection) return res.status(400).json({ error: "Collection required" });
+    if (!collection)
+      return res.status(400).json({ error: "Collection required" });
 
     switch (req.method) {
       case "GET":
@@ -51,6 +51,7 @@ export default async function handler(req, res) {
         const payload = {
           ...req.body,
           createdAt: new Date(),
+          author: userId || null,
         };
 
         if (collection === "rooms") payload.userId = userId;
@@ -58,7 +59,11 @@ export default async function handler(req, res) {
         const newId = await createData(collection, payload);
 
         // only trigger Pusher for new questions once newId is generated...
-        await pusherServer.trigger(`event-${payload.eventId}`, "new-question", true);
+        await pusherServer.trigger(
+          `event-${payload.eventId}`,
+          "new-question",
+          true
+        );
 
         // ...then return the full question data (including newId) in the response
         return res.status(201).json({ ...payload, _id: newId });
