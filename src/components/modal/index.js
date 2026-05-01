@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import "./style.css";
 import Image from "next/image";
 import { uploadImage } from "@/utils/storage";
 import useEvents from "@/hooks/useEvents";

@@ -10,11 +10,9 @@ export default async function handler(req, res) {
   try {
     await start();
 
-    // Search the 'rooms' collection for the PIN
     const rooms = await readDataByParams("rooms", Number(pinCode));
 
     if (rooms && rooms.length > 0) {
-      // Return the internal _id so the frontend can redirect
       return res.status(200).json({ success: true, eventId: rooms[0]._id });
     } else {
       return res

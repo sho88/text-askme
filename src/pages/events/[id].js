@@ -4,7 +4,6 @@ import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
 import SubmitQuestionsContainer from "@/components/submit-questions-container/SubmitQuestionsContainer";
 import { useRouter } from "next/router";
-import { useContext } from "react";
 import Provider, { TheFatherContext } from "@/context/app";
 import "@/styles/main.css";
 import "@/styles/event.css";
@@ -44,17 +43,11 @@ export const getServerSideProps = async (context) => {
 
 export function EventSingleComponent({ room, session }) {
   console.log("Event PIN:", room?.pin);
-  const {
-    questions,
-    setQuestions,
-    createQuestionApi,
-    deleteQuestionApi,
-    updateQuestionApi,
-  } = useRoom(room);
+  const { questions, createQuestionApi, deleteQuestionApi, updateQuestionApi } =
+    useRoom(room);
   const [user, setUser] = useState(session?.user || null);
 
   const router = useRouter();
-  // const { dispatch, state } = useContext(TheFatherContext);
   const [showModal, setShowModal] = useState(false);
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
 
@@ -75,7 +68,6 @@ export function EventSingleComponent({ room, session }) {
     setShowModal(false);
   };
 
-  // Study below
   const handleEmojiSelect = async (emoji) => {
     if (!selectedQuestionId) return;
 

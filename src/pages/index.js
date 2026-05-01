@@ -238,27 +238,11 @@ const Intro = ({ session }) => {
           <div className="intro-footer-logo-container">
             <small>
               Designed and developed by {""}
-              {/* <a
-                href="https://isaac-ola.com/"
-                rel="noreferrer"
-                style={{ color: "white" }}
-              >
-                Isaac Ola
-              </a>{" "} */}
               Isaac Ola & Sho-Carter Daniel.
               {"  "}
               <br />
               2026 ⓒ TextQ&A
             </small>
-
-            {/* logo for the footer */}
-            {/* <Image
-              className="footer-sole-logo"
-              src="/images/logo-text-white.png"
-              width={35}
-              height={35}
-              alt="Picture of the author"
-            /> */}
           </div>
           <div className="cover-footer-gap">
             <br />

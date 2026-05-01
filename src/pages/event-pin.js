@@ -5,9 +5,9 @@ import Image from "next/image";
 export default function EventPassword() {
   const router = useRouter();
 
-  const handleSubmit = async (ev) => {
-    ev.preventDefault();
-    const formData = new FormData(ev.target);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
     const pin = formData.get("pin");
 
     try {
@@ -15,7 +15,7 @@ export default function EventPassword() {
       const result = await res.json();
 
       if (result.success) {
-        // redirecting to actual events-page
+        // redirecting to actual events [id] page
         // attempting to declare that this is a "guest" incoming, so make necessary changes
         router.push(`/events/${result.eventId}?fromPin=true`);
       } else {
