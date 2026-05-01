@@ -51,6 +51,7 @@ export default async function handler(req, res) {
         const payload = {
           ...req.body,
           createdAt: new Date(),
+          author: userId || null,
         };
 
         if (collection === "rooms") payload.userId = userId;

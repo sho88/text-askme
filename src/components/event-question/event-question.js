@@ -2,6 +2,7 @@ import Image from "next/image";
 import { formatDate } from "@/utils/dates";
 
 const EventQuestionComponent = ({
+  room,
   user,
   handleAddClick,
   handleDelete,
@@ -25,7 +26,8 @@ const EventQuestionComponent = ({
 
       <span className="time-stampped">{formatDate(props)}</span>
     </div>
-    {user ? (
+
+    {user && user.sub === room.author ? (
       <button onClick={() => handleDelete(props._id)}>
         <Image
           className="questions-cross"

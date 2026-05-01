@@ -177,6 +177,7 @@ export function EventSingleComponent({ room, session }) {
               {questions.map((questionObject) => (
                 <EventQuestionComponent
                   {...questionObject}
+                  room={room}
                   key={questionObject._id}
                   user={user}
                   handleDelete={handleDelete}
