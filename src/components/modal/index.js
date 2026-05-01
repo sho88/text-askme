@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import { uploadImage } from "@/utils/storage";
 import useEvents from "@/hooks/useEvents";
-import { auth0 } from "@/lib/auth0";
 
 export const ModalComponent = ({ onModalClose }) => {
   const [title, setTitle] = useState("");
@@ -37,7 +36,6 @@ export const ModalComponent = ({ onModalClose }) => {
         description,
         image: uploadResult.url,
         pin: Math.ceil(Math.random() * 1000000),
-        author: (await auth0.getSession()).user,
       };
 
       await postingEventsFive(newRoomData);

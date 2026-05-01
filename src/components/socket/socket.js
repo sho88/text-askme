@@ -9,14 +9,7 @@ export default function SocketComponent({ roomId: eventId }) {
 
   useEffect(() => {
     const channel = pusherClient.subscribe(`event-${eventId}`);
-    console.log(
-      `I am listening to and have subscribed to channel: event-${eventId}...`
-    );
-
-    channel.bind("new-question", (data) => {
-      console.log("Received data from Pusher:", data);
-      setHasNewQuestion(true);
-    });
+    channel.bind("new-question", () => setHasNewQuestion(true));
 
     // Clean up subscription on unmount
     return () => {

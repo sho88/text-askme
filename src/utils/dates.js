@@ -1,11 +1,7 @@
 import { format, parseISO } from "date-fns";
 
 export function formatDate(dateObject = undefined) {
-  if (!dateObject) {
-    console.log("formatDate function called with undefined dateObject");
-    return "Unknown date";
-  }
-
+  if (!dateObject) return "Unknown date";
   if (!dateObject.createdAt) return "Unknown date";
 
   const date = parseISO(dateObject.createdAt);
