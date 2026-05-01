@@ -1147,7 +1147,15 @@ position: relative;
   margin-top: 15px;
 }
 
-.pin-form-container {
+.pin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.pin-form__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1156,7 +1164,7 @@ position: relative;
   height: 100%;
 }
 
-.pin-form-container button {
+.pin-form__container button {
   width: 100%;
   height: 50px;
   padding: 15px;
@@ -1170,18 +1178,6 @@ position: relative;
   border: 1px solid transparent;
   align-self: center;
   font-size: 12pt;
-}
-
-.pin-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.pin-form__label {
-  background-color: yellow;
 }
 
 .pin-form__input {
@@ -1203,6 +1199,10 @@ position: relative;
   border: none;
   font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 16px;
+}
+
+.pin-form__label {
+  background-color: yellow;
 }
 
 .quick-random {

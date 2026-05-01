@@ -1,21 +1,20 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
 import SubmitQuestionsContainer from "@/components/submit-questions-container/SubmitQuestionsContainer";
-import { useRouter } from "next/router";
-import Provider, { TheFatherContext } from "@/context/app";
-import "@/styles/main.css";
-import "@/styles/event.css";
-import "@/styles/globals.css";
 import GuestHeader from "@/components/header/GuestHeader";
 import ScrollToTopButton from "@/components/scroll-to-top-button/ScrollToTopButton";
 import EmojiContainer from "@/components/emoji/EmojiContainer";
-import { formatDate } from "@/utils/dates";
 import useRoom from "@/hooks/room";
 import { auth0 } from "@/lib/auth0";
 import ReduceBrowserSize from "../reduce-browsing-size";
-import { notFound } from "next/navigation";
+import SocketComponent from "@/components/socket/socket";
+import EventQuestionComponent from "@/components/event-question/event-question";
+
+import "@/styles/main.css";
+import "@/styles/event.css";
+import "@/styles/globals.css";
 
 export const getServerSideProps = async (context) => {
   const { params, req, res } = context;
@@ -43,18 +42,21 @@ export const getServerSideProps = async (context) => {
 
 export function EventSingleComponent({ room, session }) {
   console.log("Event PIN:", room?.pin);
+
+  // initialise hooks and states here...
   const { questions, createQuestionApi, deleteQuestionApi, updateQuestionApi } =
     useRoom(room);
+
+  const [selectedQuestionId, setSelectedQuestionId] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState(session?.user || null);
 
-  const router = useRouter();
-  const [showModal, setShowModal] = useState(false);
-  const [selectedQuestionId, setSelectedQuestionId] = useState(null);
-
+  // effects come here...
   useEffect(() => {
     setUser(session?.user || null);
   }, [session]);
 
+  // event handlers come here...
   const handleAddClick = (questionId) => {
     setSelectedQuestionId(questionId);
     setShowModal(true);
@@ -88,7 +90,7 @@ export function EventSingleComponent({ room, session }) {
     const formData = new FormData(e.target);
     const formValues = Object.fromEntries(formData.entries());
 
-    const create = await createQuestionApi({
+    await createQuestionApi({
       ...formValues,
       eventId: room._id,
       pin: Number(room.pin),
@@ -108,6 +110,7 @@ export function EventSingleComponent({ room, session }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // render comes here...
   return (
     <div>
       <ReduceBrowserSize />
@@ -152,7 +155,8 @@ export function EventSingleComponent({ room, session }) {
                 />
               </div>
             </div>
-            <div className="layer-3">
+
+            <div className="event__details layer-3">
               <div className="event__header">
                 <h1>{room.title || room.name}</h1>
 
@@ -168,70 +172,19 @@ export function EventSingleComponent({ room, session }) {
             <div className="event__messages">
               <h2 className="event__header-2">{questions.length} questions</h2>
 
-              {questions.map((msgObj) => (
-                <div key={msgObj._id} className="event__messages-2">
-                  <div>
-                    <p>
-                      <small>
-                        <b>{msgObj.name} </b>
-                      </small>
-                    </p>
-                    <p>{msgObj.question}</p>
-                    <small>
-                      <b>
-                        <p className="host-answer">{msgObj.hostname} </p>
-                      </b>
-                    </small>
+              {user && <SocketComponent roomId={room._id} />}
 
-                    <p className="host-answer">{msgObj.answer}</p>
-
-                    <span className="time-stampped">{formatDate(msgObj)}</span>
-                  </div>
-                  {user ? (
-                    <button onClick={() => handleDelete(msgObj._id)}>
-                      <Image
-                        className="questions-cross"
-                        src="/images/cross-cancel.png"
-                        alt="Delete"
-                        height="10"
-                        width="10"
-                      />
-                    </button>
-                  ) : (
-                    <button>
-                      <Image
-                        onClick={() => handleAddClick(msgObj._id)}
-                        className="emoji-on-question-bar"
-                        src="/images/select-emoji-5.png"
-                        alt="React"
-                        height="15"
-                        width="15"
-                      />
-                    </button>
-                  )}
-                  {/* <div className="reactions-container">
-                    {msgObj.reactions?.map((r, i) => (
-                      <span key={i}>{r}</span>
-                    ))}
-                  </div> */}
-                  <div className="reactions-container">
-                    {Object.entries(
-                      (msgObj.reactions || []).reduce((acc, emoji) => {
-                        acc[emoji] = (acc[emoji] || 0) + 1;
-                        return acc;
-                      }, {})
-                    ).map(([emoji, count]) => (
-                      <div key={emoji} className="reaction-badge">
-                        <span>{emoji}</span>
-                        {count > 1 && (
-                          <span className="reaction-count">{count}</span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              {questions.map((questionObject) => (
+                <EventQuestionComponent
+                  {...questionObject}
+                  key={questionObject._id}
+                  user={user}
+                  handleDelete={handleDelete}
+                  handleAddClick={handleAddClick}
+                />
               ))}
             </div>
+
             <ScrollToTopButton>
               <div className="scroll-to-top">
                 <button onClick={handleToTop}>
@@ -300,6 +253,7 @@ export function EventSingleComponent({ room, session }) {
               </form>
             </SubmitQuestionsContainer>
           </div>
+
           <div className="random-box"></div>
         </div>
 
@@ -309,12 +263,4 @@ export function EventSingleComponent({ room, session }) {
   );
 }
 
-export const exportThis = ({ room, session }) => {
-  return (
-    <Provider>
-      <EventSingleComponent room={room} session={session} />
-    </Provider>
-  );
-};
-
-export default exportThis;
+export default EventSingleComponent;

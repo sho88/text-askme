@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import "@/styles/main.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import ReduceBrowserSize from "./reduce-browsing-size";
 import { auth0 } from "@/lib/auth0";
 import LogoutButton from "@/components/auth/LogoutButton";
 import LoginButton from "@/components/auth/LoginButton";
