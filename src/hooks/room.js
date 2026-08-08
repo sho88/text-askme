@@ -25,6 +25,9 @@ const useRoom = (room) => {
     fetchingRoomsOne();
   }, [room?._id]);
 
+  // createQuestionApi
+  // add new data to prev
+
   const createQuestionApi = async (payload) => {
     if (!payload) return;
 
@@ -36,19 +39,22 @@ const useRoom = (room) => {
         },
         body: JSON.stringify(payload),
       });
+
       if (!res) {
-        throw new Error("ERROR, as res is not okay.");
+        throw new Error("this is an error message");
       }
+
       const data = await res.json();
 
-      const addingToPrev = (prev) => {
-        const adding = [data, ...prev];
-        return adding;
+      const addingToExisting = (existing) => {
+        const theNew = [data, ...existing];
+        return theNew;
       };
 
-      setQuestions(addingToPrev);
+      setQuestions(addingToExisting);
     } catch (err) {
       console.error(err.message);
+      setError(true);
     }
   };
 

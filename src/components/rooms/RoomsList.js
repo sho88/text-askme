@@ -48,9 +48,16 @@ export default function RoomsList({
       } catch (err) {
         alert("Delete failed: " + err.message);
       } finally {
-        router.push("/dashboard");
+        // router.push("/dashboard");
+        router.reload();
+        // setTimeout(() => {
+        //   router.refresh();
+        // }, 2000);
       }
     }
+    // setTimeout(() => {
+    //   router.reload();
+    // }, 2000);
   };
 
   const handleOnView = () => {

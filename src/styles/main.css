@@ -324,9 +324,24 @@ p {
 .edit-page-input {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
+  background-color: white;
+  border-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 18px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+}
+.edit-page-input-replace-image {
+  width: 100%;
+  height: 87vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   border-radius: 20px;
   padding-top: 20px;
@@ -2064,4 +2079,34 @@ position: relative;
   .cover-footer-gap {
     display: block;
   }
+}
+
+.change-image-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vw;
+  width: 84%;
+  /* background-color: rgba(255, 255, 255, 0.891); */
+  position: absolute;
+  opacity: 35%;
+}
+
+.replace-image-button {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.913);
+  color: rgb(45, 45, 45);
+  position: absolute;
+  /* height: 70px; */
+  width: 210px;
+  padding: 15px;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+
+.random-filler {
+  height: 250px;
+  z-index: 5;
 }

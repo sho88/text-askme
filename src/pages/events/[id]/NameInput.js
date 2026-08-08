@@ -1,25 +1,45 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import "@/styles/main.css";
 import useEvents from "@/hooks/useEvents";
+import Image from "next/image";
+import { uploadImage } from "@/utils/storage";
 
 export const EditEvent = ({ initialData }) => {
   const router = useRouter();
   const [name, setName] = useState(initialData?.title || "");
-  const [description, setDescription] = useState(
-    initialData?.description || ""
-  );
+  const [description, setDescription] = useState(initialData?.description);
+  const [imageFile, setImageFile] = useState(null);
+  const [image, setImage] = useState(initialData?.image);
+  const fileInputRef = useRef(null);
+  const [display, setDisplay] = useState(true);
+
   const [loading, setLoading] = useState(false);
 
   const { editEvent } = useEvents(null, "rooms");
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImageFile(file);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
+    const uploadResult = await uploadImage({ imageFile });
+
+    if (!uploadResult?.url) {
+      throw new Error(
+        "Image upload failed. Cloudinary did not return back a URL."
+      );
+    }
+
     const updatedFields = {
       title: name,
       description: description,
+      image: uploadResult.url,
     };
 
     const updatedChanges = await editEvent(initialData._id, updatedFields);
@@ -36,6 +56,14 @@ export const EditEvent = ({ initialData }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const hideCurrentImage = () => {
+    setDisplay((prevDisplay) => !prevDisplay);
+  };
+
+  const replaceImage = () => {
+    fileInputRef.current.click();
   };
 
   return (
@@ -65,14 +93,47 @@ export const EditEvent = ({ initialData }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <div>
-            <small>
-              &nbsp; &nbsp; &nbsp; Please note: Images cannot be changed at this
-              time
-            </small>
-            <br />
+        </label>
+
+        <label>
+          <div className="event__header-2">Upload New Image</div>
+
+          <div className="edit-page-input-replace-image">
+            <Image
+              className="event__image"
+              loading="lazy"
+              src={image || "/images/placeholder.png"}
+              height={1000}
+              width={1000}
+              style={{
+                objectFit: "cover",
+                borderRadius: "18px",
+                display: display ? "block" : "none",
+              }}
+            />
+            <div className="change-image-overlay"></div>
+            <button
+              type="button"
+              onClick={() => {
+                hideCurrentImage();
+                replaceImage();
+              }}
+              disabled={loading}
+              className="replace-image-button"
+            >
+              {imageFile ? "Image Uploaded ✅" : "Replace Image ⬆"}
+            </button>
           </div>
         </label>
+
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleImageChange}
+          style={{ display: "none" }}
+          required
+        />
 
         <button
           className="intro-call-to-action-button"
@@ -82,6 +143,8 @@ export const EditEvent = ({ initialData }) => {
           <b>{loading ? "Saving..." : "Update Changes"}</b>
         </button>
       </form>
+
+      <div className="random-filler" />
     </div>
   );
 };

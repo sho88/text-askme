@@ -34,7 +34,7 @@
   width: 92%;
   position: absolute;
   z-index: -1;
-  height: 500px;
+  height: auto;
   object-fit: cover;
   object-position: top;
   border-radius: 20px;

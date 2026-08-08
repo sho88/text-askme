@@ -131,9 +131,9 @@ export const useEvents = (event, collection, id, user) => {
     setEvents,
     postingEventsFive,
     deleteEventTwo,
-    event,
     editEvent,
     collection,
+    event,
   };
 };
 

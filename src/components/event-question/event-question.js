@@ -6,29 +6,29 @@ const EventQuestionComponent = ({
   user,
   handleAddClick,
   handleDelete,
-  ...props
+  theQuestion,
 }) => (
-  <div key={props._id} className="event__messages-2">
+  <div key={theQuestion._id} className="event__messages-2">
     <div>
       <p>
         <small>
-          <b>{props.name} </b>
+          <b>{theQuestion.name} </b>
         </small>
       </p>
-      <p>{props.question}</p>
+      <p>{theQuestion.question}</p>
       <small>
         <b>
-          <p className="host-answer">{props.hostname} </p>
+          <p className="host-answer">{theQuestion.hostname} </p>
         </b>
       </small>
 
-      <p className="host-answer">{props.answer}</p>
+      <p className="host-answer">{theQuestion.answer}</p>
 
-      <span className="time-stampped">{formatDate(props)}</span>
+      <span className="time-stampped">{formatDate(theQuestion)}</span>
     </div>
 
     {user && user.sub === room.author ? (
-      <button onClick={() => handleDelete(props._id)}>
+      <button onClick={() => handleDelete(theQuestion._id)}>
         <Image
           className="questions-cross"
           src="/images/cross-cancel.png"
@@ -40,7 +40,7 @@ const EventQuestionComponent = ({
     ) : (
       <button>
         <Image
-          onClick={() => handleAddClick(props._id)}
+          onClick={() => handleAddClick(theQuestion._id)}
           className="emoji-on-question-bar"
           src="/images/select-emoji-5.png"
           alt="React"
@@ -52,7 +52,7 @@ const EventQuestionComponent = ({
 
     <div className="reactions-container">
       {Object.entries(
-        (props.reactions || []).reduce((acc, emoji) => {
+        (theQuestion.reactions || []).reduce((acc, emoji) => {
           acc[emoji] = (acc[emoji] || 0) + 1;
           return acc;
         }, {})

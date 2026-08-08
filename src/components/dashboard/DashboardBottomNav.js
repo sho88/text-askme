@@ -15,9 +15,14 @@ export const DashboardBottomNav = () => {
   const handleModalClose = (newEventData) => {
     setShowModal(false);
 
-    console.clear();
-    console.log(`New Data`);
-    console.log(newEventData);
+    if (newEventData) {
+      console.clear();
+      console.log(`New Data`);
+      console.log(newEventData);
+      router.refresh();
+    } else {
+      console.clear();
+    }
   };
 
   const handleClickHome = () => {

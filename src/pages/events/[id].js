@@ -15,6 +15,7 @@ import EventQuestionComponent from "@/components/event-question/event-question";
 import "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
+import { notFound } from "next/navigation";
 
 export const getServerSideProps = async (context) => {
   const { params, req, res } = context;
@@ -40,10 +41,14 @@ export const getServerSideProps = async (context) => {
   }
 };
 
+// getting rooms info from mongo
+// getting user session from auth0
+
 export function EventSingleComponent({ room, session }) {
   console.log("Event PIN:", room?.pin);
 
   // initialise hooks and states here...
+
   const { questions, createQuestionApi, deleteQuestionApi, updateQuestionApi } =
     useRoom(room);
 
@@ -171,12 +176,11 @@ export function EventSingleComponent({ room, session }) {
 
             <div className="event__messages">
               <h2 className="event__header-2">{questions.length} questions</h2>
-
               {user && <SocketComponent roomId={room._id} />}
 
               {questions.map((questionObject) => (
                 <EventQuestionComponent
-                  {...questionObject}
+                  theQuestion={questionObject}
                   room={room}
                   key={questionObject._id}
                   user={user}
@@ -184,6 +188,12 @@ export function EventSingleComponent({ room, session }) {
                   handleAddClick={handleAddClick}
                 />
               ))}
+
+              {/* {questions.map((callback) => (
+                <div key={callback._id}>
+                  <p> {callback.question} </p>
+                </div>
+              ))} */}
             </div>
 
             <ScrollToTopButton>
