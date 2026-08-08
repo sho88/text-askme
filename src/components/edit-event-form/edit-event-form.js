@@ -5,7 +5,7 @@ import useEvents from "@/hooks/useEvents";
 import Image from "next/image";
 import { uploadImage } from "@/utils/storage";
 
-export const EditEvent = ({ initialData }) => {
+export const EditEventForm = ({ initialData }) => {
   const router = useRouter();
   const [name, setName] = useState(initialData?.title || "");
   const [description, setDescription] = useState(initialData?.description);
@@ -132,7 +132,7 @@ export const EditEvent = ({ initialData }) => {
           ref={fileInputRef}
           onChange={handleImageChange}
           style={{ display: "none" }}
-          required
+          // required
         />
 
         <button
@@ -148,4 +148,4 @@ export const EditEvent = ({ initialData }) => {
     </div>
   );
 };
-export default EditEvent;
+export default EditEventForm;

@@ -1,6 +1,6 @@
 import { DashboardBottomNav } from "@/components/dashboard/DashboardBottomNav";
 import HeaderComponent from "@/components/header";
-import { EditEvent } from "./NameInput";
+import { EditEventForm } from "../../../components/edit-event-form/edit-event-form";
 import { readData } from "@/utils/mongo";
 import "@/styles/main.css";
 import "@/styles/globals.css";
@@ -13,31 +13,12 @@ export default function EditPage({ room }) {
     <div>
       <HeaderComponent />
       <div className="edit-page-layout">
-        <EditEvent initialData={room} />
+        <EditEventForm initialData={room} />
       </div>
       <DashboardBottomNav />
     </div>
   );
 }
-
-// Server-side data fetching function... for pre-populating the edit form in the Edit Page Component
-// export async function getServerSideProps(context) {
-//   const { id } = context.params;
-
-//   try {
-//     const data = await readData("rooms", id);
-//     if (!data) return { props: { room: null } };
-
-//     return {
-//       props: {
-//         room: JSON.parse(JSON.stringify(data)),
-//       },
-//     };
-//   } catch (error) {
-//     console.error("Error fetching room:", error);
-//     return { props: { room: null } };
-//   }
-// }
 
 export const getServerSideProps = async (context) => {
   const { params } = context;
