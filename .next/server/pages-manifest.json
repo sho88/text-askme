@@ -3,6 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/events/[id]": "pages/events/[id].js",
-  "/dashboard": "pages/dashboard.js",
-  "/": "pages/index.js"
+  "/api/database": "pages/api/database.js"
 }

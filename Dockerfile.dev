@@ -1,0 +1,23 @@
+# Determine which environment to use (NodeJS, Python, etc.) based on the application requirements.
+FROM node:25-alpine
+
+# Almost like a "cd" command in the container into the /app directory. If the directory does not exist, it will be created.
+WORKDIR /app
+
+# Copy package.json and package-lock.json files in my local folder into the working directory in the container.
+COPY package.json package-lock.json ./
+
+# Install the dependencies defined in package.json using npm.
+RUN npm install
+
+# Copy the rest of the application code from my local folder into the working directory in the container ("/app").
+COPY . .
+
+ENV NODE_ENV=development
+ENV PORT=3000
+
+# Expose port 3000 to allow external access to the application running inside the container. This is necessary for development purposes, as it allows me to access the application from my host machine or other containers.
+EXPOSE 3000
+
+# Run the application in development mode using npm. This command will start the application and keep it running, allowing for live reloading and debugging during development.
+CMD ["npm", "run", "dev"]
