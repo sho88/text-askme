@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/events/[id]": "pages/events/[id].js",
   "/dashboard": "pages/dashboard.js",
-  "/events/[id]/edit": "pages/events/[id]/edit.js",
-  "/api/database": "pages/api/database.js",
-  "/api/upload": "pages/api/upload.js"
+  "/": "pages/index.js"
 }

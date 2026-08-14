@@ -2110,3 +2110,25 @@ position: relative;
   height: 250px;
   z-index: 5;
 }
+
+.socket-button-no-new {
+  background-color: gray;
+  border-radius: 30px;
+  color: white;
+  cursor: default;
+  padding: 9px;
+  opacity: 0.75;
+  /* transition: 0; */
+  width: 100%;
+}
+
+.socket-button-new {
+  background-color: #ff414f;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  padding: 9px;
+  opacity: 1;
+  /* transition: 0; */
+  width: 100%;
+}
