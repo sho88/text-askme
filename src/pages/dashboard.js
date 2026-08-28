@@ -58,6 +58,7 @@ export default function DashboardPageComponent({ session }) {
 
   const handleInput = (input) => setTerm(input);
   const handleRoomClick = (id) => router.push(`/events/${id}`);
+  const handlePractice = () => router.push("./practicePusher");
 
   return (
     <div>
@@ -66,6 +67,7 @@ export default function DashboardPageComponent({ session }) {
         <div>
           <HeaderComponent />
           <DashboardSearch whenInput={handleInput} />
+          <button onClick={handlePractice}>go to practice page</button>
           {events.length > 0 ? (
             <RoomsList
               eventsProp={filteredRooms}
@@ -74,7 +76,6 @@ export default function DashboardPageComponent({ session }) {
           ) : (
             <EmptyDashboard />
           )}
-
           <DashboardBottomNav />
         </div>
       ) : (

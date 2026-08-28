@@ -68,6 +68,8 @@ export default async function handler(req, res) {
         // ...then return the full question data (including newId) in the response
         return res.status(201).json({ ...payload, _id: newId });
 
+      // Inside your API handler (POST case):
+
       case "PUT":
         if (!id)
           return res.status(400).json({ error: "ID required for update" });
