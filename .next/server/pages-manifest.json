@@ -4,5 +4,5 @@
   "/_document": "pages/_document.js",
   "/dashboard": "pages/dashboard.js",
   "/practicePusher": "pages/practicePusher.js",
-  "/api/database": "pages/api/database.js"
+  "/": "pages/index.js"
 }

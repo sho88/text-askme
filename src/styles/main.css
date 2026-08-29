@@ -2132,3 +2132,7 @@ position: relative;
   /* transition: 0; */
   width: 100%;
 }
+
+.practice-websockets {
+  z-index: 9;
+}

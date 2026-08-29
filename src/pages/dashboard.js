@@ -58,7 +58,7 @@ export default function DashboardPageComponent({ session }) {
 
   const handleInput = (input) => setTerm(input);
   const handleRoomClick = (id) => router.push(`/events/${id}`);
-  const handlePractice = () => router.push("./practicePusher");
+  const handlePractice = () => router.push("/practicePusher");
 
   return (
     <div>
