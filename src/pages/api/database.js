@@ -47,26 +47,46 @@ export default async function handler(req, res) {
         const result = await readData(collection, id);
         return res.status(200).json(result);
 
-      case "POST":
-        const payload = {
-          ...req.body,
-          createdAt: new Date(),
-          author: userId || null,
-        };
+      // case "POST":
+      //   const payload = {
+      //     ...req.body,
+      //     createdAt: new Date(),
+      //     author: userId || null,
+      //   };
 
-        if (collection === "rooms") payload.userId = userId;
+      //   if (collection === "rooms") payload.userId = userId;
 
-        const newId = await createData(collection, payload);
+      //   const newId = await createData(collection, payload);
 
-        // only trigger Pusher for new questions once newId is generated...
-        await pusherServer.trigger(
-          `event-${payload.eventId}`,
-          "new-question",
-          true
-        );
+      //   // only trigger Pusher for new questions once newId is generated...
+      //   await pusherServer.trigger(
+      //     `event-${payload.eventId}`,
+      //     "new-question",
+      //     true
+      //   );
 
-        // ...then return the full question data (including newId) in the response
-        return res.status(201).json({ ...payload, _id: newId });
+      //   // ...then return the full question data (including newId) in the response
+      //   return res.status(201).json({ ...payload, _id: newId });
+
+case "POST":
+  const payload = {
+    ...req.body,
+    createdAt: new Date(),
+    author: userId || null,
+  };
+
+  if (collection === "rooms") payload.userId = userId;
+
+  const newId = await createData(collection, payload);
+
+  // Send the full message payload to Pusher instead of `true`
+  await pusherServer.trigger(
+    `event-${payload.eventId}`,
+    "new-question",
+    { ...payload, _id: newId }
+  );
+
+  return res.status(201).json({ ...payload, _id: newId });
 
       // Inside your API handler (POST case):
 
