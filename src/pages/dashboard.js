@@ -67,7 +67,6 @@ export default function DashboardPageComponent({ session }) {
         <div>
           <HeaderComponent />
           <DashboardSearch whenInput={handleInput} />
-          <button onClick={handlePractice}>go to practice page</button>
           {events.length > 0 ? (
             <RoomsList
               eventsProp={filteredRooms}
