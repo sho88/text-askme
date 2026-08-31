@@ -121,24 +121,24 @@ const Intro = ({ session }) => {
         <div className="intro-additional-section">
           <div className="intro-additional-section-body">
             {user ? (
-              // <h2>
-              //   Provide seamless interaction with your audience with a live,
-              //   two-way communication. Your audience will submit their questions
-              //   through the app, as you respond to them in real-time!
-              // </h2>
-              <button className="practice-websocketss" onClick={handlePractice}>
-                go to practice page
-              </button>
+              <h2>
+                Provide seamless interaction with your audience with a live,
+                two-way communication. Your audience will submit their questions
+                through the app, as you respond to them in real-time!
+              </h2>
+              // <button className="practice-websocketss" onClick={handlePractice}>
+              //   go to practice page
+              // </button>
             ) : (
-              // <h2>
-              //   Experience seamless interaction with live, two-way
-              //   communication. Submit your questions instantly, from the comfort
-              //   of your own home, and watch as speakers respond to you in
-              //   real-time!
-              // </h2>
-              <button className="practice-websocketss" onClick={handlePractice}>
-                go to practice page
-              </button>
+              <h2>
+                Experience seamless interaction with live, two-way
+                communication. Submit your questions instantly, from the comfort
+                of your own home, and watch as speakers respond to you in
+                real-time!
+              </h2>
+              // <button className="practice-websocketss" onClick={handlePractice}>
+              //   go to practice page
+              // </button>
             )}
           </div>
         </div>
