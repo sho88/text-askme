@@ -99,7 +99,7 @@ export default function PracticePusher() {
     };
 
     // Optimistically display your own message immediately
-    setMessages((prev) => [...prev, { ...payload, isMe: true }]);
+    // setMessages((prev) => [...prev, { ...payload, isMe: true }]);
 
     // Clear input right away
     setInputText("");
