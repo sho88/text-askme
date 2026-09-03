@@ -49,51 +49,6 @@ export const PracticePusher = () => {
     setInputText("");
   };
 
-  // return (
-  //   <div style={{ padding: "20px", maxWidth: "500px" }}>
-  //     <h3>Messages from friends go here:</h3>
-
-  //     <div
-  //       style={{
-  //         border: "1px solid #ccc",
-  //         padding: "10px",
-  //         borderRadius: "8px",
-  //         minHeight: "200px",
-  //         marginBottom: "15px",
-  //         display: "flex",
-  //         flexDirection: "column",
-  //         gap: "8px",
-  //       }}
-  //     >
-  //       {messages.length === 0 ? (
-  //         <p style={{ color: "#888" }}>No messages yet...</p>
-  //       ) : (
-  //         messages.map((msg, idx) => (
-  //           <div key={idx}>
-  //             <strong>{msg.isMe ? "You: " : "Friend: "}</strong>
-  //             {typeof msg === "object"
-  //               ? msg.text || msg.message || JSON.stringify(msg)
-  //               : msg}
-  //           </div>
-  //         ))
-  //       )}
-  //     </div>
-
-  //     <form onSubmit={handleSubmit} style={{ display: "flex", gap: "8px" }}>
-  //       <input
-  //         placeholder="Type message here"
-  //         type="text"
-  //         value={inputText}
-  //         onChange={(e) => setInputText(e.target.value)}
-  //         style={{ flex: 1, padding: "8px" }}
-  //       />
-  //       <button type="submit" style={{ padding: "8px 16px" }}>
-  //         Send
-  //       </button>
-  //     </form>
-  //   </div>
-  // );
-
   return (
     <div className="practice-container">
       <div>
@@ -116,12 +71,14 @@ export const PracticePusher = () => {
       <br />
       <br />
       <div className="list-of-messages-practice">
-        {messages.map((msg, theKey) => (
-          <div key={theKey}>
-            {/* <strong>{msg.isMe ? "You: " : "Friend: "}</strong> */}
-            {typeof msg === "object"
-              ? msg.text || msg.message || JSON.stringify(msg)
-              : msg}
+        {messages.map((singleMessage, ourKey) => (
+          <div key={ourKey}>
+            {/* But Who is sending? */}
+            {typeof singleMessage === "object"
+              ? singleMessage.text ||
+                singleMessage.message ||
+                JSON.stringify(singleMessage)
+              : singleMessage}
           </div>
         ))}
       </div>
