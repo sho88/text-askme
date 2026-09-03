@@ -2136,3 +2136,20 @@ position: relative;
 .practice-websockets {
   z-index: 9;
 }
+
+.list-of-messages-practice {
+  background-color: rgb(244, 229, 231);
+  height: 200px;
+}
+
+.practice-send {
+  background-color: coral;
+  color: white;
+  padding: 20px;
+}
+
+.practice-input {
+  border-width: 2px;
+  border-radius: 20px;
+  padding: 20px;
+}
