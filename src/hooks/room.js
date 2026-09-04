@@ -1,7 +1,7 @@
 // Hook responsible for QUESTIONS
 
-import { add } from "date-fns";
 import { useEffect, useState } from "react";
+import { pusherClient } from "@/lib/pusher-client";
 
 const useRoom = (room) => {
   const [questions, setQuestions] = useState([]);
@@ -25,8 +25,24 @@ const useRoom = (room) => {
     fetchingRoomsOne();
   }, [room?._id]);
 
-  // createQuestionApi
-  // add new data to prev
+  useEffect(() => {
+    if (!room?._id) return;
+
+    const channel = pusherClient.subscribe(`room-${room?._id}`);
+
+    channel.bind("question-created", (data) => {
+      setQuestions((prev) => [...prev, data]);
+    });
+
+    channel.bind("question-deleted", ({ id }) => {
+      setQuestions((prev) => prev.filter((q) => q._id !== id));
+    });
+
+    return () => {
+      channel.unbind_all();
+      pusherClient.unsubscribe(`room-${room?._id}`);
+    };
+  }, [room?._id]);
 
   const createQuestionApi = async (payload) => {
     if (!payload) return;
@@ -62,9 +78,13 @@ const useRoom = (room) => {
     if (!id) return;
 
     try {
-      const res = await fetch(`/api/database?collection=questions&id=${id}`, {
-        method: "DELETE",
-      });
+      // Added &eventId=${room?._id} so backend can trigger pusherServer
+      const res = await fetch(
+        `/api/database?collection=questions&id=${id}&eventId=${room?._id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!res.ok) {
         throw new Error("ERROR, as res is not okay.");

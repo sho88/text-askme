@@ -47,46 +47,32 @@ export default async function handler(req, res) {
         const result = await readData(collection, id);
         return res.status(200).json(result);
 
-      // case "POST":
-      //   const payload = {
-      //     ...req.body,
-      //     createdAt: new Date(),
-      //     author: userId || null,
-      //   };
+      case "POST":
+        const payload = {
+          ...req.body,
+          createdAt: new Date(),
+          author: userId || null,
+        };
 
-      //   if (collection === "rooms") payload.userId = userId;
+        if (collection === "rooms") payload.userId = userId;
 
-      //   const newId = await createData(collection, payload);
+        const newId = await createData(collection, payload);
+        const newQuestion = { ...payload, _id: newId };
 
-      //   // only trigger Pusher for new questions once newId is generated...
-      //   await pusherServer.trigger(
-      //     `event-${payload.eventId}`,
-      //     "new-question",
-      //     true
-      //   );
+        // Send the full message payload to Pusher instead of `true`
+        // await pusherServer.trigger(`event-${payload.eventId}`, "new-question", {
+        //   ...payload,
+        //   _id: newId,
+        // });
 
-      //   // ...then return the full question data (including newId) in the response
-      //   return res.status(201).json({ ...payload, _id: newId });
+        await pusherServer.trigger(
+          `room-${payload.eventId}`,
+          "question-created",
+          newQuestion
+        );
 
-case "POST":
-  const payload = {
-    ...req.body,
-    createdAt: new Date(),
-    author: userId || null,
-  };
-
-  if (collection === "rooms") payload.userId = userId;
-
-  const newId = await createData(collection, payload);
-
-  // Send the full message payload to Pusher instead of `true`
-  await pusherServer.trigger(
-    `event-${payload.eventId}`,
-    "new-question",
-    { ...payload, _id: newId }
-  );
-
-  return res.status(201).json({ ...payload, _id: newId });
+        // return res.status(201).json({ ...payload, _id: newId });
+        return res.status(201).json(newQuestion);
 
       // Inside your API handler (POST case):
 
@@ -94,11 +80,24 @@ case "POST":
         if (!id)
           return res.status(400).json({ error: "ID required for update" });
         const success = await updateData(collection, id, req.body);
+        await pusherServer.trigger(
+          `room-${req.body.eventId}`,
+          "question-updated",
+          {
+            _id: id,
+            ...req.body,
+          }
+        );
         return res.status(200).json({ success });
 
       case "DELETE":
         if (!id) return res.status(400).json({ error: "ID required" });
         await deleteData(collection, id);
+        if (eventId) {
+          await pusherServer.trigger(`room-${eventId}`, "question-deleted", {
+            id,
+          });
+        }
         return res.status(200).json({ success: true });
 
       default:

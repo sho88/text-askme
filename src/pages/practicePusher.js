@@ -1,86 +1,121 @@
 import React, { useState, useEffect } from "react";
-import { pusherClient } from "@/lib/pusher-client";
+import useRoom from "@/hooks/room";
+import { auth0 } from "@/lib/auth0";
 import "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
-import PageLoader from "next/dist/client/page-loader";
 
-export const PracticePusher = () => {
-  const [inputText, setInputText] = useState("");
-  const [messages, setMessages] = useState([]);
+export const getServerSideProps = async (context) => {
+  const { req, res } = context;
 
-  const eventId = "test-room";
-
-  useEffect(() => {
-    if (!pusherClient) return;
-
-    const channel = pusherClient.subscribe(`event-${eventId}`);
-    channel.bind("new-question", (data) => {
-      setMessages((prev) => [...prev, data]);
-    });
-
-    return () => {
-      channel.unbind_all();
-      pusherClient.unsubscribe(`event-${eventId}`);
+  try {
+    const theSession = await auth0.getSession(req, res);
+    return {
+      props: {
+        session: theSession || null,
+      },
     };
-  }, [eventId]);
+  } catch (err) {
+    console.error(err, "Operation failed.");
+    return { props: { session: null } };
+  }
+};
+
+export const PracticePusher = ({ session }) => {
+  const [user, setUser] = useState(session?.user);
+
+  // Fix 2: Pass an object with an _id key to match room?._id inside useRoom
+  const room = { _id: "test-room" };
+
+  // import useRoom with necessary functions and values
+  const { questions, error, createQuestionApi, deleteQuestionApi } =
+    useRoom(room);
+
+  const [inputText, setInputText] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!inputText.trim()) return;
-
     const payload = {
       text: inputText,
-      eventId: eventId,
+      author: user?.sub,
+      authorName: user?.name || user?.email || "Unknown",
+      eventId: room._id,
     };
 
-    try {
-      await fetch("/api/database?collection=questions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-    } catch (err) {
-      console.log(err, "error! fix code!");
-    }
+    setisLoading(true);
+    await createQuestionApi(payload);
     setInputText("");
+    setisLoading(false);
   };
 
   return (
     <div className="practice-container">
-      <div>
-        <br />
-        <br />
-        <br />
+      {/* User Header Section */}
+      <div className="user-banner">
+        {user ? (
+          <p>
+            Logged in as <strong>{user.name || user.email}</strong> |{" "}
+            <a href="/api/auth/logout">Logout</a>
+          </p>
+        ) : (
+          <p>
+            Posting as <strong>Anonymous</strong> |{" "}
+            <a href="/auth/login?returnTo=/dashboard">Login / Sign Up</a>
+          </p>
+        )}
+      </div>
+
+      {/* Error State Banner */}
+      {error && (
+        <div className="error-banner">An error occurred loading questions.</div>
+      )}
+
+      {/* Input Form */}
+      <form onSubmit={handleSubmit}>
         <input
           required
           value={inputText}
-          placeholder="type here!"
+          placeholder="Type your question here..."
           onChange={(e) => setInputText(e.target.value)}
           className="practice-input"
-        ></input>
-      </div>
-      <br />
-      <button className="practice-send" onClick={handleSubmit}>
-        Send
-      </button>
-      <br />
-      <br />
-      <br />
+          disabled={isLoading}
+        />
+        <button
+          type="submit"
+          className="practice-send"
+          disabled={isLoading || !inputText.trim()}
+        >
+          {isLoading ? "Sending..." : "Send"}
+        </button>
+      </form>
+
+      {/* Messages List */}
       <div className="list-of-messages-practice">
-        {messages.map((singleMessage, ourKey) => (
-          <div key={ourKey}>
-            {/* But Who is sending? */}
-            {typeof singleMessage === "object"
-              ? singleMessage.text ||
-                singleMessage.message ||
-                JSON.stringify(singleMessage)
-              : singleMessage}
-          </div>
-        ))}
+        {questions.length === 0 ? (
+          <p>No questions yet. Be the first to ask!</p>
+        ) : (
+          questions.map((msg) => (
+            <div key={msg._id} className="message-card">
+              <div className="message-header">
+                <strong>{msg.authorName || "Anonymous"}</strong>
+                <span className="timestamp">
+                  {new Date(msg.createdAt).toLocaleTimeString()}
+                </span>
+              </div>
+              <p className="message-body">{msg.text}</p>
+              {
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteQuestionApi(msg._id)}
+                >
+                  Delete
+                </button>
+              }
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

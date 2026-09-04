@@ -3,6 +3,8 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 
+// use getServerSideProps for auth login
+
 export default function EmptyDashboard() {
   const { user, isLoading } = useUser();
 
@@ -22,7 +24,7 @@ export default function EmptyDashboard() {
     <div className="dashboard-body-container">
       <div></div>
       <div className="event__header">
-        <h1>Welcome {user.name} 👋</h1>
+        <h1>Welcome {user.name || user.email} 👋</h1>
         <h1 style={{ fontSize: "17px", color: "#696969" }}>
           You currently have no topics to present...
         </h1>

@@ -2111,45 +2111,58 @@ position: relative;
   z-index: 5;
 }
 
-.socket-button-no-new {
-  background-color: gray;
-  border-radius: 30px;
-  color: white;
-  cursor: default;
-  padding: 9px;
-  opacity: 0.75;
-  /* transition: 0; */
-  width: 100%;
+/* User Session Banner */
+.user-banner {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
 }
 
-.socket-button-new {
-  background-color: #ff414f;
-  border-radius: 30px;
-  color: white;
+.user-banner a {
+  color: #ff6b57;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.user-banner a:hover {
+  text-decoration: underline;
+}
+
+/* Error Alert Banner */
+.error-banner {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+/* Delete Button */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-size: 0.75rem;
+  font-weight: 600;
   cursor: pointer;
-  padding: 9px;
-  opacity: 1;
-  /* transition: 0; */
-  width: 100%;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
-.practice-websockets {
-  z-index: 9;
+.delete-btn:hover {
+  background-color: #fef2f2;
 }
 
-.list-of-messages-practice {
-  background-color: rgb(244, 229, 231);
-  height: 200px;
-}
-
-.practice-send {
-  background-color: coral;
-  color: white;
-  padding: 20px;
-}
-
-.practice-input {
-  border-width: 2px;
-  border-radius: 20px;
-  padding: 20px;
+/* Loading Spinner Text */
+.loading-spinner {
+  text-align: center;
+  color: #94a3b8;
+  padding: 2rem 0;
+  font-size: 0.9rem;
 }
