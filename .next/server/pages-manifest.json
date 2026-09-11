@@ -3,8 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/practicePusher": "pages/practicePusher.js",
-  "/dashboard": "pages/dashboard.js",
-  "/events/[id]": "pages/events/[id].js",
-  "/api/database": "pages/api/database.js",
-  "/": "pages/index.js"
+  "/api/database": "pages/api/database.js"
 }

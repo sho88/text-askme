@@ -25,28 +25,9 @@ const useRoom = (room) => {
     fetchingRoomsOne();
   }, [room?._id]);
 
-  useEffect(() => {
-    if (!room?._id) return;
-
-    const channel = pusherClient.subscribe(`room-${room?._id}`);
-
-    channel.bind("question-created", (data) => {
-      setQuestions((prev) => [...prev, data]);
-    });
-
-    channel.bind("question-deleted", ({ id }) => {
-      setQuestions((prev) => prev.filter((q) => q._id !== id));
-    });
-
-    return () => {
-      channel.unbind_all();
-      pusherClient.unsubscribe(`room-${room?._id}`);
-    };
-  }, [room?._id]);
-
   const createQuestionApi = async (payload) => {
     if (!payload) return;
-
+    console.log(payload);
     try {
       const res = await fetch(`/api/database?collection=questions`, {
         method: "POST",
@@ -90,12 +71,14 @@ const useRoom = (room) => {
         throw new Error("ERROR, as res is not okay.");
       }
 
-      const deleteFunction = (prev) => {
-        const remaining = prev.filter((question) => question._id !== id);
-        return remaining;
-      };
+      // const deleteFunction = (prev) => {
+      //   const remaining = prev.filter((question) => question._id !== id);
+      //   return remaining;
+      // };
 
-      setQuestions(deleteFunction);
+      ({ id }) => {
+        setQuestions((prev) => prev.filter((p) => p._id !== id));
+      };
     } catch (err) {
       console.error(err.message);
     }

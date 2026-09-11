@@ -4,6 +4,7 @@ import { auth0 } from "@/lib/auth0";
 import "@/styles/main.css";
 import "@/styles/event.css";
 import "@/styles/globals.css";
+import usePusher from "@/hooks/usePusher";
 
 export const getServerSideProps = async (context) => {
   const { req, res } = context;
@@ -24,8 +25,9 @@ export const getServerSideProps = async (context) => {
 export const PracticePusher = ({ session }) => {
   const [user, setUser] = useState(session?.user);
 
-  // Fix 2: Pass an object with an _id key to match room?._id inside useRoom
   const room = { _id: "test-room" };
+  const { questions: pusherQuestions, setQuestions: setPusherQuestions } =
+    usePusher(room);
 
   // import useRoom with necessary functions and values
   const { questions, error, createQuestionApi, deleteQuestionApi } =
@@ -34,8 +36,14 @@ export const PracticePusher = ({ session }) => {
   const [inputText, setInputText] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
+  useEffect(() => {
+    setPusherQuestions(questions);
+  }, [questions]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setisLoading(true);
 
     const payload = {
       text: inputText,
@@ -44,7 +52,6 @@ export const PracticePusher = ({ session }) => {
       eventId: room._id,
     };
 
-    setisLoading(true);
     await createQuestionApi(payload);
     setInputText("");
     setisLoading(false);
@@ -93,11 +100,12 @@ export const PracticePusher = ({ session }) => {
 
       {/* Messages List */}
       <div className="list-of-messages-practice">
-        {questions.length === 0 ? (
+        {pusherQuestions.length === 0 ? (
           <p>No questions yet. Be the first to ask!</p>
         ) : (
-          questions.map((msg) => (
+          pusherQuestions.map((msg) => (
             <div key={msg._id} className="message-card">
+              {/* <pre> {JSON.stringify(msg, null, 2)} </pre> */}
               <div className="message-header">
                 <strong>{msg.authorName || "Anonymous"}</strong>
                 <span className="timestamp">
