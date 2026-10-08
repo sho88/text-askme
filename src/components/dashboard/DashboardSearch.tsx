@@ -9,7 +9,7 @@ export const DashboardSearch = ({ whenInput = () => {} } = {}) => {
           <Image src="/images/fn-search3.png" alt="" height="25" width="25" />
         </button>
 
-        <InputField whenInput={whenInput} />
+        {/* <InputField whenInput={whenInput} /> */}
       </div>
     </div>
   );

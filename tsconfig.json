@@ -36,7 +36,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "src/pages/practicePusher.js"  ],
   "exclude": [
     "node_modules"
   ]

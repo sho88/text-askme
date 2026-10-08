@@ -7,29 +7,37 @@ import useEvents from "@/hooks/useEvents";
 import "@/styles/globals.css";
 import "@/styles/main.css";
 
+type RoomListProps = {
+  // eventsProps: Array<any>;
+  eventsProp: any[];
+  whenRoomClick: (roomId: string) => void;
+}
+
+type EventType = {
+  _id: string;
+}
+
 export default function RoomsList({
   eventsProp = [],
   whenRoomClick,
-  onNewDataCreated,
-}) {
+}: RoomListProps) {
   const [showModal, setShowModal] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState<null | EventType>(null);
   const router = useRouter();
 
   // Passing 'null' for room initially because the hook needs a room object, but here we are managing a LIST of rooms.
 
   const { deleteEventTwo } = useEvents(null, "rooms");
 
-  const handleAddClick = (room) => {
+  const handleAddClick = (room: EventType) => {
     setShowModal(true);
     setSelectedEvent(room);
   };
 
-  const handleModalClose = (shouldRefresh) => {
+  const handleModalClose = (shouldRefresh: boolean) => {
+    if (shouldRefresh) {}
+    // come back to this...
     setShowModal(false);
-    if (shouldRefresh && onNewDataCreated) {
-      onNewDataCreated();
-    }
   };
 
   const handleEditAction = () => {
@@ -48,16 +56,9 @@ export default function RoomsList({
       } catch (err) {
         alert("Delete failed: " + err.message);
       } finally {
-        // router.push("/dashboard");
         router.reload();
-        // setTimeout(() => {
-        //   router.refresh();
-        // }, 2000);
       }
     }
-    // setTimeout(() => {
-    //   router.reload();
-    // }, 2000);
   };
 
   const handleOnView = () => {

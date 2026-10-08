@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export const useEvents = (event, collection, id, user) => {
+export const useEvents = (event, collection, id?: string, user?: any) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(false);
   // optional loading state in thought
