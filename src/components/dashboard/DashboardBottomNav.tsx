@@ -1,69 +1,91 @@
 import Image from "next/image";
-import { ModalComponent } from "../modal";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { ModalComponent } from "../modal";
+
+// define the EventData interface to represent the structure of event data
+export interface EventData {
+  id?: string;
+  title?: string;
+  [key: string]: unknown;
+}
+
 
 export const DashboardBottomNav = () => {
+  // invoke the useRouter hook to get the router object
   const router = useRouter();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  const [showModal, setShowModal] = useState(false);
+  // add an event listener to close the modal when the escape key is pressed
+  useEffect(() => {
+    window.addEventListener("keyup" , (event) => 
+      (event.key === "Escape" && setShowModal(false))
+    );
 
-  const handleAddClick = () => {
-    setShowModal(true);
-  };
+    return () => window.removeEventListener("keyup", (event) => 
+      (event.key === "Escape" && setShowModal(false))
+    );
+  }, []);
 
-  const handleModalClose = (newEventData) => {
+  // event handlers...
+  const handleAddClick = () => setShowModal(true);
+  const handleModalClose = (newEventData: EventData | null) => {
     setShowModal(false);
 
     if (newEventData) {
-      console.clear();
-      console.log(`New Data`);
-      console.log(newEventData);
+      console.log('[DashboardBottomNav]: New Data - ', newEventData);
       router.refresh();
-    } else {
-      console.clear();
     }
   };
+  const handleClickHome = () => router.push("/dashboard");
+  const handleClickLogout = () => router.push("/");
 
-  const handleClickHome = () => {
-    return router.push("/dashboard");
-  };
-
-  const handleClickLogout = () => {
-    return router.push("/");
-  };
-
+  // render the component
   return (
     <>
       {showModal && <ModalComponent onModalClose={handleModalClose} />}
 
       <div className="message">
         <div className="dashboard-nav-container">
-          <button className="dashboard-bottom-nav-buttons" type="">
+          <button
+            aria-label="Home" 
+            className="dashboard-bottom-nav-buttons"
+            type="button"
+            onClick={handleClickHome}
+          >
             <Image
-              onClick={handleClickHome}
               src="/images/fn-home-5.png"
-              alt=""
+              alt="Home icon"
               height="25"
               width="25"
             />
           </button>
 
           <button
+            aria-label="Add Event"
             className="dashboard-bottom-nav-buttons"
-            type=""
+            type="button"
             onClick={handleAddClick}
           >
-            <Image src="/images/fn-plus-5.png" alt="" height="25" width="25" />
-          </button>
-
-          <button className="dashboard-bottom-nav-buttons" type="">
             <Image
-              src="/images/fn-user-5.png"
-              alt=""
+              src="/images/fn-plus-5.png"
+              alt="Plus icon"
               height="25"
               width="25"
-              onClick={handleClickLogout}
+            />
+          </button>
+
+          <button
+            aria-label="Logout"
+            className="dashboard-bottom-nav-buttons"
+            type="button"
+            onClick={handleClickLogout}
+          >
+            <Image
+              src="/images/fn-user-5.png"
+              alt="User logout icon"
+              height="25"
+              width="25"
             />
           </button>
         </div>

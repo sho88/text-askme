@@ -60,7 +60,7 @@ export default function IndexPage({ session }: PageProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // events belong here for now...
+  // event handlers...
   const handleAboutMe = () => router.push("/footer/about");
   const handleGuestLoginClick = () => router.push("/event-pin");
   const handleHostLoginClick = () => router.push("/host-login");
