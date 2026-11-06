@@ -1,65 +1,77 @@
-import { useState, useEffect } from "react";
-import "@/styles/main.css";
 import Image from "next/image";
+import { GetServerSideProps } from "next";
+import { useState, useEffect } from "react";
+
 import { useRouter } from "next/router";
 import { auth0 } from "@/lib/auth0";
 import LogoutButton from "@/components/auth/LogoutButton";
 import LoginButton from "@/components/auth/LoginButton";
 
-export const getServerSideProps = async (context) => {
-  const { req, res } = context;
+import "@/styles/main.css";
+
+// define interfaces
+interface Auth0User {
+  name?: string;
+  email?: string;
+  picture?: string;
+  [key: string]: unknown;
+}
+
+interface PageProps {
+  session: {
+    user: Auth0User;
+    [key: string]: unknown;
+  } | null;
+}
+
+export const getServerSideProps: GetServerSideProps<PageProps> = async (context) => {
+  const { req: request, res: response } = context;
   try {
-    const session = await auth0.getSession(req, res);
+    // @ts-ignore - Come back to check this...
+    const session = await auth0.getSession(request, response);
+
     return {
       props: { session: session || null },
     };
   } catch (err) {
-    console.error(err, "Error fetching the session");
+    console.error("Error fetching the session:", err);
+    return {
+      props: { session: null },
+    };
   }
 };
 
-const Intro = ({ session }) => {
-  const [user, setUser] = useState(session?.user || null);
+export default function IndexPage({ session }: PageProps) {
+  // invoke the useRouter hook to get the router object
   const router = useRouter();
+
+  // set state for scroll position
   const [scrollY, setScrollY] = useState(0);
 
-  const handlePractice = () => router.push("/practicePusher");
+  // get the user from the session, if available
+  const user = session?.user ?? null;
 
+  // create an event listener to track scroll position
   useEffect(() => {
-    setUser(session?.user || null);
-  }, [session]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+    const handleScroll = () => setScrollY(window.scrollY);
 
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // events...
-  function handleGuestLoginClick() {
-    return router.push("/event-pin");
-  }
-  function handleHostLoginClick() {
-    return router.push("/host-login");
-  }
-  const handleAboutMe = () => {
-    return router.push("/footer/about");
-  };
+  // events belong here for now...
+  const handleAboutMe = () => router.push("/footer/about");
+  const handleGuestLoginClick = () => router.push("/event-pin");
+  const handleHostLoginClick = () => router.push("/host-login");
+  const handleToDashboard = () => router.push("/dashboard");
 
-  const handleToDashboard = () => {
-    return router.push("/dashboard");
-  };
-
+  // render the page
   return (
     <div>
       <div className="intro-body-container">
         <div style={{ position: "relative", width: "100%" }}>
+
           <div className="intro-header-container">
             <Image
               src="/images/logo-text-small.png"
@@ -69,6 +81,7 @@ const Intro = ({ session }) => {
             />
             {user ? <LogoutButton /> : <LoginButton />}
           </div>
+
           <div
             className="qa-image-wrapper"
             style={{
@@ -91,6 +104,7 @@ const Intro = ({ session }) => {
               style={{ objectFit: "cover" }}
             />
           </div>
+
           <div className="header-overlay">
             <h1 className="qa-opening-header">
               BRIDGING <br />
@@ -99,24 +113,20 @@ const Intro = ({ session }) => {
             </h1>
           </div>
         </div>
+
         <div className="intro-call-to-action">
           {user ? (
-            <button
-              className="intro-call-to-action-button"
-              onClick={handleToDashboard}
-            >
+            <button className="intro-call-to-action-button" onClick={handleToDashboard} >
               <b>My Dashboard</b>
             </button>
           ) : (
-            <button
-              className="intro-call-to-action-button"
-              onClick={handleGuestLoginClick}
-            >
+            <button className="intro-call-to-action-button" onClick={handleGuestLoginClick}>
               <b>Use Now as Guest!</b>
             </button>
           )}
         </div>
       </div>
+
       <div className="qa-article-1">
         <div className="intro-additional-section">
           <div className="intro-additional-section-body">
@@ -239,10 +249,10 @@ const Intro = ({ session }) => {
           <div className="intro-footer-logo-container">
             <small>
               Designed and developed by {""}
-              Isaac Ola & Sho-Carter Daniel.
+              Isaac Ola &amp; Sho-Carter Daniel.
               {"  "}
               <br />
-              2026 ⓒ TextQ&A
+              2026 &copy; TextQ&A
             </small>
           </div>
           <div className="cover-footer-gap">
@@ -258,5 +268,3 @@ const Intro = ({ session }) => {
     </div>
   );
 };
-
-export default Intro;
